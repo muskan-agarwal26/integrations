@@ -2,7 +2,7 @@
 
 ## Overview
 
-[Axonius](https://www.axonius.com/) is a cybersecurity asset management platform that automatically collects data from hundreds of IT and security tools through adapters, merges that information, and builds a unified inventory of all assets—devices, users, SaaS apps, cloud instances, and more. By correlating data from multiple systems, Axonius helps organizations identify visibility gaps, missing security controls, risky configurations, and compliance issues. It lets you create powerful queries to answer any security or IT question and automate actions such as sending alerts, creating tickets, or enforcing policies.
+[Axonius](https://www.axonius.com/) is a cybersecurity asset management platform that automatically collects data from hundreds of IT and security tools through adapters, merges that information, and builds a unified inventory of all assets including devices, users, SaaS apps, cloud instances, and more. By correlating data from multiple systems, Axonius helps organizations identify visibility gaps, missing security controls, risky configurations, and compliance issues. It lets you create powerful queries to answer any security or IT question and automate actions such as sending alerts, creating tickets, or enforcing policies.
 
 This integration for Elastic allows you to collect assets and security events data using the Axonius API, then visualize the data in Kibana.
 
@@ -81,6 +81,13 @@ For more information, refer to [Agentless integrations](https://www.elastic.co/g
 1. In the top search bar in Kibana, search for **Dashboards**.
 2. In the search bar, type **Axonius**, and verify the dashboard information is populated.
 
+#### Transforms healthy
+
+1. In the top search bar in Kibana, search for **Transforms**.
+2. Select the **Data / Transforms** from the search results.
+3. In the search bar, type **Axonius**.
+4. All transforms from the search results should indicate **Healthy** under the **Health** column.
+
 ## Troubleshooting
 
 For help with Elastic ingest tools, check [Common problems](https://www.elastic.co/docs/troubleshoot/ingest/fleet/common-problems).
@@ -110,3 +117,7 @@ The `user` data stream provides user events from axonius.
 These APIs are used with this integration:
 
 * User (endpoint: `/api/v2/users`)
+
+#### ILM Policy
+
+To facilitate user data, source data stream-backed indices `.ds-logs-axonius.user-*` are allowed to contain duplicates from each polling interval. ILM policy `logs-axonius.user-default_policy` is added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.
