@@ -112,7 +112,7 @@ Refer to this [document](https://www.elastic.co/guide/en/ecs/current/ecs-field-r
 
 ### Audit logs
 
-The `audit` data stream captures organization audit logs from the OpenAI platform.
+The `audit` data stream captures organization audit logs.
 
 An example event for `audit` looks as following:
 
