@@ -13,7 +13,7 @@
                 - name: id
                   type: keyword
                   description: The tracking id of the API key.
-                - name: servie_account
+                - name: service_account
                   type: group
                   fields:
                     - name: id

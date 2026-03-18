@@ -253,7 +253,7 @@ An example event for `audit` looks as following:
 | observer.product | The product name of the observer. | constant_keyword |
 | observer.vendor | Vendor name of the observer. | constant_keyword |
 | openai.audit.actor.api_key.id | The tracking id of the API key. | keyword |
-| openai.audit.actor.api_key.servie_account.id | The service account that performed the audit logged action. | keyword |
+| openai.audit.actor.api_key.service_account.id | The service account that performed the audit logged action. | keyword |
 | openai.audit.actor.api_key.type | The type of API key. Can be either user or service_account. | keyword |
 | openai.audit.actor.api_key.user.email | The user who performed the audit logged action. | keyword |
 | openai.audit.actor.api_key.user.id | The user who performed the audit logged action. | keyword |

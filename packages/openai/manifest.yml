@@ -70,7 +70,7 @@ policy_templates:
           - name: admin_token
             type: password
             title: Admin token
-            description: Admin token for OpenAI API usage collection. See [Admin keys](https://platform.openai.com/settings/organization/admin-keys) for mmore information.
+            description: Admin token for OpenAI API usage collection. See [Admin keys](https://platform.openai.com/settings/organization/admin-keys) for more information.
             multi: false
             required: true
             show_user: true
