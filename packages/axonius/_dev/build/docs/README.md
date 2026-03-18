@@ -39,7 +39,7 @@ This integration collects log messages of the following type:
 
 ### Supported use cases
 
-Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, and Storage data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, and storage assets. Together, these datastreams help analysts understand how data enters the platform, how it maps to users and access, how gateways operate within the network, where risks exist, and how alerts evolve into incidents.
+Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, and Storage data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, and storage assets. Together, these data streams help analysts understand how data enters the platform, how it maps to users and access, how gateways operate within the network, where risks exist, and how alerts evolve into incidents.
 
 The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, and storage asset distribution across object storages, file systems, and disks. By correlating operational, identity, exposure, incident, and storage data in one place, security teams can detect anomalies, identify misconfigurations, prioritize remediation, and streamline investigations with comprehensive operational and security context across the environment.
 
