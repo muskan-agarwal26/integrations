@@ -9,9 +9,6 @@ processors:
       description: error message set and no data to process.
       tag: terminate_data_collection_error
       if: ctx.error?.message != null && ctx.message == null && ctx.event?.original == null
-  - drop:
-      if: ctx.message == 'empty_data'
-      tag: drop_empty_data_events
 
   # remove agentless metadata
   - remove:
@@ -40,7 +37,7 @@ processors:
   - json:
       field: event.original
       tag: json_event_original
-      target_field: json
+      target_field: axonius.ticket
   - fingerprint:
       fields:
         - event.original
@@ -51,81 +48,66 @@ processors:
       tag: set_event_kind
       field: event.kind
       value: event
-  - rename:
-      field: json.asset_type
-      tag: rename_asset_type
-      ignore_missing: true
-      target_field: axonius.ticket.asset_type
   - convert:
-      field: json.adapter_list_length
+      field: axonius.ticket.adapter_list_length
       tag: convert_adapter_list_length_to_long
-      target_field: axonius.ticket.adapter_list_length
       type: long
       ignore_missing: true
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - rename:
-      field: json.adapters
-      tag: rename_adapters
-      target_field: axonius.ticket.adapters
-      ignore_missing: true
+  - script:
+      tag: script_rename_event_data_fields
+      lang: painless
+      description: Renames all event.data.* fields to root level (removes event.data prefix). Prefixes conflicting keys with 'data_' to avoid overwriting root-level fields.
+      source: |-
+        if (ctx.axonius?.ticket?.event?.data instanceof Map) {
+          Map eventData = ctx.axonius.ticket.event.data;
+          for (String key : new ArrayList(eventData.keySet())) {
+            if (ctx.axonius.ticket.containsKey(key)) {
+              ctx.axonius.ticket['data_' + key] = eventData[key];
+            } else {
+              ctx.axonius.ticket[key] = eventData[key];
+            }
+          }
+          ctx.axonius.ticket.event.remove('data');
+        }
   - date:
-      field: json.event.accurate_for_datetime
+      field: axonius.ticket.event.accurate_for_datetime
       tag: date_event_accurate_for_datetime
       target_field: axonius.ticket.event.accurate_for_datetime
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.accurate_for_datetime != null && ctx.json.event.accurate_for_datetime != ''
+      if: ctx.axonius?.ticket?.event?.accurate_for_datetime != null && ctx.axonius.ticket.event.accurate_for_datetime != ''
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - rename:
-      field: json.event.adapter_categories
-      tag: rename_event_adapter_categories
-      target_field: axonius.ticket.event.adapter_categories
-      ignore_missing: true
-  - rename:
-      field: json.event.client_used
-      tag: rename_event_client_used
-      target_field: axonius.ticket.event.client_used
-      ignore_missing: true
   - date:
-      field: json.event.data.accurate_for_datetime
+      field: axonius.ticket.accurate_for_datetime
       tag: date_event_data_accurate_for_datetime
-      target_field: axonius.ticket.event.data.accurate_for_datetime
+      target_field: axonius.ticket.accurate_for_datetime
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.data?.accurate_for_datetime != null && ctx.json.event.data.accurate_for_datetime != ''
+      if: ctx.axonius?.ticket?.accurate_for_datetime != null && ctx.axonius.ticket.accurate_for_datetime != ''
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - rename:
-      field: json.event.data.application_and_account_name
-      tag: rename_event_data_application_and_account_name
-      target_field: axonius.ticket.event.data.application_and_account_name
-      ignore_missing: true
-  - rename:
-      field: json.event.data.category
-      tag: rename_event_data_category
-      target_field: axonius.ticket.event.data.category
-      ignore_missing: true
   - date:
-      field: json.event.data.closed
+      field: axonius.ticket.closed
       tag: date_event_data_closed
-      target_field: axonius.ticket.event.data.closed
+      target_field: axonius.ticket.closed
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.data?.closed != null && ctx.json.event.data.closed != ''
+      if: ctx.axonius?.ticket?.closed != null && ctx.axonius.ticket.closed != ''
       on_failure:
         - append:
             field: error.message
@@ -133,17 +115,17 @@ processors:
   - set:
       field: event.end
       tag: set_event_end_from_ticket_event_data_closed
-      copy_from: axonius.ticket.event.data.closed
+      copy_from: axonius.ticket.closed
       ignore_empty_value: true
   - date:
-      field: json.event.data.created
+      field: axonius.ticket.created
       tag: date_event_data_created
-      target_field: axonius.ticket.event.data.created
+      target_field: axonius.ticket.created
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.data?.created != null && ctx.json.event.data.created != ''
+      if: ctx.axonius?.ticket?.created != null && ctx.axonius.ticket.created != ''
       on_failure:
         - append:
             field: error.message
@@ -151,154 +133,81 @@ processors:
   - set:
       field: event.created
       tag: set_event_created_from_ticket_event_data_created
-      copy_from: axonius.ticket.event.data.created
+      copy_from: axonius.ticket.created
       ignore_empty_value: true
-  - rename:
-      field: json.event.data.description
-      tag: rename_event_data_description
-      target_field: axonius.ticket.event.data.description
-      ignore_missing: true
   - set:
       field: message
       tag: set_message_from_ticket_event_data_description
-      copy_from: axonius.ticket.event.data.description
+      copy_from: axonius.ticket.description
       ignore_empty_value: true
-  - rename:
-      field: json.event.data.display_id
-      tag: rename_event_data_display_id
-      target_field: axonius.ticket.event.data.display_id
-      ignore_missing: true
   - date:
-      field: json.event.data.fetch_time
+      field: axonius.ticket.fetch_time
       tag: date_event_data_fetch_time
-      target_field: axonius.ticket.event.data.fetch_time
+      target_field: axonius.ticket.fetch_time
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.data?.fetch_time != null && ctx.json.event.data.fetch_time != ''
+      if: ctx.axonius?.ticket?.fetch_time != null && ctx.axonius.ticket.fetch_time != ''
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
   - date:
-      field: json.event.data.first_fetch_time
+      field: axonius.ticket.first_fetch_time
       tag: date_event_data_first_fetch_time
-      target_field: axonius.ticket.event.data.first_fetch_time
+      target_field: axonius.ticket.first_fetch_time
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.data?.first_fetch_time != null && ctx.json.event.data.first_fetch_time != ''
+      if: ctx.axonius?.ticket?.first_fetch_time != null && ctx.axonius.ticket.first_fetch_time != ''
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
   - convert:
-      field: json.event.data.from_last_fetch
+      field: axonius.ticket.from_last_fetch
       tag: convert_event_data_from_last_fetch_to_boolean
-      target_field: axonius.ticket.event.data.from_last_fetch
       type: boolean
       ignore_missing: true
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - rename:
-      field: json.event.data.id
-      tag: rename_event_data_id
-      target_field: axonius.ticket.event.data.id
-      ignore_missing: true
   - convert:
-      field: json.event.data.is_fetched_from_adapter
+      field: axonius.ticket.is_fetched_from_adapter
       tag: convert_event_data_is_fetched_from_adapter_to_boolean
-      target_field: axonius.ticket.event.data.is_fetched_from_adapter
       type: boolean
       ignore_missing: true
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - rename:
-      field: json.event.data.last_fetch_connection_id
-      tag: rename_event_data_last_fetch_connection_id
-      target_field: axonius.ticket.event.data.last_fetch_connection_id
-      ignore_missing: true
-  - rename:
-      field: json.event.data.last_fetch_connection_label
-      tag: rename_event_data_last_fetch_connection_label
-      target_field: axonius.ticket.event.data.last_fetch_connection_label
-      ignore_missing: true
   - convert:
-      field: json.event.data.not_fetched_count
+      field: axonius.ticket.not_fetched_count
       tag: convert_event_data_not_fetched_count_to_long
-      target_field: axonius.ticket.event.data.not_fetched_count
       type: long
       ignore_missing: true
       on_failure:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - rename:
-      field: json.event.data.priority
-      tag: rename_event_data_priority
-      target_field: axonius.ticket.event.data.priority
-      ignore_missing: true
-  - rename:
-      field: json.event.data.reporter
-      tag: rename_event_data_reporter
-      target_field: axonius.ticket.event.data.reporter
-      ignore_missing: true
   - append:
       field: related.user
       tag: append_ticket_event_data_reporter_into_related_user
-      value: '{{{axonius.ticket.event.data.reporter}}}'
+      value: '{{{axonius.ticket.reporter}}}'
       allow_duplicates: false
-      if: ctx.axonius?.ticket?.event?.data?.reporter != null
-  - rename:
-      field: json.event.data.source_application
-      tag: rename_event_data_source_application
-      target_field: axonius.ticket.event.data.source_application
-      ignore_missing: true
-  - rename:
-      field: json.event.data.status
-      tag: rename_event_data_status
-      target_field: axonius.ticket.event.data.status
-      ignore_missing: true
-  - rename:
-      field: json.event.data.summary
-      tag: rename_event_data_summary
-      target_field: axonius.ticket.event.data.summary
-      ignore_missing: true
-  - rename:
-      field: json.event.data.sys_class_name
-      tag: rename_event_data_sys_class_name
-      target_field: axonius.ticket.event.data.sys_class_name
-      ignore_missing: true
-  - rename:
-      field: json.event.data.tenant_number
-      tag: rename_event_data_tenant_number
-      target_field: axonius.ticket.event.data.tenant_number
-      ignore_missing: true
-  - rename:
-      field: json.event.data.ticket_id
-      tag: rename_event_data_ticket_id
-      target_field: axonius.ticket.event.data.ticket_id
-      ignore_missing: true
-  - rename:
-      field: json.event.data.type
-      tag: rename_event_data_type
-      target_field: axonius.ticket.event.data.type
-      ignore_missing: true
+      if: ctx.axonius?.ticket?.reporter != null
   - date:
-      field: json.event.data.updated
+      field: axonius.ticket.updated
       tag: date_event_data_updated
-      target_field: axonius.ticket.event.data.updated
+      target_field: axonius.ticket.updated
       formats:
         - EEE, dd MMM yyyy HH:mm:ss 'GMT'
         - yyyy-MM-dd
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
-      if: ctx.json?.event?.data?.updated != null && ctx.json.event.data.updated != ''
+      if: ctx.axonius?.ticket?.updated != null && ctx.axonius.ticket.updated != ''
       on_failure:
         - append:
             field: error.message
@@ -306,56 +215,18 @@ processors:
   - set:
       field: '@timestamp'
       tag: set_@timestamp_from_ticket_event_data_updated
-      copy_from: axonius.ticket.event.data.updated
+      copy_from: axonius.ticket.updated
       ignore_empty_value: true
-  - rename:
-      field: json.event.initial_plugin_unique_name
-      tag: rename_event_initial_plugin_unique_name
-      target_field: axonius.ticket.event.initial_plugin_unique_name
-      ignore_missing: true
-  - rename:
-      field: json.event.plugin_name
-      tag: rename_event_plugin_name
-      target_field: axonius.ticket.event.plugin_name
-      ignore_missing: true
-  - rename:
-      field: json.event.plugin_type
-      tag: rename_event_plugin_type
-      target_field: axonius.ticket.event.plugin_type
-      ignore_missing: true
-  - rename:
-      field: json.event.plugin_unique_name
-      tag: rename_event_plugin_unique_name
-      target_field: axonius.ticket.event.plugin_unique_name
-      ignore_missing: true
-  - rename:
-      field: json.event.quick_id
-      tag: rename_event_quick_id
-      target_field: axonius.ticket.event.quick_id
-      ignore_missing: true
-  - rename:
-      field: json.event.type
-      tag: rename_event_type
-      target_field: axonius.ticket.event.type
-      ignore_missing: true
-  - rename:
-      field: json.internal_axon_id
-      tag: rename_internal_axon_id
-      target_field: axonius.ticket.internal_axon_id
-      ignore_missing: true
   - remove:
       field:
-        - axonius.ticket.event.data.updated
-        - axonius.ticket.event.data.closed
-        - axonius.ticket.event.data.created
-        - axonius.ticket.event.data.description
+        - axonius.ticket.event.accurate_for_datetime
+        - axonius.ticket.accurate_for_datetime
+        - axonius.ticket.closed
+        - axonius.ticket.created
+        - axonius.ticket.description
       tag: remove_custom_duplicate_fields
       ignore_missing: true
       if: ctx.tags == null || !ctx.tags.contains('preserve_duplicate_custom_fields')
-  - remove:
-      field: json
-      tag: remove_json
-      ignore_missing: true
   - script:
       tag: script_to_drop_null_values
       lang: painless
