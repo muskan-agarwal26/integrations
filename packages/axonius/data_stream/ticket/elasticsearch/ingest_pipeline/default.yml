@@ -219,7 +219,7 @@ processors:
       ignore_empty_value: true
   - remove:
       field:
-        - axonius.ticket.update
+        - axonius.ticket.updated
         - axonius.ticket.closed
         - axonius.ticket.created
         - axonius.ticket.description
