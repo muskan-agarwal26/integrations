@@ -219,8 +219,7 @@ processors:
       ignore_empty_value: true
   - remove:
       field:
-        - axonius.ticket.event.accurate_for_datetime
-        - axonius.ticket.accurate_for_datetime
+        - axonius.ticket.update
         - axonius.ticket.closed
         - axonius.ticket.created
         - axonius.ticket.description
