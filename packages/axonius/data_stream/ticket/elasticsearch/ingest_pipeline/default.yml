@@ -184,6 +184,23 @@ processors:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - foreach:
+      field: axonius.ticket.tenant_number
+      tag: foreach_tenant_number
+      if: ctx.axonius?.ticket?.tenant_number instanceof List
+      processor:
+        convert:
+          field: _ingest._value
+          tag: convert_tenant_number_to_long
+          type: long
+          ignore_missing: true
+          on_failure:
+            - remove:
+                field: _ingest._value
+                ignore_missing: true
+            - append:
+                field: error.message
+                value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
   - convert:
       field: axonius.ticket.not_fetched_count
       tag: convert_event_data_not_fetched_count_to_long

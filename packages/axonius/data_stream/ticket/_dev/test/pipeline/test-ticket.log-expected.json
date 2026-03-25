@@ -46,7 +46,7 @@
                     "summary": "Access Reviewer",
                     "sys_class_name": "incident",
                     "tenant_number": [
-                        "3"
+                        3
                     ],
                     "ticket_id": "ca9371ef-9218-4a93-9355-5e70f15495a6",
                     "transform_unique_id": "l3KlIS5BF4T6jCHwueLEdaw8KEw=",
@@ -121,7 +121,7 @@
                     "summary": "Access Reviewer",
                     "sys_class_name": "incident",
                     "tenant_number": [
-                        "2"
+                        2
                     ],
                     "ticket_id": "ca9371ef-9218-4a93-9355-5e70f15495a6",
                     "transform_unique_id": "1CdQ84ot40brQuT6U7DqH/ZtLd8=",
@@ -196,7 +196,7 @@
                     "summary": "Access Reviewer",
                     "sys_class_name": "incident",
                     "tenant_number": [
-                        "2"
+                        2
                     ],
                     "ticket_id": "cdb39ea7-d608-4033-9389-adb4ed1a1169",
                     "transform_unique_id": "OYFp+pM+XyQHsshtcNrdgzXQ+A8=",

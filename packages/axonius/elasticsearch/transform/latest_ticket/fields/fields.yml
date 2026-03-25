@@ -6,8 +6,10 @@
       fields:
         - name: adapter_list_length
           type: long
+          description: How many adapters contributed to this asset.
         - name: adapters
           type: keyword
+          description: List of adapters that created this asset.
         - name: asset_type
           type: keyword
         - name: accurate_for_datetime
@@ -25,7 +27,7 @@
         - name: data_type
           type: keyword
         - name: description
-          type: keyword
+          type: text
         - name: display_id
           type: keyword
         - name: fetch_time
@@ -53,11 +55,11 @@
         - name: status
           type: keyword
         - name: summary
-          type: keyword
+          type: text
         - name: sys_class_name
           type: keyword
         - name: tenant_number
-          type: keyword
+          type: long
         - name: ticket_id
           type: keyword
         - name: type
@@ -87,5 +89,6 @@
               type: keyword
         - name: internal_axon_id
           type: keyword
+          description: Internal ID of this asset. This ID may change in the future.
         - name: transform_unique_id
           type: keyword

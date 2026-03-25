@@ -14,7 +14,7 @@ latest:
   sort: '@timestamp'
 description: >-
   Latest tickets from Axonius. As tickets get updated, this transform stores only the latest state of each ticket inside the destination index. Thus the transform's destination index contains only the latest state of the ticket.
-frequency: 30s
+frequency: 5m
 settings:
   # This is required to prevent the transform from clobbering the Fleet-managed mappings.
   deduce_mappings: false
