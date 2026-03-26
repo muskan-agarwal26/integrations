@@ -37,11 +37,15 @@ This integration collects log messages of the following type:
     - file_systems (endpoint: `/api/v2/file_systems`)
     - disks (endpoint: `/api/v2/disks`)
 
+- `Ticket`: Collect details of all ticket assets including:
+    - tickets (endpoint: `/api/v2/tickets`)
+    - cases (endpoint: `/api/v2/cases`)
+
 ### Supported use cases
 
-Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, and Storage data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, and storage assets. Together, these data streams help analysts understand how data enters the platform, how it maps to users and access, how gateways operate within the network, where risks exist, and how alerts evolve into incidents.
+Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, and Ticket data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, and operational ticketing. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways operate, where risks exist, how alerts evolve into incidents, and how issues are tracked and resolved.
 
-The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, and storage asset distribution across object storages, file systems, and disks. By correlating operational, identity, exposure, incident, and storage data in one place, security teams can detect anomalies, identify misconfigurations, prioritize remediation, and streamline investigations with comprehensive operational and security context across the environment.
+The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, and ticket activity. Ticket-specific views add context around priority, status, trends, and top reporters, helping teams track issue progression and identify workload patterns. By correlating operational, identity, exposure, incident, storage, and ticket data in one place, security teams can detect anomalies, prioritize remediation, manage workloads effectively, and streamline investigations with comprehensive, end-to-end context across the environment.
 
 ## What do I need to use this integration?
 
@@ -124,6 +128,7 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 | `logs-axonius.incident-*`          | `logs-axonius_latest.dest_incident-*`            | `logs-axonius_latest.incident`          |
 | `logs-axonius.user-*`              | `logs-axonius_latest.dest_user-*`                | `logs-axonius_latest.user`              |
 | `logs-axonius.storage-*`              | `logs-axonius_latest.dest_storage-*`                | `logs-axonius_latest.storage`              |
+| `logs-axonius.ticket-*`              | `logs-axonius_latest.dest_ticket-*`                | `logs-axonius_latest.ticket`
 
 ## Troubleshooting
 
@@ -134,6 +139,10 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 For more information on architectures that can be used for scaling this integration, check the [Ingest Architectures](https://www.elastic.co/docs/manage-data/ingest/ingest-reference-architectures) documentation.
 
 ## Reference
+
+### Inputs used
+{{/* All inputs used by this package will be automatically listed here. */}}
+{{ inputDocs }}
 
 ### Adapter
 
@@ -205,6 +214,16 @@ The `storage` data stream provides storage asset logs from axonius.
 
 {{event "storage"}}
 
+### Ticket
+
+The `ticket` data stream provides ticket asset logs from axonius.
+
+#### ticket fields
+
+{{ fields "ticket" }}
+
+{{event "ticket"}}
+
 ### API usage
 
 These APIs are used with this integration:
@@ -224,7 +243,10 @@ These APIs are used with this integration:
     * object_storages (endpoint: `/api/v2/object_storages`)
     * file_systems (endpoint: `/api/v2/file_systems`)
     * disks (endpoint: `/api/v2/disks`)
+* Ticket:
+    * tickets (endpoint: `/api/v2/tickets`)
+    * cases (endpoint: `/api/v2/cases`)
 
 ### ILM Policy
 
-To facilitate adapter, user, gateway and assets data including exposures, alert findings, incidents and storage source data stream-backed indices `.ds-logs-axonius.adapter-*`, `.ds-logs-axonius.user-*`, `.ds-logs-axonius.gateway-*`, `.ds-logs-axonius.exposure-*`, `.ds-logs-axonius.alert_finding-*`, `.ds-logs-axonius.incident-*` and `.ds-logs-axonius.storage-*` respectively are allowed to contain duplicates from each polling interval. ILM policies `logs-axonius.adapter-default_policy`, `logs-axonius.user-default_policy`, `logs-axonius.gateway-default_policy`, `logs-axonius.exposure-default_policy`,  `logs-axonius.alert_finding-default_policy`, `logs-axonius.incident-default_policy`, `logs-axonius.storage-default_policy` are added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.
+To facilitate adapter, user, gateway and assets data including exposures, alert findings, incidents, storage and ticket source data stream-backed indices `.ds-logs-axonius.adapter-*`, `.ds-logs-axonius.user-*`, `.ds-logs-axonius.gateway-*`, `.ds-logs-axonius.exposure-*`, `.ds-logs-axonius.alert_finding-*`, `.ds-logs-axonius.incident-*`, `.ds-logs-axonius.storage-*` and `.ds-logs-axonius.ticket-*` respectively are allowed to contain duplicates from each polling interval. ILM policies `logs-axonius.adapter-default_policy`, `logs-axonius.user-default_policy`, `logs-axonius.gateway-default_policy`, `logs-axonius.exposure-default_policy`,  `logs-axonius.alert_finding-default_policy`, `logs-axonius.incident-default_policy`, `logs-axonius.storage-default_policy` and `logs-axonius.ticket-default_policy` are added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.

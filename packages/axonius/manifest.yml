@@ -36,6 +36,10 @@ screenshots:
     title: Incident Assets Dashboard
     size: 600x600
     type: image/png
+  - src: /img/axonius-ticket-dashboard.png
+    title: Tickets Dashboard
+    size: 600x600
+    type: image/png
 icons:
   - src: /img/axonius-logo.svg
     title: Axonius Logo

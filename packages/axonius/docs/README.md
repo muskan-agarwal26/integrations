@@ -37,11 +37,15 @@ This integration collects log messages of the following type:
     - file_systems (endpoint: `/api/v2/file_systems`)
     - disks (endpoint: `/api/v2/disks`)
 
+- `Ticket`: Collect details of all ticket assets including:
+    - tickets (endpoint: `/api/v2/tickets`)
+    - cases (endpoint: `/api/v2/cases`)
+
 ### Supported use cases
 
-Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, and Storage data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, and storage assets. Together, these data streams help analysts understand how data enters the platform, how it maps to users and access, how gateways operate within the network, where risks exist, and how alerts evolve into incidents.
+Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, and Ticket data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, and operational ticketing. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways operate, where risks exist, how alerts evolve into incidents, and how issues are tracked and resolved.
 
-The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, and storage asset distribution across object storages, file systems, and disks. By correlating operational, identity, exposure, incident, and storage data in one place, security teams can detect anomalies, identify misconfigurations, prioritize remediation, and streamline investigations with comprehensive operational and security context across the environment.
+The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, and ticket activity. Ticket-specific views add context around priority, status, trends, and top reporters, helping teams track issue progression and identify workload patterns. By correlating operational, identity, exposure, incident, storage, and ticket data in one place, security teams can detect anomalies, prioritize remediation, manage workloads effectively, and streamline investigations with comprehensive, end-to-end context across the environment.
 
 ## What do I need to use this integration?
 
@@ -124,6 +128,7 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 | `logs-axonius.incident-*`          | `logs-axonius_latest.dest_incident-*`            | `logs-axonius_latest.incident`          |
 | `logs-axonius.user-*`              | `logs-axonius_latest.dest_user-*`                | `logs-axonius_latest.user`              |
 | `logs-axonius.storage-*`              | `logs-axonius_latest.dest_storage-*`                | `logs-axonius_latest.storage`              |
+| `logs-axonius.ticket-*`              | `logs-axonius_latest.dest_ticket-*`                | `logs-axonius_latest.ticket`
 
 ## Troubleshooting
 
@@ -134,6 +139,35 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 For more information on architectures that can be used for scaling this integration, check the [Ingest Architectures](https://www.elastic.co/docs/manage-data/ingest/ingest-reference-architectures) documentation.
 
 ## Reference
+
+### Inputs used
+
+These inputs can be used with this integration:
+<details>
+<summary>cel</summary>
+
+## Setup
+
+For more details about the CEL input settings, check the [Filebeat documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-cel.html).
+
+Before configuring the CEL input, make sure you have:
+- Network connectivity to the target API endpoint
+- Valid authentication credentials (API keys, tokens, or certificates as required)
+- Appropriate permissions to read from the target data source
+
+### Collecting logs from CEL
+
+To configure the CEL input, you must specify the `request.url` value pointing to the API endpoint. The interval parameter controls how frequently requests are made and is the primary way to balance data freshness with API rate limits and costs. Authentication is often configured through the `request.headers` section using the appropriate method for the service.
+
+NOTE: To access the API service, make sure you have the necessary API credentials and that the Filebeat instance can reach the endpoint URL. Some services may require IP whitelisting or VPN access.
+
+To collect logs via API endpoint, configure the following parameters:
+
+- API Endpoint URL
+- API credentials (tokens, keys, or username/password)
+- Request interval (how often to fetch data)
+</details>
+
 
 ### Adapter
 
@@ -1217,6 +1251,173 @@ An example event for `storage` looks as following:
 }
 ```
 
+### Ticket
+
+The `ticket` data stream provides ticket asset logs from axonius.
+
+#### ticket fields
+
+**Exported fields**
+
+| Field | Description | Type |
+|---|---|---|
+| @timestamp | Date/time when the event originated. This is the date/time extracted from the event, typically representing when the event was generated by the source. If the event source has no original timestamp, this value is typically populated by the first time the event was received by the pipeline. Required field for all events. | date |
+| axonius.ticket.accurate_for_datetime | Timestamp indicating when this asset information was accurate. | date |
+| axonius.ticket.adapter_list_length | How many adapters contributed to this asset. | long |
+| axonius.ticket.adapters | List of adapters that created this asset. | keyword |
+| axonius.ticket.application_and_account_name | The application and account name associated with the ticket. | keyword |
+| axonius.ticket.asset_type | The type of asset. | keyword |
+| axonius.ticket.category | The category or classification of the ticket. | keyword |
+| axonius.ticket.closed | The date and time when the ticket was closed. | date |
+| axonius.ticket.created | The date and time when the ticket was created. | date |
+| axonius.ticket.data_accurate_for_datetime | Timestamp indicating when the ticket data was last accurate. | date |
+| axonius.ticket.data_type | The type of data contained in the ticket. | keyword |
+| axonius.ticket.description | Detailed description or body content of the ticket. | text |
+| axonius.ticket.display_id | Human readable identifier for the ticket displayed to users. | keyword |
+| axonius.ticket.event.accurate_for_datetime | Timestamp indicating when the event data was accurate. | date |
+| axonius.ticket.event.adapter_categories | List of adapter categories that this event belongs to. | keyword |
+| axonius.ticket.event.client_used | The client identifier that was used to process the event. | keyword |
+| axonius.ticket.event.initial_plugin_unique_name | The initial plugin name that created or processed the event. | keyword |
+| axonius.ticket.event.plugin_name | The name of the plugin that processed the event. | keyword |
+| axonius.ticket.event.plugin_type | The type or category of the plugin that processed the event. | keyword |
+| axonius.ticket.event.plugin_unique_name | The unique identifier of the plugin instance that processed the event. | keyword |
+| axonius.ticket.event.quick_id | A quick reference identifier combining plugin and entity information. | keyword |
+| axonius.ticket.event.type | The type or classification of the event data. | keyword |
+| axonius.ticket.fetch_time | The date and time when the ticket data was last fetched. | date |
+| axonius.ticket.first_fetch_time | The date and time when the ticket was first fetched. | date |
+| axonius.ticket.from_last_fetch | Indicates whether this ticket was modified since the last fetch. | boolean |
+| axonius.ticket.id | Unique identifier for the ticket. | keyword |
+| axonius.ticket.internal_axon_id | Internal ID of this asset. This ID may change in the future. | keyword |
+| axonius.ticket.is_fetched_from_adapter | Indicates whether this ticket was fetched from an adapter. | boolean |
+| axonius.ticket.last_fetch_connection_id | The connection ID of the adapter that last fetched this ticket. | keyword |
+| axonius.ticket.last_fetch_connection_label | The label of the connection that last fetched this ticket. | keyword |
+| axonius.ticket.not_fetched_count | The number of times this ticket failed to be fetched. | long |
+| axonius.ticket.priority | The priority level of the ticket. | keyword |
+| axonius.ticket.reporter | The user or entity that reported the ticket. | keyword |
+| axonius.ticket.source_application | The application system where the ticket originated. | keyword |
+| axonius.ticket.status | The current status of the ticket. | keyword |
+| axonius.ticket.summary | Brief summary or title of the ticket. | text |
+| axonius.ticket.sys_class_name | The system class name or type of the ticket in the source system. | keyword |
+| axonius.ticket.tenant_number | The tenant or organization number associated with the ticket. | long |
+| axonius.ticket.ticket_id | The unique identifier of the ticket in the source system. | keyword |
+| axonius.ticket.transform_unique_id | Unique identifier for this asset in the transformation process. | keyword |
+| axonius.ticket.type | The type or category of the ticket entity. | keyword |
+| axonius.ticket.updated | The date and time when the ticket was last updated. | date |
+| data_stream.dataset | The field can contain anything that makes sense to signify the source of the data. Examples include `nginx.access`, `prometheus`, `endpoint` etc. For data streams that otherwise fit, but that do not have dataset set we use the value "generic" for the dataset value. `event.dataset` should have the same value as `data_stream.dataset`. Beyond the Elasticsearch data stream naming criteria noted above, the `dataset` value has additional restrictions:   \* Must not contain `-`   \* No longer than 100 characters | constant_keyword |
+| data_stream.namespace | A user defined namespace. Namespaces are useful to allow grouping of data. Many users already organize their indices this way, and the data stream naming scheme now provides this best practice as a default. Many users will populate this field with `default`. If no value is used, it falls back to `default`. Beyond the Elasticsearch index naming criteria noted above, `namespace` value has the additional restrictions:   \* Must not contain `-`   \* No longer than 100 characters | constant_keyword |
+| data_stream.type | An overarching type for the data stream. Currently allowed values are "logs" and "metrics". We expect to also add "traces" and "synthetics" in the near future. | constant_keyword |
+| event.dataset | Name of the dataset. If an event source publishes more than one type of log or events (e.g. access log, error log), the dataset is used to specify which one the event comes from. It's recommended but not required to start the dataset name with the module name, followed by a dot, then the dataset name. | constant_keyword |
+| event.module | Name of the module this data is coming from. If your monitoring agent supports the concept of modules or plugins to process events of a given source (e.g. Apache logs), `event.module` should contain the name of this module. | constant_keyword |
+| input.type | Type of filebeat input. | keyword |
+| labels.is_transform_source | Indicates whether a ticket is in the raw source data stream, or in the latest destination index. | constant_keyword |
+| log.offset | Log offset. | long |
+| observer.vendor | Vendor name of the observer. | constant_keyword |
+
+
+An example event for `ticket` looks as following:
+
+```json
+{
+    "@timestamp": "2024-08-10T16:21:10.000Z",
+    "agent": {
+        "ephemeral_id": "6bc19b7c-541f-4d51-9ee2-2ce3d20a24c5",
+        "id": "06edafcd-bf62-4330-b3da-d7c210c44f7f",
+        "name": "elastic-agent-45583",
+        "type": "filebeat",
+        "version": "8.18.0"
+    },
+    "axonius": {
+        "ticket": {
+            "accurate_for_datetime": "2025-12-08T00:02:48.000Z",
+            "adapter_list_length": 1,
+            "adapters": [
+                "service_now_adapter"
+            ],
+            "application_and_account_name": "servicenow/servicenow-dev",
+            "asset_type": "tickets",
+            "category": "Access Reviewer",
+            "closed": "2024-08-10T16:21:10.000Z",
+            "created": "2024-07-14T23:21:10.000Z",
+            "description": "Access Reviewer - Needs addressing",
+            "display_id": "INC3566938",
+            "event": {
+                "accurate_for_datetime": "2025-12-08T00:02:48.000Z",
+                "adapter_categories": [
+                    "CMDB",
+                    "ITAM/ITSM",
+                    "Ticketing",
+                    "SaaS Management"
+                ],
+                "client_used": "67fd0999fe1c8e812a176ba2",
+                "initial_plugin_unique_name": "service_now_adapter_0",
+                "plugin_name": "service_now_adapter",
+                "plugin_type": "Adapter",
+                "plugin_unique_name": "service_now_adapter_0",
+                "quick_id": "service_now_adapter_0!b59da9ea-6814-4ee9-b7b1-ad9088b601cd",
+                "type": "entitydata"
+            },
+            "fetch_time": "2025-12-08T00:02:42.000Z",
+            "first_fetch_time": "2025-08-30T12:00:42.000Z",
+            "from_last_fetch": true,
+            "id": "b59da9ea-6814-4ee9-b7b1-ad9088b601cd",
+            "internal_axon_id": "3bd6051f3dd4493796aaf0d55dbcbe1f",
+            "is_fetched_from_adapter": true,
+            "last_fetch_connection_id": "67fd0999fe1c8e812a176ba2",
+            "last_fetch_connection_label": "servicenow-dev",
+            "not_fetched_count": 0,
+            "priority": "5 - Planning",
+            "reporter": "Randy Mason",
+            "source_application": "ServiceNow",
+            "status": "Resolved",
+            "summary": "Access Reviewer",
+            "sys_class_name": "incident",
+            "tenant_number": [
+                1
+            ],
+            "ticket_id": "b59da9ea-6814-4ee9-b7b1-ad9088b601cd",
+            "transform_unique_id": "17k4++79l2/seCorLsaz4cuv6tA=",
+            "type": "Tickets",
+            "updated": "2024-08-10T16:21:10.000Z"
+        }
+    },
+    "data_stream": {
+        "dataset": "axonius.ticket",
+        "namespace": "49563",
+        "type": "logs"
+    },
+    "ecs": {
+        "version": "9.2.0"
+    },
+    "elastic_agent": {
+        "id": "06edafcd-bf62-4330-b3da-d7c210c44f7f",
+        "snapshot": false,
+        "version": "8.18.0"
+    },
+    "event": {
+        "agent_id_status": "verified",
+        "created": "2024-07-14T23:21:10.000Z",
+        "dataset": "axonius.ticket",
+        "end": "2024-08-10T16:21:10.000Z",
+        "ingested": "2026-03-25T07:18:20Z",
+        "kind": "event"
+    },
+    "input": {
+        "type": "cel"
+    },
+    "message": "Access Reviewer - Needs addressing",
+    "related": {
+        "user": [
+            "Randy Mason"
+        ]
+    },
+    "tags": [
+        "preserve_duplicate_custom_fields",
+        "forwarded",
+        "axonius-ticket"
+    ]
+}
+```
+
 ### API usage
 
 These APIs are used with this integration:
@@ -1236,7 +1437,10 @@ These APIs are used with this integration:
     * object_storages (endpoint: `/api/v2/object_storages`)
     * file_systems (endpoint: `/api/v2/file_systems`)
     * disks (endpoint: `/api/v2/disks`)
+* Ticket:
+    * tickets (endpoint: `/api/v2/tickets`)
+    * cases (endpoint: `/api/v2/cases`)
 
 ### ILM Policy
 
-To facilitate adapter, user, gateway and assets data including exposures, alert findings, incidents and storage source data stream-backed indices `.ds-logs-axonius.adapter-*`, `.ds-logs-axonius.user-*`, `.ds-logs-axonius.gateway-*`, `.ds-logs-axonius.exposure-*`, `.ds-logs-axonius.alert_finding-*`, `.ds-logs-axonius.incident-*` and `.ds-logs-axonius.storage-*` respectively are allowed to contain duplicates from each polling interval. ILM policies `logs-axonius.adapter-default_policy`, `logs-axonius.user-default_policy`, `logs-axonius.gateway-default_policy`, `logs-axonius.exposure-default_policy`,  `logs-axonius.alert_finding-default_policy`, `logs-axonius.incident-default_policy`, `logs-axonius.storage-default_policy` are added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.
+To facilitate adapter, user, gateway and assets data including exposures, alert findings, incidents, storage and ticket source data stream-backed indices `.ds-logs-axonius.adapter-*`, `.ds-logs-axonius.user-*`, `.ds-logs-axonius.gateway-*`, `.ds-logs-axonius.exposure-*`, `.ds-logs-axonius.alert_finding-*`, `.ds-logs-axonius.incident-*`, `.ds-logs-axonius.storage-*` and `.ds-logs-axonius.ticket-*` respectively are allowed to contain duplicates from each polling interval. ILM policies `logs-axonius.adapter-default_policy`, `logs-axonius.user-default_policy`, `logs-axonius.gateway-default_policy`, `logs-axonius.exposure-default_policy`,  `logs-axonius.alert_finding-default_policy`, `logs-axonius.incident-default_policy`, `logs-axonius.storage-default_policy` and `logs-axonius.ticket-default_policy` are added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.
