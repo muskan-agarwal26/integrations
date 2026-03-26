@@ -27,8 +27,8 @@ sync:
     delay: 120s
 retention_policy:
   time:
-    field: 'event.ingested'
-    max_age: 24h
+    field: '@timestamp'
+    max_age: 90d
 _meta:
   managed: false
   # Bump this version to delete, reinstall, and restart the transform during
