@@ -15,6 +15,32 @@ This integration periodically queries the Axonius API to retrieve logs.
 ## What data does this integration collect?
 This integration collects log messages of the following type:
 
+- `Adapter`: Collect details of all adapters (endpoint: `/api/v2/adapters`).
+
+- `User`: Collect details of all users (endpoint: `/api/v2/users`).
+
+- `Gateway`: Collect details of all Gateway (endpoint: `/api/v2/gateway`).
+
+- `Exposure`: Collect details of all exposure assets including:
+    - vulnerability_instances (endpoint: `/api/v2/vulnerability_instances`)
+    - vulnerabilities (endpoint: `/api/v2/vulnerabilities`)
+    - vulnerabilities_repository (endpoint: `/api/v2/vulnerabilities_repository`)
+
+- `Alert Findings`: Collect details of all alert findings and incident assets including:
+    - alert_findings (endpoint: `/api/v2/alert_findings`)
+
+- `Incidents`: Collect details of all incident assets including:
+    - incidents (endpoint: `/api/v2/incidents`)
+
+- `Storage`: Collect details of all storage assets including:
+    - object_storages (endpoint: `/api/v2/object_storages`)
+    - file_systems (endpoint: `/api/v2/file_systems`)
+    - disks (endpoint: `/api/v2/disks`)
+
+- `Ticket`: Collect details of all ticket assets including:
+    - tickets (endpoint: `/api/v2/tickets`)
+    - cases (endpoint: `/api/v2/cases`)
+
 - `Network`: Collect details of all identity assets including:
     - networks (endpoint: `/api/v2/networks`)
     - load_balancers (endpoint: `/api/v2/load_balancers`)
@@ -26,11 +52,9 @@ This integration collects log messages of the following type:
 
 ### Supported use cases
 
-Integrating the Axonius Network Datastream with Elastic SIEM provides centralized visibility into network assets, traffic exposure, and connectivity across the environment. Kibana dashboards surface key insights into network asset status, device states, and routing behavior, helping analysts quickly understand overall network posture and potential exposure points.
+Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, Ticket, and Network data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, ticketing, and network activity. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways and network assets operate, where risks and exposures exist, and how alerts evolve into incidents and tracked issues.
 
-The dashboards present clear breakdowns of assets by protocol, type, category, and operating system, while metrics highlight publicly exposed and unsafe network devices. Tables provide actionable context around top sources, destinations, subnetworks, routes, locations, and vendors, supporting deeper analysis of network dependencies and communication paths.
-
-These insights help security teams identify network exposure hotspots, detect misconfigurations or risky assets, and streamline network-focused investigations across the organization.
+The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, ticket activity, and network asset posture. Network-specific views highlight protocols, device states, exposure levels, and communication paths, while ticket insights provide context on priorities, statuses, and workload patterns. By correlating operational, identity, exposure, incident, storage, ticket, and network data in one place, security teams can detect anomalies, identify misconfigurations, prioritize remediation, and streamline investigations with comprehensive, end-to-end context across the environment.
 
 ## What do I need to use this integration?
 
@@ -98,8 +122,23 @@ For more information, refer to [Agentless integrations](https://www.elastic.co/g
 
 1. In the top search bar in Kibana, search for **Transforms**.
 2. Select the **Data / Transforms** from the search results.
-3. In the search bar, type **axonius**.
+3. In the search bar, type **Axonius**.
 4. All transforms from the search results should indicate **Healthy** under the **Health** column.
+
+An [Elastic Transform](https://www.elastic.co/guide/en/elasticsearch/reference/current/transforms.html) is created for each data stream, to provide a view of the most recent, active Axonius data. Use the relevant destination alias from the table below to access the latest data, whether for use in dashboards, rules, or elsewhere.
+Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
+
+| Source Data stream                 | Destination Index Pattern                        | Destination Alias                       |
+|:-----------------------------------|:-------------------------------------------------|-----------------------------------------|
+| `logs-axonius.adapter-*`           | `logs-axonius_latest.dest_adapter-*`             | `logs-axonius_latest.adapter`           |
+| `logs-axonius.alert_finding-*`     | `logs-axonius_latest.dest_alert_finding-*`       | `logs-axonius_latest.alert_finding`     |
+| `logs-axonius.exposure-*`          | `logs-axonius_latest.dest_exposure-*`            | `logs-axonius_latest.exposure`          |
+| `logs-axonius.gateway-*`           | `logs-axonius_latest.dest_gateway-*`             | `logs-axonius_latest.gateway`           |
+| `logs-axonius.incident-*`          | `logs-axonius_latest.dest_incident-*`            | `logs-axonius_latest.incident`          |
+| `logs-axonius.user-*`              | `logs-axonius_latest.dest_user-*`                | `logs-axonius_latest.user`              |
+| `logs-axonius.storage-*`              | `logs-axonius_latest.dest_storage-*`                | `logs-axonius_latest.storage`              |
+| `logs-axonius.ticket-*`              | `logs-axonius_latest.dest_ticket-*`                | `logs-axonius_latest.ticket`
+| `logs-axonius.network-*`              | `logs-axonius_latest.dest_network-*`                | `logs-axonius_latest.network`
 
 ## Troubleshooting
 
@@ -110,6 +149,86 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 For more information on architectures that can be used for scaling this integration, check the [Ingest Architectures](https://www.elastic.co/docs/manage-data/ingest/ingest-reference-architectures) documentation.
 
 ## Reference
+
+### Adapter
+
+The `adapter` data stream provides adapter logs from axonius.
+
+#### adapter fields
+
+{{ fields "adapter" }}
+
+{{ event "adapter" }}
+
+### User
+
+The `user` data stream provides user events from axonius.
+
+#### user fields
+
+{{ fields "user" }}
+
+{{ event "user" }}
+
+### Gateway
+
+The `gateway` data stream provides gateway events from axonius.
+
+#### gateway fields
+
+{{ fields "gateway" }}
+
+{{ event "gateway" }}
+
+### Exposure
+
+The `exposure` data stream provides exposure logs from axonius.
+
+#### exposure fields
+
+{{ fields "exposure" }}
+
+{{event "exposure"}}
+
+### Alert Finding
+
+The `alert_finding` data stream provides alert findings asset logs from axonius.
+
+#### alert_finding fields
+
+{{ fields "alert_finding" }}
+
+{{event "alert_finding"}}
+
+### Incident
+
+The `incident` data stream provides incident asset logs from axonius.
+
+#### incident fields
+
+{{ fields "incident" }}
+
+{{event "incident"}}
+
+### Storage
+
+The `storage` data stream provides storage asset logs from axonius.
+
+#### storage fields
+
+{{ fields "storage" }}
+
+{{event "storage"}}
+
+### Ticket
+
+The `ticket` data stream provides ticket asset logs from axonius.
+
+#### ticket fields
+
+{{ fields "ticket" }}
+
+{{event "ticket"}}
 
 ### Network
 
@@ -129,6 +248,24 @@ The `network` data stream provides network events from axonius.
 
 These APIs are used with this integration:
 
+* Adapter (endpoint: `/api/v2/adapters`)
+* User (endpoint: `/api/v2/users`)
+* Gateway (endpoint: `/api/v2/gateway`)
+* Exposure:
+    * vulnerability_instances (endpoint: `/api/v2/vulnerability_instances`)
+    * vulnerabilities (endpoint: `/api/v2/vulnerabilities`)
+    * vulnerabilities_repository (endpoint: `/api/v2/vulnerabilities_repository`)
+* Alert Findings:
+    * alert_findings (endpoint: `/api/v2/alert_findings`)
+* Incidents:
+    * incidents (endpoint: `/api/v2/incidents`)
+* Storage:
+    * object_storages (endpoint: `/api/v2/object_storages`)
+    * file_systems (endpoint: `/api/v2/file_systems`)
+    * disks (endpoint: `/api/v2/disks`)
+* Ticket:
+    * tickets (endpoint: `/api/v2/tickets`)
+    * cases (endpoint: `/api/v2/cases`)
 * Network
     * networks (endpoint: `/api/v2/networks`)
     * load_balancers (endpoint: `/api/v2/load_balancers`)
@@ -138,6 +275,6 @@ These APIs are used with this integration:
     * nat_rules (endpoint: `/api/v2/nat_rules`)
     * network_routes (endpoint: `/api/v2/network_routes`)
 
-#### ILM Policy
+### ILM Policy
 
-To facilitate network data, source data stream-backed indices `.ds-logs-axonius.network-*` are allowed to contain duplicates from each polling interval. ILM policy `logs-axonius.network-default_policy` is added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.
+To facilitate adapter, user, gateway and assets data including exposures, alert findings, incidents, storage and ticket source data stream-backed indices `.ds-logs-axonius.adapter-*`, `.ds-logs-axonius.user-*`, `.ds-logs-axonius.gateway-*`, `.ds-logs-axonius.exposure-*`, `.ds-logs-axonius.alert_finding-*`, `.ds-logs-axonius.incident-*`, `.ds-logs-axonius.storage-*` and `.ds-logs-axonius.ticket-*` respectively are allowed to contain duplicates from each polling interval. ILM policies `logs-axonius.adapter-default_policy`, `logs-axonius.user-default_policy`, `logs-axonius.gateway-default_policy`, `logs-axonius.exposure-default_policy`,  `logs-axonius.alert_finding-default_policy`, `logs-axonius.incident-default_policy`, `logs-axonius.storage-default_policy` and `logs-axonius.ticket-default_policy` are added to these source indices, so it doesn't lead to unbounded growth. This means that in these source indices data will be deleted after `30 days` from ingested date.
