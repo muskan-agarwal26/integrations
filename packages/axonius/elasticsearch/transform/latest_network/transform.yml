@@ -14,7 +14,7 @@ latest:
   sort: '@timestamp'
 description: >-
   Latest networks from Axonius. As networks get updated, this transform stores only the latest state of each network asset inside the destination index. Thus the transform's destination index contains only the latest state of the network asset.
-frequency: 30s
+frequency: 5m
 settings:
   # This is required to prevent the transform from clobbering the Fleet-managed mappings.
   deduce_mappings: false
@@ -27,8 +27,8 @@ sync:
     delay: 120s
 retention_policy:
   time:
-    field: 'event.ingested'
-    max_age: 24h
+    field: '@timestamp'
+    max_age: 90d
 _meta:
   managed: false
   # Bump this version to delete, reinstall, and restart the transform during
