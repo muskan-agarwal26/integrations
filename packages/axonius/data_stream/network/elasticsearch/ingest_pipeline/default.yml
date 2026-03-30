@@ -68,7 +68,7 @@ processors:
   - script:
       tag: script_rename_event_data_fields
       lang: painless
-      description: Renames all event.data.* fields to root level (removes event.data prefix). Prefixes conflicting keys with 'data_' to avoid overwriting root-level fields.
+      description:  Renames all axonius.network.event.data.* fields to root level (removes event.data prefix). Prefixes conflicting keys with 'data_' to avoid overwriting custom data-stream-root-level fields.
       source: |-
         if (ctx.axonius?.network?.event?.data instanceof Map) {
           Map eventData = ctx.axonius.network.event.data;
@@ -320,7 +320,7 @@ processors:
   - script:
       tag: script_to_drop_null_values
       lang: painless
-      description: This script processor iterates over the whole document to remove fields with null values.
+      description: This script processor iterates over the whole document to remove fields with null values, empty strings, empty objects, and empty arrays.
       source: |-
         void handleMap(Map map) {
           map.values().removeIf(v -> {
@@ -338,6 +338,11 @@ processors:
               handleMap(v);
             } else if (v instanceof List) {
               handleList(v);
+            }
+            if (v instanceof String) {
+              String s = (String) v;
+              // Remove empty strings and stringified empty objects/arrays
+              return s.isEmpty() || s.equals('{}') || s.equals('[]');
             }
             return v == null || v == '' || (v instanceof Map && v.size() == 0) || (v instanceof List && v.size() == 0)
           });
