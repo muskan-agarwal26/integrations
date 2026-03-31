@@ -267,32 +267,32 @@ processors:
       name: '{{ IngestPipeline "pipeline-network" }}'
       tag: pipeline_network
       if: >-
-        ctx.axonius?.network?.asset_type.contains('networks')
+        ctx.axonius?.network?.asset_type != null && ctx.axonius.network.asset_type.contains('networks')
   - pipeline:
       name: '{{ IngestPipeline "pipeline-load-balancer" }}'
       tag: pipeline_load_balancer
       if: >-
-        ctx.axonius?.network?.asset_type.contains('load_balancers')
+        ctx.axonius?.network?.asset_type != null && ctx.axonius.network.asset_type.contains('load_balancers')
   - pipeline:
       name: '{{ IngestPipeline "pipeline-network-device" }}'
       tag: pipeline_network_device
       if: >-
-        ctx.axonius?.network?.asset_type.contains('network_devices')
+        ctx.axonius?.network?.asset_type != null && ctx.axonius.network.asset_type.contains('network_devices')
   - pipeline:
       name: '{{ IngestPipeline "pipeline-firewall" }}'
       tag: pipeline_firewall
       if: >-
-        ctx.axonius?.network?.asset_type.contains('firewalls')
+        ctx.axonius?.network?.asset_type != null && ctx.axonius.network.asset_type.contains('firewalls')
   - pipeline:
       name: '{{ IngestPipeline "pipeline-nat-rule" }}'
       tag: pipeline_nat_rule
       if: >-
-        ctx.axonius?.network?.asset_type.contains('nat_rules')
+        ctx.axonius?.network?.asset_type != null && ctx.axonius.network.asset_type.contains('nat_rules')
   - pipeline:
       name: '{{ IngestPipeline "pipeline-network-route" }}'
       tag: pipeline_network_route
       if: >-
-        ctx.axonius?.network?.asset_type.contains('network_routes')
+        ctx.axonius?.network?.asset_type != null && ctx.axonius.network.asset_type.contains('network_routes')
   - remove:
       field:
         - axonius.network.event.accurate_for_datetime
