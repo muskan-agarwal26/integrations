@@ -8,6 +8,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.allow_nat
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'

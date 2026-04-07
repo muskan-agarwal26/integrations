@@ -5,7 +5,14 @@ version: 0.1.0
 description: Collect logs from Axonius with Elastic Agent.
 type: integration
 categories:
+  - asset_inventory
+  - datastore
+  - iam
+  - network
   - security
+  - siem
+  - ticketing
+  - vulnerability_management
 conditions:
   kibana:
     version: ^8.19.10 || ~9.1.10 || ~9.2.4 || ^9.3.1

@@ -44,6 +44,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network._keep_hostname_empty
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -58,6 +61,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.arp_ttl
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -67,6 +73,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.assessed_for_policies
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -76,6 +85,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.assessed_for_vulnerabilities
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -244,6 +256,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.confidence_level
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -320,6 +335,9 @@ processors:
       ignore_missing: true
       if: ctx.axonius?.network?.external_ip != ''
       on_failure:
+        - remove:
+            field: axonius.network.external_ip
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -336,6 +354,9 @@ processors:
       ignore_missing: true
       if: ctx.axonius?.network?.external_nat_ip != ''
       on_failure:
+        - remove:
+            field: axonius.network.external_nat_ip
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -351,6 +372,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.firewall_enabled
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -371,6 +395,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.free_physical_memory
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -397,6 +424,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.ghost
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -418,6 +448,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.hard_drives.free_size
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -427,6 +460,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.hard_drives.is_encrypted
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -436,6 +472,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.hard_drives.total_size
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -456,6 +495,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_authenticated_scan
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -465,6 +507,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_fragile
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -474,6 +519,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_latest_last_seen
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -483,6 +531,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_managed
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -492,6 +543,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_network_infra_device
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -525,6 +579,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_purchased
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -534,6 +591,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_safe
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -581,6 +641,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.jamf_location.room
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -959,6 +1022,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.is_end_of_life
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -968,6 +1034,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.is_end_of_support
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -977,6 +1046,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.is_latest_os_version
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -986,6 +1058,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.is_windows_server
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1000,6 +1075,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.major
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1009,6 +1087,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.minor
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1023,6 +1104,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.os.os_dotted_raw
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1105,6 +1189,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.part_of_domain
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1114,6 +1201,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.physical_memory_percentage
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1529,6 +1619,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.read_only
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1538,6 +1631,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.recording
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1580,6 +1676,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.scanner
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1602,6 +1701,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.severity_critical
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1611,6 +1713,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.severity_high
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1620,6 +1725,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.severity_info
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1629,6 +1737,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.severity_low
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1638,6 +1749,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.severity_medium
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1647,6 +1761,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.share_application
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1656,6 +1773,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.share_desktop
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1665,6 +1785,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.share_whiteboard
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -1674,6 +1797,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.sip_status
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2053,6 +2179,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.special_hint
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2062,6 +2191,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.swap_free
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2071,6 +2203,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.swap_total
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2080,6 +2215,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.total
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2089,6 +2227,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.total_number_of_cores
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2098,6 +2239,9 @@ processors:
       type: double
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.total_physical_memory
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2113,6 +2257,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.uniq_sites_count
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2138,6 +2285,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.virtual_host
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2153,6 +2303,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.vpn_is_local
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2162,6 +2315,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.vpn_lifetime
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2170,8 +2326,10 @@ processors:
       tag: convert_vpn_public_ip_to_ip
       type: ip
       ignore_missing: true
-      if: ctx.axonius?.network?.vpn_public_ip != ''
       on_failure:
+        - remove:
+            field: axonius.network.vpn_public_ip
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2186,8 +2344,10 @@ processors:
       tag: convert_zoom_ip_to_ip
       type: ip
       ignore_missing: true
-      if: ctx.axonius?.network?.zoom_ip != ''
       on_failure:
+        - remove:
+            field: axonius.network.zoom_ip
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -2208,6 +2368,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.event.hidden_for_gui
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'

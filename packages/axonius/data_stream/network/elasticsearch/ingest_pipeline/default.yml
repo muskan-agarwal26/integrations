@@ -62,6 +62,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.adapter_list_length
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -174,6 +177,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.from_last_fetch
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -183,6 +189,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_exposing_public_traffic
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -192,6 +201,9 @@ processors:
       type: boolean
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.is_fetched_from_adapter
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -214,6 +226,9 @@ processors:
       type: long
       ignore_missing: true
       on_failure:
+        - remove:
+            field: axonius.network.not_fetched_count
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
