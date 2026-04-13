@@ -140,6 +140,8 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 | `logs-axonius.ticket-*`              | `logs-axonius_latest.dest_ticket-*`                | `logs-axonius_latest.ticket`
 | `logs-axonius.network-*`              | `logs-axonius_latest.dest_network-*`                | `logs-axonius_latest.network`
 
+**Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets.
+
 ## Troubleshooting
 
 For help with Elastic ingest tools, check [Common problems](https://www.elastic.co/docs/troubleshoot/ingest/fleet/common-problems).

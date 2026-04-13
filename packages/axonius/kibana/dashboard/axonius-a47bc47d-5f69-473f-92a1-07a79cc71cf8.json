@@ -402,1318 +402,6 @@
             },
             {
                 "embeddableConfig": {
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "savedVis": {
-                        "data": {
-                            "aggs": [],
-                            "searchSource": {
-                                "filter": [],
-                                "query": {
-                                    "language": "kuery",
-                                    "query": ""
-                                }
-                            }
-                        },
-                        "description": "",
-                        "id": "",
-                        "params": {
-                            "fontSize": 12,
-                            "markdown": "**Overview**\n\nThis dashboard provides a comprehensive view of Network Assets collected from Axonius.\n\nIt highlights network asset activity and exposure across the environment, giving immediate visibility into how assets communicate and where potential risks exist. Breakdowns by protocol, asset type, rule type, status, and device state help analysts quickly understand how network assets are distributed and identify unsafe or publicly exposed devices.\n\nAdditional views surface key network context such as top adapters, sources, destinations, subnetworks, routes, locations, vendors, and device categories. These perspectives help teams identify network exposure hotspots, assess configuration and routing risks, and prioritize remediation efforts efficiently across the network infrastructure.\n\n**[Integration Page](/app/integrations/detail/axonius)**\n",
-                            "openLinksInNewTab": false
-                        },
-                        "title": "",
-                        "type": "markdown",
-                        "uiState": {}
-                    }
-                },
-                "gridData": {
-                    "h": 27,
-                    "i": "9a4f4549-67e6-4e7a-ac4d-787f7958fec4",
-                    "w": 9,
-                    "x": 0,
-                    "y": 0
-                },
-                "panelIndex": "9a4f4549-67e6-4e7a-ac4d-787f7958fec4",
-                "type": "visualization"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "67f1e088-5eb0-492e-802a-59438185e2af",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "beb4cdbd-3988-414b-ae5c-973ada4b376a": {
-                                            "columnOrder": [
-                                                "c9b13189-8d22-4d78-9776-0bb89e541796"
-                                            ],
-                                            "columns": {
-                                                "c9b13189-8d22-4d78-9776-0bb89e541796": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "filter": {
-                                                        "language": "kuery",
-                                                        "query": "axonius.network.is_exposing_public_traffic : true "
-                                                    },
-                                                    "isBucketed": false,
-                                                    "label": "Count of Assets Exposing Public Traffic",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "emptyAsNull": false
-                                                    },
-                                                    "scale": "ratio",
-                                                    "sourceField": "___records___"
-                                                }
-                                            },
-                                            "ignoreGlobalFilters": false,
-                                            "incompleteColumns": {},
-                                            "sampling": 1
-                                        }
-                                    }
-                                },
-                                "indexpattern": {
-                                    "layers": {}
-                                },
-                                "textBased": {
-                                    "layers": {}
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "67f1e088-5eb0-492e-802a-59438185e2af",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "beb4cdbd-3988-414b-ae5c-973ada4b376a",
-                                "layerType": "data",
-                                "metricAccessor": "c9b13189-8d22-4d78-9776-0bb89e541796"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 9,
-                    "i": "944933ad-8624-4041-8047-cf90f836e314",
-                    "w": 8,
-                    "x": 17,
-                    "y": 0
-                },
-                "panelIndex": "944933ad-8624-4041-8047-cf90f836e314",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-a8db2fc2-4a74-4850-a5d7-1b024e153d81",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "1324b440-d3f1-4963-99d9-995184d2073b",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "a8db2fc2-4a74-4850-a5d7-1b024e153d81": {
-                                            "columnOrder": [
-                                                "6d40e1b3-0dad-403c-8212-6d7eea052c01"
-                                            ],
-                                            "columns": {
-                                                "6d40e1b3-0dad-403c-8212-6d7eea052c01": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "filter": null,
-                                                    "isBucketed": false,
-                                                    "label": "Maximum Cvss Base Score",
-                                                    "operationType": "sum",
-                                                    "params": {
-                                                        "emptyAsNull": false,
-                                                        "format": {
-                                                            "id": "number",
-                                                            "params": {
-                                                                "decimals": 0
-                                                            }
-                                                        }
-                                                    },
-                                                    "reducedTimeRange": null,
-                                                    "scale": "ratio",
-                                                    "sourceField": "axonius.network.plugin_and_severities.cvss_base_score",
-                                                    "timeScale": null,
-                                                    "timeShift": null
-                                                }
-                                            },
-                                            "incompleteColumns": {}
-                                        }
-                                    }
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "1324b440-d3f1-4963-99d9-995184d2073b",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "a8db2fc2-4a74-4850-a5d7-1b024e153d81",
-                                "layerType": "data",
-                                "metricAccessor": "6d40e1b3-0dad-403c-8212-6d7eea052c01"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "hidePanelTitles": true,
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 9,
-                    "i": "metric-02",
-                    "w": 8,
-                    "x": 25,
-                    "y": 0
-                },
-                "panelIndex": "metric-02",
-                "title": "",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-4d730a3e-6974-4d5e-bbb0-c7cbf250fade",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "409621d0-2134-4dc9-89a9-d24d779fc187",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "4d730a3e-6974-4d5e-bbb0-c7cbf250fade": {
-                                            "columnOrder": [
-                                                "135d9c82-8028-49e1-b82f-7c022c635610"
-                                            ],
-                                            "columns": {
-                                                "135d9c82-8028-49e1-b82f-7c022c635610": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "isBucketed": false,
-                                                    "label": "Maximum Vpr Score",
-                                                    "operationType": "sum",
-                                                    "params": {
-                                                        "emptyAsNull": false,
-                                                        "format": {
-                                                            "id": "number",
-                                                            "params": {
-                                                                "decimals": 0
-                                                            }
-                                                        }
-                                                    },
-                                                    "scale": "ratio",
-                                                    "sourceField": "axonius.network.plugin_and_severities.vpr_score"
-                                                }
-                                            },
-                                            "incompleteColumns": {}
-                                        }
-                                    }
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "409621d0-2134-4dc9-89a9-d24d779fc187",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "4d730a3e-6974-4d5e-bbb0-c7cbf250fade",
-                                "layerType": "data",
-                                "metricAccessor": "135d9c82-8028-49e1-b82f-7c022c635610"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "hidePanelTitles": true,
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 9,
-                    "i": "metric-04",
-                    "w": 7,
-                    "x": 33,
-                    "y": 0
-                },
-                "panelIndex": "metric-04",
-                "title": "",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "1d120204-2770-436c-b0d8-699c4f1115a1",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "beb4cdbd-3988-414b-ae5c-973ada4b376a": {
-                                            "columnOrder": [
-                                                "c9b13189-8d22-4d78-9776-0bb89e541796"
-                                            ],
-                                            "columns": {
-                                                "c9b13189-8d22-4d78-9776-0bb89e541796": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "filter": {
-                                                        "language": "kuery",
-                                                        "query": "axonius.network.is_safe : false "
-                                                    },
-                                                    "isBucketed": false,
-                                                    "label": "Unsafe Network Devices",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "emptyAsNull": false
-                                                    },
-                                                    "scale": "ratio",
-                                                    "sourceField": "___records___"
-                                                }
-                                            },
-                                            "ignoreGlobalFilters": false,
-                                            "incompleteColumns": {},
-                                            "sampling": 1
-                                        }
-                                    }
-                                },
-                                "indexpattern": {
-                                    "layers": {}
-                                },
-                                "textBased": {
-                                    "layers": {}
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "1d120204-2770-436c-b0d8-699c4f1115a1",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#CC5642",
-                                "layerId": "beb4cdbd-3988-414b-ae5c-973ada4b376a",
-                                "layerType": "data",
-                                "metricAccessor": "c9b13189-8d22-4d78-9776-0bb89e541796"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 9,
-                    "i": "06e51419-950e-47e6-a939-223d171125b0",
-                    "w": 8,
-                    "x": 40,
-                    "y": 0
-                },
-                "panelIndex": "06e51419-950e-47e6-a939-223d171125b0",
-                "title": "",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-8050a858-4640-4d70-8830-c38e88ec4ce7",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "65859297-2f2e-49ca-9da4-e59b412bebc8",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "8050a858-4640-4d70-8830-c38e88ec4ce7": {
-                                            "columnOrder": [
-                                                "b61a9d27-df3e-4256-8b66-d510c8b08f0a"
-                                            ],
-                                            "columns": {
-                                                "b61a9d27-df3e-4256-8b66-d510c8b08f0a": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "isBucketed": false,
-                                                    "label": "Total Events",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "format": {
-                                                            "id": "number",
-                                                            "params": {
-                                                                "decimals": 0
-                                                            }
-                                                        }
-                                                    },
-                                                    "scale": "ratio",
-                                                    "sourceField": "___records___"
-                                                }
-                                            },
-                                            "incompleteColumns": {}
-                                        }
-                                    }
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "65859297-2f2e-49ca-9da4-e59b412bebc8",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "8050a858-4640-4d70-8830-c38e88ec4ce7",
-                                "layerType": "data",
-                                "metricAccessor": "b61a9d27-df3e-4256-8b66-d510c8b08f0a"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "hidePanelTitles": true,
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 9,
-                    "i": "metric-01",
-                    "w": 8,
-                    "x": 9,
-                    "y": 0
-                },
-                "panelIndex": "metric-01",
-                "title": "",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-ce73c071-4e83-4531-aed0-c10e4e50c151",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "08f7cd4e-c1e4-4abe-89e9-3f497ba24105",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "ce73c071-4e83-4531-aed0-c10e4e50c151": {
-                                            "columnOrder": [
-                                                "84c244b4-ef4e-4d8d-8145-4f3714471aff",
-                                                "6958c55e-cb75-419d-a8f2-71a8022b6f0b",
-                                                "08d7bafd-150d-4415-8ca1-bc829630fddf"
-                                            ],
-                                            "columns": {
-                                                "08d7bafd-150d-4415-8ca1-bc829630fddf": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "isBucketed": false,
-                                                    "label": "Count",
-                                                    "operationType": "count",
-                                                    "scale": "ratio",
-                                                    "sourceField": "___records___"
-                                                },
-                                                "6958c55e-cb75-419d-a8f2-71a8022b6f0b": {
-                                                    "dataType": "date",
-                                                    "isBucketed": true,
-                                                    "label": "@timestamp",
-                                                    "operationType": "date_histogram",
-                                                    "params": {
-                                                        "dropPartials": false,
-                                                        "includeEmptyRows": true,
-                                                        "interval": "auto"
-                                                    },
-                                                    "scale": "interval",
-                                                    "sourceField": "@timestamp"
-                                                },
-                                                "84c244b4-ef4e-4d8d-8145-4f3714471aff": {
-                                                    "customLabel": true,
-                                                    "dataType": "string",
-                                                    "isBucketed": true,
-                                                    "label": "Asset Type",
-                                                    "operationType": "terms",
-                                                    "params": {
-                                                        "exclude": [],
-                                                        "excludeIsRegex": false,
-                                                        "include": [],
-                                                        "includeIsRegex": false,
-                                                        "missingBucket": false,
-                                                        "orderBy": {
-                                                            "columnId": "08d7bafd-150d-4415-8ca1-bc829630fddf",
-                                                            "type": "column"
-                                                        },
-                                                        "orderDirection": "desc",
-                                                        "otherBucket": false,
-                                                        "parentFormat": {
-                                                            "id": "terms"
-                                                        },
-                                                        "size": 7
-                                                    },
-                                                    "scale": "ordinal",
-                                                    "sourceField": "axonius.network.asset_type"
-                                                }
-                                            },
-                                            "incompleteColumns": {}
-                                        }
-                                    }
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "08f7cd4e-c1e4-4abe-89e9-3f497ba24105",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "axisTitlesVisibilitySettings": {
-                                    "x": true,
-                                    "yLeft": true,
-                                    "yRight": true
-                                },
-                                "emphasizeFitting": true,
-                                "fittingFunction": "Linear",
-                                "gridlinesVisibilitySettings": {
-                                    "x": true,
-                                    "yLeft": true,
-                                    "yRight": true
-                                },
-                                "labelsOrientation": {
-                                    "x": 0,
-                                    "yLeft": 0,
-                                    "yRight": 0
-                                },
-                                "layers": [
-                                    {
-                                        "accessors": [
-                                            "08d7bafd-150d-4415-8ca1-bc829630fddf"
-                                        ],
-                                        "layerId": "ce73c071-4e83-4531-aed0-c10e4e50c151",
-                                        "layerType": "data",
-                                        "seriesType": "line",
-                                        "splitAccessor": "84c244b4-ef4e-4d8d-8145-4f3714471aff",
-                                        "xAccessor": "6958c55e-cb75-419d-a8f2-71a8022b6f0b"
-                                    }
-                                ],
-                                "legend": {
-                                    "isVisible": true,
-                                    "legendStats": [
-                                        "currentAndLastValue"
-                                    ],
-                                    "position": "right",
-                                    "shouldTruncate": false,
-                                    "showSingleSeries": true
-                                },
-                                "preferredSeriesType": "line",
-                                "tickLabelsVisibilitySettings": {
-                                    "x": true,
-                                    "yLeft": true,
-                                    "yRight": true
-                                },
-                                "valueLabels": "hide"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsXY"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 18,
-                    "i": "line-01",
-                    "w": 24,
-                    "x": 9,
-                    "y": 9
-                },
-                "panelIndex": "line-01",
-                "title": "Events over Time",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
                     "attributes": {
                         "references": [
                             {
@@ -1976,264 +664,6 @@
                 },
                 "panelIndex": "line-02",
                 "title": "Events by Anti Malware Agent Status over Time",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-9cb47ef9-d506-4e82-acf5-d164cdee188b",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "15518c14-172d-4d47-8f30-38ef878e1520",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "9cb47ef9-d506-4e82-acf5-d164cdee188b": {
-                                            "columnOrder": [
-                                                "986382ad-917a-4c21-a5d4-2c0f8765ac2d",
-                                                "0cfb5e2c-010c-4016-b394-d701c633c17d"
-                                            ],
-                                            "columns": {
-                                                "0cfb5e2c-010c-4016-b394-d701c633c17d": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "isBucketed": false,
-                                                    "label": "Count",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "emptyAsNull": false
-                                                    },
-                                                    "scale": "ratio",
-                                                    "sourceField": "___records___"
-                                                },
-                                                "986382ad-917a-4c21-a5d4-2c0f8765ac2d": {
-                                                    "customLabel": true,
-                                                    "dataType": "string",
-                                                    "isBucketed": true,
-                                                    "label": "Status",
-                                                    "operationType": "terms",
-                                                    "params": {
-                                                        "exclude": [],
-                                                        "excludeIsRegex": false,
-                                                        "include": [],
-                                                        "includeIsRegex": false,
-                                                        "missingBucket": false,
-                                                        "orderBy": {
-                                                            "columnId": "0cfb5e2c-010c-4016-b394-d701c633c17d",
-                                                            "type": "column"
-                                                        },
-                                                        "orderDirection": "desc",
-                                                        "otherBucket": true,
-                                                        "parentFormat": {
-                                                            "id": "terms"
-                                                        },
-                                                        "size": 5
-                                                    },
-                                                    "scale": "ordinal",
-                                                    "sourceField": "axonius.network.status"
-                                                }
-                                            },
-                                            "ignoreGlobalFilters": false,
-                                            "incompleteColumns": {},
-                                            "sampling": 1
-                                        }
-                                    }
-                                },
-                                "indexpattern": {
-                                    "layers": {}
-                                },
-                                "textBased": {
-                                    "layers": {}
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "index": "15518c14-172d-4d47-8f30-38ef878e1520",
-                                        "negate": false,
-                                        "params": [
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "data_stream.dataset",
-                                                    "index": "logs-*",
-                                                    "key": "data_stream.dataset",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "axonius.network"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "data_stream.dataset": "axonius.network"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "meta": {
-                                                    "disabled": false,
-                                                    "field": "labels.is_transform_source",
-                                                    "index": "logs-*",
-                                                    "key": "labels.is_transform_source",
-                                                    "negate": false,
-                                                    "params": {
-                                                        "query": "false"
-                                                    },
-                                                    "type": "phrase"
-                                                },
-                                                "query": {
-                                                    "match_phrase": {
-                                                        "labels.is_transform_source": "false"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "relation": "AND",
-                                        "type": "combined"
-                                    },
-                                    "query": {}
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "layers": [
-                                    {
-                                        "categoryDisplay": "default",
-                                        "colorMapping": {
-                                            "assignments": [],
-                                            "colorMode": {
-                                                "type": "categorical"
-                                            },
-                                            "paletteId": "eui_amsterdam_color_blind",
-                                            "specialAssignments": [
-                                                {
-                                                    "color": {
-                                                        "type": "loop"
-                                                    },
-                                                    "rule": {
-                                                        "type": "other"
-                                                    },
-                                                    "touched": false
-                                                }
-                                            ]
-                                        },
-                                        "layerId": "9cb47ef9-d506-4e82-acf5-d164cdee188b",
-                                        "layerType": "data",
-                                        "legendDisplay": "show",
-                                        "metrics": [
-                                            "0cfb5e2c-010c-4016-b394-d701c633c17d"
-                                        ],
-                                        "nestedLegend": false,
-                                        "numberDisplay": "percent",
-                                        "primaryGroups": [
-                                            "986382ad-917a-4c21-a5d4-2c0f8765ac2d"
-                                        ],
-                                        "truncateLegend": false
-                                    }
-                                ],
-                                "shape": "pie"
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsPie"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "index": "logs-*",
-                                "negate": false,
-                                "params": [
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "data_stream.dataset",
-                                            "index": "logs-*",
-                                            "key": "data_stream.dataset",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "axonius.network"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "data_stream.dataset": "axonius.network"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "meta": {
-                                            "disabled": false,
-                                            "field": "labels.is_transform_source",
-                                            "index": "logs-*",
-                                            "key": "labels.is_transform_source",
-                                            "negate": false,
-                                            "params": {
-                                                "query": "false"
-                                            },
-                                            "type": "phrase"
-                                        },
-                                        "query": {
-                                            "match_phrase": {
-                                                "labels.is_transform_source": "false"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "relation": "AND",
-                                "type": "combined"
-                            },
-                            "query": {}
-                        }
-                    ],
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 18,
-                    "i": "8f04869e-2127-4bfe-b95b-159167c8b717",
-                    "w": 15,
-                    "x": 33,
-                    "y": 9
-                },
-                "panelIndex": "8f04869e-2127-4bfe-b95b-159167c8b717",
-                "title": "Assets by Status",
                 "type": "lens"
             },
             {
@@ -6531,6 +4961,1576 @@
                 "panelIndex": "d9924234-e730-44b9-8c6c-8786f8a86f63",
                 "title": "Top Host Details",
                 "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "savedVis": {
+                        "data": {
+                            "aggs": [],
+                            "searchSource": {
+                                "filter": [],
+                                "query": {
+                                    "language": "kuery",
+                                    "query": ""
+                                }
+                            }
+                        },
+                        "description": "",
+                        "id": "",
+                        "params": {
+                            "fontSize": 12,
+                            "markdown": "**Overview**\n\nThis dashboard provides a comprehensive view of Network Assets collected from Axonius.\n\nIt highlights network asset activity and exposure across the environment, giving immediate visibility into how assets communicate and where potential risks exist. Breakdowns by protocol, asset type, rule type, status, and device state help analysts quickly understand how network assets are distributed and identify unsafe or publicly exposed devices.\n\nAdditional views surface key network context such as top adapters, sources, destinations, subnetworks, routes, locations, vendors, and device categories. These perspectives help teams identify network exposure hotspots, assess configuration and routing risks, and prioritize remediation efforts efficiently across the network infrastructure.\n\n**Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets.\n\n**[Integration Page](/app/integrations/detail/axonius)**\n",
+                            "openLinksInNewTab": false
+                        },
+                        "title": "",
+                        "type": "markdown",
+                        "uiState": {}
+                    }
+                },
+                "gridData": {
+                    "h": 27,
+                    "i": "9a4f4549-67e6-4e7a-ac4d-787f7958fec4",
+                    "w": 14,
+                    "x": 0,
+                    "y": 0
+                },
+                "panelIndex": "9a4f4549-67e6-4e7a-ac4d-787f7958fec4",
+                "type": "visualization"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "67f1e088-5eb0-492e-802a-59438185e2af",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "beb4cdbd-3988-414b-ae5c-973ada4b376a": {
+                                            "columnOrder": [
+                                                "c9b13189-8d22-4d78-9776-0bb89e541796"
+                                            ],
+                                            "columns": {
+                                                "c9b13189-8d22-4d78-9776-0bb89e541796": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "filter": {
+                                                        "language": "kuery",
+                                                        "query": "axonius.network.is_exposing_public_traffic : true "
+                                                    },
+                                                    "isBucketed": false,
+                                                    "label": "Count of Assets Exposing Public Traffic",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "67f1e088-5eb0-492e-802a-59438185e2af",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "beb4cdbd-3988-414b-ae5c-973ada4b376a",
+                                "layerType": "data",
+                                "metricAccessor": "c9b13189-8d22-4d78-9776-0bb89e541796"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "944933ad-8624-4041-8047-cf90f836e314",
+                    "w": 7,
+                    "x": 14,
+                    "y": 0
+                },
+                "panelIndex": "944933ad-8624-4041-8047-cf90f836e314",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-a8db2fc2-4a74-4850-a5d7-1b024e153d81",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "1324b440-d3f1-4963-99d9-995184d2073b",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "a8db2fc2-4a74-4850-a5d7-1b024e153d81": {
+                                            "columnOrder": [
+                                                "6d40e1b3-0dad-403c-8212-6d7eea052c01"
+                                            ],
+                                            "columns": {
+                                                "6d40e1b3-0dad-403c-8212-6d7eea052c01": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "filter": null,
+                                                    "isBucketed": false,
+                                                    "label": "Maximum Cvss Base Score",
+                                                    "operationType": "sum",
+                                                    "params": {
+                                                        "emptyAsNull": false,
+                                                        "format": {
+                                                            "id": "number",
+                                                            "params": {
+                                                                "decimals": 0
+                                                            }
+                                                        }
+                                                    },
+                                                    "reducedTimeRange": null,
+                                                    "scale": "ratio",
+                                                    "sourceField": "axonius.network.plugin_and_severities.cvss_base_score",
+                                                    "timeScale": null,
+                                                    "timeShift": null
+                                                }
+                                            },
+                                            "incompleteColumns": {}
+                                        }
+                                    }
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "1324b440-d3f1-4963-99d9-995184d2073b",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "a8db2fc2-4a74-4850-a5d7-1b024e153d81",
+                                "layerType": "data",
+                                "metricAccessor": "6d40e1b3-0dad-403c-8212-6d7eea052c01"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "metric-02",
+                    "w": 7,
+                    "x": 21,
+                    "y": 0
+                },
+                "panelIndex": "metric-02",
+                "title": "",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-4d730a3e-6974-4d5e-bbb0-c7cbf250fade",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "409621d0-2134-4dc9-89a9-d24d779fc187",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "4d730a3e-6974-4d5e-bbb0-c7cbf250fade": {
+                                            "columnOrder": [
+                                                "135d9c82-8028-49e1-b82f-7c022c635610"
+                                            ],
+                                            "columns": {
+                                                "135d9c82-8028-49e1-b82f-7c022c635610": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Maximum Vpr Score",
+                                                    "operationType": "sum",
+                                                    "params": {
+                                                        "emptyAsNull": false,
+                                                        "format": {
+                                                            "id": "number",
+                                                            "params": {
+                                                                "decimals": 0
+                                                            }
+                                                        }
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "axonius.network.plugin_and_severities.vpr_score"
+                                                }
+                                            },
+                                            "incompleteColumns": {}
+                                        }
+                                    }
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "409621d0-2134-4dc9-89a9-d24d779fc187",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "4d730a3e-6974-4d5e-bbb0-c7cbf250fade",
+                                "layerType": "data",
+                                "metricAccessor": "135d9c82-8028-49e1-b82f-7c022c635610"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "metric-04",
+                    "w": 7,
+                    "x": 28,
+                    "y": 0
+                },
+                "panelIndex": "metric-04",
+                "title": "",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "1d120204-2770-436c-b0d8-699c4f1115a1",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "beb4cdbd-3988-414b-ae5c-973ada4b376a": {
+                                            "columnOrder": [
+                                                "c9b13189-8d22-4d78-9776-0bb89e541796"
+                                            ],
+                                            "columns": {
+                                                "c9b13189-8d22-4d78-9776-0bb89e541796": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "filter": {
+                                                        "language": "kuery",
+                                                        "query": "axonius.network.is_safe : false "
+                                                    },
+                                                    "isBucketed": false,
+                                                    "label": "Unsafe Network Devices",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "1d120204-2770-436c-b0d8-699c4f1115a1",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#CC5642",
+                                "layerId": "beb4cdbd-3988-414b-ae5c-973ada4b376a",
+                                "layerType": "data",
+                                "metricAccessor": "c9b13189-8d22-4d78-9776-0bb89e541796"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "06e51419-950e-47e6-a939-223d171125b0",
+                    "w": 6,
+                    "x": 42,
+                    "y": 0
+                },
+                "panelIndex": "06e51419-950e-47e6-a939-223d171125b0",
+                "title": "",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-8050a858-4640-4d70-8830-c38e88ec4ce7",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "65859297-2f2e-49ca-9da4-e59b412bebc8",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "8050a858-4640-4d70-8830-c38e88ec4ce7": {
+                                            "columnOrder": [
+                                                "b61a9d27-df3e-4256-8b66-d510c8b08f0a"
+                                            ],
+                                            "columns": {
+                                                "b61a9d27-df3e-4256-8b66-d510c8b08f0a": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Total Events",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "format": {
+                                                            "id": "number",
+                                                            "params": {
+                                                                "decimals": 0
+                                                            }
+                                                        }
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "incompleteColumns": {}
+                                        }
+                                    }
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "65859297-2f2e-49ca-9da4-e59b412bebc8",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "8050a858-4640-4d70-8830-c38e88ec4ce7",
+                                "layerType": "data",
+                                "metricAccessor": "b61a9d27-df3e-4256-8b66-d510c8b08f0a"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "metric-01",
+                    "w": 7,
+                    "x": 35,
+                    "y": 0
+                },
+                "panelIndex": "metric-01",
+                "title": "",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-ce73c071-4e83-4531-aed0-c10e4e50c151",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "08f7cd4e-c1e4-4abe-89e9-3f497ba24105",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "ce73c071-4e83-4531-aed0-c10e4e50c151": {
+                                            "columnOrder": [
+                                                "84c244b4-ef4e-4d8d-8145-4f3714471aff",
+                                                "6958c55e-cb75-419d-a8f2-71a8022b6f0b",
+                                                "08d7bafd-150d-4415-8ca1-bc829630fddf"
+                                            ],
+                                            "columns": {
+                                                "08d7bafd-150d-4415-8ca1-bc829630fddf": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                },
+                                                "6958c55e-cb75-419d-a8f2-71a8022b6f0b": {
+                                                    "dataType": "date",
+                                                    "isBucketed": true,
+                                                    "label": "@timestamp",
+                                                    "operationType": "date_histogram",
+                                                    "params": {
+                                                        "dropPartials": false,
+                                                        "includeEmptyRows": true,
+                                                        "interval": "auto"
+                                                    },
+                                                    "scale": "interval",
+                                                    "sourceField": "@timestamp"
+                                                },
+                                                "84c244b4-ef4e-4d8d-8145-4f3714471aff": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Asset Type",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "exclude": [],
+                                                        "excludeIsRegex": false,
+                                                        "include": [],
+                                                        "includeIsRegex": false,
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "08d7bafd-150d-4415-8ca1-bc829630fddf",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": false,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 7
+                                                    },
+                                                    "scale": "ordinal",
+                                                    "sourceField": "axonius.network.asset_type"
+                                                }
+                                            },
+                                            "incompleteColumns": {}
+                                        }
+                                    }
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "08f7cd4e-c1e4-4abe-89e9-3f497ba24105",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "axisTitlesVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "emphasizeFitting": true,
+                                "fittingFunction": "Linear",
+                                "gridlinesVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "labelsOrientation": {
+                                    "x": 0,
+                                    "yLeft": 0,
+                                    "yRight": 0
+                                },
+                                "layers": [
+                                    {
+                                        "accessors": [
+                                            "08d7bafd-150d-4415-8ca1-bc829630fddf"
+                                        ],
+                                        "layerId": "ce73c071-4e83-4531-aed0-c10e4e50c151",
+                                        "layerType": "data",
+                                        "seriesType": "line",
+                                        "splitAccessor": "84c244b4-ef4e-4d8d-8145-4f3714471aff",
+                                        "xAccessor": "6958c55e-cb75-419d-a8f2-71a8022b6f0b"
+                                    }
+                                ],
+                                "legend": {
+                                    "isVisible": true,
+                                    "legendStats": [
+                                        "currentAndLastValue"
+                                    ],
+                                    "position": "right",
+                                    "shouldTruncate": false,
+                                    "showSingleSeries": true
+                                },
+                                "preferredSeriesType": "line",
+                                "tickLabelsVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "valueLabels": "hide"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsXY"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 19,
+                    "i": "line-01",
+                    "w": 19,
+                    "x": 14,
+                    "y": 8
+                },
+                "panelIndex": "line-01",
+                "title": "Events over Time",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-9cb47ef9-d506-4e82-acf5-d164cdee188b",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "15518c14-172d-4d47-8f30-38ef878e1520",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "9cb47ef9-d506-4e82-acf5-d164cdee188b": {
+                                            "columnOrder": [
+                                                "986382ad-917a-4c21-a5d4-2c0f8765ac2d",
+                                                "0cfb5e2c-010c-4016-b394-d701c633c17d"
+                                            ],
+                                            "columns": {
+                                                "0cfb5e2c-010c-4016-b394-d701c633c17d": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                },
+                                                "986382ad-917a-4c21-a5d4-2c0f8765ac2d": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Status",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "exclude": [],
+                                                        "excludeIsRegex": false,
+                                                        "include": [],
+                                                        "includeIsRegex": false,
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "0cfb5e2c-010c-4016-b394-d701c633c17d",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 5
+                                                    },
+                                                    "scale": "ordinal",
+                                                    "sourceField": "axonius.network.status"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "index": "15518c14-172d-4d47-8f30-38ef878e1520",
+                                        "negate": false,
+                                        "params": [
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "data_stream.dataset",
+                                                    "index": "logs-*",
+                                                    "key": "data_stream.dataset",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "axonius.network"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "data_stream.dataset": "axonius.network"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "meta": {
+                                                    "disabled": false,
+                                                    "field": "labels.is_transform_source",
+                                                    "index": "logs-*",
+                                                    "key": "labels.is_transform_source",
+                                                    "negate": false,
+                                                    "params": {
+                                                        "query": "false"
+                                                    },
+                                                    "type": "phrase"
+                                                },
+                                                "query": {
+                                                    "match_phrase": {
+                                                        "labels.is_transform_source": "false"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "relation": "AND",
+                                        "type": "combined"
+                                    },
+                                    "query": {}
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "categoryDisplay": "default",
+                                        "colorMapping": {
+                                            "assignments": [],
+                                            "colorMode": {
+                                                "type": "categorical"
+                                            },
+                                            "paletteId": "eui_amsterdam_color_blind",
+                                            "specialAssignments": [
+                                                {
+                                                    "color": {
+                                                        "type": "loop"
+                                                    },
+                                                    "rule": {
+                                                        "type": "other"
+                                                    },
+                                                    "touched": false
+                                                }
+                                            ]
+                                        },
+                                        "layerId": "9cb47ef9-d506-4e82-acf5-d164cdee188b",
+                                        "layerType": "data",
+                                        "legendDisplay": "show",
+                                        "metrics": [
+                                            "0cfb5e2c-010c-4016-b394-d701c633c17d"
+                                        ],
+                                        "nestedLegend": false,
+                                        "numberDisplay": "percent",
+                                        "primaryGroups": [
+                                            "986382ad-917a-4c21-a5d4-2c0f8765ac2d"
+                                        ],
+                                        "truncateLegend": false
+                                    }
+                                ],
+                                "shape": "pie"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsPie"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "index": "logs-*",
+                                "negate": false,
+                                "params": [
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "data_stream.dataset",
+                                            "index": "logs-*",
+                                            "key": "data_stream.dataset",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "axonius.network"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "data_stream.dataset": "axonius.network"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "meta": {
+                                            "disabled": false,
+                                            "field": "labels.is_transform_source",
+                                            "index": "logs-*",
+                                            "key": "labels.is_transform_source",
+                                            "negate": false,
+                                            "params": {
+                                                "query": "false"
+                                            },
+                                            "type": "phrase"
+                                        },
+                                        "query": {
+                                            "match_phrase": {
+                                                "labels.is_transform_source": "false"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "relation": "AND",
+                                "type": "combined"
+                            },
+                            "query": {}
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 19,
+                    "i": "8f04869e-2127-4bfe-b95b-159167c8b717",
+                    "w": 15,
+                    "x": 33,
+                    "y": 8
+                },
+                "panelIndex": "8f04869e-2127-4bfe-b95b-159167c8b717",
+                "title": "Assets by Status",
+                "type": "lens"
             }
         ],
         "timeRestore": false,
@@ -6538,7 +6538,7 @@
         "version": 3
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-03-27T12:24:28.883Z",
+    "created_at": "2026-04-13T10:25:25.632Z",
     "id": "axonius-a47bc47d-5f69-473f-92a1-07a79cc71cf8",
     "references": [
         {
@@ -6563,82 +6563,12 @@
         },
         {
             "id": "logs-*",
-            "name": "944933ad-8624-4041-8047-cf90f836e314:indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "944933ad-8624-4041-8047-cf90f836e314:67f1e088-5eb0-492e-802a-59438185e2af",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "metric-02:indexpattern-datasource-layer-a8db2fc2-4a74-4850-a5d7-1b024e153d81",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "metric-02:1324b440-d3f1-4963-99d9-995184d2073b",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "metric-04:indexpattern-datasource-layer-4d730a3e-6974-4d5e-bbb0-c7cbf250fade",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "metric-04:409621d0-2134-4dc9-89a9-d24d779fc187",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "06e51419-950e-47e6-a939-223d171125b0:indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "06e51419-950e-47e6-a939-223d171125b0:1d120204-2770-436c-b0d8-699c4f1115a1",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "metric-01:indexpattern-datasource-layer-8050a858-4640-4d70-8830-c38e88ec4ce7",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "metric-01:65859297-2f2e-49ca-9da4-e59b412bebc8",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "line-01:indexpattern-datasource-layer-ce73c071-4e83-4531-aed0-c10e4e50c151",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "line-01:08f7cd4e-c1e4-4abe-89e9-3f497ba24105",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
             "name": "line-02:indexpattern-datasource-layer-1a0ebbd3-9939-4097-93e4-4f64e486e86c",
             "type": "index-pattern"
         },
         {
             "id": "logs-*",
             "name": "line-02:bc9cbfff-8999-4f59-8514-784e91e7d41a",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "8f04869e-2127-4bfe-b95b-159167c8b717:indexpattern-datasource-layer-9cb47ef9-d506-4e82-acf5-d164cdee188b",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "8f04869e-2127-4bfe-b95b-159167c8b717:15518c14-172d-4d47-8f30-38ef878e1520",
             "type": "index-pattern"
         },
         {
@@ -6809,6 +6739,76 @@
         {
             "id": "logs-*",
             "name": "d9924234-e730-44b9-8c6c-8786f8a86f63:9be2df21-a2a8-4d57-bc2e-380ae6e173a8",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "944933ad-8624-4041-8047-cf90f836e314:indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "944933ad-8624-4041-8047-cf90f836e314:67f1e088-5eb0-492e-802a-59438185e2af",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "metric-02:indexpattern-datasource-layer-a8db2fc2-4a74-4850-a5d7-1b024e153d81",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "metric-02:1324b440-d3f1-4963-99d9-995184d2073b",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "metric-04:indexpattern-datasource-layer-4d730a3e-6974-4d5e-bbb0-c7cbf250fade",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "metric-04:409621d0-2134-4dc9-89a9-d24d779fc187",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "06e51419-950e-47e6-a939-223d171125b0:indexpattern-datasource-layer-beb4cdbd-3988-414b-ae5c-973ada4b376a",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "06e51419-950e-47e6-a939-223d171125b0:1d120204-2770-436c-b0d8-699c4f1115a1",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "metric-01:indexpattern-datasource-layer-8050a858-4640-4d70-8830-c38e88ec4ce7",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "metric-01:65859297-2f2e-49ca-9da4-e59b412bebc8",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "line-01:indexpattern-datasource-layer-ce73c071-4e83-4531-aed0-c10e4e50c151",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "line-01:08f7cd4e-c1e4-4abe-89e9-3f497ba24105",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "8f04869e-2127-4bfe-b95b-159167c8b717:indexpattern-datasource-layer-9cb47ef9-d506-4e82-acf5-d164cdee188b",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "8f04869e-2127-4bfe-b95b-159167c8b717:15518c14-172d-4d47-8f30-38ef878e1520",
             "type": "index-pattern"
         },
         {
