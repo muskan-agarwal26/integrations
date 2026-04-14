@@ -1,8 +1,8 @@
 {
     "attributes": {
-        "description": "Forensic pack for process execution analysis — prefetch, shimcache, process listing, and suspicious process detection across all platforms.",
+        "description": "Forensic pack for process execution and Amcache analysis \u2014 prefetch, shimcache, process listing, suspicious process detection across all platforms, plus Windows Amcache application inventory, driver forensics, shortcuts, device PnP, and enriched views.",
         "name": "forensic-process-execution",
-        "version": 1,
+        "version": 2,
         "queries": [
             {
                 "id": "prefetch_windows_elastic",
@@ -1011,10 +1011,466 @@
                         }
                     }
                 ]
+            },
+            {
+                "id": "amcache_application_forensics_windows_elastic",
+                "query": "-- Amcache Application Forensics: Combined application and file inventory\n-- Source: elastic_amcache_applications_view (Amcache.hve registry hive)\n-- Forensic value: Application execution/installation evidence with SHA1 hashes\n-- NOTE: Execution must be corroborated with additional artifacts\n\nSELECT\n  *,\n  datetime(timestamp, 'unixepoch') AS record_time\nFROM elastic_amcache_applications_view\nWHERE name IS NOT NULL AND name != ''\nORDER BY timestamp DESC;",
+                "interval": 3600,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "process"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_application"
+                        }
+                    },
+                    {
+                        "key": "file.path",
+                        "value": {
+                            "field": "lower_case_long_path"
+                        }
+                    },
+                    {
+                        "key": "file.name",
+                        "value": {
+                            "field": "name"
+                        }
+                    },
+                    {
+                        "key": "file.hash.sha1",
+                        "value": {
+                            "field": "file_sha1"
+                        }
+                    },
+                    {
+                        "key": "file.size",
+                        "value": {
+                            "field": "size"
+                        }
+                    },
+                    {
+                        "key": "package.name",
+                        "value": {
+                            "field": "product_name"
+                        }
+                    },
+                    {
+                        "key": "package.version",
+                        "value": {
+                            "field": "product_version"
+                        }
+                    },
+                    {
+                        "key": "user.id",
+                        "value": {
+                            "field": "user_sid"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "execution_artifacts",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "amcache_driver_forensics_windows_elastic",
+                "query": "-- Amcache Driver Forensics: Driver binary inventory from Amcache\n-- Source: elastic_amcache_driver_binary (Root\\InventoryDriverBinary)\n-- Forensic value: Identifies unsigned, third-party, and kernel-mode drivers\n-- Use case: Rootkit detection, BYOVD (Bring Your Own Vulnerable Driver), unauthorized drivers\n\nSELECT\n  *,\n  datetime(timestamp, 'unixepoch') AS record_time,\n  CASE\n    WHEN driver_signed = '1' THEN 'true'\n    ELSE 'false'\n  END AS is_signed\nFROM elastic_amcache_driver_binary\nORDER BY\n  CASE WHEN driver_signed != '1' THEN 0 ELSE 1 END,\n  CASE WHEN driver_is_kernel_mode = '1' THEN 0 ELSE 1 END,\n  CASE WHEN driver_in_box != '1' THEN 0 ELSE 1 END,\n  timestamp DESC;",
+                "interval": 7200,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "driver"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_driver"
+                        }
+                    },
+                    {
+                        "key": "file.name",
+                        "value": {
+                            "field": "driver_name"
+                        }
+                    },
+                    {
+                        "key": "file.code_signature.subject_name",
+                        "value": {
+                            "field": "driver_company"
+                        }
+                    },
+                    {
+                        "key": "file.code_signature.signed",
+                        "value": {
+                            "field": "is_signed"
+                        }
+                    },
+                    {
+                        "key": "package.name",
+                        "value": {
+                            "field": "product"
+                        }
+                    },
+                    {
+                        "key": "package.version",
+                        "value": {
+                            "field": "product_version"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "driver_analysis",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "amcache_shortcut_windows_elastic",
+                "query": "-- Amcache Application Shortcuts: Start Menu shortcut inventory\n-- Source: elastic_amcache_application_shortcut (Root\\InventoryApplicationShortcut)\n-- Forensic value: Tracks LNK files for execution evidence and persistence analysis\n\nSELECT\n  *,\n  datetime(timestamp, 'unixepoch') AS record_time\nFROM elastic_amcache_application_shortcut\nWHERE shortcut_path IS NOT NULL AND shortcut_path != ''\nORDER BY timestamp DESC;",
+                "interval": 3600,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "file"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_shortcut"
+                        }
+                    },
+                    {
+                        "key": "file.path",
+                        "value": {
+                            "field": "shortcut_path"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "shortcuts",
+                                "execution_artifacts",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "amcache_device_pnp_windows_elastic",
+                "query": "-- Amcache Device PnP: Plug and Play device history\n-- Source: elastic_amcache_device_pnp (Root\\InventoryDevicePnp)\n-- Forensic value: USB, Bluetooth, and peripheral device connection history\n-- Use case: Unauthorized device detection, data exfiltration investigation\n\nSELECT\n  *,\n  datetime(timestamp, 'unixepoch') AS record_time\nFROM elastic_amcache_device_pnp\nORDER BY timestamp DESC;",
+                "interval": 7200,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "host"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_device_pnp"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "device_inventory",
+                                "usb_forensics",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "amcache_driver_package_windows_elastic",
+                "query": "-- Amcache Driver Packages: Driver package metadata from Amcache\n-- Source: elastic_amcache_driver_package (Root\\InventoryDriverPackage)\n-- Forensic value: Driver provenance, package class, provider, associated hardware IDs\n\nSELECT\n  *,\n  datetime(timestamp, 'unixepoch') AS record_time\nFROM elastic_amcache_driver_package\nORDER BY timestamp DESC;",
+                "interval": 7200,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "driver"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_driver_package"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "driver_analysis",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "amcache_application_enriched_windows_elastic",
+                "query": "-- Amcache Application Enriched: App inventory + file details + shortcuts\n-- Source: elastic_amcache_applications_view + elastic_amcache_application_shortcut\n-- Join: program_id = shortcut_program_id\n-- Forensic value: Full application forensics with shortcut launch points\n-- NOTE: Execution must be corroborated with additional artifacts\n\nSELECT\n  av.*,\n  s.shortcut_path,\n  s.shortcut_target_path,\n  s.shortcut_aumid,\n  datetime(av.timestamp, 'unixepoch') AS record_time\nFROM elastic_amcache_applications_view AS av\nLEFT JOIN elastic_amcache_application_shortcut AS s\n  ON av.program_id = s.shortcut_program_id\nWHERE av.name IS NOT NULL AND av.name != ''\nORDER BY av.timestamp DESC;",
+                "interval": 3600,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "process"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_application_enriched"
+                        }
+                    },
+                    {
+                        "key": "file.path",
+                        "value": {
+                            "field": "lower_case_long_path"
+                        }
+                    },
+                    {
+                        "key": "file.name",
+                        "value": {
+                            "field": "name"
+                        }
+                    },
+                    {
+                        "key": "file.hash.sha1",
+                        "value": {
+                            "field": "file_sha1"
+                        }
+                    },
+                    {
+                        "key": "file.size",
+                        "value": {
+                            "field": "size"
+                        }
+                    },
+                    {
+                        "key": "package.name",
+                        "value": {
+                            "field": "product_name"
+                        }
+                    },
+                    {
+                        "key": "package.version",
+                        "value": {
+                            "field": "product_version"
+                        }
+                    },
+                    {
+                        "key": "user.id",
+                        "value": {
+                            "field": "user_sid"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "execution_artifacts",
+                                "combined",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "amcache_driver_enriched_windows_elastic",
+                "query": "-- Amcache Driver Enriched: Driver binaries + PnP device history\n-- Source: elastic_amcache_driver_binary + elastic_amcache_device_pnp\n-- Join: service name (runtime binding between driver and device)\n-- Forensic value: Which physical devices use each driver binary\n-- Note: device columns prefixed with device_ to avoid collisions with driver columns\n\nSELECT\n  db.*,\n  dp.timestamp AS device_timestamp,\n  dp.date_time AS device_date_time,\n  dp.model AS device_model,\n  dp.manufacturer AS device_manufacturer,\n  dp.description AS device_description,\n  dp.driver_name AS device_driver_name,\n  dp.class AS device_class,\n  dp.class_guid AS device_class_guid,\n  dp.enumerator AS device_enumerator,\n  dp.service AS device_service,\n  dp.install_state AS device_install_state,\n  dp.device_state,\n  dp.inf AS device_inf,\n  dp.driver_ver_date,\n  dp.install_date AS device_install_date,\n  dp.first_install_date AS device_first_install_date,\n  dp.driver_package_strong_name AS device_driver_package,\n  dp.driver_ver_version AS device_driver_version,\n  dp.container_id AS device_container_id,\n  dp.problem_code AS device_problem_code,\n  dp.provider AS device_provider,\n  dp.driver_id AS device_driver_id,\n  dp.bus_reported_description AS device_bus_description,\n  dp.hw_id AS device_hw_id,\n  dp.extended_infs AS device_extended_infs,\n  dp.compid AS device_compid,\n  dp.stack_id AS device_stack_id,\n  dp.upper_class_filters AS device_upper_class_filters,\n  dp.lower_class_filters AS device_lower_class_filters,\n  dp.upper_filters AS device_upper_filters,\n  dp.lower_filters AS device_lower_filters,\n  dp.device_interface_classes,\n  dp.location_paths AS device_location_paths,\n  dp.parent_id AS device_parent_id,\n  dp.matching_id AS device_matching_id,\n  datetime(db.timestamp, 'unixepoch') AS record_time,\n  CASE WHEN db.driver_signed = '1' THEN 'true' ELSE 'false' END AS is_signed\nFROM elastic_amcache_driver_binary AS db\nLEFT JOIN elastic_amcache_device_pnp AS dp\n  ON db.service = dp.service\n  AND dp.service != ''\nORDER BY\n  CASE WHEN db.driver_signed != '1' THEN 0 ELSE 1 END,\n  CASE WHEN db.driver_is_kernel_mode = '1' THEN 0 ELSE 1 END,\n  CASE WHEN db.driver_in_box != '1' THEN 0 ELSE 1 END,\n  db.timestamp DESC;",
+                "interval": 7200,
+                "platform": "windows",
+                "timeout": 180,
+                "ecs_mapping": [
+                    {
+                        "key": "event.category",
+                        "value": {
+                            "value": [
+                                "driver"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.type",
+                        "value": {
+                            "value": [
+                                "info"
+                            ]
+                        }
+                    },
+                    {
+                        "key": "event.action",
+                        "value": {
+                            "value": "osquery.amcache_driver_enriched"
+                        }
+                    },
+                    {
+                        "key": "file.name",
+                        "value": {
+                            "field": "driver_name"
+                        }
+                    },
+                    {
+                        "key": "file.code_signature.subject_name",
+                        "value": {
+                            "field": "driver_company"
+                        }
+                    },
+                    {
+                        "key": "file.code_signature.signed",
+                        "value": {
+                            "field": "is_signed"
+                        }
+                    },
+                    {
+                        "key": "package.name",
+                        "value": {
+                            "field": "product"
+                        }
+                    },
+                    {
+                        "key": "package.version",
+                        "value": {
+                            "field": "product_version"
+                        }
+                    },
+                    {
+                        "key": "tags",
+                        "value": {
+                            "value": [
+                                "osquery",
+                                "amcache",
+                                "forensics",
+                                "driver_analysis",
+                                "device_inventory",
+                                "combined",
+                                "windows"
+                            ]
+                        }
+                    }
+                ]
             }
         ]
     },
-    "coreMigrationVersion": "9.3.0",
+    "coreMigrationVersion": "9.4.0",
     "id": "osquery_manager-c8a1b2d3-e4f5-4a6b-8c7d-9e0f1a2b3c4d",
     "references": [],
     "type": "osquery-pack-asset"
