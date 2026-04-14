@@ -2,8 +2,8 @@
 
 This document tracks the coverage of forensic artifacts in Osquery.
 
-**Last Updated**: 2026-03-30
-**Total Core Artifacts**: 55 available + 5 in progress = 60 total variants
+**Last Updated**: 2026-04-13
+**Total Core Artifacts**: 56 available + 4 in progress = 60 total variants
 **Total Queries**: 78
 **Completion Rate**: 91.7% (55/60 core artifacts fully supported)
 
@@ -22,8 +22,8 @@ The saved queries in `kibana/osquery_saved_query/*.json` are Kibana saved object
 
 | Status                             | Count | Percentage |
 |------------------------------------|-------|------------|
-| ✅ Available (Fully Supported)      | 55    | 91.7%      |
-| ⚠️ In Progress (Needs Validation)  | 5     | 8.3%       |
+| ✅ Available (Fully Supported)      | 56    | 91.7%      |
+| ⚠️ In Progress (Needs Validation)  | 4     | 8.3%       |
 
 ---
 
@@ -48,7 +48,7 @@ The saved queries in `kibana/osquery_saved_query/*.json` are Kibana saved object
 | 6   | Installed Services                    | ✅ | Win   | services_suspicious_windows_elastic        | [892e](kibana/osquery_saved_query/osquery_manager-892ee425-60e7-4eb6-ba25-6e97dc3e2ea0.json)     | Detects suspicious Windows services: unsigned binaries, unusual paths, FailureCommand persistence, ServiceDLL hijacking. Excludes Microsoft-signed services.                                                                               |
 | 6a  | Installed Services                    | ✅ | Linux | services_suspicious_linux_elastic          | [f8b0](kibana/osquery_saved_query/osquery_manager-f8b0894b-772d-4242-8e19-dbc5d7ae2e06.json)     | Detects suspicious systemd services in user directories, /tmp, ~/.config/systemd. Hash enrichment and file age tracking.                                                                                                                   |
 | 6b  | Installed Services                    | ✅ | Mac   | services_suspicious_darwin_elastic         | [5823](kibana/osquery_saved_query/osquery_manager-5823a22e-5add-416d-a142-de323400edb0.json)     | Detects ALL non-Apple-signed launchd services plus Apple-signed services in suspicious locations (/tmp, /Users, hidden dirs). Derives executable from program or program_arguments. Signature and hash enrichment.                         |
-| 7   | Jumplists                             | ⚠️ | Win   | -                                          | -                                                                                                | In progress                                                                                                                                                                                                                                |
+| 7   | Jumplists                             | ✅ | Win   | jumplists_forensics_windows_elastic        | [a4b2](kibana/osquery_saved_query/osquery_manager-a4b2c8d0-jmpl-11f0-b4d1-4f9e8c3a1b2e.json)     | elastic_jumplists extension table (requires Elastic Agent v9.3.0+). Both automatic and custom destinations. Full DestList metadata (hostname, MAC, interaction_count, is_pinned). LOLBin detection, suspicious arguments, remote access tool flags. T1204, T1083. |
 | 8   | LNK files                             | ✅ | Win   | lnk_forensics_windows_elastic              | [a1b2](kibana/osquery_saved_query/osquery_manager-a1b2c3d4-lnk1-11ef-8f39-bf9c07530bbb.json)     | file table with native shortcut parsing; can enrich with hash + authenticode; enumerate common locations via users table                                                                                                                   |
 | 9   | ARP Cache (Enriched)                  | ✅ | All   | arp_cache_elastic                          | [b2c3](kibana/osquery_saved_query/osquery_manager-b2c3d4e5-f6a7-11ef-89c6-331eb0db6d02.json)     | Enriched ARP cache with local interface details (local IP, local MAC). Combines arp_cache with interface_details and interface_addresses tables. Includes ECS mappings for destination.ip/mac, source.ip/mac, interface.name, network.type. |
 | 10  | Disks & Volumes                       | ✅ | Win   | disk_info_windows_elastic                  | [d8a1](kibana/osquery_saved_query/osquery_manager-d8a1b2c3-d4e5-11ef-a6b7-12c3d4e5f678.json)     | disk_info table                                                                                                                                                                                                                            |
@@ -153,7 +153,7 @@ Queries are organized by investigative goal to support both **scheduled monitori
 - ✅ **Process Listing** (All) - Full forensic process listing with parent/child relationships. Queries: `process_listing_windows_elastic`, `process_listing_linux_elastic`, `process_listing_darwin_elastic`
 - ✅ **Suspicious Processes** (All) - LOLBins, unsigned binaries, unusual paths. Queries: `suspicious_processes_windows_elastic`, `suspicious_processes_linux_elastic`, `suspicious_processes_darwin_elastic`
 - ✅ **AmCache** (Windows) - 7 queries covering all 6 extension tables: 5 individual table queries + 2 combined JOINed queries for full-picture forensics. Requires Elastic Agent with osquery extension amcache support. Individual: `amcache_application_forensics_windows_elastic`, `amcache_driver_forensics_windows_elastic`, `amcache_driver_package_windows_elastic`, `amcache_shortcut_windows_elastic`, `amcache_device_pnp_windows_elastic`. Combined: `amcache_application_enriched_windows_elastic`, `amcache_driver_enriched_windows_elastic`
-- ⚠️ **Jumplists** - In Progress
+- ✅ **Jumplists** (Windows) - User activity timeline with DestList metadata (hostname, MAC, interaction count) and LOLBin/suspicious argument detection. Requires Elastic Agent v9.3.0+. Query: `jumplists_forensics_windows_elastic`
 
 ### Persistence
 
@@ -174,7 +174,7 @@ Queries are organized by investigative goal to support both **scheduled monitori
 - ✅ **Logon Users** (All) - Cross-platform logged-in users with session details, lateral movement detection. Query: `logged_in_users_elastic`
 - ✅ **LNK Files** (Windows) - Shortcut file forensics with hash + authenticode enrichment. Query: `lnk_forensics_windows_elastic`
 - ✅ **Shellbags** (Windows) - Directory access tracking via Windows Explorer. Query: `shellbags_windows_elastic`
-- ⚠️ **Jumplists** - In progress
+- ✅ **Jumplists** (Windows) - User activity timeline, both automatic and custom destinations, DestList metadata (hostname, MAC, interaction count, pinned status), LOLBin and suspicious argument detection. Requires Elastic Agent v9.3.0+. Query: `jumplists_forensics_windows_elastic`
 
 ### Lateral Movement & C2 Communication
 
@@ -200,7 +200,7 @@ Queries are organized by investigative goal to support both **scheduled monitori
 - ✅ **Unsigned Executables & Drivers** (All) - Suspicious process detection + VirusTotal integration. Queries: `suspicious_processes_windows_elastic`, `suspicious_processes_linux_elastic`, `suspicious_processes_darwin_elastic`, `unsigned_processes_vt_windows_elastic`
 - ✅ **Code Execution from Non-Standard Paths** (All) - File hash info in staging directories with signature validation. Queries: `file_hash_info_windows_elastic`, `file_hash_info_linux_elastic`, `file_hash_info_darwin_elastic`
 - ✅ **Suspicious New Services** (All) - See Persistence above. Queries: `services_suspicious_windows_elastic`, `services_suspicious_linux_elastic`, `services_suspicious_darwin_elastic`
-- ✅ **Process Injection Attempts** - Comprehensive memory analysis using `process_memory_map` with 5 detection patterns (RWX unbacked/file-backed, temp/hidden exec, unbacked regions) and 5 anomaly indicators (PPID spoofing, process-not-on-disk, protected process abuse, name/path mismatch, system binary unusual location). Hash enrichment included. Query: `process_memory_suspicious_elastic` 
+- ✅ **Process Injection Attempts** - Comprehensive memory analysis using `process_memory_map` with 5 detection patterns (RWX unbacked/file-backed, temp/hidden exec, unbacked regions) and 5 anomaly indicators (PPID spoofing, process-not-on-disk, protected process abuse, name/path mismatch, system binary unusual location). Hash enrichment included. Query: `process_memory_suspicious_elastic`
 
 ### Data Exfiltration & Collection
 
@@ -214,8 +214,8 @@ Queries are organized by investigative goal to support both **scheduled monitori
 
 ### Defense Evasion
 
-- ✅ **Disabled Security Tools** (Windows) - Detects stopped/paused security services across major vendors and Windows Defender registry tampering (12 values). Query: `security_products_disabled_windows_elastic` ([a8f3](kibana/osquery_saved_query/osquery_manager-a8f3c5e7-d9b4-4a21-8f6c-2e9d1b3a5c7e.json)) 
-- ✅ **Cleared Event Logs** (Windows) - Detects Security/System event log clearing via Event IDs 1102 and 104 (windows_eventlog). Query: `event_log_cleared_windows_elastic` ([f2a9](kibana/osquery_saved_query/osquery_manager-f2a9c7d5-e3b1-4f8a-9c2e-6d4b8a1e3f5c.json)) 
+- ✅ **Disabled Security Tools** (Windows) - Detects stopped/paused security services across major vendors and Windows Defender registry tampering (12 values). Query: `security_products_disabled_windows_elastic` ([a8f3](kibana/osquery_saved_query/osquery_manager-a8f3c5e7-d9b4-4a21-8f6c-2e9d1b3a5c7e.json))
+- ✅ **Cleared Event Logs** (Windows) - Detects Security/System event log clearing via Event IDs 1102 and 104 (windows_eventlog). Query: `event_log_cleared_windows_elastic` ([f2a9](kibana/osquery_saved_query/osquery_manager-f2a9c7d5-e3b1-4f8a-9c2e-6d4b8a1e3f5c.json))
 - ⚠️ **Timestomping Detection** - In Progress
 
 ### File System Forensics (Supporting)
