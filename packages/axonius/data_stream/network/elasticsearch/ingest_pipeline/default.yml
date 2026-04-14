@@ -38,7 +38,10 @@ processors:
       field: event.original
       tag: json_event_original
       target_field: axonius.network
+  # Fingerprint the full raw payload because the Axonius API does not expose a stable entity ID for network assets; the transform keys on this value for deduplication.
   - fingerprint:
+      description: >-
+        Hash event.original so each document has axonius.network.transform_unique_id for the latest transform. Required because the API provides no stable per asset identifier.
       fields:
         - event.original
       tag: fingerprint_event_original
