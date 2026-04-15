@@ -375,6 +375,7 @@
 /packages/o365_metrics @elastic/obs-infraobs-integrations 
 /packages/okta @elastic/security-service-integrations
 /packages/openai @elastic/obs-infraobs-integrations
+/packages/openai/data_stream/audit @elastic/security-service-integrations
 /packages/opencanary @elastic/security-service-integrations
 /packages/oracle @elastic/obs-infraobs-integrations
 /packages/oracle_weblogic @elastic/obs-infraobs-integrations
