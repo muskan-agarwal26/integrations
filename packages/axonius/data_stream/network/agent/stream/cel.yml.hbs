@@ -33,7 +33,7 @@ program: |
     state.?worklist.asset_type_list[0].hasValue() ?
       state
     :
-      state.drop("worklist").with(
+      state.with(
         {
           "worklist": {
             "asset_type_list": state.asset_type_list,
@@ -118,7 +118,6 @@ program: |
           ],
           "worklist": {
             "asset_type_list": tail(state.worklist.asset_type_list),
-            ?"next_page": optional.none(),
           },
           "want_more": size(state.worklist.asset_type_list) > 1,
         }
