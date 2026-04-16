@@ -41,11 +41,20 @@ This integration collects log messages of the following type:
     - tickets (endpoint: `/api/v2/tickets`)
     - cases (endpoint: `/api/v2/cases`)
 
+- `Network`: Collect details of all identity assets including:
+    - networks (endpoint: `/api/v2/networks`)
+    - load_balancers (endpoint: `/api/v2/load_balancers`)
+    - network_services (endpoint: `/api/v2/network_services`)
+    - network_devices (endpoint: `/api/v2/network_devices`)
+    - firewalls (endpoint: `/api/v2/firewalls`)
+    - nat_rules (endpoint: `/api/v2/nat_rules`)
+    - network_routes (endpoint: `/api/v2/network_routes`)
+
 ### Supported use cases
 
-Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, and Ticket data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, and operational ticketing. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways operate, where risks exist, how alerts evolve into incidents, and how issues are tracked and resolved.
+Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, Ticket, and Network data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, ticketing, and network activity. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways and network assets operate, where risks and exposures exist, and how alerts evolve into incidents and tracked issues.
 
-The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, and ticket activity. Ticket-specific views add context around priority, status, trends, and top reporters, helping teams track issue progression and identify workload patterns. By correlating operational, identity, exposure, incident, storage, and ticket data in one place, security teams can detect anomalies, prioritize remediation, manage workloads effectively, and streamline investigations with comprehensive, end-to-end context across the environment.
+The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, ticket activity, and network asset posture. Network-specific views highlight protocols, device states, exposure levels, and communication paths, while ticket insights provide context on priorities, statuses, and workload patterns. By correlating operational, identity, exposure, incident, storage, ticket, and network data in one place, security teams can detect anomalies, identify misconfigurations, prioritize remediation, and streamline investigations with comprehensive, end-to-end context across the environment.
 
 ## What do I need to use this integration?
 
@@ -129,6 +138,10 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 | `logs-axonius.user-*`              | `logs-axonius_latest.dest_user-*`                | `logs-axonius_latest.user`              |
 | `logs-axonius.storage-*`              | `logs-axonius_latest.dest_storage-*`                | `logs-axonius_latest.storage`              |
 | `logs-axonius.ticket-*`              | `logs-axonius_latest.dest_ticket-*`                | `logs-axonius_latest.ticket`
+| `logs-axonius.network-*`              | `logs-axonius_latest.dest_network-*`                | `logs-axonius_latest.network`
+
+**Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets. This means deleted assets will continue to appear in dashboards for up to 90 days after deletion.
+The network destination index is a content-based deduplicated view, not an entity-level latest-state view like the other data streams (for example `user` and `gateway`), which rely on a unique entity identifier and reflect the latest state of each entity.
 
 ## Troubleshooting
 
@@ -139,35 +152,6 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 For more information on architectures that can be used for scaling this integration, check the [Ingest Architectures](https://www.elastic.co/docs/manage-data/ingest/ingest-reference-architectures) documentation.
 
 ## Reference
-
-### Inputs used
-
-These inputs can be used with this integration:
-<details>
-<summary>cel</summary>
-
-## Setup
-
-For more details about the CEL input settings, check the [Filebeat documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-cel.html).
-
-Before configuring the CEL input, make sure you have:
-- Network connectivity to the target API endpoint
-- Valid authentication credentials (API keys, tokens, or certificates as required)
-- Appropriate permissions to read from the target data source
-
-### Collecting logs from CEL
-
-To configure the CEL input, you must specify the `request.url` value pointing to the API endpoint. The interval parameter controls how frequently requests are made and is the primary way to balance data freshness with API rate limits and costs. Authentication is often configured through the `request.headers` section using the appropriate method for the service.
-
-NOTE: To access the API service, make sure you have the necessary API credentials and that the Filebeat instance can reach the endpoint URL. Some services may require IP whitelisting or VPN access.
-
-To collect logs via API endpoint, configure the following parameters:
-
-- API Endpoint URL
-- API credentials (tokens, keys, or username/password)
-- Request interval (how often to fetch data)
-</details>
-
 
 ### Adapter
 
@@ -1418,6 +1402,679 @@ An example event for `ticket` looks as following:
 }
 ```
 
+### Network
+
+The `network` data stream provides network events from axonius.
+
+#### network fields
+
+**Exported fields**
+
+| Field | Description | Type |
+|---|---|---|
+| @timestamp | Date/time when the event originated. This is the date/time extracted from the event, typically representing when the event was generated by the source. If the event source has no original timestamp, this value is typically populated by the first time the event was received by the pipeline. Required field for all events. | date |
+| axonius.network._keep_hostname_empty | Internal flag to indicate if hostname should be kept empty. | boolean |
+| axonius.network.access | Access type or control level for the network entity. | keyword |
+| axonius.network.accurate_for_datetime | Timestamp indicating when this asset information was accurate. | date |
+| axonius.network.action | Action or rule action associated with the network entity. | keyword |
+| axonius.network.adapter_list_length | How many adapters contributed to this asset. | long |
+| axonius.network.adapter_properties | Properties or metadata from the adapter that collected this data. | keyword |
+| axonius.network.adapters | List of adapters that created this asset. | keyword |
+| axonius.network.agent_version | Version of the agent that collected this data. | keyword |
+| axonius.network.agent_versions.adapter_name | The name of the adapter. | keyword |
+| axonius.network.agent_versions.agent_version | The version of the agent. | keyword |
+| axonius.network.agent_versions.agent_version_raw | The raw version string of the agent. | keyword |
+| axonius.network.all_associated_email_addresses | All email addresses associated with this asset. | keyword |
+| axonius.network.allow_nat | Indicates if Network Address Translation (NAT) is allowed. | boolean |
+| axonius.network.anti_malware_agent_status | The status of the anti-malware agent on this asset. | keyword |
+| axonius.network.anti_malware_agent_status_message | Status message from the anti-malware agent. | keyword |
+| axonius.network.anti_malware_state | The current state of anti-malware protection. | keyword |
+| axonius.network.application_and_account_name | The application and account name associated with the asset. | keyword |
+| axonius.network.applications | List of applications running or associated with this asset. | keyword |
+| axonius.network.arp_interface | The ARP (Address Resolution Protocol) interface identifier. | keyword |
+| axonius.network.arp_port | The port associated with the ARP interface. | keyword |
+| axonius.network.arp_status | The operational status of the ARP protocol on this interface. | keyword |
+| axonius.network.arp_ttl | The Time-To-Live (TTL) value for ARP packets. | long |
+| axonius.network.assessed_for_policies | Indicates whether this asset has been assessed for policies. | boolean |
+| axonius.network.assessed_for_vulnerabilities | Indicates whether this asset has been assessed for vulnerabilities. | boolean |
+| axonius.network.asset_entity_info | Information about the asset entity and its properties. | keyword |
+| axonius.network.asset_install_status | The installation status of software or services on this asset. | keyword |
+| axonius.network.asset_tag | A custom tag or label assigned to this asset. | keyword |
+| axonius.network.asset_type | The type of asset. | keyword |
+| axonius.network.asset_user_name |  | keyword |
+| axonius.network.associated_device_users.internal_axon_id | Internal Axonius ID of the associated user. | keyword |
+| axonius.network.associated_device_users.is_latest_used_user | Indicates if this is the most recently used user on the device. | boolean |
+| axonius.network.associated_device_users.last_used_departments | Departments associated with the last used user. | keyword |
+| axonius.network.associated_device_users.last_used_email | Email address of the last used user. | keyword |
+| axonius.network.associated_device_users.last_used_email_domain | Email domain of the last used user. | keyword |
+| axonius.network.associated_device_users.last_used_user_manager | Manager of the last used user. | keyword |
+| axonius.network.associated_saas_applications.internal_axon_id | Internal Axonius ID of the SaaS application. | keyword |
+| axonius.network.associated_saas_applications.name | Name of the SaaS application. | keyword |
+| axonius.network.axon_id | The unique Axonius identifier for this asset. | keyword |
+| axonius.network.axonius_instance_name | The name of the Axonius instance that collected this data. | keyword |
+| axonius.network.balanced_integer_ips | Integer representation of balanced IP addresses. | long |
+| axonius.network.balanced_ips | IP addresses that are load-balanced on this asset. | ip |
+| axonius.network.browsers.channel | The distribution channel of the browser (e.g., stable, beta). | keyword |
+| axonius.network.browsers.version | The version of the browser. | keyword |
+| axonius.network.category | The category or classification of the network asset or entity. | keyword |
+| axonius.network.certificate_expiry_date | The date when the SSL/TLS certificate expires. | date |
+| axonius.network.chrome_device_type | The type of Chrome device (for Chrome OS devices). | keyword |
+| axonius.network.cidr_blocks | CIDR (Classless Inter-Domain Routing) blocks associated with this network. | keyword |
+| axonius.network.cisa_vulnerabilities.action | Recommended action for this vulnerability. | keyword |
+| axonius.network.cisa_vulnerabilities.added | Date when this vulnerability was added to CISA list. | date |
+| axonius.network.cisa_vulnerabilities.cve_id | CVE (Common Vulnerabilities and Exposures) identifier. | keyword |
+| axonius.network.cisa_vulnerabilities.desc | Description of the vulnerability. | text |
+| axonius.network.cisa_vulnerabilities.due_date | Due date for remediation of this vulnerability. | date |
+| axonius.network.cisa_vulnerabilities.notes | Additional notes about the vulnerability. | keyword |
+| axonius.network.cisa_vulnerabilities.product | Product affected by this vulnerability. | keyword |
+| axonius.network.cisa_vulnerabilities.used_in_ransomware | Indicates if this vulnerability is known to be used in ransomware attacks. | boolean |
+| axonius.network.cisa_vulnerabilities.vendor | Vendor of the affected product. | keyword |
+| axonius.network.cisa_vulnerabilities.vulnerability_name | Name or title of the vulnerability. | keyword |
+| axonius.network.class_name | The class name or system classification of this asset. | keyword |
+| axonius.network.class_title | The display title or human-readable name of the class. | keyword |
+| axonius.network.class_type | The type of class or classification category. | keyword |
+| axonius.network.cloud_provider_account_id | The account ID in the cloud provider where this asset is located. | keyword |
+| axonius.network.cmdb_business_applications.app_owner | Owner of the application. | keyword |
+| axonius.network.cmdb_business_applications.assignment_group | Assignment group responsible for the application. | keyword |
+| axonius.network.cmdb_business_applications.business_criticality | Business criticality rating of the application. | keyword |
+| axonius.network.cmdb_business_applications.install_status | Installation status of the application. | keyword |
+| axonius.network.cmdb_business_applications.managed_by | Entity or team managing this application. | keyword |
+| axonius.network.cmdb_business_applications.name | Name of the business application. | keyword |
+| axonius.network.cmdb_business_applications.number | Reference number in CMDB. | keyword |
+| axonius.network.cmdb_business_applications.u_architect | Architect responsible for the application. | keyword |
+| axonius.network.cmdb_business_applications.u_availability_criticality | Availability criticality rating. | keyword |
+| axonius.network.cmdb_business_applications.u_confidentiality_criticality | Confidentiality criticality rating. | keyword |
+| axonius.network.cmdb_business_applications.u_crown_jewel | Indicates if this is a crown jewel application. | boolean |
+| axonius.network.cmdb_business_applications.u_integrity_criticality | Integrity criticality rating. | keyword |
+| axonius.network.cmdb_business_applications.u_privacy_criticality | Privacy criticality rating. | keyword |
+| axonius.network.color | A color code or label assigned to this asset for visual organization. | keyword |
+| axonius.network.common_users | Users commonly associated with or using this asset. | keyword |
+| axonius.network.company | The company or organization that owns or manages this asset. | keyword |
+| axonius.network.confidence_level | The confidence level or score for the asset data (0-100). | long |
+| axonius.network.connected_assets | Other assets connected to or associated with this network asset. | keyword |
+| axonius.network.connected_devices | Devices directly connected to this network asset. | keyword |
+| axonius.network.cp_type | CloudPath or custom property type classification. | keyword |
+| axonius.network.cpus.cores | Number of CPU cores. | long |
+| axonius.network.cpus.ghz | CPU speed in gigahertz (GHz). | double |
+| axonius.network.cpus.manufacturer | Manufacturer of the CPU. | keyword |
+| axonius.network.cpus.name | Model name of the CPU. | keyword |
+| axonius.network.creation_time_stamp | The date and time when this asset was created or first discovered. | date |
+| axonius.network.criticality | The criticality level assigned to this asset. | keyword |
+| axonius.network.custom_risk_owner | Custom owner or stakeholder assigned for risk management. | keyword |
+| axonius.network.data_asset_type | The asset type from network event data, distinguishing from root asset_type. | keyword |
+| axonius.network.data_center | The data center location or identifier for this network asset. | keyword |
+| axonius.network.destination | The destination address, hostname, or network for traffic from this asset. | keyword |
+| axonius.network.destination_addresses | List of destination IP addresses or hostnames. | keyword |
+| axonius.network.destination_ips | Destination IP addresses associated with this network entity. | ip |
+| axonius.network.destination_port | Destination port number for network connections. | long |
+| axonius.network.destination_zone | Security zone or network segment that is the destination. | keyword |
+| axonius.network.device_group | The logical group or collection this device belongs to. | keyword |
+| axonius.network.device_manufacturer | The manufacturer of the network device. | keyword |
+| axonius.network.device_serial | The serial number of the network device. | keyword |
+| axonius.network.device_state | The operational state of the device (e.g., on, off, idle). | keyword |
+| axonius.network.device_type | The type of network device (e.g., router, switch, firewall). | keyword |
+| axonius.network.devices_axon_ids | Axonius IDs of related or connected devices. | keyword |
+| axonius.network.direction | The direction of network traffic (inbound, outbound, bidirectional). | keyword |
+| axonius.network.disk_encryption_configuration | Configuration details for disk encryption on this asset. | keyword |
+| axonius.network.domain | The DNS domain or network domain this asset belongs to. | keyword |
+| axonius.network.entity_id | The unique entity identifier within the system. | keyword |
+| axonius.network.environment |  | keyword |
+| axonius.network.epo_host |  | keyword |
+| axonius.network.epo_id |  | keyword |
+| axonius.network.epo_products |  | keyword |
+| axonius.network.event.accurate_for_datetime | Timestamp indicating when the event data was accurate. | date |
+| axonius.network.event.action_if_exists | Action associated with the network event, if it exists. | keyword |
+| axonius.network.event.adapter_categories | List of adapter categories that this event belongs to. | keyword |
+| axonius.network.event.associated_adapter_plugin_name | The associated plugin name that created or processed the event. | keyword |
+| axonius.network.event.association_type | The type of association between the event and related entities. | keyword |
+| axonius.network.event.client_used | The client identifier that was used to process the event. | keyword |
+| axonius.network.event.enrichment_type | The type of enrichment applied to the event. | keyword |
+| axonius.network.event.entity | The entity type or category this event relates to. | keyword |
+| axonius.network.event.hidden_for_gui | Indicates if this event should be hidden in the GUI. | boolean |
+| axonius.network.event.initial_plugin_unique_name | The initial plugin name that created or processed the event. | keyword |
+| axonius.network.event.name | The name of the event. | keyword |
+| axonius.network.event.plugin_name | The name of the plugin that processed the event. | keyword |
+| axonius.network.event.plugin_type | The type or category of the plugin that processed the event. | keyword |
+| axonius.network.event.plugin_unique_name | The unique identifier of the plugin instance that processed the event. | keyword |
+| axonius.network.event.quick_id | A quick reference identifier combining plugin and entity information. | keyword |
+| axonius.network.event.type | The type or classification of the event data. | keyword |
+| axonius.network.excluded_software_cves |  | keyword |
+| axonius.network.external_cloud_account_id |  | keyword |
+| axonius.network.external_ip |  | ip |
+| axonius.network.external_nat_ip |  | ip |
+| axonius.network.fetch_proto |  | keyword |
+| axonius.network.fetch_time | The date and time when the network data was last fetched. | date |
+| axonius.network.fields_to_unset |  | keyword |
+| axonius.network.fingerprint |  | keyword |
+| axonius.network.firewall_enabled |  | boolean |
+| axonius.network.firewall_rules |  | keyword |
+| axonius.network.first_fetch_time | The date and time when this network asset was first fetched. | date |
+| axonius.network.first_seen | The date and time when this network asset was first observed. | date |
+| axonius.network.fqdn | Fully Qualified Domain Name of this asset. | keyword |
+| axonius.network.free_physical_memory |  | double |
+| axonius.network.from_last_fetch | Indicates whether this network asset was modified since the last fetch. | boolean |
+| axonius.network.general.extension_name |  | keyword |
+| axonius.network.general.extension_value |  | keyword |
+| axonius.network.generic_encryption.status |  | boolean |
+| axonius.network.ghost |  | boolean |
+| axonius.network.guest_dns_name |  | keyword |
+| axonius.network.guest_family |  | keyword |
+| axonius.network.guest_name |  | keyword |
+| axonius.network.guest_state |  | keyword |
+| axonius.network.hard_drives.free_size |  | double |
+| axonius.network.hard_drives.is_encrypted |  | boolean |
+| axonius.network.hard_drives.total_size |  | double |
+| axonius.network.hardware_status |  | keyword |
+| axonius.network.hostname |  | keyword |
+| axonius.network.id | Unique identifier for the network asset. | keyword |
+| axonius.network.id_raw |  | keyword |
+| axonius.network.in_groups |  | keyword |
+| axonius.network.inbound_rules.from_port |  | long |
+| axonius.network.inbound_rules.ip_protocol |  | keyword |
+| axonius.network.inbound_rules.ip_ranges |  | keyword |
+| axonius.network.inbound_rules.to_port |  | long |
+| axonius.network.inbound_rules.type |  | keyword |
+| axonius.network.install_status |  | keyword |
+| axonius.network.installed_software.generated_cpe |  | keyword |
+| axonius.network.installed_software.name |  | keyword |
+| axonius.network.installed_software.name_version |  | keyword |
+| axonius.network.installed_software.sw_uid |  | keyword |
+| axonius.network.installed_software.vendor |  | keyword |
+| axonius.network.installed_software.vendor_publisher |  | keyword |
+| axonius.network.installed_software.version |  | keyword |
+| axonius.network.installed_software.version_raw |  | keyword |
+| axonius.network.internal_axon_id | Internal ID of this asset. This ID may change in the future. | keyword |
+| axonius.network.ip_address_guid |  | keyword |
+| axonius.network.is_authenticated_scan |  | boolean |
+| axonius.network.is_enabled |  | boolean |
+| axonius.network.is_exposing_public_traffic |  | boolean |
+| axonius.network.is_fetched_from_adapter | Indicates whether this network data was fetched from an adapter. | boolean |
+| axonius.network.is_fragile |  | boolean |
+| axonius.network.is_latest_last_seen | Indicates if this is the latest recorded last-seen timestamp. | boolean |
+| axonius.network.is_managed |  | boolean |
+| axonius.network.is_network_infra_device |  | boolean |
+| axonius.network.is_purchased |  | boolean |
+| axonius.network.is_safe |  | boolean |
+| axonius.network.jamf_groups |  | keyword |
+| axonius.network.jamf_groups_detailed.group_id |  | keyword |
+| axonius.network.jamf_groups_detailed.group_name |  | keyword |
+| axonius.network.jamf_groups_detailed.smart_group |  | boolean |
+| axonius.network.jamf_id |  | keyword |
+| axonius.network.jamf_location.building |  | keyword |
+| axonius.network.jamf_location.email_address |  | keyword |
+| axonius.network.jamf_location.phone_number |  | keyword |
+| axonius.network.jamf_location.position |  | keyword |
+| axonius.network.jamf_location.real_name |  | keyword |
+| axonius.network.jamf_location.room |  | long |
+| axonius.network.jamf_location.username |  | keyword |
+| axonius.network.jamf_version |  | keyword |
+| axonius.network.labels | Labels or tags associated with this network asset. | keyword |
+| axonius.network.last_agent_import |  | date |
+| axonius.network.last_auth_run |  | date |
+| axonius.network.last_contact_time |  | date |
+| axonius.network.last_enrolled_date_utc |  | date |
+| axonius.network.last_fetch_connection_id | The connection ID of the adapter that last fetched this data. | keyword |
+| axonius.network.last_fetch_connection_label | The label of the connection that last fetched this network data. | keyword |
+| axonius.network.last_scan |  | date |
+| axonius.network.last_seen | The date and time when this network asset was last observed. | date |
+| axonius.network.last_seen_agents |  | date |
+| axonius.network.last_unauth_run |  | date |
+| axonius.network.last_used_users |  | keyword |
+| axonius.network.last_used_users_departments_association | Association between last used users and their departments. | keyword |
+| axonius.network.last_used_users_email_domain_association | Association between last used users and their email domains. | keyword |
+| axonius.network.last_used_users_internal_axon_id_association | Association between last used users and their internal Axonius IDs. | keyword |
+| axonius.network.last_used_users_mail_association | Association between last used users and their email addresses. | keyword |
+| axonius.network.last_used_users_user_manager_association | Association between last used users and their managers. | keyword |
+| axonius.network.last_used_users_user_manager_mail_association | Association between last used users and their managers' email addresses. | keyword |
+| axonius.network.last_used_users_user_status_association | Association between last used users and their account status. | keyword |
+| axonius.network.last_used_users_user_title_association | Association between last used users and their job titles. | keyword |
+| axonius.network.latest_used_user | The most recently used user account on this asset. | keyword |
+| axonius.network.latest_used_user_department | Department of the most recently used user. | keyword |
+| axonius.network.latest_used_user_email_domain | Email domain of the most recently used user. | keyword |
+| axonius.network.latest_used_user_mail | Email address of the most recently used user. | keyword |
+| axonius.network.latest_used_user_user_manager | Manager of the most recently used user. | keyword |
+| axonius.network.latest_used_user_user_status | Account status of the most recently used user. | keyword |
+| axonius.network.latest_used_user_user_title | Job title of the most recently used user. | keyword |
+| axonius.network.linked_tickets.category |  | keyword |
+| axonius.network.linked_tickets.created |  | date |
+| axonius.network.linked_tickets.description |  | text |
+| axonius.network.linked_tickets.display_id |  | keyword |
+| axonius.network.linked_tickets.priority |  | keyword |
+| axonius.network.linked_tickets.reporter |  | keyword |
+| axonius.network.linked_tickets.status |  | keyword |
+| axonius.network.linked_tickets.summary |  | text |
+| axonius.network.linked_tickets.updated |  | date |
+| axonius.network.load_balancers_axon_ids |  | keyword |
+| axonius.network.location |  | keyword |
+| axonius.network.lock |  | keyword |
+| axonius.network.meeting_id |  | keyword |
+| axonius.network.method |  | keyword |
+| axonius.network.microphone |  | keyword |
+| axonius.network.mtu |  | long |
+| axonius.network.name | The name or identifier of the network asset. | keyword |
+| axonius.network.nat_policy_ips.address |  | ip |
+| axonius.network.nat_policy_ips.direction |  | keyword |
+| axonius.network.nat_policy_ips.matched_on |  | keyword |
+| axonius.network.nat_policy_ips.policy_name |  | keyword |
+| axonius.network.nat_policy_ips.rule_num |  | long |
+| axonius.network.nat_policy_ips.uid |  | keyword |
+| axonius.network.nat_rules_axon_ids |  | keyword |
+| axonius.network.nat_translations.from_destination_integer_ip |  | long |
+| axonius.network.nat_translations.from_source_integer_ip |  | long |
+| axonius.network.nat_translations.is_destination_ip_range_public |  | boolean |
+| axonius.network.nat_translations.is_source_ip_range_public |  | boolean |
+| axonius.network.nat_translations.to_destination_integer_ip |  | long |
+| axonius.network.nat_translations.to_source_integer_ip |  | long |
+| axonius.network.network |  | keyword |
+| axonius.network.network_firewall_policy |  | keyword |
+| axonius.network.network_interfaces.ips |  | keyword |
+| axonius.network.network_interfaces.ips_raw |  | long |
+| axonius.network.network_interfaces.ips_v4 |  | keyword |
+| axonius.network.network_interfaces.ips_v4_raw |  | long |
+| axonius.network.network_interfaces.mac |  | keyword |
+| axonius.network.network_interfaces.manufacturer |  | keyword |
+| axonius.network.network_interfaces.subnets |  | keyword |
+| axonius.network.network_status |  | keyword |
+| axonius.network.network_type |  | keyword |
+| axonius.network.nexpose_id |  | keyword |
+| axonius.network.nexpose_type |  | keyword |
+| axonius.network.node_id |  | keyword |
+| axonius.network.node_name |  | keyword |
+| axonius.network.normalization_reasons.calculated_time |  | date |
+| axonius.network.normalization_reasons.key |  | keyword |
+| axonius.network.normalization_reasons.original |  | keyword |
+| axonius.network.normalization_reasons.reason |  | keyword |
+| axonius.network.not_fetched_count | The number of times this network asset failed to be fetched. | long |
+| axonius.network.open_ports.port_id |  | keyword |
+| axonius.network.open_ports.protocol |  | keyword |
+| axonius.network.operational_status |  | keyword |
+| axonius.network.organizational_unit |  | keyword |
+| axonius.network.os.codename |  | keyword |
+| axonius.network.os.distribution |  | keyword |
+| axonius.network.os.distribution_name |  | keyword |
+| axonius.network.os.end_of_life |  | date |
+| axonius.network.os.end_of_support |  | date |
+| axonius.network.os.is_end_of_life |  | boolean |
+| axonius.network.os.is_end_of_support |  | boolean |
+| axonius.network.os.is_latest_os_version |  | boolean |
+| axonius.network.os.is_windows_server |  | boolean |
+| axonius.network.os.latest_os_version |  | keyword |
+| axonius.network.os.major |  | long |
+| axonius.network.os.minor |  | long |
+| axonius.network.os.os_cpe |  | keyword |
+| axonius.network.os.os_dotted |  | keyword |
+| axonius.network.os.os_dotted_raw |  | long |
+| axonius.network.os.os_str |  | keyword |
+| axonius.network.os.type |  | keyword |
+| axonius.network.os.type_distribution |  | keyword |
+| axonius.network.os_ext_attributes.attr_name |  | keyword |
+| axonius.network.os_ext_attributes.data_type |  | keyword |
+| axonius.network.os_ext_attributes.definition_id |  | keyword |
+| axonius.network.os_ext_attributes.ext_description |  | keyword |
+| axonius.network.os_ext_attributes.input_type |  | keyword |
+| axonius.network.os_ext_attributes.is_enabled |  | boolean |
+| axonius.network.os_ext_attributes.is_multivalue |  | boolean |
+| axonius.network.os_ext_attributes.values |  | keyword |
+| axonius.network.owner |  | keyword |
+| axonius.network.paloalto_device_type |  | keyword |
+| axonius.network.part_of_domain |  | boolean |
+| axonius.network.peerings.exchange_subnet_routes |  | boolean |
+| axonius.network.peerings.export_custom_routes |  | boolean |
+| axonius.network.peerings.import_custom_routes |  | boolean |
+| axonius.network.peerings.peer_mtu |  | long |
+| axonius.network.peerings.state |  | keyword |
+| axonius.network.peerings.state_details |  | keyword |
+| axonius.network.physical_location |  | keyword |
+| axonius.network.physical_memory_percentage |  | double |
+| axonius.network.plugin_and_severities.cpe |  | keyword |
+| axonius.network.plugin_and_severities.cve |  | keyword |
+| axonius.network.plugin_and_severities.cvss_base_score |  | float |
+| axonius.network.plugin_and_severities.days_seen |  | long |
+| axonius.network.plugin_and_severities.exploit_available |  | boolean |
+| axonius.network.plugin_and_severities.family.id |  | keyword |
+| axonius.network.plugin_and_severities.family.name |  | keyword |
+| axonius.network.plugin_and_severities.first_found |  | date |
+| axonius.network.plugin_and_severities.first_seen |  | date |
+| axonius.network.plugin_and_severities.has_been_mitigated |  | boolean |
+| axonius.network.plugin_and_severities.has_patch |  | boolean |
+| axonius.network.plugin_and_severities.last_fixed |  | date |
+| axonius.network.plugin_and_severities.last_found |  | date |
+| axonius.network.plugin_and_severities.last_seen |  | date |
+| axonius.network.plugin_and_severities.mitigated |  | boolean |
+| axonius.network.plugin_and_severities.nessus_instance.credentialed_check |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.display_superseded_patches |  | boolean |
+| axonius.network.plugin_and_severities.nessus_instance.experimental_tests |  | boolean |
+| axonius.network.plugin_and_severities.nessus_instance.patch_management_checks |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.plugin_feed_version |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.report_verbosity |  | long |
+| axonius.network.plugin_and_severities.nessus_instance.safe_check |  | boolean |
+| axonius.network.plugin_and_severities.nessus_instance.scan_name |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.scan_policy_used |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.scan_type |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.scanner_edition_used |  | keyword |
+| axonius.network.plugin_and_severities.nessus_instance.scanner_ip |  | ip |
+| axonius.network.plugin_and_severities.nessus_instance.thorough_tests |  | boolean |
+| axonius.network.plugin_and_severities.nessus_instance.version |  | keyword |
+| axonius.network.plugin_and_severities.patch_publication_date |  | date |
+| axonius.network.plugin_and_severities.plugin |  | keyword |
+| axonius.network.plugin_and_severities.plugin_id |  | keyword |
+| axonius.network.plugin_and_severities.plugin_id_number |  | keyword |
+| axonius.network.plugin_and_severities.severity |  | keyword |
+| axonius.network.plugin_and_severities.severity_modification_type |  | keyword |
+| axonius.network.plugin_and_severities.solution |  | keyword |
+| axonius.network.plugin_and_severities.state |  | keyword |
+| axonius.network.plugin_and_severities.unsupported_by_vendor |  | boolean |
+| axonius.network.plugin_and_severities.vpr_score |  | float |
+| axonius.network.plugin_and_severities.vuln_state |  | keyword |
+| axonius.network.policy_id |  | keyword |
+| axonius.network.policy_name |  | keyword |
+| axonius.network.pool_members_ips |  | ip |
+| axonius.network.pool_name |  | keyword |
+| axonius.network.power_state |  | keyword |
+| axonius.network.pretty_id |  | keyword |
+| axonius.network.priority |  | long |
+| axonius.network.private_integer_ips |  | long |
+| axonius.network.private_ips |  | ip |
+| axonius.network.project_id |  | keyword |
+| axonius.network.protocol | The network protocol used or associated with this asset. | keyword |
+| axonius.network.provisioningState |  | keyword |
+| axonius.network.public_ips |  | ip |
+| axonius.network.ranger_version |  | keyword |
+| axonius.network.raw_hostname |  | keyword |
+| axonius.network.read_only |  | boolean |
+| axonius.network.recording |  | boolean |
+| axonius.network.relatable_ids |  | keyword |
+| axonius.network.related_network_route_ids |  | keyword |
+| axonius.network.relative_path |  | keyword |
+| axonius.network.report_date |  | date |
+| axonius.network.resource_group |  | keyword |
+| axonius.network.risk_level |  | long |
+| axonius.network.risk_level_value |  | keyword |
+| axonius.network.route.asset |  | keyword |
+| axonius.network.route.asset_internal_axon_id |  | keyword |
+| axonius.network.route.host_ipv4s |  | ip |
+| axonius.network.route.is_end_point |  | boolean |
+| axonius.network.route.is_entry_point |  | boolean |
+| axonius.network.route.is_public_facing |  | boolean |
+| axonius.network.route.name |  | keyword |
+| axonius.network.route.nat.from_destination_integer_ip |  | long |
+| axonius.network.route.nat.from_destination_ip_address |  | ip |
+| axonius.network.route.nat.from_source_integer_ip |  | long |
+| axonius.network.route.nat.from_source_ip_address |  | ip |
+| axonius.network.route.nat.is_destination_ip_range_public |  | boolean |
+| axonius.network.route.nat.is_source_ip_range_public |  | boolean |
+| axonius.network.route.nat.to_destination_integer_ip |  | long |
+| axonius.network.route.nat.to_destination_ip_address |  | ip |
+| axonius.network.route.nat.to_source_integer_ip |  | long |
+| axonius.network.route.nat.to_source_ip_address |  | ip |
+| axonius.network.route.order |  | keyword |
+| axonius.network.route.product_type |  | keyword |
+| axonius.network.route.vendors |  | keyword |
+| axonius.network.routing_mode |  | keyword |
+| axonius.network.rule_base_type |  | keyword |
+| axonius.network.rule_type |  | keyword |
+| axonius.network.scan_results |  | keyword |
+| axonius.network.scan_results_objs.id |  | keyword |
+| axonius.network.scan_results_objs.name |  | keyword |
+| axonius.network.scan_results_objs.status |  | keyword |
+| axonius.network.scanner |  | boolean |
+| axonius.network.security_updates_last_changed |  | date |
+| axonius.network.security_updates_status |  | keyword |
+| axonius.network.server_type |  | keyword |
+| axonius.network.service |  | keyword |
+| axonius.network.services |  | keyword |
+| axonius.network.severity_critical |  | long |
+| axonius.network.severity_high |  | long |
+| axonius.network.severity_info |  | long |
+| axonius.network.severity_low |  | long |
+| axonius.network.severity_medium |  | long |
+| axonius.network.share_application |  | boolean |
+| axonius.network.share_desktop |  | boolean |
+| axonius.network.share_whiteboard |  | boolean |
+| axonius.network.sip_status |  | boolean |
+| axonius.network.site_name |  | keyword |
+| axonius.network.software_cves.axonius_risk_score |  | double |
+| axonius.network.software_cves.axonius_status |  | keyword |
+| axonius.network.software_cves.axonius_status_last_update |  | date |
+| axonius.network.software_cves.custom_software_cves_business_unit |  | keyword |
+| axonius.network.software_cves.cve_from_sw_analysis |  | boolean |
+| axonius.network.software_cves.cve_id |  | keyword |
+| axonius.network.software_cves.cve_list |  | keyword |
+| axonius.network.software_cves.cve_severity |  | keyword |
+| axonius.network.software_cves.cve_synopsis |  | keyword |
+| axonius.network.software_cves.cvss |  | float |
+| axonius.network.software_cves.cvss2_score |  | float |
+| axonius.network.software_cves.cvss2_score_num |  | float |
+| axonius.network.software_cves.cvss3_score |  | float |
+| axonius.network.software_cves.cvss3_score_num |  | float |
+| axonius.network.software_cves.cvss4_score |  | float |
+| axonius.network.software_cves.cvss4_score_num |  | float |
+| axonius.network.software_cves.cvss_str |  | keyword |
+| axonius.network.software_cves.cvss_vector |  | keyword |
+| axonius.network.software_cves.cvss_version |  | keyword |
+| axonius.network.software_cves.cwe_id |  | keyword |
+| axonius.network.software_cves.epss.creation_date |  | date |
+| axonius.network.software_cves.epss.cve_id |  | keyword |
+| axonius.network.software_cves.epss.percentile |  | double |
+| axonius.network.software_cves.epss.score |  | double |
+| axonius.network.software_cves.exploitability_score |  | double |
+| axonius.network.software_cves.first_fetch_time |  | date |
+| axonius.network.software_cves.hash_id |  | keyword |
+| axonius.network.software_cves.impact_score |  | double |
+| axonius.network.software_cves.last_fetch_time |  | date |
+| axonius.network.software_cves.last_modified_date |  | date |
+| axonius.network.software_cves.mitigated |  | boolean |
+| axonius.network.software_cves.msrc.creation_date |  | keyword |
+| axonius.network.software_cves.msrc.cve_id |  | keyword |
+| axonius.network.software_cves.msrc.title |  | keyword |
+| axonius.network.software_cves.nvd_publish_age |  | long |
+| axonius.network.software_cves.publish_date |  | date |
+| axonius.network.software_cves.software_name |  | keyword |
+| axonius.network.software_cves.software_type |  | keyword |
+| axonius.network.software_cves.software_vendor |  | keyword |
+| axonius.network.software_cves.software_version |  | keyword |
+| axonius.network.software_cves.solution_hash_id |  | keyword |
+| axonius.network.software_cves.version_raw |  | keyword |
+| axonius.network.source_addresses |  | ip |
+| axonius.network.source_application |  | keyword |
+| axonius.network.source_ips |  | ip |
+| axonius.network.source_zone |  | keyword |
+| axonius.network.speaker |  | keyword |
+| axonius.network.special_hint |  | long |
+| axonius.network.special_hint_underscore |  | keyword |
+| axonius.network.state | The current state or operational condition of the network asset. | keyword |
+| axonius.network.subnet_tag |  | keyword |
+| axonius.network.subnetworks.creation_timestamp |  | date |
+| axonius.network.subnetworks.gateway_address |  | ip |
+| axonius.network.subnetworks.id |  | keyword |
+| axonius.network.subnetworks.ip_cidr_range |  | ip |
+| axonius.network.subnetworks.name |  | keyword |
+| axonius.network.subnetworks.private_ip_google_access |  | boolean |
+| axonius.network.subscription_id |  | keyword |
+| axonius.network.subscription_name |  | keyword |
+| axonius.network.swap_free |  | double |
+| axonius.network.swap_total |  | double |
+| axonius.network.sys_id |  | keyword |
+| axonius.network.table_type |  | keyword |
+| axonius.network.tenant_number |  | long |
+| axonius.network.tenant_tag |  | keyword |
+| axonius.network.threat_level |  | keyword |
+| axonius.network.threats |  | keyword |
+| axonius.network.total |  | long |
+| axonius.network.total_number_of_cores |  | long |
+| axonius.network.total_physical_memory |  | double |
+| axonius.network.traffic_direction |  | keyword |
+| axonius.network.transform_unique_id | Unique identifier for this asset in the transformation process. | keyword |
+| axonius.network.type | The type or classification of the network entity. | keyword |
+| axonius.network.u_business_owner |  | keyword |
+| axonius.network.u_business_unit |  | keyword |
+| axonius.network.uniq_sites_count |  | long |
+| axonius.network.uri |  | keyword |
+| axonius.network.urls_axon_ids |  | keyword |
+| axonius.network.uuid |  | keyword |
+| axonius.network.vendor |  | keyword |
+| axonius.network.virtual_host |  | boolean |
+| axonius.network.vm_status |  | keyword |
+| axonius.network.vm_type |  | keyword |
+| axonius.network.vpn_domain |  | keyword |
+| axonius.network.vpn_is_local |  | boolean |
+| axonius.network.vpn_lifetime |  | long |
+| axonius.network.vpn_public_ip |  | ip |
+| axonius.network.vpn_tunnel_type |  | keyword |
+| axonius.network.vpn_type |  | keyword |
+| axonius.network.z_sys_class_name |  | keyword |
+| axonius.network.z_table_hierarchy.name |  | keyword |
+| axonius.network.zoom_ip |  | ip |
+| data_stream.dataset | The field can contain anything that makes sense to signify the source of the data. Examples include `nginx.access`, `prometheus`, `endpoint` etc. For data streams that otherwise fit, but that do not have dataset set we use the value "generic" for the dataset value. `event.dataset` should have the same value as `data_stream.dataset`. Beyond the Elasticsearch data stream naming criteria noted above, the `dataset` value has additional restrictions:   \* Must not contain `-`   \* No longer than 100 characters | constant_keyword |
+| data_stream.namespace | A user defined namespace. Namespaces are useful to allow grouping of data. Many users already organize their indices this way, and the data stream naming scheme now provides this best practice as a default. Many users will populate this field with `default`. If no value is used, it falls back to `default`. Beyond the Elasticsearch index naming criteria noted above, `namespace` value has the additional restrictions:   \* Must not contain `-`   \* No longer than 100 characters | constant_keyword |
+| data_stream.type | An overarching type for the data stream. Currently allowed values are "logs" and "metrics". We expect to also add "traces" and "synthetics" in the near future. | constant_keyword |
+| event.dataset | Name of the dataset. If an event source publishes more than one type of log or events (e.g. access log, error log), the dataset is used to specify which one the event comes from. It's recommended but not required to start the dataset name with the module name, followed by a dot, then the dataset name. | constant_keyword |
+| event.module | Name of the module this data is coming from. If your monitoring agent supports the concept of modules or plugins to process events of a given source (e.g. Apache logs), `event.module` should contain the name of this module. | constant_keyword |
+| input.type | Type of filebeat input. | keyword |
+| labels.is_transform_source | Distinguishes between documents that are a source for a transform and documents that are an output of a transform, to facilitate easier filtering. | constant_keyword |
+| log.offset | Log offset. | long |
+| observer.vendor | Vendor name of the observer. | constant_keyword |
+
+
+An example event for `network` looks as following:
+
+```json
+{
+    "@timestamp": "2025-12-16T00:02:05.000Z",
+    "agent": {
+        "ephemeral_id": "4e336b5a-d5c0-4ce6-9dc8-e54685263e6c",
+        "id": "d8b9844e-5cb3-4ade-b75c-03bd66ca704d",
+        "name": "elastic-agent-49461",
+        "type": "filebeat",
+        "version": "8.18.0"
+    },
+    "axonius": {
+        "network": {
+            "access": "Allow",
+            "accurate_for_datetime": "2025-12-16T00:02:05.000Z",
+            "adapter_list_length": 1,
+            "adapters": [
+                "azure_adapter"
+            ],
+            "application_and_account_name": "azure/azure-demo",
+            "asset_type": "networks",
+            "connected_assets": [
+                "subscription_id::64062aef-14a6-42a4-86b1-8a25d0c7cb24"
+            ],
+            "direction": "Inbound",
+            "event": {
+                "accurate_for_datetime": "2025-12-16T00:02:05.000Z",
+                "adapter_categories": [
+                    "Cloud Infra"
+                ],
+                "client_used": "67fd09ca731ccb5730923106",
+                "initial_plugin_unique_name": "azure_adapter_0",
+                "plugin_name": "azure_adapter",
+                "plugin_type": "Adapter",
+                "plugin_unique_name": "azure_adapter_0",
+                "quick_id": "azure_adapter_0!2142ce3eb735930b68a7",
+                "type": "entitydata"
+            },
+            "fetch_time": "2025-12-16T00:02:04.000Z",
+            "first_fetch_time": "2025-12-14T16:49:34.000Z",
+            "from_last_fetch": true,
+            "id": "2142ce3eb735930b68a7",
+            "id_raw": "912b0b56-fb12-4fe9-8f88-214c6c6b32e5",
+            "internal_axon_id": "100b89429e965a0bf70a9bae08c4b679",
+            "is_fetched_from_adapter": true,
+            "last_fetch_connection_id": "67fd09ca731ccb5730923106",
+            "last_fetch_connection_label": "azure-demo",
+            "location": "New York City",
+            "name": "FTP-ENABLED-Allowedcb5E-",
+            "not_fetched_count": 0,
+            "pretty_id": "AX-1156168648572164619",
+            "priority": 1937,
+            "protocol": "UDP",
+            "provisioningState": "Succeeded",
+            "source_application": "Azure",
+            "subscription_id": "b3fa20bb-a9c1-4cb6-80a9-13bcc9d68da5",
+            "subscription_name": "Microsoft Azure Enterprise",
+            "tenant_number": [
+                2
+            ],
+            "transform_unique_id": "+d3LsTUHSgxeH1GKpDIbo8Oh1Jk=",
+            "type": "Networks"
+        }
+    },
+    "data_stream": {
+        "dataset": "axonius.network",
+        "namespace": "48120",
+        "type": "logs"
+    },
+    "ecs": {
+        "version": "9.2.0"
+    },
+    "elastic_agent": {
+        "id": "d8b9844e-5cb3-4ade-b75c-03bd66ca704d",
+        "snapshot": false,
+        "version": "8.18.0"
+    },
+    "event": {
+        "agent_id_status": "verified",
+        "category": [
+            "network"
+        ],
+        "dataset": "axonius.network",
+        "ingested": "2026-03-27T12:14:37Z",
+        "kind": "event",
+        "type": [
+            "info"
+        ]
+    },
+    "host": {
+        "geo": {
+            "city_name": "New York City"
+        }
+    },
+    "input": {
+        "type": "cel"
+    },
+    "network": {
+        "direction": "inbound",
+        "protocol": "udp"
+    },
+    "tags": [
+        "preserve_duplicate_custom_fields",
+        "forwarded",
+        "axonius-network"
+    ]
+}
+```
+
+### Inputs used
+
+These inputs can be used with this integration:
+<details>
+<summary>cel</summary>
+
+## Setup
+
+For more details about the CEL input settings, check the [Filebeat documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-cel.html).
+
+Before configuring the CEL input, make sure you have:
+- Network connectivity to the target API endpoint
+- Valid authentication credentials (API keys, tokens, or certificates as required)
+- Appropriate permissions to read from the target data source
+
+### Collecting logs from CEL
+
+To configure the CEL input, you must specify the `request.url` value pointing to the API endpoint. The interval parameter controls how frequently requests are made and is the primary way to balance data freshness with API rate limits and costs. Authentication is often configured through the `request.headers` section using the appropriate method for the service.
+
+NOTE: To access the API service, make sure you have the necessary API credentials and that the Filebeat instance can reach the endpoint URL. Some services may require IP whitelisting or VPN access.
+
+To collect logs via API endpoint, configure the following parameters:
+
+- API Endpoint URL
+- API credentials (tokens, keys, or username/password)
+- Request interval (how often to fetch data)
+</details>
+
+
 ### API usage
 
 These APIs are used with this integration:
@@ -1440,6 +2097,14 @@ These APIs are used with this integration:
 * Ticket:
     * tickets (endpoint: `/api/v2/tickets`)
     * cases (endpoint: `/api/v2/cases`)
+* Network
+    * networks (endpoint: `/api/v2/networks`)
+    * load_balancers (endpoint: `/api/v2/load_balancers`)
+    * network_services (endpoint: `/api/v2/network_services`)
+    * network_devices (endpoint: `/api/v2/network_devices`)
+    * firewalls (endpoint: `/api/v2/firewalls`)
+    * nat_rules (endpoint: `/api/v2/nat_rules`)
+    * network_routes (endpoint: `/api/v2/network_routes`)
 
 ### ILM Policy
 

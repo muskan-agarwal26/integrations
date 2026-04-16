@@ -41,11 +41,20 @@ This integration collects log messages of the following type:
     - tickets (endpoint: `/api/v2/tickets`)
     - cases (endpoint: `/api/v2/cases`)
 
+- `Network`: Collect details of all identity assets including:
+    - networks (endpoint: `/api/v2/networks`)
+    - load_balancers (endpoint: `/api/v2/load_balancers`)
+    - network_services (endpoint: `/api/v2/network_services`)
+    - network_devices (endpoint: `/api/v2/network_devices`)
+    - firewalls (endpoint: `/api/v2/firewalls`)
+    - nat_rules (endpoint: `/api/v2/nat_rules`)
+    - network_routes (endpoint: `/api/v2/network_routes`)
+
 ### Supported use cases
 
-Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, and Ticket data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, and operational ticketing. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways operate, where risks exist, how alerts evolve into incidents, and how issues are tracked and resolved.
+Integrating the Axonius Adapter, User, Gateway, Exposure, Alert, Incident, Storage, Ticket, and Network data streams with Elastic SIEM provides centralized, end-to-end visibility across data ingestion, identity posture, network configuration, vulnerability exposure, security events, storage assets, ticketing, and network activity. Together, these data streams help analysts understand how data flows into the platform, how it maps to users and access, how gateways and network assets operate, where risks and exposures exist, and how alerts evolve into incidents and tracked issues.
 
-The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, and ticket activity. Ticket-specific views add context around priority, status, trends, and top reporters, helping teams track issue progression and identify workload patterns. By correlating operational, identity, exposure, incident, storage, and ticket data in one place, security teams can detect anomalies, prioritize remediation, manage workloads effectively, and streamline investigations with comprehensive, end-to-end context across the environment.
+The dashboards surface insights into integration health, connection behavior, user roles, routing context, vulnerability severity, alert and incident trends, storage distribution, ticket activity, and network asset posture. Network-specific views highlight protocols, device states, exposure levels, and communication paths, while ticket insights provide context on priorities, statuses, and workload patterns. By correlating operational, identity, exposure, incident, storage, ticket, and network data in one place, security teams can detect anomalies, identify misconfigurations, prioritize remediation, and streamline investigations with comprehensive, end-to-end context across the environment.
 
 ## What do I need to use this integration?
 
@@ -129,6 +138,10 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 | `logs-axonius.user-*`              | `logs-axonius_latest.dest_user-*`                | `logs-axonius_latest.user`              |
 | `logs-axonius.storage-*`              | `logs-axonius_latest.dest_storage-*`                | `logs-axonius_latest.storage`              |
 | `logs-axonius.ticket-*`              | `logs-axonius_latest.dest_ticket-*`                | `logs-axonius_latest.ticket`
+| `logs-axonius.network-*`              | `logs-axonius_latest.dest_network-*`                | `logs-axonius_latest.network`
+
+**Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets. This means deleted assets will continue to appear in dashboards for up to 90 days after deletion.
+The network destination index is a content-based deduplicated view, not an entity-level latest-state view like the other data streams (for example `user` and `gateway`), which rely on a unique entity identifier and reflect the latest state of each entity.
 
 ## Troubleshooting
 
@@ -139,10 +152,6 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 For more information on architectures that can be used for scaling this integration, check the [Ingest Architectures](https://www.elastic.co/docs/manage-data/ingest/ingest-reference-architectures) documentation.
 
 ## Reference
-
-### Inputs used
-{{/* All inputs used by this package will be automatically listed here. */}}
-{{ inputDocs }}
 
 ### Adapter
 
@@ -224,6 +233,20 @@ The `ticket` data stream provides ticket asset logs from axonius.
 
 {{event "ticket"}}
 
+### Network
+
+The `network` data stream provides network events from axonius.
+
+#### network fields
+
+{{ fields "network" }}
+
+{{ event "network" }}
+
+### Inputs used
+{{/* All inputs used by this package will be automatically listed here. */}}
+{{ inputDocs }}
+
 ### API usage
 
 These APIs are used with this integration:
@@ -246,6 +269,14 @@ These APIs are used with this integration:
 * Ticket:
     * tickets (endpoint: `/api/v2/tickets`)
     * cases (endpoint: `/api/v2/cases`)
+* Network
+    * networks (endpoint: `/api/v2/networks`)
+    * load_balancers (endpoint: `/api/v2/load_balancers`)
+    * network_services (endpoint: `/api/v2/network_services`)
+    * network_devices (endpoint: `/api/v2/network_devices`)
+    * firewalls (endpoint: `/api/v2/firewalls`)
+    * nat_rules (endpoint: `/api/v2/nat_rules`)
+    * network_routes (endpoint: `/api/v2/network_routes`)
 
 ### ILM Policy
 
