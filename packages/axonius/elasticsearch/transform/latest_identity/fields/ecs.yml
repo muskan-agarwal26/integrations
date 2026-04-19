@@ -72,5 +72,3 @@
   name: user.full_name
 - external: ecs
   name: user.name
-- external: ecs
-  name: user.roles

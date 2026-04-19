@@ -101,7 +101,7 @@
                                                     "dataType": "number",
                                                     "filter": {
                                                         "language": "kuery",
-                                                        "query": "axonius.identity.event.data.is_user_inactive : true "
+                                                        "query": "axonius.identity.is_user_inactive : true "
                                                     },
                                                     "isBucketed": false,
                                                     "label": "Inactive Users",
@@ -199,7 +199,7 @@
                         "id": "",
                         "params": {
                             "fontSize": 12,
-                            "markdown": "**Overview**\n\nThis dashboard provides a comprehensive view of Identity Assets collected from Axonius.\n\nIt provides clear visibility into the identity landscape, highlighting counts of active, inactive, suspended, and external users to help teams quickly assess overall account posture. Breakdowns by user status, type, and department reveal how identities are distributed across the organization and make it easier to spot unusual patterns or high-risk groups.\n\nTables showing top email addresses and cloud providers add further context, helping analysts identify heavily used accounts and understand where identities originate. These insights enable teams to monitor user activity, detect anomalies, and maintain strong identity hygiene across the environment.\n\n**[Integration Page](/app/integrations/detail/axonius)**\n\n",
+                            "markdown": "**Overview**\n\nThis dashboard provides a comprehensive view of Identity Assets collected from Axonius.\n\nIt provides clear visibility into the identity landscape, highlighting counts of active, inactive, suspended, and external users to help teams quickly assess overall account posture. Breakdowns by user status, type, and department reveal how identities are distributed across the organization and make it easier to spot unusual patterns or high-risk groups.\n\nTables showing top email addresses and cloud providers add further context, helping analysts identify heavily used accounts and understand where identities originate. These insights enable teams to monitor user activity, detect anomalies, and maintain strong identity hygiene across the environment.\n\n**Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets. This means deleted assets will continue to appear in dashboards for up to 90 days after deletion.\n\n**[Integration Page](/app/integrations/detail/axonius)**\n\n",
                             "openLinksInNewTab": false
                         },
                         "title": "",
@@ -243,7 +243,7 @@
                                                     "dataType": "number",
                                                     "filter": {
                                                         "language": "kuery",
-                                                        "query": "axonius.identity.event.data.is_user_external : true "
+                                                        "query": "axonius.identity.is_user_external : true "
                                                     },
                                                     "isBucketed": false,
                                                     "label": "External Users",
@@ -345,7 +345,7 @@
                                                     "dataType": "number",
                                                     "filter": {
                                                         "language": "kuery",
-                                                        "query": "axonius.identity.event.data.is_user_suspended : true "
+                                                        "query": "axonius.identity.is_user_suspended : true "
                                                     },
                                                     "isBucketed": false,
                                                     "label": "Suspended Users",
@@ -446,7 +446,7 @@
                                                     "dataType": "number",
                                                     "filter": {
                                                         "language": "kuery",
-                                                        "query": "axonius.identity.event.data.is_user_active : true "
+                                                        "query": "axonius.identity.is_user_active : true "
                                                     },
                                                     "isBucketed": false,
                                                     "label": "Active Users",
@@ -575,7 +575,7 @@
                                                         "size": 10
                                                     },
                                                     "scale": "ordinal",
-                                                    "sourceField": "axonius.identity.event.data.user_department"
+                                                    "sourceField": "axonius.identity.user_department"
                                                 }
                                             },
                                             "ignoreGlobalFilters": false,
@@ -744,7 +744,7 @@
                                                         "size": 10
                                                     },
                                                     "scale": "ordinal",
-                                                    "sourceField": "axonius.identity.event.data.user_type"
+                                                    "sourceField": "axonius.identity.user_type"
                                                 }
                                             },
                                             "ignoreGlobalFilters": false,
@@ -911,7 +911,7 @@
                                                         "size": 5
                                                     },
                                                     "scale": "ordinal",
-                                                    "sourceField": "axonius.identity.event.data.user_status"
+                                                    "sourceField": "axonius.identity.user_status"
                                                 }
                                             },
                                             "ignoreGlobalFilters": false,
