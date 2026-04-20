@@ -1,4 +1,9 @@
 # newer versions go on top
+- version: "6.9.0"
+  changes:
+    - description: Enable agentless deployment for AWS Health metrics.
+      type: enhancement
+      link: https://github.com/elastic/integrations/pull/18362
 - version: "6.8.0"
   changes:
     - description: Enable agentless deployment for AWS SQS metrics.
