@@ -11,6 +11,9 @@ processors:
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
       if: ctx.axonius?.identity?.first_seen != null && ctx.axonius.identity.first_seen != ''
       on_failure:
+        - remove:
+            field: axonius.identity.first_seen
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'

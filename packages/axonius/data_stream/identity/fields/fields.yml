@@ -382,9 +382,6 @@
             - name: remote_id
               type: keyword
               description: Remote identifier of the group.
-        - name: groups
-          type: keyword
-          description: List of group names this identity belongs to.
         - name: has_administrative_permissions
           type: boolean
           description: Indicates whether this identity has administrative permissions.
@@ -712,6 +709,12 @@
                 - name: value
                   type: keyword
                   description: Value or identifier of the parent entity.
+            - name: permissions
+              type: group
+              fields:
+                - name: name
+                  type: keyword
+                  description: Name of the permission.
             - name: relation_direct_name
               type: keyword
               description: Name of the direct relationship to the application.
@@ -733,9 +736,6 @@
             - name: vendor_category
               type: keyword
               description: Vendor category of the application.
-        - name: nested_applications
-          type: keyword
-          description: Flattened list of nested application names.
         - name: nested_associated_devices
           type: keyword
           description: Flattened list of nested associated device identifiers.
@@ -802,9 +802,6 @@
             - name: is_admin
               type: boolean
               description: Indicates if the identity has admin privileges.
-        - name: nested_permissions
-          type: group
-          fields:
             - name: assignment_type
               type: keyword
               description: How the permission was assigned (e.g., direct, inherited).
@@ -844,9 +841,6 @@
             - name: value
               type: keyword
               description: Value or identifier of the resource.
-        - name: nested_resources
-          type: keyword
-          description: Flattened list of nested resource values.
         - name: nested_roles
           type: group
           fields:
@@ -904,6 +898,15 @@
         - name: password_not_required
           type: boolean
           description: Indicates whether a password is not required for this account.
+        - name: permissions_list
+          type: group
+          fields:
+            - name: name
+              type: keyword
+              description: Name of the permission.
+        - name: permissions
+          type: long
+          description: Total number of permissions assigned to the identity.
         - name: pmi
           type: keyword
           description: Personal Meeting ID (Zoom).
@@ -940,6 +943,18 @@
             - name: role_name
               type: keyword
               description: Name of the role in the project.
+        - name: roles
+          type: group
+          fields:
+            - name: display_name
+              type: keyword
+              description: Display Name of the role.
+            - name: remote_id
+              type: keyword
+              description: Remote ID of the role.
+        - name: roles_accounts
+          type: keyword
+          description: Account roles.
         - name: provider_name
           type: keyword
           description: Name of the identity provider.
@@ -1183,6 +1198,12 @@
             - name: last_access
               type: date
               description: Date and time of the last access to the application.
+            - name: permissions
+              type: group
+              fields:
+                - name: name
+                  type: keyword
+                  description: Name of the permission.
             - name: relation_direct_name
               type: keyword
               description: Name of the direct relationship to the application.

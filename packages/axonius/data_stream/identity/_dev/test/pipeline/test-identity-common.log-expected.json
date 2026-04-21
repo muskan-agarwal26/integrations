@@ -161,7 +161,7 @@
                     ],
                     "not_fetched_count": 0,
                     "operational_users_count": 1,
-                    "permissions": [
+                    "permissions_list": [
                         {
                             "name": "User.Read"
                         }

@@ -49,12 +49,7 @@
             },
             "tags": [
                 "preserve_duplicate_custom_fields"
-            ],
-            "user": {
-                "roles": [
-                    "SharePoint Administrator"
-                ]
-            }
+            ]
         },
         {
             "@timestamp": "2025-12-09T00:09:21.000Z",
@@ -324,12 +319,7 @@
                 "preserve_duplicate_custom_fields"
             ],
             "user": {
-                "name": "Server",
-                "roles": [
-                    "sn_dependentclient.dependentclient_user",
-                    "log_points",
-                    "decision_table_admin"
-                ]
+                "name": "Server"
             }
         }
     ]

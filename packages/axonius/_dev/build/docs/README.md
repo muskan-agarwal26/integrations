@@ -163,7 +163,7 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 
 
 **Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets. This means deleted assets will continue to appear in dashboards for up to 90 days after deletion.
-The network and identity destination index is a content-based deduplicated view, not an entity-level latest-state view like the other data streams (for example `user` and `gateway`), which rely on a unique entity identifier and reflect the latest state of each entity.
+The network and identity destination indices are a content-based deduplicated view, not an entity-level latest-state view like the other data streams (for example `user` and `gateway`), which rely on a unique entity identifier and reflect the latest state of each entity.
 
 ## Troubleshooting
 

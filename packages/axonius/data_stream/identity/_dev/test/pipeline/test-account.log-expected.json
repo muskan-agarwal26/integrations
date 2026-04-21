@@ -153,8 +153,11 @@
                     "is_managed_by_direct_app": true,
                     "name": "Qualys/qualys_scans-demo",
                     "not_fetched_count": 0,
+                    "roles_accounts": [
+                        "roles/clou."
+                    ],
                     "source_application": "Qualys",
-                    "transform_unique_id": "MmWIPw5K01Viih7QMSCTzqUGr0w=",
+                    "transform_unique_id": "o1/wQWHAgVHLeNNsa0aSzPLTx74=",
                     "type": "Accounts"
                 }
             },
@@ -166,7 +169,7 @@
                     "iam"
                 ],
                 "kind": "event",
-                "original": "{\"adapter_list_length\":1,\"adapters\":[\"qualys_scans_adapter\"],\"asset_type\":\"accounts\",\"event\":{\"accurate_for_datetime\":\"Tue, 09 Dec 2025 00:04:58 GMT\",\"adapter_categories\":[\"VA Tool\"],\"client_used\":\"67fd09dffe1c8e812a176bcb\",\"data\":{\"accurate_for_datetime\":\"Tue, 09 Dec 2025 00:04:58 GMT\",\"application_and_account_name\":\"qualys/qualys_scans-demo\",\"application_name\":\"Qualys\",\"asset_type\":\"Connected Adapter\",\"domains\":[{}],\"fetch_time\":\"Tue, 09 Dec 2025 00:04:58 GMT\",\"first_fetch_time\":\"Mon, 14 Apr 2025 13:29:14 GMT\",\"from_last_fetch\":true,\"id\":\"38561584016c3bd50997\",\"id_raw\":\"qualys_scans-demo_67fd09dffe1c8e812a176bcb\",\"is_fetched_from_adapter\":true,\"is_managed_by_direct_app\":true,\"name\":\"Qualys/qualys_scans-demo\",\"not_fetched_count\":0,\"source_application\":\"Qualys\",\"type\":\"Accounts\"},\"initial_plugin_unique_name\":\"qualys_scans_adapter_0\",\"plugin_name\":\"qualys_scans_adapter\",\"plugin_type\":\"Adapter\",\"plugin_unique_name\":\"qualys_scans_adapter_0\",\"quick_id\":\"qualys_scans_adapter_0!38561584016c3bd50997\",\"type\":\"entitydata\"},\"internal_axon_id\":\"e2781b0b477c77303261aec45a40cb44\"}",
+                "original": "{\"adapter_list_length\":1,\"adapters\":[\"qualys_scans_adapter\"],\"asset_type\":\"accounts\",\"event\":{\"accurate_for_datetime\":\"Tue, 09 Dec 2025 00:04:58 GMT\",\"adapter_categories\":[\"VA Tool\"],\"client_used\":\"67fd09dffe1c8e812a176bcb\",\"data\":{\"accurate_for_datetime\":\"Tue, 09 Dec 2025 00:04:58 GMT\",\"application_and_account_name\":\"qualys/qualys_scans-demo\",\"application_name\":\"Qualys\",\"asset_type\":\"Connected Adapter\",\"domains\":[{}],\"fetch_time\":\"Tue, 09 Dec 2025 00:04:58 GMT\",\"first_fetch_time\":\"Mon, 14 Apr 2025 13:29:14 GMT\",\"from_last_fetch\":true,\"id\":\"38561584016c3bd50997\",\"id_raw\":\"qualys_scans-demo_67fd09dffe1c8e812a176bcb\",\"is_fetched_from_adapter\":true,\"is_managed_by_direct_app\":true,\"name\":\"Qualys/qualys_scans-demo\",\"not_fetched_count\":0,\"roles\":[\"roles/clou.\"], \"source_application\":\"Qualys\",\"type\":\"Accounts\"},\"initial_plugin_unique_name\":\"qualys_scans_adapter_0\",\"plugin_name\":\"qualys_scans_adapter\",\"plugin_type\":\"Adapter\",\"plugin_unique_name\":\"qualys_scans_adapter_0\",\"quick_id\":\"qualys_scans_adapter_0!38561584016c3bd50997\",\"type\":\"entitydata\"},\"internal_axon_id\":\"e2781b0b477c77303261aec45a40cb44\"}",
                 "type": [
                     "info"
                 ]

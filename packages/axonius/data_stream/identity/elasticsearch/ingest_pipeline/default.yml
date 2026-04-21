@@ -95,6 +95,9 @@ processors:
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
       if: ctx.axonius?.identity?.event?.accurate_for_datetime != null && ctx.axonius.identity.event.accurate_for_datetime != ''
       on_failure:
+        - remove:
+            field: axonius.identity.event.accurate_for_datetime
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -117,7 +120,6 @@ processors:
       tag: split_event_action
       separator: \s+
       ignore_missing: true
-      if: ctx.event?.action != ''
       on_failure:
         - append:
             field: error.message
@@ -141,6 +143,9 @@ processors:
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
       if: ctx.axonius?.identity?.accurate_for_datetime != null && ctx.axonius.identity.accurate_for_datetime != ''
       on_failure:
+        - remove:
+            field: axonius.identity.accurate_for_datetime
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -182,6 +187,9 @@ processors:
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
       if: ctx.axonius?.identity?.fetch_time != null && ctx.axonius.identity.fetch_time != ''
       on_failure:
+        - remove:
+            field: axonius.identity.fetch_time
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -195,6 +203,9 @@ processors:
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
       if: ctx.axonius?.identity?.first_fetch_time != null && ctx.axonius.identity.first_fetch_time != ''
       on_failure:
+        - remove:
+            field: axonius.identity.first_fetch_time
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -513,6 +524,9 @@ processors:
         - EEE,dd MMM yyyy HH:mm:ss 'GMT'
       if: ctx.axonius?.identity?.nested_grants_last_updated != null && ctx.axonius.identity.nested_grants_last_updated != ''
       on_failure:
+        - remove:
+            field: axonius.identity.nested_grants_last_updated
+            ignore_missing: true
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
@@ -574,6 +588,16 @@ processors:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+     field: axonius.identity.permissions
+     tag: convert_permissions_to_long
+     type: long
+     ignore_missing: true
+     on_failure:
+       - rename:
+           field: axonius.identity.permissions
+           target_field: axonius.identity.permissions_list
+           ignore_missing: true
   - pipeline:
       name: '{{ IngestPipeline "pipeline-account" }}'
       tag: pipeline-account

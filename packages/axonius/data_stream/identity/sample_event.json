@@ -1,9 +1,9 @@
 {
     "@timestamp": "2025-12-09T12:02:11.000Z",
     "agent": {
-        "ephemeral_id": "9109326f-aa8f-4059-a349-eff84327ad03",
-        "id": "15cd14d0-a0dc-4a18-83a6-7be41048ff2b",
-        "name": "elastic-agent-92590",
+        "ephemeral_id": "9f03aa73-e75b-478f-a4b6-03207451caa1",
+        "id": "2009affa-84ca-46da-9030-1686d937a20d",
+        "name": "elastic-agent-92850",
         "type": "filebeat",
         "version": "8.18.0"
     },
@@ -124,14 +124,14 @@
     },
     "data_stream": {
         "dataset": "axonius.identity",
-        "namespace": "36505",
+        "namespace": "42638",
         "type": "logs"
     },
     "ecs": {
         "version": "9.2.0"
     },
     "elastic_agent": {
-        "id": "15cd14d0-a0dc-4a18-83a6-7be41048ff2b",
+        "id": "2009affa-84ca-46da-9030-1686d937a20d",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -142,7 +142,7 @@
         ],
         "created": "2024-06-28T08:49:28.000Z",
         "dataset": "axonius.identity",
-        "ingested": "2026-04-19T13:23:58Z",
+        "ingested": "2026-04-21T12:29:16Z",
         "kind": "event",
         "type": [
             "info"

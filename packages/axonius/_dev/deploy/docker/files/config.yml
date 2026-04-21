@@ -3133,7 +3133,7 @@ rules:
               "cache_last_updated": "Mon, 01 Dec 2025 13:37:38 GMT",
               "is_data_from_cache": true,
               "page": {
-                "number": 2,
+                "number": 1,
                 "size": 2,
                 "totalPages": 2,
                 "totalResources": 4

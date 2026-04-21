@@ -163,7 +163,7 @@ Destinations indices are aliased to `logs-axonius_latest.<data_stream_name>`.
 
 
 **Note:** Assets deleted from Axonius may reappear in a future discovery cycle if they are still present in connected data sources and get re-detected. Because the exact duration for which a deleted asset may remain dormant before being rediscovered is unknown, the transform retention period is set to **90 days** to reduce the risk of data loss for such assets. This means deleted assets will continue to appear in dashboards for up to 90 days after deletion.
-The network and identity destination index is a content-based deduplicated view, not an entity-level latest-state view like the other data streams (for example `user` and `gateway`), which rely on a unique entity identifier and reflect the latest state of each entity.
+The network and identity destination indices are a content-based deduplicated view, not an entity-level latest-state view like the other data streams (for example `user` and `gateway`), which rely on a unique entity identifier and reflect the latest state of each entity.
 
 ## Troubleshooting
 
@@ -2205,7 +2205,6 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.first_seen | The date and time when this identity was first observed. | date |
 | axonius.identity.from_last_fetch | Indicates whether this identity asset was modified since the last fetch. | boolean |
 | axonius.identity.gce_account_id | Google Cloud Engine account ID associated with this identity. | keyword |
-| axonius.identity.groups | List of group names this identity belongs to. | keyword |
 | axonius.identity.groups.display_name | Display name of the group. | keyword |
 | axonius.identity.groups.name | Name of the group. | keyword |
 | axonius.identity.groups.remote_id | Remote identifier of the group. | keyword |
@@ -2293,7 +2292,6 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.max_breach_date | Most recent breach date across all breaches for this identity. | date |
 | axonius.identity.max_modified_date | Most recent modified date across all breaches for this identity. | date |
 | axonius.identity.name | The name or identifier of the identity asset. | keyword |
-| axonius.identity.nested_applications | Flattened list of nested application names. | keyword |
 | axonius.identity.nested_applications.active_from_direct_adapter | Indicates if active status is from a direct adapter. | boolean |
 | axonius.identity.nested_applications.app_accounts.name | Name of the application account. | keyword |
 | axonius.identity.nested_applications.app_display_name | Display name of the application. | keyword |
@@ -2315,6 +2313,7 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.nested_applications.name | Name of the application. | keyword |
 | axonius.identity.nested_applications.parents.name | Name of the parent entity. | keyword |
 | axonius.identity.nested_applications.parents.value | Value or identifier of the parent entity. | keyword |
+| axonius.identity.nested_applications.permissions.name | Name of the permission. | keyword |
 | axonius.identity.nested_applications.relation_direct_name | Name of the direct relationship to the application. | keyword |
 | axonius.identity.nested_applications.relation_discovery_name | Name of the discovered relationship to the application. | keyword |
 | axonius.identity.nested_applications.relation_extension_name | Name of the extension-based relationship to the application. | keyword |
@@ -2344,7 +2343,6 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.nested_permissions.parents.parent_type | Type of the parent entity. | keyword |
 | axonius.identity.nested_permissions.parents.value | Value or identifier of the parent entity. | keyword |
 | axonius.identity.nested_permissions.value | Value or identifier of the permission. | keyword |
-| axonius.identity.nested_resources | Flattened list of nested resource values. | keyword |
 | axonius.identity.nested_resources.assignment_type | How the resource was assigned. | keyword |
 | axonius.identity.nested_resources.name | Name of the resource. | keyword |
 | axonius.identity.nested_resources.parents.name | Name of the parent entity. | keyword |
@@ -2366,6 +2364,8 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.paid_users_saved_query_id | Saved query ID for the paid users metric. | keyword |
 | axonius.identity.password_never_expires | Indicates whether the password is set to never expire. | boolean |
 | axonius.identity.password_not_required | Indicates whether a password is not required for this account. | boolean |
+| axonius.identity.permissions | Total number of permissions assigned to the identity. | long |
+| axonius.identity.permissions_list.name | Name of the permission. | keyword |
 | axonius.identity.pmi | Personal Meeting ID (Zoom). | keyword |
 | axonius.identity.pretty_id | A human-readable identifier for the identity asset. | keyword |
 | axonius.identity.project_ids | Cloud project IDs associated with this identity. | keyword |
@@ -2394,6 +2394,9 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.relatable_ids | IDs used to relate this identity to other assets. | keyword |
 | axonius.identity.remote_account_id | Remote account identifier for this identity. | keyword |
 | axonius.identity.remote_id | Remote identifier for this identity in the source system. | keyword |
+| axonius.identity.roles.display_name | Display Name of the role. | keyword |
+| axonius.identity.roles.remote_id | Remote ID of the role. | keyword |
+| axonius.identity.roles_accounts | Account roles. | keyword |
 | axonius.identity.schedule_meeting.audio_type | Audio type configured for scheduled meetings. | keyword |
 | axonius.identity.schedule_meeting.force_pmi_jbh_password | Indicates if PMI join-before-host password is forced. | boolean |
 | axonius.identity.schedule_meeting.host_video | Indicates if host video is on when joining a meeting. | boolean |
@@ -2451,6 +2454,7 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.user_apps.is_user_paid | Indicates if the user has a paid license in the application. | boolean |
 | axonius.identity.user_apps.is_user_suspended | Indicates if the user is suspended in the application. | boolean |
 | axonius.identity.user_apps.last_access | Date and time of the last access to the application. | date |
+| axonius.identity.user_apps.permissions.name | Name of the permission. | keyword |
 | axonius.identity.user_apps.relation_direct_name | Name of the direct relationship to the application. | keyword |
 | axonius.identity.user_apps.relation_discovery_name | Name of the discovered relationship to the application. | keyword |
 | axonius.identity.user_apps.relation_extension_name | Name of the extension-based relationship to the application. | keyword |
@@ -2515,9 +2519,9 @@ An example event for `identity` looks as following:
 {
     "@timestamp": "2025-12-09T12:02:11.000Z",
     "agent": {
-        "ephemeral_id": "9109326f-aa8f-4059-a349-eff84327ad03",
-        "id": "15cd14d0-a0dc-4a18-83a6-7be41048ff2b",
-        "name": "elastic-agent-92590",
+        "ephemeral_id": "9f03aa73-e75b-478f-a4b6-03207451caa1",
+        "id": "2009affa-84ca-46da-9030-1686d937a20d",
+        "name": "elastic-agent-92850",
         "type": "filebeat",
         "version": "8.18.0"
     },
@@ -2638,14 +2642,14 @@ An example event for `identity` looks as following:
     },
     "data_stream": {
         "dataset": "axonius.identity",
-        "namespace": "36505",
+        "namespace": "42638",
         "type": "logs"
     },
     "ecs": {
         "version": "9.2.0"
     },
     "elastic_agent": {
-        "id": "15cd14d0-a0dc-4a18-83a6-7be41048ff2b",
+        "id": "2009affa-84ca-46da-9030-1686d937a20d",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -2656,7 +2660,7 @@ An example event for `identity` looks as following:
         ],
         "created": "2024-06-28T08:49:28.000Z",
         "dataset": "axonius.identity",
-        "ingested": "2026-04-19T13:23:58Z",
+        "ingested": "2026-04-21T12:29:16Z",
         "kind": "event",
         "type": [
             "info"
