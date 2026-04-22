@@ -878,7 +878,7 @@
               type: float
               description: CIS benchmark version of the incompliant rule.
             - name: rule_section
-              type: float
+              type: keyword
               description: Section number of the incompliant CIS rule.
         - name: orphaned_users
           type: long
@@ -1304,7 +1304,7 @@
           type: keyword
           description: Email address of the user's manager.
         - name: user_pass_last_used
-          type: keyword
+          type: date
           description: Date or timestamp when the user's password was last used.
         - name: user_path
           type: keyword

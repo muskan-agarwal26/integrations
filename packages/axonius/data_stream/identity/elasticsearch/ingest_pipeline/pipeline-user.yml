@@ -304,6 +304,23 @@ processors:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - date:
+      field: axonius.identity.user_pass_last_used
+      tag: date_user_pass_last_used
+      target_field: axonius.identity.user_pass_last_used
+      formats:
+        - EEE, dd MMM yyyy HH:mm:ss 'GMT'
+        - yyyy-MM-dd
+        - EEE,dd MMM yyyy HH:mm:ss 'GMT'
+      if: ctx.axonius?.identity?.user_pass_last_used != null && ctx.axonius.identity.user_pass_last_used != ''
+      on_failure:
+        - remove:
+            field: axonius.identity.user_pass_last_used
+            ignore_missing: true
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+
   - convert:
       field: axonius.identity.email_activity.report_period
       tag: convert_email_activity_report_period_to_long
@@ -710,15 +727,8 @@ processors:
         convert:
           field: _ingest._value.rule_section
           tag: convert_oracle_cloud_cis_incompliant_rule_section_to_float
-          type: float
+          type: string
           ignore_missing: true
-          on_failure:
-            - remove:
-                field: _ingest._value.rule_section
-                ignore_missing: true
-            - append:
-                field: error.message
-                value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
   - foreach:
       field: axonius.identity.oracle_cloud_cis_incompliant
       tag: foreach_oracle_cloud_cis_incompliant_rule_cis_version

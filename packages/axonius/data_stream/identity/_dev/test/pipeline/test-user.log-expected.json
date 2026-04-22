@@ -242,7 +242,7 @@
                     "oracle_cloud_cis_incompliant": [
                         {
                             "rule_cis_version": 1.0,
-                            "rule_section": 1.11
+                            "rule_section": "1.11"
                         }
                     ],
                     "password_never_expires": false,
@@ -339,7 +339,7 @@
                     "user_is_password_enabled": false,
                     "user_manager": "yvonne.gordon@demo.local",
                     "user_manager_mail": "yvonne.gordon@demo.local",
-                    "user_pass_last_used": "Sun, 13 Apr 2025 00:29:22 GMT",
+                    "user_pass_last_used": "2025-04-13T00:29:22.000Z",
                     "user_path": "/",
                     "user_permissions": [
                         {

@@ -2357,7 +2357,7 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.not_fetched_count | The number of times this identity asset failed to be fetched. | long |
 | axonius.identity.operational_users_count | Total number of operational users in the account. | long |
 | axonius.identity.oracle_cloud_cis_incompliant.rule_cis_version | CIS benchmark version of the incompliant rule. | float |
-| axonius.identity.oracle_cloud_cis_incompliant.rule_section | Section number of the incompliant CIS rule. | float |
+| axonius.identity.oracle_cloud_cis_incompliant.rule_section | Section number of the incompliant CIS rule. | keyword |
 | axonius.identity.orphaned_users | Number of orphaned users in the account. | long |
 | axonius.identity.orphaned_users_saved_query_id | Saved query ID for the orphaned users metric. | keyword |
 | axonius.identity.paid_users | Number of paid users in the account. | long |
@@ -2486,7 +2486,7 @@ The `identity` data stream provides identity asset logs from axonius.
 | axonius.identity.user_is_password_enabled | Indicates whether password authentication is enabled for this user. | boolean |
 | axonius.identity.user_manager | Name or identifier of the user's manager. | keyword |
 | axonius.identity.user_manager_mail | Email address of the user's manager. | keyword |
-| axonius.identity.user_pass_last_used | Date or timestamp when the user's password was last used. | keyword |
+| axonius.identity.user_pass_last_used | Date or timestamp when the user's password was last used. | date |
 | axonius.identity.user_path | Path of the user in the directory (e.g., AWS IAM path). | keyword |
 | axonius.identity.user_permissions.is_admin | Indicates if the user has admin privileges for this permission. | boolean |
 | axonius.identity.user_permissions.name | Name of the permission. | keyword |
