@@ -112,6 +112,7 @@
 /packages/azure/data_stream/provisioning @elastic/obs-infraobs-integrations
 /packages/azure/data_stream/signinlogs @elastic/obs-infraobs-integrations
 /packages/azure/data_stream/springcloudlogs @elastic/obs-infraobs-integrations
+/packages/azure_activity_otel @elastic/obs-infraobs-integrations
 /packages/azure_ai_foundry @elastic/obs-infraobs-integrations
 /packages/azure_app_service @elastic/obs-infraobs-integrations
 /packages/azure_app_service/data_stream/app_service_logs @elastic/obs-infraobs-integrations
@@ -414,6 +415,7 @@
 /packages/prisma_access @elastic/integration-experience
 /packages/prisma_cloud @elastic/security-service-integrations
 /packages/problemchild @elastic/sec-applied-ml
+/packages/profiling_otel @elastic/ingest-otel-data
 /packages/profilingmetrics_otel @elastic/ingest-otel-data
 /packages/prometheus @elastic/obs-infraobs-integrations
 /packages/prometheus/data_stream/collector @elastic/obs-infraobs-integrations
