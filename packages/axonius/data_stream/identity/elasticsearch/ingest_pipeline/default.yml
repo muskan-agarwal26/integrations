@@ -602,22 +602,22 @@ processors:
       name: '{{ IngestPipeline "pipeline-account" }}'
       tag: pipeline-account
       if: >-
-        ctx.axonius?.identity?.asset_type.contains('accounts')
+        ctx.axonius?.identity?.asset_type?.contains('accounts') == true
   - pipeline:
       name: '{{ IngestPipeline "pipeline-group" }}'
       tag: pipeline-group
       if: >-
-        ctx.axonius?.identity?.asset_type.contains('groups')
+        ctx.axonius?.identity?.asset_type?.contains('groups') == true
   - pipeline:
       name: '{{ IngestPipeline "pipeline-certificate" }}'
       tag: pipeline-certificate
       if: >-
-        ctx.axonius?.identity?.asset_type.contains('certificates')
+        ctx.axonius?.identity?.asset_type?.contains('certificates') == true
   - pipeline:
       name: '{{ IngestPipeline "pipeline-user" }}'
       tag: pipeline-user
       if: >-
-        ctx.axonius?.identity?.asset_type.contains('users')
+        ctx.axonius?.identity?.asset_type?.contains('users') == true
   - remove:
       field:
         - axonius.identity.event.accurate_for_datetime
