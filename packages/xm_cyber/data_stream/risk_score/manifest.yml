@@ -71,7 +71,7 @@ streams:
         required: false
         show_user: false
         title: Preserve duplicate custom fields
-        description: Preserve beyondtrust_epm.audit fields that were copied to Elastic Common Schema (ECS) fields.
+        description: Preserve xm_cyber.risk_score fields that were copied to Elastic Common Schema (ECS) fields.
         type: bool
         multi: false
         default: false

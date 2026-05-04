@@ -58,7 +58,7 @@ Elastic Agent must be installed. For more details, check the Elastic Agent [inst
    - **URL**: Your XM Cyber base URL, for example `https://your-org.clients.xmcyber.com`
    - **API Key**: Your XM Cyber API key.
    - **Resolution**: Number of days used to aggregate the risk score results.
-   - **Interval**: How often to poll for new data (default: `1h`).
+   - **Interval**: How often to poll for new data (default: `24h`).
    - **Initial interval**: The time window for the first poll (default: `30`).
 4. Select **Save and continue** to save the integration.
 
