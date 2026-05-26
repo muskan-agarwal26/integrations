@@ -96,12 +96,10 @@ program: |-
                   },
                   "next_page": {
                     ?"link": (
-                      body.?paging != null && has(body.paging.nextLink) && body.paging.nextLink != null &&
-                      string(body.paging.nextLink) != ""
+                      body.?paging != null && has(body.paging.nextLink) && body.paging.nextLink != null
                     ) ? optional.of(string(body.paging.nextLink)) : optional.none(),
                   },
-                  "want_more": body.?paging != null && has(body.paging.nextLink) && body.paging.nextLink != null &&
-                  string(body.paging.nextLink) != "",
+                  "want_more": body.?paging != null && has(body.paging.nextLink) && body.paging.nextLink != null,
                 }
               )
             : (resp.StatusCode == 401 || resp.StatusCode == 419) ?
