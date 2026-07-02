@@ -17,7 +17,7 @@
         "type": "Workstation"
     },
     "ecs": {
-        "version": "9.3.0"
+        "version": "9.4.0"
     },
     "elastic_agent": {
         "id": "8969c161-0027-4cdb-a060-db0116873dcb",

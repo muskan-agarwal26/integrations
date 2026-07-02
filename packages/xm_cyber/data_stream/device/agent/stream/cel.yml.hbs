@@ -102,11 +102,10 @@ program: |
                     "need_reauth": false,
                   },
                   "next_page": {
-                    ?"link": (body.?paging.?nextLink.orValue(null) != null) ?
-                      optional.of(string(body.?paging.?nextLink.orValue("")).replace_all("http://", "https://")) :
-                      optional.none(),
+                    ?"link": body.?meta.?next.orValue(null) != null ?
+                      optional.of(string(body.meta.next).replace_all("http://", "https://")) : optional.none(),
                   },
-                  "want_more": body.?paging.?nextLink.orValue(null) != null,
+                  "want_more": body.?meta.?next.orValue(null) != null,
                 }
               )
             : (resp.StatusCode == 401 || resp.StatusCode == 419) ?
