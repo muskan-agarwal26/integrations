@@ -103,7 +103,7 @@ program: |
                   },
                   "next_page": {
                     ?"link": body.?meta.?next.orValue(null) != null ?
-                      optional.of(string(body.meta.next).replace_all("http://", "https://")) : optional.none(),
+                      optional.of((body.meta.next).replace_all("http://", "https://")) : optional.none(),
                   },
                   "want_more": body.?meta.?next.orValue(null) != null,
                 }
