@@ -32,8 +32,17 @@
                 },
                 "type": "Workstation"
             },
+            "related": {
+                "ip": [
+                    "175.16.199.0"
+                ]
+            },
             "vulnerability": {
                 "classification": "CVSS",
+                "enumeration": "CVE",
+                "id": [
+                    "CVE-2023-0001"
+                ],
                 "score": {
                     "base": 7.2,
                     "version": "4.0"
@@ -127,8 +136,17 @@
                 },
                 "type": "Server"
             },
+            "related": {
+                "ip": [
+                    "216.160.83.56"
+                ]
+            },
             "vulnerability": {
                 "classification": "CVSS",
+                "enumeration": "CVE",
+                "id": [
+                    "CVE-2024-6387"
+                ],
                 "score": {
                     "base": 7.5,
                     "version": "3.1"
@@ -215,6 +233,11 @@
                     "full": "RouterOS 7"
                 },
                 "type": "NetworkDevice"
+            },
+            "related": {
+                "ip": [
+                    "81.2.69.142"
+                ]
             },
             "vulnerability": {
                 "classification": "CVSS",

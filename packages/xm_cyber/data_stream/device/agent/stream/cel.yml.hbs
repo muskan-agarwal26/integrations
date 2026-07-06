@@ -102,10 +102,10 @@ program: |
                     "need_reauth": false,
                   },
                   "next_page": {
-                    ?"link": body.?meta.?next.orValue(null) != null ?
-                      optional.of((body.meta.next).replace_all("http://", "https://")) : optional.none(),
+                    ?"link": body.?meta.next.orValue(null) != null ?
+                      optional.of(body.meta.next.replace("http://", "https://", 1)) : optional.none(),
                   },
-                  "want_more": body.?meta.?next.orValue(null) != null,
+                  "want_more": body.?meta.next.orValue(null) != null,
                 }
               )
             : (resp.StatusCode == 401 || resp.StatusCode == 419) ?
@@ -132,7 +132,7 @@ program: |
                         "need_reauth": true,
                       },
                     "next_page": {
-                      ?"link": optional.of(dataUrl),
+                      "link": dataUrl,
                     },
                     "want_more": true,
                   }
@@ -153,7 +153,7 @@ program: |
                   "need_reauth": false,
                 },
                 "next_page": {
-                  ?"link": optional.of(dataUrl),
+                  "link": dataUrl,
                 },
                 "want_more": false,
               }
@@ -175,7 +175,7 @@ program: |
                   "need_reauth": false,
                 },
                 "next_page": {
-                  ?"link": optional.of(dataUrl),
+                  "link": dataUrl,
                 },
                 "want_more": false,
               }

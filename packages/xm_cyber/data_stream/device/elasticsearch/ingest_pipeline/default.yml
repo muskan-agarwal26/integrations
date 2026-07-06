@@ -461,6 +461,29 @@ processors:
       field: vulnerability.classification
       value: CVSS
       if: ctx.vulnerability?.score?.base != null
+  - script:
+      tag: script_vulnerability_id_from_active_cves
+      lang: painless
+      description: Collect unique CVE identifiers from every apps[].active_cves list into vulnerability.id and record the identifier scheme in vulnerability.enumeration.
+      if: ctx.xm_cyber?.device?.apps instanceof List
+      source: |-
+        def cves = new TreeSet();
+        for (def app : ctx.xm_cyber.device.apps) {
+          if (app instanceof Map && app.active_cves instanceof List) {
+            for (def cve : app.active_cves) {
+              if (cve != null && cve != '') {
+                cves.add(cve);
+              }
+            }
+          }
+        }
+        if (!cves.isEmpty()) {
+          if (ctx.vulnerability == null) {
+            ctx.vulnerability = new HashMap();
+          }
+          ctx.vulnerability.id = new ArrayList(cves);
+          ctx.vulnerability.enumeration = 'CVE';
+        }
 
   # ----- ECS host.* / device.* (inventory; device.* is beta per ECS) -----
   - set:
@@ -509,6 +532,12 @@ processors:
   - append:
       tag: append_host_ip_from_ip_address
       field: host.ip
+      value: '{{{xm_cyber.device.ip_address}}}'
+      allow_duplicates: false
+      if: ctx.xm_cyber?.device?.ip_address != null && ctx.xm_cyber.device.ip_address != ''
+  - append:
+      tag: append_related_ip_from_ip_address
+      field: related.ip
       value: '{{{xm_cyber.device.ip_address}}}'
       allow_duplicates: false
       if: ctx.xm_cyber?.device?.ip_address != null && ctx.xm_cyber.device.ip_address != ''
