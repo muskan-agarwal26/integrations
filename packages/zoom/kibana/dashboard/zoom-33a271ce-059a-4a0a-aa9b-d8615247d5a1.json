@@ -10,7 +10,7 @@
                 "ignoreValidations": false
             },
             "panelsJSON": {
-                "42bd5a1a-4910-464c-a891-0de8b20fb8a0": {
+                "18ccabea-b908-4921-9c14-0fedecc59648": {
                     "explicitInput": {
                         "dataViewId": "logs-*",
                         "exclude": false,
@@ -29,19 +29,19 @@
                     "type": "optionsListControl",
                     "width": "medium"
                 },
-                "93d82b38-3bad-48d6-9d43-c8359b7bbab3": {
+                "e3cd4663-61cf-4a5a-8399-65136bb84510": {
                     "explicitInput": {
                         "dataViewId": "logs-*",
                         "exclude": false,
                         "existsSelected": false,
-                        "fieldName": "zoom.activity.client_type",
+                        "fieldName": "zoom.operation.category_type",
                         "searchTechnique": "prefix",
                         "selectedOptions": [],
                         "sort": {
                             "by": "_count",
                             "direction": "desc"
                         },
-                        "title": "Client Type"
+                        "title": "Category Type"
                     },
                     "grow": true,
                     "order": 0,
@@ -67,13 +67,13 @@
                             "key": "data_stream.dataset",
                             "negate": false,
                             "params": {
-                                "query": "zoom.activity"
+                                "query": "zoom.operation"
                             },
                             "type": "phrase"
                         },
                         "query": {
                             "match_phrase": {
-                                "data_stream.dataset": "zoom.activity"
+                                "data_stream.dataset": "zoom.operation"
                             }
                         }
                     }
@@ -95,199 +95,45 @@
             {
                 "embeddableConfig": {
                     "attributes": {
-                        "references": [
+                        "layout": "vertical",
+                        "links": [
                             {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-27c98f33-f3f9-4ed2-8372-9b138d0a6de5",
-                                "type": "index-pattern"
+                                "destinationRefName": "link_7029b6a2-4717-4704-9533-dcc620595302_dashboard",
+                                "id": "7029b6a2-4717-4704-9533-dcc620595302",
+                                "label": "Activity Overview",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": false,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 0,
+                                "type": "dashboardLink"
                             },
                             {
-                                "id": "logs-*",
-                                "name": "5b30bd22-da63-4b8b-b7bf-680e1ff01a42",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "de73cf18-5e63-4254-a8d4-1d211859163c",
-                                "type": "index-pattern"
+                                "destinationRefName": "link_b97e0257-2b08-4bac-a3cc-37e110db9abc_dashboard",
+                                "id": "b97e0257-2b08-4bac-a3cc-37e110db9abc",
+                                "label": "Operation Overview",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": false,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 1,
+                                "type": "dashboardLink"
                             }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "27c98f33-f3f9-4ed2-8372-9b138d0a6de5": {
-                                            "columnOrder": [
-                                                "b4690374-71c8-447e-b255-b8f2263616e8"
-                                            ],
-                                            "columns": {
-                                                "b4690374-71c8-447e-b255-b8f2263616e8": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "isBucketed": false,
-                                                    "label": "Total Sign In",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "emptyAsNull": true,
-                                                        "format": {
-                                                            "id": "number",
-                                                            "params": {
-                                                                "decimals": 0
-                                                            }
-                                                        }
-                                                    },
-                                                    "sourceField": "___records___"
-                                                }
-                                            },
-                                            "ignoreGlobalFilters": false,
-                                            "incompleteColumns": {},
-                                            "sampling": 1
-                                        }
-                                    }
-                                },
-                                "indexpattern": {
-                                    "layers": {}
-                                },
-                                "textBased": {
-                                    "layers": {}
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "field": "data_stream.dataset",
-                                        "index": "5b30bd22-da63-4b8b-b7bf-680e1ff01a42",
-                                        "key": "data_stream.dataset",
-                                        "negate": false,
-                                        "params": {
-                                            "query": "zoom.activity"
-                                        },
-                                        "type": "phrase"
-                                    },
-                                    "query": {
-                                        "match_phrase": {
-                                            "data_stream.dataset": "zoom.activity"
-                                        }
-                                    }
-                                },
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "field": "event.action",
-                                        "index": "de73cf18-5e63-4254-a8d4-1d211859163c",
-                                        "key": "event.action",
-                                        "negate": false,
-                                        "params": {
-                                            "query": "sign-in"
-                                        },
-                                        "type": "phrase"
-                                    },
-                                    "query": {
-                                        "match_phrase": {
-                                            "event.action": "sign-in"
-                                        }
-                                    }
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "27c98f33-f3f9-4ed2-8372-9b138d0a6de5",
-                                "layerType": "data",
-                                "metricAccessor": "b4690374-71c8-447e-b255-b8f2263616e8",
-                                "secondaryTrend": {
-                                    "type": "none"
-                                }
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
+                        ]
                     },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "field": "data_stream.dataset",
-                                "index": "5b30bd22-da63-4b8b-b7bf-680e1ff01a42",
-                                "key": "data_stream.dataset",
-                                "negate": false,
-                                "params": {
-                                    "query": "zoom.activity"
-                                },
-                                "type": "phrase"
-                            },
-                            "query": {
-                                "match_phrase": {
-                                    "data_stream.dataset": "zoom.activity"
-                                }
-                            }
-                        },
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "field": "event.action",
-                                "index": "de73cf18-5e63-4254-a8d4-1d211859163c",
-                                "key": "event.action",
-                                "negate": false,
-                                "params": {
-                                    "query": "sign-in"
-                                },
-                                "type": "phrase"
-                            },
-                            "query": {
-                                "match_phrase": {
-                                    "event.action": "sign-in"
-                                }
-                            }
-                        }
-                    ],
-                    "hidePanelTitles": true,
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false,
-                    "title": "Total Sign In"
+                    "title": "Navigation"
                 },
                 "gridData": {
-                    "h": 6,
-                    "i": "5872cf31-6b4b-425f-8393-05a3cdb563af",
-                    "w": 19,
-                    "x": 10,
+                    "h": 5,
+                    "i": "91b0b66c-04d0-42b5-8489-b604d0420a47",
+                    "w": 9,
+                    "x": 0,
                     "y": 0
                 },
-                "panelIndex": "5872cf31-6b4b-425f-8393-05a3cdb563af",
-                "type": "lens"
+                "panelIndex": "91b0b66c-04d0-42b5-8489-b604d0420a47",
+                "type": "links"
             },
             {
                 "embeddableConfig": {
@@ -295,17 +141,12 @@
                         "references": [
                             {
                                 "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-27c98f33-f3f9-4ed2-8372-9b138d0a6de5",
+                                "name": "indexpattern-datasource-layer-8fd78473-ed5e-4454-be21-9ca537e71036",
                                 "type": "index-pattern"
                             },
                             {
                                 "id": "logs-*",
-                                "name": "2a48737e-59cf-4880-bbf5-70fa0cc33812",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "98678adf-0f09-4810-a272-d26b4d433fa2",
+                                "name": "9db2cefd-29c5-4c51-a411-34f24ea66a13",
                                 "type": "index-pattern"
                             }
                         ],
@@ -314,205 +155,13 @@
                             "datasourceStates": {
                                 "formBased": {
                                     "layers": {
-                                        "27c98f33-f3f9-4ed2-8372-9b138d0a6de5": {
+                                        "8fd78473-ed5e-4454-be21-9ca537e71036": {
                                             "columnOrder": [
-                                                "b4690374-71c8-447e-b255-b8f2263616e8"
+                                                "d9ac4229-9ffc-4380-8025-7426dceef06e",
+                                                "cf2f13c9-4931-4572-8d75-4659efa36ba3"
                                             ],
                                             "columns": {
-                                                "b4690374-71c8-447e-b255-b8f2263616e8": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "isBucketed": false,
-                                                    "label": "Total Sign Out",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "emptyAsNull": true,
-                                                        "format": {
-                                                            "id": "number",
-                                                            "params": {
-                                                                "decimals": 0
-                                                            }
-                                                        }
-                                                    },
-                                                    "sourceField": "___records___"
-                                                }
-                                            },
-                                            "ignoreGlobalFilters": false,
-                                            "incompleteColumns": {},
-                                            "sampling": 1
-                                        }
-                                    }
-                                },
-                                "indexpattern": {
-                                    "layers": {}
-                                },
-                                "textBased": {
-                                    "layers": {}
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "field": "data_stream.dataset",
-                                        "index": "2a48737e-59cf-4880-bbf5-70fa0cc33812",
-                                        "key": "data_stream.dataset",
-                                        "negate": false,
-                                        "params": {
-                                            "query": "zoom.activity"
-                                        },
-                                        "type": "phrase"
-                                    },
-                                    "query": {
-                                        "match_phrase": {
-                                            "data_stream.dataset": "zoom.activity"
-                                        }
-                                    }
-                                },
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "field": "event.action",
-                                        "index": "98678adf-0f09-4810-a272-d26b4d433fa2",
-                                        "key": "event.action",
-                                        "negate": false,
-                                        "params": {
-                                            "query": "sign-out"
-                                        },
-                                        "type": "phrase"
-                                    },
-                                    "query": {
-                                        "match_phrase": {
-                                            "event.action": "sign-out"
-                                        }
-                                    }
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "27c98f33-f3f9-4ed2-8372-9b138d0a6de5",
-                                "layerType": "data",
-                                "metricAccessor": "b4690374-71c8-447e-b255-b8f2263616e8",
-                                "secondaryTrend": {
-                                    "type": "none"
-                                }
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "field": "data_stream.dataset",
-                                "index": "2a48737e-59cf-4880-bbf5-70fa0cc33812",
-                                "key": "data_stream.dataset",
-                                "negate": false,
-                                "params": {
-                                    "query": "zoom.activity"
-                                },
-                                "type": "phrase"
-                            },
-                            "query": {
-                                "match_phrase": {
-                                    "data_stream.dataset": "zoom.activity"
-                                }
-                            }
-                        },
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "field": "event.action",
-                                "index": "98678adf-0f09-4810-a272-d26b4d433fa2",
-                                "key": "event.action",
-                                "negate": false,
-                                "params": {
-                                    "query": "sign-out"
-                                },
-                                "type": "phrase"
-                            },
-                            "query": {
-                                "match_phrase": {
-                                    "event.action": "sign-out"
-                                }
-                            }
-                        }
-                    ],
-                    "hidePanelTitles": true,
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false,
-                    "title": "Total Sign Out"
-                },
-                "gridData": {
-                    "h": 6,
-                    "i": "c07a00af-012e-4804-9e19-fb596bf105fb",
-                    "w": 19,
-                    "x": 29,
-                    "y": 0
-                },
-                "panelIndex": "c07a00af-012e-4804-9e19-fb596bf105fb",
-                "type": "lens"
-            },
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-90a95ce9-7d3d-4dac-a55a-a565d116f655",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "a81a0430-465f-4346-a7a2-7bdc78053f46",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "90a95ce9-7d3d-4dac-a55a-a565d116f655": {
-                                            "columnOrder": [
-                                                "d497ef74-547c-461b-942f-90723ab6daa6",
-                                                "b3448b77-0c90-42fd-85c3-5d1703b03215"
-                                            ],
-                                            "columns": {
-                                                "b3448b77-0c90-42fd-85c3-5d1703b03215": {
+                                                "cf2f13c9-4931-4572-8d75-4659efa36ba3": {
                                                     "customLabel": true,
                                                     "dataType": "number",
                                                     "isBucketed": false,
@@ -529,7 +178,7 @@
                                                     },
                                                     "sourceField": "___records___"
                                                 },
-                                                "d497ef74-547c-461b-942f-90723ab6daa6": {
+                                                "d9ac4229-9ffc-4380-8025-7426dceef06e": {
                                                     "dataType": "date",
                                                     "isBucketed": true,
                                                     "label": "@timestamp",
@@ -564,17 +213,17 @@
                                         "alias": null,
                                         "disabled": false,
                                         "field": "data_stream.dataset",
-                                        "index": "a81a0430-465f-4346-a7a2-7bdc78053f46",
+                                        "index": "9db2cefd-29c5-4c51-a411-34f24ea66a13",
                                         "key": "data_stream.dataset",
                                         "negate": false,
                                         "params": {
-                                            "query": "zoom.activity"
+                                            "query": "zoom.operation"
                                         },
                                         "type": "phrase"
                                     },
                                     "query": {
                                         "match_phrase": {
-                                            "data_stream.dataset": "zoom.activity"
+                                            "data_stream.dataset": "zoom.operation"
                                         }
                                     }
                                 }
@@ -585,10 +234,26 @@
                                 "query": ""
                             },
                             "visualization": {
+                                "axisTitlesVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "fittingFunction": "Linear",
+                                "gridlinesVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "labelsOrientation": {
+                                    "x": 0,
+                                    "yLeft": 0,
+                                    "yRight": 0
+                                },
                                 "layers": [
                                     {
                                         "accessors": [
-                                            "b3448b77-0c90-42fd-85c3-5d1703b03215"
+                                            "cf2f13c9-4931-4572-8d75-4659efa36ba3"
                                         ],
                                         "colorMapping": {
                                             "assignments": [],
@@ -610,12 +275,10 @@
                                                 }
                                             ]
                                         },
-                                        "layerId": "90a95ce9-7d3d-4dac-a55a-a565d116f655",
+                                        "layerId": "8fd78473-ed5e-4454-be21-9ca537e71036",
                                         "layerType": "data",
-                                        "position": "top",
                                         "seriesType": "line",
-                                        "showGridlines": false,
-                                        "xAccessor": "d497ef74-547c-461b-942f-90723ab6daa6"
+                                        "xAccessor": "d9ac4229-9ffc-4380-8025-7426dceef06e"
                                     }
                                 ],
                                 "legend": {
@@ -625,7 +288,11 @@
                                     "showSingleSeries": false
                                 },
                                 "preferredSeriesType": "line",
-                                "title": "Empty XY chart",
+                                "tickLabelsVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
                                 "valueLabels": "hide"
                             }
                         },
@@ -647,17 +314,17 @@
                                 "alias": null,
                                 "disabled": false,
                                 "field": "data_stream.dataset",
-                                "index": "a81a0430-465f-4346-a7a2-7bdc78053f46",
+                                "index": "9db2cefd-29c5-4c51-a411-34f24ea66a13",
                                 "key": "data_stream.dataset",
                                 "negate": false,
                                 "params": {
-                                    "query": "zoom.activity"
+                                    "query": "zoom.operation"
                                 },
                                 "type": "phrase"
                             },
                             "query": {
                                 "match_phrase": {
-                                    "data_stream.dataset": "zoom.activity"
+                                    "data_stream.dataset": "zoom.operation"
                                 }
                             }
                         }
@@ -669,16 +336,16 @@
                     "syncColors": false,
                     "syncCursor": true,
                     "syncTooltips": false,
-                    "title": "Activity over Time"
+                    "title": "Operation over Time"
                 },
                 "gridData": {
-                    "h": 14,
-                    "i": "56e0b837-8751-4c6c-bf1f-557e702e468a",
-                    "w": 38,
-                    "x": 10,
-                    "y": 6
+                    "h": 12,
+                    "i": "1b327f50-2290-4aa7-8a84-216ca7fd1c3e",
+                    "w": 39,
+                    "x": 9,
+                    "y": 13
                 },
-                "panelIndex": "56e0b837-8751-4c6c-bf1f-557e702e468a",
+                "panelIndex": "1b327f50-2290-4aa7-8a84-216ca7fd1c3e",
                 "type": "lens"
             },
             {
@@ -689,62 +356,449 @@
                             "events": []
                         }
                     },
-                    "savedObjectId": "zoom-e9178ff9-be70-4161-8e4d-9ec7a0d171b5",
-                    "title": "Activity Essential Details"
+                    "savedObjectId": "7735ceba-c6a0-430f-ac79-57c0dc63c201",
+                    "title": "Operation Essential Details"
                 },
                 "gridData": {
-                    "h": 17,
-                    "i": "48d0042f-e909-40d2-92c1-56902457f498",
+                    "h": 15,
+                    "i": "3226eac2-318b-44b5-9538-3c690f2c4206",
                     "w": 48,
                     "x": 0,
-                    "y": 20
+                    "y": 25
                 },
-                "panelIndex": "48d0042f-e909-40d2-92c1-56902457f498",
-                "panelRefName": "panel_48d0042f-e909-40d2-92c1-56902457f498",
+                "panelIndex": "3226eac2-318b-44b5-9538-3c690f2c4206",
+                "panelRefName": "panel_3226eac2-318b-44b5-9538-3c690f2c4206",
                 "type": "search"
             },
             {
                 "embeddableConfig": {
                     "attributes": {
-                        "layout": "vertical",
-                        "links": [
+                        "references": [
                             {
-                                "destinationRefName": "link_3711fea8-e2a2-44b7-9c54-61daaf5f090c_dashboard",
-                                "id": "3711fea8-e2a2-44b7-9c54-61daaf5f090c",
-                                "label": "Activity Overview",
-                                "options": {
-                                    "openInNewTab": false,
-                                    "useCurrentDateRange": false,
-                                    "useCurrentFilters": false
-                                },
-                                "order": 0,
-                                "type": "dashboardLink"
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-8fd78473-ed5e-4454-be21-9ca537e71036",
+                                "type": "index-pattern"
                             },
                             {
-                                "destinationRefName": "link_0d6c025c-8394-4fa1-bdf1-550d183e8a6b_dashboard",
-                                "id": "0d6c025c-8394-4fa1-bdf1-550d183e8a6b",
-                                "label": "Operation Overview",
-                                "options": {
-                                    "openInNewTab": false,
-                                    "useCurrentDateRange": false,
-                                    "useCurrentFilters": false
-                                },
-                                "order": 1,
-                                "type": "dashboardLink"
+                                "id": "logs-*",
+                                "name": "9ee99f7c-e8bd-4983-b6e7-a91e12601544",
+                                "type": "index-pattern"
                             }
-                        ]
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "8fd78473-ed5e-4454-be21-9ca537e71036": {
+                                            "columnOrder": [
+                                                "50b0150f-3be0-4005-bb4b-377d8a2409a2",
+                                                "84fa27ae-d576-44ad-84b2-f8eabc99c926"
+                                            ],
+                                            "columns": {
+                                                "50b0150f-3be0-4005-bb4b-377d8a2409a2": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Category",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "exclude": [],
+                                                        "excludeIsRegex": false,
+                                                        "include": [],
+                                                        "includeIsRegex": false,
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "84fa27ae-d576-44ad-84b2-f8eabc99c926",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 5
+                                                    },
+                                                    "sourceField": "zoom.operation.category_type"
+                                                },
+                                                "84fa27ae-d576-44ad-84b2-f8eabc99c926": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": true,
+                                                        "format": {
+                                                            "id": "number",
+                                                            "params": {
+                                                                "decimals": 0
+                                                            }
+                                                        }
+                                                    },
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "9ee99f7c-e8bd-4983-b6e7-a91e12601544",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "zoom.operation"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "zoom.operation"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "categoryDisplay": "default",
+                                        "colorMapping": {
+                                            "assignments": [],
+                                            "colorMode": {
+                                                "type": "categorical"
+                                            },
+                                            "paletteId": "default",
+                                            "specialAssignments": [
+                                                {
+                                                    "color": {
+                                                        "type": "loop"
+                                                    },
+                                                    "rules": [
+                                                        {
+                                                            "type": "other"
+                                                        }
+                                                    ],
+                                                    "touched": false
+                                                }
+                                            ]
+                                        },
+                                        "layerId": "8fd78473-ed5e-4454-be21-9ca537e71036",
+                                        "layerType": "data",
+                                        "legendDisplay": "show",
+                                        "metrics": [
+                                            "84fa27ae-d576-44ad-84b2-f8eabc99c926"
+                                        ],
+                                        "nestedLegend": false,
+                                        "numberDisplay": "percent",
+                                        "primaryGroups": [
+                                            "50b0150f-3be0-4005-bb4b-377d8a2409a2"
+                                        ],
+                                        "truncateLegend": false
+                                    }
+                                ],
+                                "shape": "pie"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsPie"
                     },
-                    "title": "Navigation"
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "9ee99f7c-e8bd-4983-b6e7-a91e12601544",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "zoom.operation"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "zoom.operation"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false,
+                    "title": "Operation by Category Type"
                 },
                 "gridData": {
-                    "h": 5,
-                    "i": "fe010efb-7fa0-484f-afca-18ba31bc534d",
-                    "w": 10,
-                    "x": 0,
+                    "h": 13,
+                    "i": "237f1a31-039d-428c-88b0-9a3077ce1a5c",
+                    "w": 14,
+                    "x": 9,
                     "y": 0
                 },
-                "panelIndex": "fe010efb-7fa0-484f-afca-18ba31bc534d",
-                "type": "links"
+                "panelIndex": "237f1a31-039d-428c-88b0-9a3077ce1a5c",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-8fd78473-ed5e-4454-be21-9ca537e71036",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "b05dd69d-a188-4b43-ab5c-15425f9b1cd5",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "8fd78473-ed5e-4454-be21-9ca537e71036": {
+                                            "columnOrder": [
+                                                "2521f510-770d-477f-9cfb-d7801ffae352",
+                                                "cf2f13c9-4931-4572-8d75-4659efa36ba3"
+                                            ],
+                                            "columns": {
+                                                "2521f510-770d-477f-9cfb-d7801ffae352": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Action",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "exclude": [],
+                                                        "excludeIsRegex": false,
+                                                        "include": [],
+                                                        "includeIsRegex": false,
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "cf2f13c9-4931-4572-8d75-4659efa36ba3",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "event.action"
+                                                },
+                                                "cf2f13c9-4931-4572-8d75-4659efa36ba3": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": true,
+                                                        "format": {
+                                                            "id": "number",
+                                                            "params": {
+                                                                "decimals": 0
+                                                            }
+                                                        }
+                                                    },
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "b05dd69d-a188-4b43-ab5c-15425f9b1cd5",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "zoom.operation"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "zoom.operation"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "axisTitlesVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "fittingFunction": "Linear",
+                                "gridlinesVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "labelsOrientation": {
+                                    "x": 0,
+                                    "yLeft": 0,
+                                    "yRight": 0
+                                },
+                                "layers": [
+                                    {
+                                        "accessors": [
+                                            "cf2f13c9-4931-4572-8d75-4659efa36ba3"
+                                        ],
+                                        "colorMapping": {
+                                            "assignments": [],
+                                            "colorMode": {
+                                                "type": "categorical"
+                                            },
+                                            "paletteId": "default",
+                                            "specialAssignments": [
+                                                {
+                                                    "color": {
+                                                        "type": "loop"
+                                                    },
+                                                    "rules": [
+                                                        {
+                                                            "type": "other"
+                                                        }
+                                                    ],
+                                                    "touched": false
+                                                }
+                                            ]
+                                        },
+                                        "layerId": "8fd78473-ed5e-4454-be21-9ca537e71036",
+                                        "layerType": "data",
+                                        "seriesType": "bar_horizontal_stacked",
+                                        "xAccessor": "2521f510-770d-477f-9cfb-d7801ffae352"
+                                    }
+                                ],
+                                "legend": {
+                                    "isVisible": true,
+                                    "position": "right",
+                                    "shouldTruncate": false,
+                                    "showSingleSeries": false
+                                },
+                                "preferredSeriesType": "bar_percentage_stacked",
+                                "tickLabelsVisibilitySettings": {
+                                    "x": true,
+                                    "yLeft": true,
+                                    "yRight": true
+                                },
+                                "valueLabels": "hide"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsXY"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "b05dd69d-a188-4b43-ab5c-15425f9b1cd5",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "zoom.operation"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "zoom.operation"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false,
+                    "title": "Operation by Action"
+                },
+                "gridData": {
+                    "h": 13,
+                    "i": "526f539a-1cbf-4880-845c-c7b1a5e3ca18",
+                    "w": 25,
+                    "x": 23,
+                    "y": 0
+                },
+                "panelIndex": "526f539a-1cbf-4880-845c-c7b1a5e3ca18",
+                "type": "lens"
             },
             {
                 "embeddableConfig": {
@@ -767,7 +821,7 @@
                         "description": "",
                         "params": {
                             "fontSize": 12,
-                            "markdown": "This dashboard provides an overview of sign-in and sign-out activity logs for users under a Zoom account. It features a metric chart showing the total count of sign-in/sign-out users, a line chart tracking this activity over time, and a search session to discover detailed overall activity.\n\n\n[**Integration Page**](/app/integrations/detail/zoom/overview)",
+                            "markdown": "This dashboard provides an overview of operation logs within a Zoom account. It features a pie chart displaying logs by category type, a bar chart breaking down operations by action, a line chart tracking events over time, and a search session to discover detailed operation data.\n\n\n[**Integration Page**](/app/integrations/detail/zoom/overview)",
                             "openLinksInNewTab": false
                         },
                         "title": "",
@@ -777,23 +831,23 @@
                     "title": "Overview"
                 },
                 "gridData": {
-                    "h": 15,
-                    "i": "a90051c9-5d5c-4028-b181-f04c5af93d29",
-                    "w": 10,
+                    "h": 20,
+                    "i": "bac128f3-5a40-473b-aef5-faaff8f36edb",
+                    "w": 9,
                     "x": 0,
                     "y": 5
                 },
-                "panelIndex": "a90051c9-5d5c-4028-b181-f04c5af93d29",
+                "panelIndex": "bac128f3-5a40-473b-aef5-faaff8f36edb",
                 "type": "visualization"
             }
         ],
         "timeRestore": false,
-        "title": "[Logs Zoom] Activity Overview",
+        "title": "[Logs Zoom] Operation Overview",
         "version": 3
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-07-06T07:29:30.073Z",
-    "id": "zoom-e9055606-5d33-4f84-b883-4498c22b6dbc",
+    "created_at": "2026-07-06T07:43:02.209Z",
+    "id": "zoom-33a271ce-059a-4a0a-aa9b-d8615247d5a1",
     "references": [
         {
             "id": "logs-*",
@@ -801,88 +855,63 @@
             "type": "index-pattern"
         },
         {
-            "id": "logs-*",
-            "name": "5872cf31-6b4b-425f-8393-05a3cdb563af:indexpattern-datasource-layer-27c98f33-f3f9-4ed2-8372-9b138d0a6de5",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "5872cf31-6b4b-425f-8393-05a3cdb563af:5b30bd22-da63-4b8b-b7bf-680e1ff01a42",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "5872cf31-6b4b-425f-8393-05a3cdb563af:de73cf18-5e63-4254-a8d4-1d211859163c",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "c07a00af-012e-4804-9e19-fb596bf105fb:indexpattern-datasource-layer-27c98f33-f3f9-4ed2-8372-9b138d0a6de5",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "c07a00af-012e-4804-9e19-fb596bf105fb:2a48737e-59cf-4880-bbf5-70fa0cc33812",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "c07a00af-012e-4804-9e19-fb596bf105fb:98678adf-0f09-4810-a272-d26b4d433fa2",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "56e0b837-8751-4c6c-bf1f-557e702e468a:indexpattern-datasource-layer-90a95ce9-7d3d-4dac-a55a-a565d116f655",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "56e0b837-8751-4c6c-bf1f-557e702e468a:a81a0430-465f-4346-a7a2-7bdc78053f46",
-            "type": "index-pattern"
-        },
-        {
-            "id": "zoom-e9178ff9-be70-4161-8e4d-9ec7a0d171b5",
-            "name": "48d0042f-e909-40d2-92c1-56902457f498:panel_48d0042f-e909-40d2-92c1-56902457f498",
-            "type": "search"
-        },
-        {
-            "id": "zoom-e9178ff9-be70-4161-8e4d-9ec7a0d171b5",
-            "name": "48d0042f-e909-40d2-92c1-56902457f498:panel_48d0042f-e909-40d2-92c1-56902457f498",
-            "type": "search"
-        },
-        {
-            "id": "zoom-e9178ff9-be70-4161-8e4d-9ec7a0d171b5",
-            "name": "48d0042f-e909-40d2-92c1-56902457f498:panel_48d0042f-e909-40d2-92c1-56902457f498",
-            "type": "search"
-        },
-        {
-            "id": "zoom-e9178ff9-be70-4161-8e4d-9ec7a0d171b5",
-            "name": "48d0042f-e909-40d2-92c1-56902457f498:panel_48d0042f-e909-40d2-92c1-56902457f498",
-            "type": "search"
-        },
-        {
-            "id": "zoom-e9178ff9-be70-4161-8e4d-9ec7a0d171b5",
-            "name": "48d0042f-e909-40d2-92c1-56902457f498:panel_48d0042f-e909-40d2-92c1-56902457f498",
-            "type": "search"
-        },
-        {
             "id": "zoom-e9055606-5d33-4f84-b883-4498c22b6dbc",
-            "name": "fe010efb-7fa0-484f-afca-18ba31bc534d:link_3711fea8-e2a2-44b7-9c54-61daaf5f090c_dashboard",
+            "name": "91b0b66c-04d0-42b5-8489-b604d0420a47:link_7029b6a2-4717-4704-9533-dcc620595302_dashboard",
             "type": "dashboard"
         },
         {
             "id": "zoom-33a271ce-059a-4a0a-aa9b-d8615247d5a1",
-            "name": "fe010efb-7fa0-484f-afca-18ba31bc534d:link_0d6c025c-8394-4fa1-bdf1-550d183e8a6b_dashboard",
+            "name": "91b0b66c-04d0-42b5-8489-b604d0420a47:link_b97e0257-2b08-4bac-a3cc-37e110db9abc_dashboard",
             "type": "dashboard"
         },
         {
             "id": "logs-*",
-            "name": "controlGroup_93d82b38-3bad-48d6-9d43-c8359b7bbab3:optionsListDataView",
+            "name": "1b327f50-2290-4aa7-8a84-216ca7fd1c3e:indexpattern-datasource-layer-8fd78473-ed5e-4454-be21-9ca537e71036",
             "type": "index-pattern"
         },
         {
             "id": "logs-*",
-            "name": "controlGroup_42bd5a1a-4910-464c-a891-0de8b20fb8a0:optionsListDataView",
+            "name": "1b327f50-2290-4aa7-8a84-216ca7fd1c3e:9db2cefd-29c5-4c51-a411-34f24ea66a13",
+            "type": "index-pattern"
+        },
+        {
+            "id": "zoom-7735ceba-c6a0-430f-ac79-57c0dc63c201",
+            "name": "3226eac2-318b-44b5-9538-3c690f2c4206:panel_3226eac2-318b-44b5-9538-3c690f2c4206",
+            "type": "search"
+        },
+        {
+            "id": "zoom-7735ceba-c6a0-430f-ac79-57c0dc63c201",
+            "name": "3226eac2-318b-44b5-9538-3c690f2c4206:panel_3226eac2-318b-44b5-9538-3c690f2c4206",
+            "type": "search"
+        },
+        {
+            "id": "logs-*",
+            "name": "237f1a31-039d-428c-88b0-9a3077ce1a5c:indexpattern-datasource-layer-8fd78473-ed5e-4454-be21-9ca537e71036",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "237f1a31-039d-428c-88b0-9a3077ce1a5c:9ee99f7c-e8bd-4983-b6e7-a91e12601544",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "526f539a-1cbf-4880-845c-c7b1a5e3ca18:indexpattern-datasource-layer-8fd78473-ed5e-4454-be21-9ca537e71036",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "526f539a-1cbf-4880-845c-c7b1a5e3ca18:b05dd69d-a188-4b43-ab5c-15425f9b1cd5",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_e3cd4663-61cf-4a5a-8399-65136bb84510:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_18ccabea-b908-4921-9c14-0fedecc59648:optionsListDataView",
             "type": "index-pattern"
         },
         {

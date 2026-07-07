@@ -1,9 +1,9 @@
-title: Activity
+title: Operation
 type: logs
 streams:
   - input: cel
-    title: Activity
-    description: Collect activity logs report of users under a Zoom account via the REST API.
+    title: Operation
+    description: Collect operation logs report of admins and users under a Zoom account via the REST API.
     template_path: cel.yml.hbs
     enabled: false
     vars:
@@ -17,7 +17,7 @@ streams:
       - name: initial_interval
         type: text
         title: Initial Interval
-        description: How far back to pull the Activity logs from Zoom API. Must not exceed six months of available report history. Supported units for this parameter are h/m/s.
+        description: How far back to pull the Operation logs from Zoom API. Must not exceed six months of available report history. Supported units for this parameter are h/m/s.
         required: true
         show_user: true
         default: 720h
@@ -48,7 +48,7 @@ streams:
         type: text
         title: Rate Limit
         description: >-
-          The maximum number of API requests allowed per second. Zoom's `/report/activities` endpoint is a Heavy API, and the per-second and daily request quotas are shared across all Zoom Report data streams and apps on the account. Leave empty to disable client-side rate limiting.
+          The maximum number of API requests allowed per second. Zoom's `/report/operationlogs` endpoint is a Heavy API, and the per-second and daily request quotas are shared across all Zoom Report data streams and apps on the account. Leave empty to disable client-side rate limiting.
         multi: false
         required: false
         show_user: false
@@ -69,7 +69,7 @@ streams:
         show_user: false
         default:
           - forwarded
-          - zoom-activity
+          - zoom-operation
       - name: preserve_original_event
         required: false
         show_user: true
