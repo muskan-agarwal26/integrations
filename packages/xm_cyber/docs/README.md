@@ -1224,31 +1224,31 @@ An example event for `product` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-07-01T15:33:52.609Z",
+    "@timestamp": "2026-07-07T06:52:39.262Z",
     "agent": {
-        "ephemeral_id": "a3795845-fbb9-4b88-aaed-2a8e09ad0848",
-        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
-        "name": "elastic-agent-41139",
+        "ephemeral_id": "80da6520-02cd-4a40-90c7-f5c9abcfe5d3",
+        "id": "b12acc03-96a1-46a1-97d6-35b9c1aa0aec",
+        "name": "elastic-agent-57568",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.product",
-        "namespace": "21831",
+        "namespace": "87473",
         "type": "logs"
     },
     "ecs": {
         "version": "9.3.0"
     },
     "elastic_agent": {
-        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
+        "id": "b12acc03-96a1-46a1-97d6-35b9c1aa0aec",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.product",
-        "ingested": "2026-07-01T15:33:55Z",
+        "ingested": "2026-07-07T06:52:42Z",
         "kind": "event",
         "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"wget\",\"productOperatingSystems\":[\"Linux sles 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },
