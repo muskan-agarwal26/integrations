@@ -7,6 +7,28 @@ streams:
     description: Collect Sign-on logs from Workday.
     template_path: cel.yml.hbs
     vars:
+      - name: url
+        type: text
+        title: Report URL
+        description: 'Full URL of the Workday Custom Report (Reports as a Service / RaaS JSON endpoint). Example: `https://<your-workday-host>.workday.com/ccx/service/customreport2/<tenant>/<report_owner>/<report_name>?format=json`.'
+        multi: false
+        required: true
+        show_user: true
+      - name: username
+        type: text
+        title: Username
+        description: Username for basic authentication against the Workday Custom Report API (usually the Integration System User).
+        multi: false
+        required: true
+        show_user: true
+      - name: password
+        type: password
+        title: Password
+        description: Password for basic authentication against the Workday Custom Report API.
+        multi: false
+        required: true
+        show_user: true
+        secret: true
       - name: interval
         type: text
         title: Interval
