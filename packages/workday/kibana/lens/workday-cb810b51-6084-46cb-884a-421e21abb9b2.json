@@ -1,0 +1,161 @@
+{
+    "attributes": {
+        "description": "",
+        "state": {
+            "adHocDataViews": {},
+            "datasourceStates": {
+                "formBased": {
+                    "currentIndexPatternId": "logs-*",
+                    "layers": {
+                        "bf0d1fd4-4afd-45a6-9a0a-28973d1e8038": {
+                            "columnOrder": [
+                                "f365c27f-6d06-4b4d-af88-7c019e5c9ef9",
+                                "254ca83f-cfea-4386-b20e-a565d7a390cf"
+                            ],
+                            "columns": {
+                                "254ca83f-cfea-4386-b20e-a565d7a390cf": {
+                                    "customLabel": true,
+                                    "dataType": "number",
+                                    "isBucketed": false,
+                                    "label": "Count",
+                                    "operationType": "count",
+                                    "params": {
+                                        "emptyAsNull": false
+                                    },
+                                    "scale": "ratio",
+                                    "sourceField": "___records___"
+                                },
+                                "f365c27f-6d06-4b4d-af88-7c019e5c9ef9": {
+                                    "customLabel": true,
+                                    "dataType": "string",
+                                    "isBucketed": true,
+                                    "label": "Authentication Type",
+                                    "operationType": "terms",
+                                    "params": {
+                                        "exclude": [],
+                                        "excludeIsRegex": false,
+                                        "include": [],
+                                        "includeIsRegex": false,
+                                        "missingBucket": false,
+                                        "orderBy": {
+                                            "columnId": "254ca83f-cfea-4386-b20e-a565d7a390cf",
+                                            "type": "column"
+                                        },
+                                        "orderDirection": "desc",
+                                        "otherBucket": true,
+                                        "parentFormat": {
+                                            "id": "terms"
+                                        },
+                                        "size": 5
+                                    },
+                                    "scale": "ordinal",
+                                    "sourceField": "workday.sign_on.Authentication_Type"
+                                }
+                            },
+                            "ignoreGlobalFilters": false,
+                            "incompleteColumns": {},
+                            "indexPatternId": "logs-*",
+                            "sampling": 1
+                        }
+                    }
+                },
+                "indexpattern": {
+                    "currentIndexPatternId": "logs-*",
+                    "layers": {}
+                },
+                "textBased": {
+                    "indexPatternRefs": [
+                        {
+                            "id": "logs-*",
+                            "timeField": "@timestamp",
+                            "title": "logs-*"
+                        }
+                    ],
+                    "layers": {}
+                }
+            },
+            "filters": [
+                {
+                    "$state": {
+                        "store": "appState"
+                    },
+                    "meta": {
+                        "alias": null,
+                        "disabled": false,
+                        "field": "data_stream.dataset",
+                        "index": "logs-*",
+                        "key": "data_stream.dataset",
+                        "negate": false,
+                        "params": {
+                            "query": "workday.sign_on"
+                        },
+                        "type": "phrase"
+                    },
+                    "query": {
+                        "match_phrase": {
+                            "data_stream.dataset": "workday.sign_on"
+                        }
+                    }
+                }
+            ],
+            "internalReferences": [],
+            "query": {
+                "language": "kuery",
+                "query": ""
+            },
+            "visualization": {
+                "layers": [
+                    {
+                        "categoryDisplay": "default",
+                        "colorMapping": {
+                            "assignments": [],
+                            "colorMode": {
+                                "type": "categorical"
+                            },
+                            "paletteId": "eui_amsterdam_color_blind",
+                            "specialAssignments": [
+                                {
+                                    "color": {
+                                        "type": "loop"
+                                    },
+                                    "rule": {
+                                        "type": "other"
+                                    },
+                                    "touched": false
+                                }
+                            ]
+                        },
+                        "layerId": "bf0d1fd4-4afd-45a6-9a0a-28973d1e8038",
+                        "layerType": "data",
+                        "legendDisplay": "show",
+                        "metrics": [
+                            "254ca83f-cfea-4386-b20e-a565d7a390cf"
+                        ],
+                        "nestedLegend": false,
+                        "numberDisplay": "percent",
+                        "primaryGroups": [
+                            "f365c27f-6d06-4b4d-af88-7c019e5c9ef9"
+                        ],
+                        "truncateLegend": false
+                    }
+                ],
+                "shape": "pie"
+            }
+        },
+        "title": "Distribution of Authentication Types",
+        "visualizationType": "lnsPie"
+    },
+    "coreMigrationVersion": "8.8.0",
+    "created_at": "2026-07-07T08:12:18.602Z",
+    "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
+    "id": "workday-cb810b51-6084-46cb-884a-421e21abb9b2",
+    "references": [
+        {
+            "id": "logs-*",
+            "name": "indexpattern-datasource-layer-bf0d1fd4-4afd-45a6-9a0a-28973d1e8038",
+            "type": "index-pattern"
+        }
+    ],
+    "type": "lens",
+    "typeMigrationVersion": "8.9.0"
+}

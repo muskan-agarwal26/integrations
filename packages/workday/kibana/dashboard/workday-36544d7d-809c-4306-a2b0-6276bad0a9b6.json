@@ -1,0 +1,629 @@
+{
+    "attributes": {
+        "controlGroupInput": {
+            "chainingSystem": "HIERARCHICAL",
+            "controlStyle": "oneLine",
+            "ignoreParentSettingsJSON": {
+                "ignoreFilters": false,
+                "ignoreQuery": false,
+                "ignoreTimerange": false,
+                "ignoreValidations": false
+            },
+            "panelsJSON": {
+                "0c598211-5777-402f-89ae-2f05488a5f0d": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "fieldName": "workday.sign_on.Authentication_Type",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "Authentication Type"
+                    },
+                    "grow": false,
+                    "order": 0,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                },
+                "c2e0d9b7-f9cf-4fd8-aa16-8f6eda164975": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "fieldName": "workday.sign_on.Device_is_Trusted",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "Device Trusted"
+                    },
+                    "grow": false,
+                    "order": 1,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                },
+                "edec393f-95df-4e4e-ae38-c0497d1fe869": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "fieldName": "workday.sign_on.Request_Originator",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "Request Originator"
+                    },
+                    "grow": false,
+                    "order": 2,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                }
+            },
+            "showApplySelections": false
+        },
+        "description": "",
+        "kibanaSavedObjectMeta": {
+            "searchSourceJSON": {
+                "filter": [
+                    {
+                        "$state": {
+                            "store": "appState"
+                        },
+                        "meta": {
+                            "alias": null,
+                            "disabled": false,
+                            "field": "data_stream.dataset",
+                            "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+                            "key": "data_stream.dataset",
+                            "negate": false,
+                            "params": {
+                                "query": "workday.sign_on"
+                            },
+                            "type": "phrase"
+                        },
+                        "query": {
+                            "match_phrase": {
+                                "data_stream.dataset": "workday.sign_on"
+                            }
+                        }
+                    }
+                ],
+                "query": {
+                    "language": "kuery",
+                    "query": ""
+                }
+            }
+        },
+        "optionsJSON": {
+            "hidePanelTitles": false,
+            "syncColors": false,
+            "syncCursor": true,
+            "syncTooltips": false,
+            "useMargins": true
+        },
+        "panelsJSON": [
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-ed94c77f-d603-4fbc-8185-e9fcdaf73c13",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "c7c491a9-307c-4f3b-9884-dd49c9aae83b",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "ed94c77f-d603-4fbc-8185-e9fcdaf73c13": {
+                                            "columnOrder": [
+                                                "f12e75b9-e798-4f81-8baf-575f59df4ed8"
+                                            ],
+                                            "columns": {
+                                                "f12e75b9-e798-4f81-8baf-575f59df4ed8": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "filter": {
+                                                        "language": "kuery",
+                                                        "query": "user.name: * "
+                                                    },
+                                                    "isBucketed": false,
+                                                    "label": "Total Users",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "c7c491a9-307c-4f3b-9884-dd49c9aae83b",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "workday.sign_on"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "workday.sign_on"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "ed94c77f-d603-4fbc-8185-e9fcdaf73c13",
+                                "layerType": "data",
+                                "metricAccessor": "f12e75b9-e798-4f81-8baf-575f59df4ed8"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "workday.sign_on"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "workday.sign_on"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "61edd668-677d-4a6d-bad5-1dd933ce7f91",
+                    "w": 6,
+                    "x": 10,
+                    "y": 0
+                },
+                "panelIndex": "61edd668-677d-4a6d-bad5-1dd933ce7f91",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "savedVis": {
+                        "data": {
+                            "aggs": [],
+                            "searchSource": {
+                                "filter": [],
+                                "query": {
+                                    "language": "kuery",
+                                    "query": ""
+                                }
+                            }
+                        },
+                        "description": "",
+                        "id": "",
+                        "params": {
+                            "fontSize": 12,
+                            "markdown": "### Overview\n\nThe Workday Sign-On dashboard provides security and IT teams visibility into authentication activity from the Workday Sign-On custom report, covering sign-on volume, authentication methods, and failure patterns.\n\nThe Total Users tile shows authenticated account scope, while Sign-ons by Authentication Type and Distribution of Authentication Types break down usage across SAML, OAuth 2.0, Trusted, Username/Password, and ID Token.\n\nTop Source IPs surfaces active originating addresses for investigation, Top SAML Identity Providers highlights federated sign-in sources, and the Failure Breakdown table helps teams quickly triage authentication failures.\n\n[**Integration Page**](https://127.0.0.1:5601/app/integrations/detail/workday-0.1.0/overview)\n",
+                            "openLinksInNewTab": false
+                        },
+                        "title": "",
+                        "type": "markdown",
+                        "uiState": {}
+                    }
+                },
+                "gridData": {
+                    "h": 26,
+                    "i": "818c4437-a43b-42fa-b984-cffc555904db",
+                    "w": 10,
+                    "x": 0,
+                    "y": 0
+                },
+                "panelIndex": "818c4437-a43b-42fa-b984-cffc555904db",
+                "type": "visualization"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "workday.sign_on"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "workday.sign_on"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "77796dc3-f59e-4291-a454-4db7eb336fb4",
+                    "w": 32,
+                    "x": 16,
+                    "y": 0
+                },
+                "panelIndex": "77796dc3-f59e-4291-a454-4db7eb336fb4",
+                "panelRefName": "panel_77796dc3-f59e-4291-a454-4db7eb336fb4",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "workday.sign_on"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "workday.sign_on"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "cb16c66d-7ceb-40e2-8def-65f2e4fb8092",
+                    "w": 19,
+                    "x": 10,
+                    "y": 8
+                },
+                "panelIndex": "cb16c66d-7ceb-40e2-8def-65f2e4fb8092",
+                "panelRefName": "panel_cb16c66d-7ceb-40e2-8def-65f2e4fb8092",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "workday.sign_on"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "workday.sign_on"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "c4a5839f-a296-4b23-840f-f0533d0d1bc7",
+                    "w": 18,
+                    "x": 29,
+                    "y": 8
+                },
+                "panelIndex": "c4a5839f-a296-4b23-840f-f0533d0d1bc7",
+                "panelRefName": "panel_c4a5839f-a296-4b23-840f-f0533d0d1bc7",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 9,
+                    "i": "49191d51-d97f-423b-9ebb-4892ee5a2e71",
+                    "w": 19,
+                    "x": 10,
+                    "y": 16
+                },
+                "panelIndex": "49191d51-d97f-423b-9ebb-4892ee5a2e71",
+                "panelRefName": "panel_49191d51-d97f-423b-9ebb-4892ee5a2e71",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "workday.sign_on"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "workday.sign_on"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 9,
+                    "i": "110a1476-2475-4198-9c9b-25c6c52fd614",
+                    "w": 19,
+                    "x": 29,
+                    "y": 16
+                },
+                "panelIndex": "110a1476-2475-4198-9c9b-25c6c52fd614",
+                "panelRefName": "panel_110a1476-2475-4198-9c9b-25c6c52fd614",
+                "type": "lens"
+            }
+        ],
+        "timeRestore": false,
+        "title": "[Logs Workday] sign_on",
+        "version": 3
+    },
+    "coreMigrationVersion": "8.8.0",
+    "created_at": "2026-07-07T08:47:49.589Z",
+    "id": "workday-36544d7d-809c-4306-a2b0-6276bad0a9b6",
+    "references": [
+        {
+            "id": "logs-*",
+            "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+            "type": "index-pattern"
+        },
+        {
+            "id": "workday-469eeddd-edd5-4fc2-bc6c-3d8852787462",
+            "name": "77796dc3-f59e-4291-a454-4db7eb336fb4:panel_77796dc3-f59e-4291-a454-4db7eb336fb4",
+            "type": "lens"
+        },
+        {
+            "id": "workday-cb810b51-6084-46cb-884a-421e21abb9b2",
+            "name": "cb16c66d-7ceb-40e2-8def-65f2e4fb8092:panel_cb16c66d-7ceb-40e2-8def-65f2e4fb8092",
+            "type": "lens"
+        },
+        {
+            "id": "workday-c56741c2-878a-4358-9379-8772134cedac",
+            "name": "c4a5839f-a296-4b23-840f-f0533d0d1bc7:panel_c4a5839f-a296-4b23-840f-f0533d0d1bc7",
+            "type": "lens"
+        },
+        {
+            "id": "workday-06b649c9-4efb-4329-a578-000c8839029a",
+            "name": "49191d51-d97f-423b-9ebb-4892ee5a2e71:panel_49191d51-d97f-423b-9ebb-4892ee5a2e71",
+            "type": "lens"
+        },
+        {
+            "id": "workday-20664743-d447-4e3b-bab4-bc65de43a40c",
+            "name": "110a1476-2475-4198-9c9b-25c6c52fd614:panel_110a1476-2475-4198-9c9b-25c6c52fd614",
+            "type": "lens"
+        },
+        {
+            "id": "logs-*",
+            "name": "61edd668-677d-4a6d-bad5-1dd933ce7f91:indexpattern-datasource-layer-ed94c77f-d603-4fbc-8185-e9fcdaf73c13",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "61edd668-677d-4a6d-bad5-1dd933ce7f91:c7c491a9-307c-4f3b-9884-dd49c9aae83b",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "77796dc3-f59e-4291-a454-4db7eb336fb4:indexpattern-datasource-layer-5cbeccd0-6531-4711-9804-e70d4fae58c3",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "77796dc3-f59e-4291-a454-4db7eb336fb4:4012a977-cb0d-4f6e-84d1-e0ef45527f65",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "cb16c66d-7ceb-40e2-8def-65f2e4fb8092:indexpattern-datasource-layer-bf0d1fd4-4afd-45a6-9a0a-28973d1e8038",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "c4a5839f-a296-4b23-840f-f0533d0d1bc7:indexpattern-datasource-layer-c860a377-5c00-4d60-a715-60984b9dbdcf",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "c4a5839f-a296-4b23-840f-f0533d0d1bc7:8201a6d7-8b14-4c1d-b6e5-f9b2e1c8328c",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "49191d51-d97f-423b-9ebb-4892ee5a2e71:indexpattern-datasource-layer-5605db3e-28cb-4bc2-a001-d3b89dd54ba2",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "110a1476-2475-4198-9c9b-25c6c52fd614:indexpattern-datasource-layer-5749a443-ee17-4a72-b728-b44e73c7c30e",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "110a1476-2475-4198-9c9b-25c6c52fd614:d57b06b9-2c09-4076-9e64-ace7dc90e07e",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_0c598211-5777-402f-89ae-2f05488a5f0d:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_c2e0d9b7-f9cf-4fd8-aa16-8f6eda164975:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_edec393f-95df-4e4e-ae38-c0497d1fe869:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+            "type": "index-pattern"
+        }
+    ],
+    "type": "dashboard",
+    "typeMigrationVersion": "10.2.0"
+}

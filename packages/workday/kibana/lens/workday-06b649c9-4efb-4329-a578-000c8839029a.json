@@ -1,0 +1,110 @@
+{
+    "attributes": {
+        "description": "",
+        "state": {
+            "adHocDataViews": {},
+            "datasourceStates": {
+                "formBased": {
+                    "layers": {
+                        "5605db3e-28cb-4bc2-a001-d3b89dd54ba2": {
+                            "columnOrder": [
+                                "192badc3-4529-4512-bec5-5325ede95dcb",
+                                "0593f0ea-189b-41a4-bf8e-da409a763be5"
+                            ],
+                            "columns": {
+                                "0593f0ea-189b-41a4-bf8e-da409a763be5": {
+                                    "customLabel": true,
+                                    "dataType": "number",
+                                    "filter": {
+                                        "language": "kuery",
+                                        "query": ""
+                                    },
+                                    "isBucketed": false,
+                                    "label": "Count",
+                                    "operationType": "count",
+                                    "params": {
+                                        "emptyAsNull": false
+                                    },
+                                    "scale": "ratio",
+                                    "sourceField": "___records___"
+                                },
+                                "192badc3-4529-4512-bec5-5325ede95dcb": {
+                                    "customLabel": true,
+                                    "dataType": "ip",
+                                    "isBucketed": true,
+                                    "label": "Source IP",
+                                    "operationType": "terms",
+                                    "params": {
+                                        "exclude": [],
+                                        "excludeIsRegex": false,
+                                        "include": [],
+                                        "includeIsRegex": false,
+                                        "missingBucket": false,
+                                        "orderBy": {
+                                            "columnId": "0593f0ea-189b-41a4-bf8e-da409a763be5",
+                                            "type": "column"
+                                        },
+                                        "orderDirection": "desc",
+                                        "otherBucket": false,
+                                        "parentFormat": {
+                                            "id": "terms"
+                                        },
+                                        "size": 10
+                                    },
+                                    "scale": "ordinal",
+                                    "sourceField": "source.ip"
+                                }
+                            },
+                            "ignoreGlobalFilters": false,
+                            "incompleteColumns": {},
+                            "sampling": 1
+                        }
+                    }
+                },
+                "indexpattern": {
+                    "layers": {}
+                },
+                "textBased": {
+                    "layers": {}
+                }
+            },
+            "filters": [],
+            "internalReferences": [],
+            "query": {
+                "language": "kuery",
+                "query": ""
+            },
+            "visualization": {
+                "columns": [
+                    {
+                        "columnId": "192badc3-4529-4512-bec5-5325ede95dcb",
+                        "isMetric": false,
+                        "isTransposed": false
+                    },
+                    {
+                        "columnId": "0593f0ea-189b-41a4-bf8e-da409a763be5",
+                        "isMetric": true,
+                        "isTransposed": false
+                    }
+                ],
+                "layerId": "5605db3e-28cb-4bc2-a001-d3b89dd54ba2",
+                "layerType": "data"
+            }
+        },
+        "title": "Top Source IPs",
+        "visualizationType": "lnsDatatable"
+    },
+    "coreMigrationVersion": "8.8.0",
+    "created_at": "2026-07-07T08:09:07.046Z",
+    "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
+    "id": "workday-06b649c9-4efb-4329-a578-000c8839029a",
+    "references": [
+        {
+            "id": "logs-*",
+            "name": "indexpattern-datasource-layer-5605db3e-28cb-4bc2-a001-d3b89dd54ba2",
+            "type": "index-pattern"
+        }
+    ],
+    "type": "lens",
+    "typeMigrationVersion": "8.9.0"
+}

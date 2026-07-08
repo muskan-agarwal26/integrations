@@ -1,0 +1,166 @@
+{
+    "attributes": {
+        "description": "",
+        "state": {
+            "adHocDataViews": {},
+            "datasourceStates": {
+                "formBased": {
+                    "layers": {
+                        "5749a443-ee17-4a72-b728-b44e73c7c30e": {
+                            "columnOrder": [
+                                "d59fbc38-11f8-40ad-83b0-de3a72c9efa7",
+                                "9feeb0d2-2a25-4c9d-96ef-e97477951955",
+                                "dd930aa7-7490-44d9-94cf-19f8dec084c9"
+                            ],
+                            "columns": {
+                                "9feeb0d2-2a25-4c9d-96ef-e97477951955": {
+                                    "customLabel": true,
+                                    "dataType": "string",
+                                    "isBucketed": true,
+                                    "label": "Authentication Type",
+                                    "operationType": "terms",
+                                    "params": {
+                                        "exclude": [],
+                                        "excludeIsRegex": false,
+                                        "include": [],
+                                        "includeIsRegex": false,
+                                        "missingBucket": false,
+                                        "orderBy": {
+                                            "columnId": "dd930aa7-7490-44d9-94cf-19f8dec084c9",
+                                            "type": "column"
+                                        },
+                                        "orderDirection": "desc",
+                                        "otherBucket": false,
+                                        "parentFormat": {
+                                            "id": "terms"
+                                        },
+                                        "size": 10
+                                    },
+                                    "scale": "ordinal",
+                                    "sourceField": "workday.sign_on.Authentication_Type"
+                                },
+                                "d59fbc38-11f8-40ad-83b0-de3a72c9efa7": {
+                                    "customLabel": true,
+                                    "dataType": "string",
+                                    "isBucketed": true,
+                                    "label": "Authentication Failure Message",
+                                    "operationType": "terms",
+                                    "params": {
+                                        "exclude": [],
+                                        "excludeIsRegex": false,
+                                        "include": [],
+                                        "includeIsRegex": false,
+                                        "missingBucket": false,
+                                        "orderBy": {
+                                            "columnId": "dd930aa7-7490-44d9-94cf-19f8dec084c9",
+                                            "type": "column"
+                                        },
+                                        "orderDirection": "desc",
+                                        "otherBucket": false,
+                                        "parentFormat": {
+                                            "id": "terms"
+                                        },
+                                        "size": 10
+                                    },
+                                    "scale": "ordinal",
+                                    "sourceField": "event.reason"
+                                },
+                                "dd930aa7-7490-44d9-94cf-19f8dec084c9": {
+                                    "customLabel": true,
+                                    "dataType": "number",
+                                    "isBucketed": false,
+                                    "label": "Count",
+                                    "operationType": "count",
+                                    "params": {
+                                        "emptyAsNull": false
+                                    },
+                                    "scale": "ratio",
+                                    "sourceField": "___records___"
+                                }
+                            },
+                            "ignoreGlobalFilters": false,
+                            "incompleteColumns": {},
+                            "sampling": 1
+                        }
+                    }
+                },
+                "indexpattern": {
+                    "layers": {}
+                },
+                "textBased": {
+                    "layers": {}
+                }
+            },
+            "filters": [
+                {
+                    "$state": {
+                        "store": "appState"
+                    },
+                    "meta": {
+                        "alias": null,
+                        "disabled": false,
+                        "field": "data_stream.dataset",
+                        "index": "d57b06b9-2c09-4076-9e64-ace7dc90e07e",
+                        "key": "data_stream.dataset",
+                        "negate": false,
+                        "params": {
+                            "query": "workday.sign_on"
+                        },
+                        "type": "phrase"
+                    },
+                    "query": {
+                        "match_phrase": {
+                            "data_stream.dataset": "workday.sign_on"
+                        }
+                    }
+                }
+            ],
+            "internalReferences": [],
+            "query": {
+                "language": "kuery",
+                "query": ""
+            },
+            "visualization": {
+                "columns": [
+                    {
+                        "columnId": "d59fbc38-11f8-40ad-83b0-de3a72c9efa7",
+                        "isMetric": false,
+                        "isTransposed": false
+                    },
+                    {
+                        "columnId": "9feeb0d2-2a25-4c9d-96ef-e97477951955",
+                        "isMetric": false,
+                        "isTransposed": false
+                    },
+                    {
+                        "columnId": "dd930aa7-7490-44d9-94cf-19f8dec084c9",
+                        "isMetric": true,
+                        "isTransposed": false
+                    }
+                ],
+                "layerId": "5749a443-ee17-4a72-b728-b44e73c7c30e",
+                "layerType": "data"
+            }
+        },
+        "title": "Failure Breakdown",
+        "visualizationType": "lnsDatatable"
+    },
+    "coreMigrationVersion": "8.8.0",
+    "created_at": "2026-07-07T08:17:44.153Z",
+    "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
+    "id": "workday-20664743-d447-4e3b-bab4-bc65de43a40c",
+    "references": [
+        {
+            "id": "logs-*",
+            "name": "indexpattern-datasource-layer-5749a443-ee17-4a72-b728-b44e73c7c30e",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "d57b06b9-2c09-4076-9e64-ace7dc90e07e",
+            "type": "index-pattern"
+        }
+    ],
+    "type": "lens",
+    "typeMigrationVersion": "8.9.0"
+}
