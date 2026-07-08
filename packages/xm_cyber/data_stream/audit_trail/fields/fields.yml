@@ -3,10 +3,10 @@
   fields:
     - name: _id
       type: keyword
-      description: XM Cyber's unique audit record identifier. Preserved when the `preserve_duplicate_custom_fields` tag is set; otherwise mapped to ECS `event.id` and removed from this namespace.
+      description: XM Cyber's unique audit record identifier. Mapped to ECS `event.id`.
     - name: timestamp
       type: date
-      description: Vendor event timestamp. Preserved when the `preserve_duplicate_custom_fields` tag is set; otherwise mapped to ECS `@timestamp` and removed from this namespace.
+      description: Vendor event timestamp. Mapped to ECS `@timestamp`.
     - name: object_type
       type: keyword
       description: The type of object affected by the action (for example, Policy, User, Scenario).

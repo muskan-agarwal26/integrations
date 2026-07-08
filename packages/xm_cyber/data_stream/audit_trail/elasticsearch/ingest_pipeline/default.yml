@@ -4,7 +4,7 @@ processors:
   - set:
       tag: set_ecs_version
       field: ecs.version
-      value: 9.3.0
+      value: 9.4.0
   - terminate:
       description: error message set and no data to process.
       tag: terminate_data_collection_error
@@ -279,7 +279,7 @@ processors:
       allow_duplicates: false
 
   - remove:
-      tag: remove_custom_duplicate_fields
+      tag: remove_fields_mapped_to_ecs
       field:
         - xm_cyber.audit_trail._id
         - xm_cyber.audit_trail.timestamp

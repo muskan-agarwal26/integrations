@@ -1,8 +1,8 @@
 - name: xm_cyber.device
   type: group
   description: >
-    Device inventory record from the XM Cyber API. Field names follow the
-    ingest pipeline camelCase-to-snake_case normalization (e.g. deviceId → device_id).
+    Device inventory record from the XM Cyber API. Field names follow the ingest pipeline camelCase-to-snake_case normalization (e.g. deviceId → device_id).
+
   fields:
     # ----- Device identity -----
     - name: device_id
@@ -17,7 +17,6 @@
     - name: type
       type: keyword
       description: Device type or category label from the vendor payload.
-
     # ----- Network / directory -----
     - name: ip_address
       type: ip
@@ -37,7 +36,6 @@
     - name: os
       type: keyword
       description: Operating system string reported for the device.
-
     # ----- Labels -----
     - name: labels
       type: keyword
@@ -45,7 +43,6 @@
     - name: enrichment_labels
       type: keyword
       description: Enrichment labels applied by XM Cyber.
-
     # ----- Choke point / critical asset -----
     - name: is_choke_point
       type: boolean
@@ -59,7 +56,6 @@
     - name: is_critical_asset
       type: boolean
       description: Whether the device is treated as a critical asset.
-
     # ----- Vulnerability counts (device aggregate) -----
     - name: critical_vulnerabilities
       type: long
@@ -79,12 +75,11 @@
     - name: enitity_vulnerabilities
       type: long
       description: >
-        Entity vulnerability count as returned by the API (vendor field name
-        retains the historical spelling "enitity").
+        Entity vulnerability count as returned by the API (vendor field name retains the historical spelling "enitity").
+
     - name: affected_entities
       type: long
       description: Number of related entities affected for this device context.
-
     # ----- Max CVSS (device aggregate) -----
     - name: max_cvss_v2
       type: double
@@ -98,7 +93,6 @@
     - name: max_cvss_v4
       type: double
       description: Maximum CVSS v4 base score observed on the device.
-
     # ----- Risk / exposure -----
     - name: critical_assets_at_risk
       type: long
@@ -109,7 +103,6 @@
     - name: products
       type: long
       description: Number of distinct products detected on the device.
-
     # ----- Timestamps -----
     - name: last_scan
       type: date
@@ -117,7 +110,6 @@
     - name: last_compromised
       type: date
       description: Timestamp of the last simulated or observed compromise when provided; may be absent.
-
     # ----- Installed applications / products (nested array) -----
     - name: apps
       type: group
@@ -138,8 +130,8 @@
         - name: choke_point_found_on
           type: keyword
           description: >
-            Vendor count of choke-point occurrences for this app; may be sent as a
-            numeric string (e.g. "4") from the API.
+            Vendor count of choke-point occurrences for this app; may be sent as a numeric string (e.g. "4") from the API.
+
         - name: affected_critical_assets
           type: long
           description: Number of critical assets affected by this application exposure.

@@ -108,6 +108,97 @@
             {
                 "embeddableConfig": {
                     "attributes": {
+                        "layout": "horizontal",
+                        "links": [
+                            {
+                                "destinationRefName": "link_8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6_dashboard",
+                                "id": "8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6",
+                                "label": "Entity Inventory",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 0,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_537cf991-1ade-483a-8e31-c9542d0646c3_dashboard",
+                                "id": "537cf991-1ade-483a-8e31-c9542d0646c3",
+                                "label": "Risk Score",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 1,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_2980a02e-541e-49d9-8ce3-407007d33c3a_dashboard",
+                                "id": "2980a02e-541e-49d9-8ce3-407007d33c3a",
+                                "label": "Audit Trail",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 2,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_d044e8c8-2edc-4883-8c54-c67f2f3c0183_dashboard",
+                                "id": "d044e8c8-2edc-4883-8c54-c67f2f3c0183",
+                                "label": "Vulnerability",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 3,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_1031a343-cc91-4b7a-9e4a-711f07d2b430_dashboard",
+                                "id": "1031a343-cc91-4b7a-9e4a-711f07d2b430",
+                                "label": "Device",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 4,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_91542e0e-8bdd-4803-8e80-2711749f4f74_dashboard",
+                                "id": "91542e0e-8bdd-4803-8e80-2711749f4f74",
+                                "label": "Product",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 5,
+                                "type": "dashboardLink"
+                            }
+                        ]
+                    },
+                    "enhancements": {}
+                },
+                "gridData": {
+                    "h": 2,
+                    "i": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016",
+                    "w": 48,
+                    "x": 0,
+                    "y": 0
+                },
+                "panelIndex": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016",
+                "type": "links"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
                         "references": [
                             {
                                 "id": "logs-*",
@@ -339,7 +430,7 @@
                     "i": "9ed22739-5452-4b6e-b482-e2bab51edda0",
                     "w": 24,
                     "x": 0,
-                    "y": 23
+                    "y": 25
                 },
                 "panelIndex": "9ed22739-5452-4b6e-b482-e2bab51edda0",
                 "title": "Vulnerable Products by Vendor",
@@ -552,7 +643,7 @@
                     "i": "d4ad5093-460c-4c8f-af6b-761f737cbc15",
                     "w": 24,
                     "x": 24,
-                    "y": 23
+                    "y": 25
                 },
                 "panelIndex": "d4ad5093-460c-4c8f-af6b-761f737cbc15",
                 "title": "Products by Count of Devices Found on",
@@ -755,7 +846,7 @@
                     "i": "437fd13a-d7f7-4d08-baff-ea3ef52c1c91",
                     "w": 24,
                     "x": 0,
-                    "y": 38
+                    "y": 40
                 },
                 "panelIndex": "437fd13a-d7f7-4d08-baff-ea3ef52c1c91",
                 "title": "Products by Count of Choke Points Found on",
@@ -995,7 +1086,7 @@
                     "i": "9b9e0c91-f4fe-4c81-b437-2fbf7cf1f145",
                     "w": 24,
                     "x": 24,
-                    "y": 38
+                    "y": 40
                 },
                 "panelIndex": "9b9e0c91-f4fe-4c81-b437-2fbf7cf1f145",
                 "title": "Vulnerable Products by Operating System",
@@ -1036,7 +1127,7 @@
                     "i": "585201f8-1fa4-460e-aca4-8c61fe95c73f",
                     "w": 13,
                     "x": 0,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "585201f8-1fa4-460e-aca4-8c61fe95c73f",
                 "type": "visualization"
@@ -1180,7 +1271,7 @@
                     "i": "ec243de5-d057-44be-8dc3-688f3eed9bf4",
                     "w": 11,
                     "x": 13,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "ec243de5-d057-44be-8dc3-688f3eed9bf4",
                 "title": "",
@@ -1320,7 +1411,7 @@
                     "i": "0eed2f10-c5f9-4a5d-a22e-57e142821c6c",
                     "w": 12,
                     "x": 24,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "0eed2f10-c5f9-4a5d-a22e-57e142821c6c",
                 "title": "",
@@ -1470,7 +1561,7 @@
                     "i": "8c45b013-7a36-4689-ba26-bab832ca93aa",
                     "w": 12,
                     "x": 36,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "8c45b013-7a36-4689-ba26-bab832ca93aa",
                 "title": "",
@@ -1667,7 +1758,7 @@
                     "i": "9b6df5dc-5230-4873-be1f-31f9775b4bb0",
                     "w": 35,
                     "x": 13,
-                    "y": 10
+                    "y": 12
                 },
                 "panelIndex": "9b6df5dc-5230-4873-be1f-31f9775b4bb0",
                 "title": "Vulnerable Products over Time",
@@ -1679,8 +1770,7 @@
         "version": 3
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-05-13T12:12:05.185Z",
-    "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
+    "created_at": "2026-07-07T09:44:43.353Z",
     "id": "xm_cyber-8591539b-edd7-42bb-bfa0-2ea26a334900",
     "references": [
         {
@@ -1757,9 +1847,38 @@
             "id": "logs-*",
             "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
             "type": "index-pattern"
+        },
+        {
+            "id": "xm_cyber-2170babe-e0a3-4289-a13b-fcb606f812a7",
+            "name": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016:link_8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-73ae0dbf-0f50-4183-8f0a-6489ca47f1d6",
+            "name": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016:link_537cf991-1ade-483a-8e31-c9542d0646c3_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-cbb01e78-83e3-4470-8047-209335be7d65",
+            "name": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016:link_2980a02e-541e-49d9-8ce3-407007d33c3a_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-96451398-d474-49d3-b76a-f328996127dd",
+            "name": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016:link_d044e8c8-2edc-4883-8c54-c67f2f3c0183_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-e671cff1-1a11-4326-a51d-04b32831df5b",
+            "name": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016:link_1031a343-cc91-4b7a-9e4a-711f07d2b430_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-8591539b-edd7-42bb-bfa0-2ea26a334900",
+            "name": "f582ab5e-8be3-44ba-8e98-ad7e3b2f7016:link_91542e0e-8bdd-4803-8e80-2711749f4f74_dashboard",
+            "type": "dashboard"
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0",
-    "updated_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0"
+    "typeMigrationVersion": "10.2.0"
 }

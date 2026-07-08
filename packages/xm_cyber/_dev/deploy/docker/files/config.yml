@@ -441,7 +441,6 @@ rules:
             "metadata": {}
           }
           `}}
-
   - path: /api/scenarios/v2/scenarios/riskScore
     methods: ['GET']
     request_headers:
@@ -539,7 +538,6 @@ rules:
             }
           }
           ` }}
-
   # Device
   - path: /api/v2/vrm/public/devices
     methods: ['GET']
@@ -666,7 +664,6 @@ rules:
             }
           }
           `}}
-
   # Product
   - path: /api/v2/vrm/public/products
     methods: ['GET']
