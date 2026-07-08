@@ -125,6 +125,97 @@
             {
                 "embeddableConfig": {
                     "attributes": {
+                        "layout": "horizontal",
+                        "links": [
+                            {
+                                "destinationRefName": "link_8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6_dashboard",
+                                "id": "8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6",
+                                "label": "Entity Inventory",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 0,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_537cf991-1ade-483a-8e31-c9542d0646c3_dashboard",
+                                "id": "537cf991-1ade-483a-8e31-c9542d0646c3",
+                                "label": "Risk Score",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 1,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_2980a02e-541e-49d9-8ce3-407007d33c3a_dashboard",
+                                "id": "2980a02e-541e-49d9-8ce3-407007d33c3a",
+                                "label": "Audit Trail",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 2,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_d044e8c8-2edc-4883-8c54-c67f2f3c0183_dashboard",
+                                "id": "d044e8c8-2edc-4883-8c54-c67f2f3c0183",
+                                "label": "Vulnerability",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 3,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_1031a343-cc91-4b7a-9e4a-711f07d2b430_dashboard",
+                                "id": "1031a343-cc91-4b7a-9e4a-711f07d2b430",
+                                "label": "Device",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 4,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_91542e0e-8bdd-4803-8e80-2711749f4f74_dashboard",
+                                "id": "91542e0e-8bdd-4803-8e80-2711749f4f74",
+                                "label": "Product",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 5,
+                                "type": "dashboardLink"
+                            }
+                        ]
+                    },
+                    "enhancements": {}
+                },
+                "gridData": {
+                    "h": 2,
+                    "i": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8",
+                    "w": 48,
+                    "x": 0,
+                    "y": 0
+                },
+                "panelIndex": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8",
+                "type": "links"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
                         "references": [
                             {
                                 "id": "logs-*",
@@ -335,7 +426,7 @@
                     "i": "efead151-5cc5-4490-aff5-c1266b97dc36",
                     "w": 24,
                     "x": 0,
-                    "y": 29
+                    "y": 31
                 },
                 "panelIndex": "efead151-5cc5-4490-aff5-c1266b97dc36",
                 "title": "Events by Event Type",
@@ -554,7 +645,7 @@
                     "i": "c8adefe8-cf3e-40da-bc57-490eae82e92b",
                     "w": 24,
                     "x": 24,
-                    "y": 29
+                    "y": 31
                 },
                 "panelIndex": "c8adefe8-cf3e-40da-bc57-490eae82e92b",
                 "title": "Events by Object Type",
@@ -752,7 +843,7 @@
                     "i": "a94fb269-2edf-4b7e-8710-f0d0f0ae0f2c",
                     "w": 14,
                     "x": 10,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "a94fb269-2edf-4b7e-8710-f0d0f0ae0f2c",
                 "title": "Events by Tenant",
@@ -941,7 +1032,7 @@
                     "i": "d7406b24-40f9-463d-b3e3-ee4087aaeda5",
                     "w": 24,
                     "x": 24,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "d7406b24-40f9-463d-b3e3-ee4087aaeda5",
                 "title": "Audit Events over Time",
@@ -982,7 +1073,7 @@
                     "i": "de99ac69-7961-45c1-9e96-89d46e1dabad",
                     "w": 10,
                     "x": 0,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "de99ac69-7961-45c1-9e96-89d46e1dabad",
                 "type": "visualization"
@@ -1200,7 +1291,7 @@
                     "i": "ff8922c3-4e0d-4bc2-a42c-c01b65e909d6",
                     "w": 38,
                     "x": 10,
-                    "y": 15
+                    "y": 17
                 },
                 "panelIndex": "ff8922c3-4e0d-4bc2-a42c-c01b65e909d6",
                 "title": "Events by Event Action",
@@ -1408,7 +1499,7 @@
                     "i": "60fabec0-f369-4ac0-a2c6-a16ed0aa3e10",
                     "w": 24,
                     "x": 0,
-                    "y": 44
+                    "y": 46
                 },
                 "panelIndex": "60fabec0-f369-4ac0-a2c6-a16ed0aa3e10",
                 "title": "Top Users",
@@ -1590,7 +1681,7 @@
                     "i": "5c1a6bf7-e482-4ae0-8376-ac5ac98e3240",
                     "w": 24,
                     "x": 24,
-                    "y": 44
+                    "y": 46
                 },
                 "panelIndex": "5c1a6bf7-e482-4ae0-8376-ac5ac98e3240",
                 "title": "Top Hosts",
@@ -1771,7 +1862,7 @@
                     "i": "51410765-9d8e-4e41-a469-e64a594a926f",
                     "w": 24,
                     "x": 0,
-                    "y": 62
+                    "y": 64
                 },
                 "panelIndex": "51410765-9d8e-4e41-a469-e64a594a926f",
                 "title": "Top Object Names",
@@ -1947,7 +2038,7 @@
                     "i": "6fb9e863-e29f-4772-8d17-d696b8979bac",
                     "w": 24,
                     "x": 24,
-                    "y": 62
+                    "y": 64
                 },
                 "panelIndex": "6fb9e863-e29f-4772-8d17-d696b8979bac",
                 "title": "Top Sources",
@@ -1959,7 +2050,7 @@
         "version": 3
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-05-05T10:37:36.339Z",
+    "created_at": "2026-07-07T09:44:41.395Z",
     "id": "xm_cyber-cbb01e78-83e3-4470-8047-209335be7d65",
     "references": [
         {
@@ -2071,9 +2162,38 @@
             "id": "logs-*",
             "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
             "type": "index-pattern"
+        },
+        {
+            "id": "xm_cyber-2170babe-e0a3-4289-a13b-fcb606f812a7",
+            "name": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8:link_8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-73ae0dbf-0f50-4183-8f0a-6489ca47f1d6",
+            "name": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8:link_537cf991-1ade-483a-8e31-c9542d0646c3_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-cbb01e78-83e3-4470-8047-209335be7d65",
+            "name": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8:link_2980a02e-541e-49d9-8ce3-407007d33c3a_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-96451398-d474-49d3-b76a-f328996127dd",
+            "name": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8:link_d044e8c8-2edc-4883-8c54-c67f2f3c0183_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-e671cff1-1a11-4326-a51d-04b32831df5b",
+            "name": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8:link_1031a343-cc91-4b7a-9e4a-711f07d2b430_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-8591539b-edd7-42bb-bfa0-2ea26a334900",
+            "name": "f1c5408a-b6f5-43b0-881d-d4ff1c796ed8:link_91542e0e-8bdd-4803-8e80-2711749f4f74_dashboard",
+            "type": "dashboard"
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0",
-    "updated_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0"
+    "typeMigrationVersion": "10.2.0"
 }

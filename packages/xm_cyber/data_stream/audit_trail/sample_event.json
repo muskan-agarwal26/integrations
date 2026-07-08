@@ -13,7 +13,7 @@
         "type": "logs"
     },
     "ecs": {
-        "version": "9.3.0"
+        "version": "9.4.0"
     },
     "elastic_agent": {
         "id": "60d4174b-a8ab-4553-87d1-babcd72f3d97",

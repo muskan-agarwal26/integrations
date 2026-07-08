@@ -2,7 +2,7 @@
     "expected": [
         {
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "kind": "event",
@@ -24,7 +24,7 @@
         },
         {
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "kind": "event",
@@ -51,7 +51,7 @@
         },
         {
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "kind": "event",

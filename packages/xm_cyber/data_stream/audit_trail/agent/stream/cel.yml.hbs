@@ -13,6 +13,9 @@ resource.ssl: {{ssl}}
 resource.timeout: {{http_client_timeout}}
 {{/if}}
 resource.url: {{url}}
+{{#if max_executions}}
+max_executions: {{max_executions}}
+{{/if}}
 state:
   api_key: {{api_key}}
   page_size: {{page_size}}
@@ -21,7 +24,6 @@ redact:
     - api_key
     - access_token
     - refresh_token
-max_executions: 50
 program: |-
   state.url.trim_right("/").as(base,
     state.with(
@@ -41,14 +43,12 @@ program: |-
             (authResp.StatusCode == 200) ?
               authResp.Body.decode_json().as(ao,
                 {
-                  "ok": true,
                   "access": ao.accessToken,
                   "refresh": ao.refreshToken,
                 }
               )
             :
               {
-                "ok": false,
                 "err_code": string(authResp.StatusCode),
                 "err_status": authResp.Status,
                 "err_body": (size(authResp.Body) != 0) ? string(authResp.Body) : authResp.Status,
@@ -56,12 +56,11 @@ program: |-
           )
         :
           {
-            "ok": true,
             "access": state.?cursor.access_token.orValue(""),
             "refresh": state.?cursor.refresh_token.orValue(""),
           }
       ).as(tok,
-        tok.ok ?
+        has(tok.access) ?
           request(
             "GET",
             (has(state.?next_page.link) && state.next_page.link != "") ?
@@ -174,9 +173,6 @@ program: |-
 tags:
 {{#if preserve_original_event}}
   - preserve_original_event
-{{/if}}
-{{#if preserve_duplicate_custom_fields}}
-  - preserve_duplicate_custom_fields
 {{/if}}
 {{#each tags as |tag|}}
   - {{tag}}

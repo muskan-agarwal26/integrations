@@ -133,7 +133,7 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 | input.type | Type of filebeat input. | keyword |
 | observer.product | The product name of the observer. | constant_keyword |
 | observer.vendor | Vendor name of the observer. | constant_keyword |
-| xm_cyber.audit_trail._id | XM Cyber's unique audit record identifier. Preserved when the `preserve_duplicate_custom_fields` tag is set; otherwise mapped to ECS `event.id` and removed from this namespace. | keyword |
+| xm_cyber.audit_trail._id | XM Cyber's unique audit record identifier. Mapped to ECS `event.id`. | keyword |
 | xm_cyber.audit_trail.details | Free-form details about the action. | keyword |
 | xm_cyber.audit_trail.event_sub_type | Finer-grained action detail (for example, SettingsChanged, PasswordReset). | keyword |
 | xm_cyber.audit_trail.event_type | High-level action performed (for example, Create, Update, Delete, Login). | keyword |
@@ -143,7 +143,7 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 | xm_cyber.audit_trail.terminal_id.hostname | Hostname of the terminal from which the action originated. | keyword |
 | xm_cyber.audit_trail.terminal_id.ip | IP address of the terminal from which the action originated. | ip |
 | xm_cyber.audit_trail.terminal_id.ip_string | IP address of the terminal from which the action originated as a string. | keyword |
-| xm_cyber.audit_trail.timestamp | Vendor event timestamp. Preserved when the `preserve_duplicate_custom_fields` tag is set; otherwise mapped to ECS `@timestamp` and removed from this namespace. | date |
+| xm_cyber.audit_trail.timestamp | Vendor event timestamp. Mapped to ECS `@timestamp`. | date |
 | xm_cyber.audit_trail.user_id.email | Email of the user who performed the action. | keyword |
 | xm_cyber.audit_trail.user_id.name | Display name of the user who performed the action. | keyword |
 
@@ -170,7 +170,7 @@ An example event for `audit_trail` looks as following:
         "type": "logs"
     },
     "ecs": {
-        "version": "9.3.0"
+        "version": "9.4.0"
     },
     "elastic_agent": {
         "id": "60d4174b-a8ab-4553-87d1-babcd72f3d97",
@@ -317,7 +317,7 @@ An example event for `vulnerability` looks as following:
         "type": "logs"
     },
     "ecs": {
-        "version": "9.3.0"
+        "version": "9.4.0"
     },
     "elastic_agent": {
         "id": "51e7c693-87cb-4910-b6d3-23201c6c96c9",
@@ -882,7 +882,6 @@ An example event for `entity_inventory` looks as following:
 | labels.risk_grade | The risk grade of the scenario. | keyword |
 | labels.risk_score | The risk score of the scenario as a keyword label. | keyword |
 | labels.scenario_name | The name of the scenario. | keyword |
-| log.offset | Log offset. | long |
 | observer.product | The product name of the observer. | constant_keyword |
 | observer.vendor | Vendor name of the observer. | constant_keyword |
 | xm_cyber.risk_score.avg_graph_data.date | The date of the average graph data point. | date |
@@ -1224,31 +1223,31 @@ An example event for `product` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-07-07T06:52:39.262Z",
+    "@timestamp": "2026-07-01T15:33:52.609Z",
     "agent": {
-        "ephemeral_id": "80da6520-02cd-4a40-90c7-f5c9abcfe5d3",
-        "id": "b12acc03-96a1-46a1-97d6-35b9c1aa0aec",
-        "name": "elastic-agent-57568",
+        "ephemeral_id": "a3795845-fbb9-4b88-aaed-2a8e09ad0848",
+        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
+        "name": "elastic-agent-41139",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.product",
-        "namespace": "87473",
+        "namespace": "21831",
         "type": "logs"
     },
     "ecs": {
-        "version": "9.3.0"
+        "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "b12acc03-96a1-46a1-97d6-35b9c1aa0aec",
+        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.product",
-        "ingested": "2026-07-07T06:52:42Z",
+        "ingested": "2026-07-01T15:33:55Z",
         "kind": "event",
         "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"wget\",\"productOperatingSystems\":[\"Linux sles 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },

@@ -7,12 +7,24 @@ streams:
     template_path: cel.yml.hbs
     vars:
       - name: initial_interval
-        type: text
+        type: select
         title: Initial Interval
-        description: How far back to pull the initial Risk Score data from XM Cyber, in days (e.g. `30`, `90`, `200`).
+        description: How far back to pull the initial Risk Score data from XM Cyber, in days.
+        multi: false
         required: true
         show_user: true
-        default: 30
+        options:
+          - text: '7'
+            value: '7'
+          - text: '14'
+            value: '14'
+          - text: '30'
+            value: '30'
+          - text: '90'
+            value: '90'
+          - text: '180'
+            value: '180'
+        default: '30'
       - name: interval
         type: text
         title: Interval
@@ -20,6 +32,14 @@ streams:
         required: true
         show_user: true
         default: 24h
+      - name: max_executions
+        type: integer
+        title: Maximum Pages Per Interval
+        description: Maximum Pages Per Interval is the maximum number of pages that can be collected at each interval. Note that this must be greater than zero.
+        multi: false
+        required: false
+        show_user: false
+        default: 1000
       - name: http_client_timeout
         type: text
         title: HTTP Client Timeout

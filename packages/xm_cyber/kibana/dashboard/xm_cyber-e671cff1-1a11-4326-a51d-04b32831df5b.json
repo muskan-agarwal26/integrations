@@ -91,6 +91,97 @@
             {
                 "embeddableConfig": {
                     "attributes": {
+                        "layout": "horizontal",
+                        "links": [
+                            {
+                                "destinationRefName": "link_8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6_dashboard",
+                                "id": "8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6",
+                                "label": "Entity Inventory",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 0,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_537cf991-1ade-483a-8e31-c9542d0646c3_dashboard",
+                                "id": "537cf991-1ade-483a-8e31-c9542d0646c3",
+                                "label": "Risk Score",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 1,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_2980a02e-541e-49d9-8ce3-407007d33c3a_dashboard",
+                                "id": "2980a02e-541e-49d9-8ce3-407007d33c3a",
+                                "label": "Audit Trail",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 2,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_d044e8c8-2edc-4883-8c54-c67f2f3c0183_dashboard",
+                                "id": "d044e8c8-2edc-4883-8c54-c67f2f3c0183",
+                                "label": "Vulnerability",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 3,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_1031a343-cc91-4b7a-9e4a-711f07d2b430_dashboard",
+                                "id": "1031a343-cc91-4b7a-9e4a-711f07d2b430",
+                                "label": "Device",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 4,
+                                "type": "dashboardLink"
+                            },
+                            {
+                                "destinationRefName": "link_91542e0e-8bdd-4803-8e80-2711749f4f74_dashboard",
+                                "id": "91542e0e-8bdd-4803-8e80-2711749f4f74",
+                                "label": "Product",
+                                "options": {
+                                    "openInNewTab": false,
+                                    "useCurrentDateRange": true,
+                                    "useCurrentFilters": false
+                                },
+                                "order": 5,
+                                "type": "dashboardLink"
+                            }
+                        ]
+                    },
+                    "enhancements": {}
+                },
+                "gridData": {
+                    "h": 2,
+                    "i": "7ea803af-db37-4594-8fdc-d33d995f1eec",
+                    "w": 48,
+                    "x": 0,
+                    "y": 0
+                },
+                "panelIndex": "7ea803af-db37-4594-8fdc-d33d995f1eec",
+                "type": "links"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
                         "references": [
                             {
                                 "id": "logs-*",
@@ -288,7 +379,7 @@
                     "i": "ed80bc00-9f35-4213-82b9-f66bfdbbc30f",
                     "w": 24,
                     "x": 0,
-                    "y": 40
+                    "y": 42
                 },
                 "panelIndex": "ed80bc00-9f35-4213-82b9-f66bfdbbc30f",
                 "title": "Devices by Type",
@@ -494,7 +585,7 @@
                     "i": "71d68c27-c611-4131-86b0-3d7076cab76a",
                     "w": 24,
                     "x": 24,
-                    "y": 40
+                    "y": 42
                 },
                 "panelIndex": "71d68c27-c611-4131-86b0-3d7076cab76a",
                 "title": "Devices by Choke Point Level",
@@ -711,7 +802,7 @@
                     "i": "8a2819ea-7f0c-4e62-bd15-103a6f30fca2",
                     "w": 24,
                     "x": 24,
-                    "y": 25
+                    "y": 27
                 },
                 "panelIndex": "8a2819ea-7f0c-4e62-bd15-103a6f30fca2",
                 "title": "Devices by Risk Score",
@@ -893,7 +984,7 @@
                     "i": "2b908d92-d6b0-4b26-a270-3637dab0a8b9",
                     "w": 24,
                     "x": 0,
-                    "y": 55
+                    "y": 57
                 },
                 "panelIndex": "2b908d92-d6b0-4b26-a270-3637dab0a8b9",
                 "title": "Top Domains",
@@ -1075,7 +1166,7 @@
                     "i": "615a179a-82f3-4b8f-9d37-8d5488991fb5",
                     "w": 24,
                     "x": 24,
-                    "y": 55
+                    "y": 57
                 },
                 "panelIndex": "615a179a-82f3-4b8f-9d37-8d5488991fb5",
                 "title": "Top OS",
@@ -1224,7 +1315,7 @@
                     "i": "badebdfc-ed6a-4bb9-ac03-74d98c40439d",
                     "w": 7,
                     "x": 12,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "badebdfc-ed6a-4bb9-ac03-74d98c40439d",
                 "title": "",
@@ -1373,7 +1464,7 @@
                     "i": "62e1c364-333e-4ef6-9894-d29430dc4146",
                     "w": 7,
                     "x": 19,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "62e1c364-333e-4ef6-9894-d29430dc4146",
                 "title": "",
@@ -1513,7 +1604,7 @@
                     "i": "45bfea91-f597-4cd4-8048-bab54945a07a",
                     "w": 7,
                     "x": 26,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "45bfea91-f597-4cd4-8048-bab54945a07a",
                 "title": "",
@@ -1662,7 +1753,7 @@
                     "i": "8ff34367-ded3-472c-aec0-abfac12087b5",
                     "w": 7,
                     "x": 33,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "8ff34367-ded3-472c-aec0-abfac12087b5",
                 "title": "",
@@ -1811,7 +1902,7 @@
                     "i": "b5715ef6-ea74-4029-b489-7d8130ad1374",
                     "w": 8,
                     "x": 40,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "b5715ef6-ea74-4029-b489-7d8130ad1374",
                 "title": "",
@@ -1852,7 +1943,7 @@
                     "i": "8e934709-c762-44f6-b987-e72bf6b00855",
                     "w": 12,
                     "x": 0,
-                    "y": 0
+                    "y": 2
                 },
                 "panelIndex": "8e934709-c762-44f6-b987-e72bf6b00855",
                 "type": "visualization"
@@ -2075,7 +2166,7 @@
                     "i": "f5c428ed-5fd7-4b32-ab1b-b699d4f8f29e",
                     "w": 24,
                     "x": 0,
-                    "y": 25
+                    "y": 27
                 },
                 "panelIndex": "f5c428ed-5fd7-4b32-ab1b-b699d4f8f29e",
                 "title": "Devices by Device Type",
@@ -2268,7 +2359,7 @@
                     "i": "495ba0ba-a2ca-4db2-a8b2-b65a6d6ede63",
                     "w": 19,
                     "x": 29,
-                    "y": 8
+                    "y": 10
                 },
                 "panelIndex": "495ba0ba-a2ca-4db2-a8b2-b65a6d6ede63",
                 "title": "Maximum Risk Score over Time",
@@ -2456,7 +2547,7 @@
                     "i": "2ee2bbd1-8458-4a80-8819-d608a7c0b82a",
                     "w": 17,
                     "x": 12,
-                    "y": 8
+                    "y": 10
                 },
                 "panelIndex": "2ee2bbd1-8458-4a80-8819-d608a7c0b82a",
                 "title": "Device Count over Time",
@@ -2638,7 +2729,7 @@
                     "i": "4a29be36-301b-4e5e-b997-3304daecebe6",
                     "w": 24,
                     "x": 0,
-                    "y": 70
+                    "y": 72
                 },
                 "panelIndex": "4a29be36-301b-4e5e-b997-3304daecebe6",
                 "title": "Top Hostnames",
@@ -2820,7 +2911,7 @@
                     "i": "3b2a6fdd-c448-4ec4-82f9-d3ae0caf0ce8",
                     "w": 24,
                     "x": 24,
-                    "y": 70
+                    "y": 72
                 },
                 "panelIndex": "3b2a6fdd-c448-4ec4-82f9-d3ae0caf0ce8",
                 "title": "Top Host IPs",
@@ -2832,8 +2923,7 @@
         "version": 3
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-05-13T09:37:04.400Z",
-    "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
+    "created_at": "2026-07-07T09:44:42.360Z",
     "id": "xm_cyber-e671cff1-1a11-4326-a51d-04b32831df5b",
     "references": [
         {
@@ -2940,9 +3030,38 @@
             "id": "logs-*",
             "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
             "type": "index-pattern"
+        },
+        {
+            "id": "xm_cyber-2170babe-e0a3-4289-a13b-fcb606f812a7",
+            "name": "7ea803af-db37-4594-8fdc-d33d995f1eec:link_8c3e1f0f-dcaf-4f30-bd73-92ead0f081b6_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-73ae0dbf-0f50-4183-8f0a-6489ca47f1d6",
+            "name": "7ea803af-db37-4594-8fdc-d33d995f1eec:link_537cf991-1ade-483a-8e31-c9542d0646c3_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-cbb01e78-83e3-4470-8047-209335be7d65",
+            "name": "7ea803af-db37-4594-8fdc-d33d995f1eec:link_2980a02e-541e-49d9-8ce3-407007d33c3a_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-96451398-d474-49d3-b76a-f328996127dd",
+            "name": "7ea803af-db37-4594-8fdc-d33d995f1eec:link_d044e8c8-2edc-4883-8c54-c67f2f3c0183_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-e671cff1-1a11-4326-a51d-04b32831df5b",
+            "name": "7ea803af-db37-4594-8fdc-d33d995f1eec:link_1031a343-cc91-4b7a-9e4a-711f07d2b430_dashboard",
+            "type": "dashboard"
+        },
+        {
+            "id": "xm_cyber-8591539b-edd7-42bb-bfa0-2ea26a334900",
+            "name": "7ea803af-db37-4594-8fdc-d33d995f1eec:link_91542e0e-8bdd-4803-8e80-2711749f4f74_dashboard",
+            "type": "dashboard"
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0",
-    "updated_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0"
+    "typeMigrationVersion": "10.2.0"
 }
