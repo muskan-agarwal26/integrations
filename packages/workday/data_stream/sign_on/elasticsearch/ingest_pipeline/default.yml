@@ -37,6 +37,12 @@ processors:
       tag: json_event_original
       target_field: workday.sign_on
       if: ctx.event?.original != null
+  - fingerprint:
+      fields:
+        - event.original
+      tag: fingerprint_sign_on
+      target_field: _id
+      ignore_missing: true
   - script:
       tag: normalize_hyphenated_field_names
       lang: painless
@@ -271,6 +277,30 @@ processors:
       copy_from: workday.sign_on.Session_IP_Address
       ignore_empty_value: true
       override: false
+  - geoip:
+      field: source.ip
+      tag: geoip_source_ip_to_source_geo
+      target_field: source.geo
+      ignore_missing: true
+  - geoip:
+      database_file: GeoLite2-ASN.mmdb
+      field: source.ip
+      tag: geoip_source_ip_to_source_as
+      target_field: source.as
+      properties:
+        - asn
+        - organization_name
+      ignore_missing: true
+  - rename:
+      field: source.as.asn
+      tag: rename_source_as_asn
+      target_field: source.as.number
+      ignore_missing: true
+  - rename:
+      field: source.as.organization_name
+      tag: rename_source_as_organization_name
+      target_field: source.as.organization.name
+      ignore_missing: true
   - set:
       field: event.reason
       tag: set_event_reason_from_failure_message
@@ -334,6 +364,16 @@ processors:
       field: event.action
       tag: set_event_action
       value: user-signon
+  - set:
+      field: event.outcome
+      tag: set_event_outcome_failure
+      value: failure
+      if: ctx.workday?.sign_on?.Failed_Signon == true || ctx.event?.reason != null
+  - set:
+      field: event.outcome
+      tag: set_event_outcome_success
+      value: success
+      if: ctx.event?.outcome == null
   - remove:
       field:
         - workday.sign_on.Session_Start

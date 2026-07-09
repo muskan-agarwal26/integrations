@@ -85,6 +85,3 @@
         - name: Workday_Account
           type: keyword
           description: The Workday account associated with the sign-on (alternate report column name for System_Account).
-        - name: signin_ip_address_string
-          type: keyword
-          description: The originating address of the sign-on when it is not a routable IP address (for example, Workday Internal).

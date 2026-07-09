@@ -244,7 +244,6 @@ For more information on architectures that can be used for scaling this integrat
 | workday.sign_on.UI_Client_Type | The type of UI client used for the sign-on (for example, iPhone Native, Android Native). | keyword |
 | workday.sign_on.Workday_Account | The Workday account associated with the sign-on (alternate report column name for System_Account). | keyword |
 | workday.sign_on.session_ip_address_string | The originating IP address of the session (alternate report column name for Session_IP_Address). | keyword |
-| workday.sign_on.signin_ip_address_string | The originating address of the sign-on when it is not a routable IP address (for example, Workday Internal). | keyword |
 | workday.sign_on.signon_ip_address_string | The originating IP address of the sign-on (alternate report column name for Signon_IP_Address). | keyword |
 
 
