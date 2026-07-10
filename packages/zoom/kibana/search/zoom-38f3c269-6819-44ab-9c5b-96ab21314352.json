@@ -2,9 +2,10 @@
     "attributes": {
         "columns": [
             "user.name",
-            "event.action",
-            "zoom.operation.category_type",
-            "zoom.operation.operation_detail"
+            "user.email",
+            "zoom.meeting_activity.meeting_number",
+            "zoom.meeting_activity.activity_category",
+            "zoom.meeting_activity.activity_detail"
         ],
         "description": "",
         "grid": {},
@@ -25,13 +26,13 @@
                             "key": "data_stream.dataset",
                             "negate": false,
                             "params": {
-                                "query": "zoom.operation"
+                                "query": "zoom.meeting_activity"
                             },
                             "type": "phrase"
                         },
                         "query": {
                             "match_phrase": {
-                                "data_stream.dataset": "zoom.operation"
+                                "data_stream.dataset": "zoom.meeting_activity"
                             }
                         }
                     }
@@ -50,11 +51,11 @@
             ]
         ],
         "timeRestore": false,
-        "title": "[Logs Zoom] Operation Essential Details"
+        "title": "[Logs Zoom] Meeting Activity Essential Details"
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-07-08T13:45:11.487Z",
-    "id": "zoom-7735ceba-c6a0-430f-ac79-57c0dc63c201",
+    "created_at": "2026-07-08T14:02:21.313Z",
+    "id": "zoom-38f3c269-6819-44ab-9c5b-96ab21314352",
     "references": [
         {
             "id": "logs-*",
