@@ -25,6 +25,14 @@
                 ]
             },
             "host": {
+                "entity": {
+                    "attributes": {
+                        "managed": false
+                    },
+                    "lifecycle": {
+                        "last_activity": "2026-06-18T23:59:32.000Z"
+                    }
+                },
                 "os": {
                     "name": "Mac OS X"
                 }
@@ -71,6 +79,16 @@
                     "end"
                 ]
             },
+            "host": {
+                "entity": {
+                    "attributes": {
+                        "managed": false
+                    },
+                    "lifecycle": {
+                        "last_activity": "2026-06-18T23:55:34.000Z"
+                    }
+                }
+            },
             "workday": {
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
@@ -111,6 +129,14 @@
                 ]
             },
             "host": {
+                "entity": {
+                    "attributes": {
+                        "managed": false
+                    },
+                    "lifecycle": {
+                        "last_activity": "2026-06-18T23:52:43.000Z"
+                    }
+                },
                 "os": {
                     "name": "iOS"
                 }
@@ -161,6 +187,14 @@
                 ]
             },
             "host": {
+                "entity": {
+                    "attributes": {
+                        "managed": false
+                    },
+                    "lifecycle": {
+                        "last_activity": "2026-06-18T23:57:04.000Z"
+                    }
+                },
                 "os": {
                     "name": "iOS"
                 }
@@ -205,6 +239,16 @@
                     "start"
                 ]
             },
+            "host": {
+                "entity": {
+                    "attributes": {
+                        "managed": false
+                    },
+                    "lifecycle": {
+                        "last_activity": "2026-06-18T20:18:51.000Z"
+                    }
+                }
+            },
             "workday": {
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
@@ -247,6 +291,11 @@
                 ]
             },
             "host": {
+                "entity": {
+                    "lifecycle": {
+                        "last_activity": "2026-06-22T08:08:10.000Z"
+                    }
+                },
                 "os": {
                     "name": "Mac OS X"
                 }
@@ -330,6 +379,11 @@
                 ]
             },
             "host": {
+                "entity": {
+                    "lifecycle": {
+                        "last_activity": "2026-06-22T07:44:17.000Z"
+                    }
+                },
                 "os": {
                     "name": "Mac OS X"
                 }
@@ -411,6 +465,13 @@
                     "end"
                 ]
             },
+            "host": {
+                "entity": {
+                    "lifecycle": {
+                        "last_activity": "2026-06-22T07:04:11.000Z"
+                    }
+                }
+            },
             "related": {
                 "user": [
                     "ISU_Adaptive_Insights_User_Provisioning"
@@ -451,6 +512,13 @@
                     "start",
                     "end"
                 ]
+            },
+            "host": {
+                "entity": {
+                    "lifecycle": {
+                        "last_activity": "2026-06-22T11:29:16.000Z"
+                    }
+                }
             },
             "related": {
                 "ip": [
@@ -519,6 +587,11 @@
                 ]
             },
             "host": {
+                "entity": {
+                    "lifecycle": {
+                        "last_activity": "2026-06-22T13:41:11.000Z"
+                    }
+                },
                 "os": {
                     "name": "Mac OS X"
                 }

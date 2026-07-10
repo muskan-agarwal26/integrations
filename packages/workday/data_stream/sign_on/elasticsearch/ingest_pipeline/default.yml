@@ -374,6 +374,23 @@ processors:
       tag: set_event_outcome_success
       value: success
       if: ctx.event?.outcome == null
+  - set:
+      field: host.entity.attributes.managed
+      tag: set_host_entity_managed_from_is_device_managed
+      copy_from: workday.sign_on.Is_Device_Managed
+      ignore_empty_value: true
+      if: ctx.workday?.sign_on?.Is_Device_Managed instanceof Boolean
+  - set:
+      field: host.entity.lifecycle.last_activity
+      tag: set_host_entity_last_activity_from_event_end
+      copy_from: event.end
+      ignore_empty_value: true
+      override: false
+  - set:
+      field: host.entity.lifecycle.last_activity
+      tag: set_host_entity_last_activity_from_event_start
+      copy_from: event.start
+      ignore_empty_value: true
   - remove:
       field:
         - workday.sign_on.Session_Start
