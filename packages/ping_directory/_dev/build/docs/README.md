@@ -39,7 +39,7 @@ The PingDirectory integration collects the following types of data:
 * **PingDirectory deployment**: An active PingDirectory server configured to generate HTTP Access logs.
 * **HTTP Access logging enabled**: The HTTP Access Logger must be enabled and configured to record HTTP request and response activity.
 * **Log access**: Elastic Agent must have access to the HTTP Access log files on the PingDirectory host.
-* **Elastic Agent**: Version 8.18+ or 9.0+ with Fleet enrollment.
+* **Elastic Agent**: Version 8.18+ or 9.1.0+ with Fleet enrollment.
 
 ## How do I deploy this integration?
 

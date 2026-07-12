@@ -4,12 +4,6 @@
     - name: authorization_type
       type: keyword
       description: The authorization type used in the request (e.g. Bearer, Basic).
-    - name: correlation_id
-      type: keyword
-      description: Correlation ID used to trace a request across systems.
-    - name: etime
-      type: double
-      description: Elapsed time in milliseconds for the request to be processed.
     - name: redirect_uri
       type: keyword
       description: The URI to which the client was redirected.
@@ -31,12 +25,6 @@
         - name: connection
           type: keyword
           description: The Connection request header.
-        - name: host
-          type: keyword
-          description: The Host request header.
-        - name: referer
-          type: keyword
-          description: The Referer request header.
         - name: sec_ch_ua
           type: keyword
           description: The sec-ch-ua request header.
@@ -61,21 +49,12 @@
         - name: upgrade_insecure_requests
           type: keyword
           description: The Upgrade-Insecure-Requests request header.
-        - name: user_agent
-          type: keyword
-          description: The User-Agent request header.
-    - name: request_id
-      type: keyword
-      description: Sequential request ID assigned by the HTTP server.
     - name: response_header
       type: group
       fields:
         - name: connection
           type: keyword
           description: The Connection response header.
-        - name: correlation_id
-          type: keyword
-          description: The Correlation-Id response header.
         - name: date
           type: keyword
           description: The Date response header.
@@ -88,12 +67,6 @@
     - name: thread_id
       type: long
       description: ID of the server thread that processed the request.
-    - name: timestamp
-      type: date
-      description: Timestamp when the HTTP request was processed.
-    - name: timezone
-      type: keyword
-      description: Timezone offset from the log timestamp.
     - name: type
       type: keyword
       description: Log record type. Always RESULT for HTTP detailed access log entries.

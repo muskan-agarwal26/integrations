@@ -39,7 +39,7 @@ The PingDirectory integration collects the following types of data:
 * **PingDirectory deployment**: An active PingDirectory server configured to generate HTTP Access logs.
 * **HTTP Access logging enabled**: The HTTP Access Logger must be enabled and configured to record HTTP request and response activity.
 * **Log access**: Elastic Agent must have access to the HTTP Access log files on the PingDirectory host.
-* **Elastic Agent**: Version 8.18+ or 9.0+ with Fleet enrollment.
+* **Elastic Agent**: Version 8.18+ or 9.1.0+ with Fleet enrollment.
 
 ## How do I deploy this integration?
 
@@ -111,16 +111,12 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 | observer.product | The product name of the observer. | constant_keyword |
 | observer.vendor | Vendor name of the observer. | constant_keyword |
 | ping_directory.http_access.authorization_type | The authorization type used in the request (e.g. Bearer, Basic). | keyword |
-| ping_directory.http_access.correlation_id | Correlation ID used to trace a request across systems. | keyword |
-| ping_directory.http_access.etime | Elapsed time in milliseconds for the request to be processed. | double |
 | ping_directory.http_access.redirect_uri | The URI to which the client was redirected. | keyword |
 | ping_directory.http_access.request_header.accept | The Accept request header. | keyword |
 | ping_directory.http_access.request_header.accept_encoding | The Accept-Encoding request header. | keyword |
 | ping_directory.http_access.request_header.accept_language | The Accept-Language request header. | keyword |
 | ping_directory.http_access.request_header.cache_control | The Cache-Control request header. | keyword |
 | ping_directory.http_access.request_header.connection | The Connection request header. | keyword |
-| ping_directory.http_access.request_header.host | The Host request header. | keyword |
-| ping_directory.http_access.request_header.referer | The Referer request header. | keyword |
 | ping_directory.http_access.request_header.sec_ch_ua | The sec-ch-ua request header. | keyword |
 | ping_directory.http_access.request_header.sec_ch_ua_mobile | The sec-ch-ua-mobile request header. | keyword |
 | ping_directory.http_access.request_header.sec_ch_ua_platform | The sec-ch-ua-platform request header. | keyword |
@@ -129,16 +125,11 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 | ping_directory.http_access.request_header.sec_fetch_site | The Sec-Fetch-Site request header. | keyword |
 | ping_directory.http_access.request_header.sec_fetch_user | The Sec-Fetch-User request header. | keyword |
 | ping_directory.http_access.request_header.upgrade_insecure_requests | The Upgrade-Insecure-Requests request header. | keyword |
-| ping_directory.http_access.request_header.user_agent | The User-Agent request header. | keyword |
-| ping_directory.http_access.request_id | Sequential request ID assigned by the HTTP server. | keyword |
 | ping_directory.http_access.response_header.connection | The Connection response header. | keyword |
-| ping_directory.http_access.response_header.correlation_id | The Correlation-Id response header. | keyword |
 | ping_directory.http_access.response_header.date | The Date response header. | keyword |
 | ping_directory.http_access.response_header.request_id | The Request-Id response header. | keyword |
 | ping_directory.http_access.response_header.x_frame_options | The X-Frame-Options response header. | keyword |
 | ping_directory.http_access.thread_id | ID of the server thread that processed the request. | long |
-| ping_directory.http_access.timestamp | Timestamp when the HTTP request was processed. | date |
-| ping_directory.http_access.timezone | Timezone offset from the log timestamp. | keyword |
 | ping_directory.http_access.type | Log record type. Always RESULT for HTTP detailed access log entries. | keyword |
 
 
@@ -150,13 +141,13 @@ An example event for `http_access` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-05-25T18:55:19.182+05:30",
+    "@timestamp": "2026-05-25T13:25:19.182Z",
     "agent": {
-        "ephemeral_id": "5443eb24-78cf-49a0-80b5-28b4db42c7cc",
-        "id": "600008dc-45f7-41d9-a7fb-8687301ea760",
-        "name": "elastic-agent-64173",
+        "ephemeral_id": "90ac8dce-75e8-4010-a043-ecc2f21d82e6",
+        "id": "246e329f-fdf2-4048-8313-908aa20cf684",
+        "name": "elastic-agent-34933",
         "type": "filebeat",
-        "version": "8.18.0"
+        "version": "9.4.3"
     },
     "client": {
         "ip": "172.20.240.130",
@@ -164,16 +155,16 @@ An example event for `http_access` looks as following:
     },
     "data_stream": {
         "dataset": "ping_directory.http_access",
-        "namespace": "23176",
+        "namespace": "22492",
         "type": "logs"
     },
     "ecs": {
         "version": "9.3.0"
     },
     "elastic_agent": {
-        "id": "600008dc-45f7-41d9-a7fb-8687301ea760",
+        "id": "246e329f-fdf2-4048-8313-908aa20cf684",
         "snapshot": false,
-        "version": "8.18.0"
+        "version": "9.4.3"
     },
     "event": {
         "action": "GET",
@@ -183,8 +174,9 @@ An example event for `http_access` looks as following:
         ],
         "dataset": "ping_directory.http_access",
         "duration": 124825000,
-        "ingested": "2026-06-10T11:08:00Z",
+        "ingested": "2026-07-10T07:22:36Z",
         "kind": "event",
+        "module": "ping_directory",
         "original": "[25/May/2026:18:55:19.182 +0530] RESULT instanceName=\"pingdirectory-elastic-test\" threadID=164 requestID=8 correlationID=\"7c0f360b-77f0-4951-9101-74d4f8358795\" from=\"172.20.240.130:55188\" method=\"GET\" url=\"https://10.50.15.29:2443/scim/v2\" requestHeader=\"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\" requestHeader=\"Connection: keep-alive\" requestHeader=\"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36\" requestHeader=\"Sec-Fetch-Site: none\" requestHeader=\"Sec-Fetch-Dest: document\" requestHeader=\"Host: 10.50.15.29:2443\" requestHeader=\"Accept-Encoding: gzip, deflate, br, zstd\" requestHeader=\"Sec-Fetch-Mode: navigate\" requestHeader=\"sec-ch-ua: 'Chromium';v='148', 'Google Chrome';v='148', 'Not/A)Brand';v='99'\" requestHeader=\"sec-ch-ua-mobile: ?0\" requestHeader=\"Upgrade-Insecure-Requests: 1\" requestHeader=\"sec-ch-ua-platform: 'Windows'\" requestHeader=\"Sec-Fetch-User: ?1\" requestHeader=\"Accept-Language: en-GB,en-US;q=0.9,en;q=0.8\" statusCode=401 etime=124.825 responseContentLength=118 responseHeader=\"X-Frame-Options: SAMEORIGIN\" responseHeader=\"Correlation-Id: 7c0f360b-77f0-4951-9101-74d4f8358795\" responseHeader=\"Date: Mon, 25 May 2026 13:25:19 GMT\" responseContentType=\"application/scim+json\"",
         "outcome": "failure",
         "timezone": "+0530",
@@ -209,7 +201,8 @@ An example event for `http_access` looks as following:
     "log": {
         "file": {
             "device_id": "64768",
-            "inode": "1372304",
+            "fingerprint": "0b60a0596cd536564982c51f606c5a080b3414d05185b50d98cdb5c7e41df570",
+            "inode": "1470728",
             "path": "/tmp/service_logs/test-http-access.log"
         },
         "offset": 720

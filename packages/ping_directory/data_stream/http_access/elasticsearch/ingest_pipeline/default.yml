@@ -20,11 +20,17 @@ processors:
       if: ctx.event?.original != null
       ignore_missing: true
       description: The `message` field is no longer required if the document has an `event.original` field.
+  - drop:
+      tag: drop_empty_lines
+      if: ctx.event?.original == null || ctx.event.original.trim().length() == 0
+  - drop:
+      tag: drop_non_timestamp_lines
+      if: ctx.event?.original != null && !(ctx.event.original.trim() =~ /^\[\d{2}\/[A-Za-z]{3}\/\d{4}:/)
   - grok:
       field: event.original
       tag: parse_http_access
       patterns:
-       - '\[(?<ping_directory.http_access.timestamp>\d{2}\/[A-Za-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}\.\d{3}) (?<ping_directory.http_access.timezone>[+-]\d{4})\] %{WORD:ping_directory.http_access.type}(?: instanceName="%{DATA:observer.name}")?(?: threadID=%{NUMBER:ping_directory.http_access.thread_id:long})?(?: requestID=%{NUMBER:ping_directory.http_access.request_id})?(?: correlationID="%{DATA:ping_directory.http_access.correlation_id}")?(?: from="%{IP:client.ip}:%{NUMBER:client.port:long}")?(?: method="%{WORD:http.request.method}")?(?: url="%{DATA:url.full}")?(?<_tmp_request_headers>(?: requestHeader="[^"]*")*)(?: authorizationType="%{DATA:ping_directory.http_access.authorization_type}")?(?: requestContentType="%{DATA:http.request.mime_type}")?(?: requestContentLength=%{NUMBER:http.request.bytes:long})?(?: statusCode=%{NUMBER:http.response.status_code:long})?(?: etime=%{NUMBER:ping_directory.http_access.etime:float})?(?: responseContentLength=%{NUMBER:http.response.bytes:long})?(?<_tmp_response_headers>(?: responseHeader="[^"]*")*)(?: responseContentType="%{DATA:http.response.mime_type}")?(?: redirectURI="%{DATA:ping_directory.http_access.redirect_uri}")?'
+       - '\[(?<ping_directory.http_access.timestamp>\d{2}\/[A-Za-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}\.\d{3}) (?<ping_directory.http_access.timezone>[+-]\d{4})\] %{WORD:ping_directory.http_access.type}(?: instanceName="%{DATA:observer.name}")?(?: threadID=%{NUMBER:ping_directory.http_access.thread_id:long})?(?: requestID=%{NUMBER:ping_directory.http_access.request_id})?(?: correlationID="%{DATA:ping_directory.http_access.correlation_id}")?(?: from="%{IP:client.ip}:%{NUMBER:client.port:long}")?(?: method="%{WORD:http.request.method}")?(?: url="%{DATA:url.full}")?(?<_tmp_request_headers>(?: requestHeader="[^"]*")*)(?: authorizationType="%{DATA:ping_directory.http_access.authorization_type}")?(?: requestContentType="%{DATA:http.request.mime_type}")?(?: requestContentLength=%{NUMBER:http.request.bytes:long})?(?: statusCode=%{NUMBER:http.response.status_code:long})?(?: etime=%{NUMBER:ping_directory.http_access.etime:float})?(?: responseContentLength=%{NUMBER:http.response.bytes:long})?(?<_tmp_response_headers>(?: responseHeader="[^"]*")*)(?: responseContentType="%{DATA:http.response.mime_type}")?(?: redirectURI="%{DATA:ping_directory.http_access.redirect_uri}")?\s*$'
       if: ctx.event?.original != null
       on_failure:
         - append:
@@ -97,7 +103,7 @@ processors:
   - convert:
       field: client.ip
       tag: convert_from_to_ip
-      if: ctx.ping_directory?.http_access?.from != ''
+      if: ctx.client?.ip != null
       type: ip
       ignore_missing: true
       on_failure:
@@ -109,6 +115,27 @@ processors:
       field: client.ip
       tag: enrich_client_geo
       target_field: client.geo
+      if: ctx.client?.ip != null
+      ignore_missing: true
+  - geoip:
+      database_file: GeoLite2-ASN.mmdb
+      field: client.ip
+      tag: enrich_client_asn
+      target_field: client.as
+      properties:
+        - asn
+        - organization_name
+      if: ctx.client?.ip != null
+      ignore_missing: true
+  - rename:
+      field: client.as.asn
+      tag: rename_client_as_asn
+      target_field: client.as.number
+      ignore_missing: true
+  - rename:
+      field: client.as.organization_name
+      tag: rename_client_as_organization_name
+      target_field: client.as.organization.name
       ignore_missing: true
   - set:
       field: event.outcome
@@ -235,6 +262,7 @@ processors:
   - user_agent:
       tag: user_agent_on_user_agent_original
       field: ping_directory.http_access.request_header.user_agent
+      if: ctx.ping_directory?.http_access?.request_header?.user_agent != null
       ignore_missing: true
   - set:
       field: http.request.id
@@ -257,8 +285,9 @@ processors:
       field: event.timezone
       tag: set_event_timezone_from_tz_offset
       copy_from: _conf.tz_offset
+      if: ctx._conf?.tz_offset != null && ctx.event?.timezone == null
       ignore_empty_value: true
-      override: true
+      override: false
   - date:
       field: ping_directory.http_access.timestamp
       tag: date_timestamp
