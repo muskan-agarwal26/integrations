@@ -80,6 +80,13 @@ processors:
             signon.put(flag, signon.get(flag) == '1');
           }
         }
+  - set:
+      field: workday.sign_on.Authentication_Type
+      tag: set_authentication_type_from_signon_variant
+      copy_from: workday.sign_on.Authentication_Type_for_Signon
+      ignore_empty_value: true
+      override: false
+      if: ctx.workday?.sign_on?.Authentication_Type == null
   - date:
       field: workday.sign_on.Sign_on_Time
       tag: date_signon_time
@@ -382,15 +389,15 @@ processors:
       if: ctx.workday?.sign_on?.Is_Device_Managed instanceof Boolean
   - set:
       field: host.entity.lifecycle.last_activity
-      tag: set_host_entity_last_activity_from_event_end
-      copy_from: event.end
-      ignore_empty_value: true
-      override: false
-  - set:
-      field: host.entity.lifecycle.last_activity
       tag: set_host_entity_last_activity_from_event_start
       copy_from: event.start
       ignore_empty_value: true
+  - set:
+      field: host.entity.lifecycle.last_activity
+      tag: set_host_entity_last_activity_from_event_end
+      copy_from: event.end
+      ignore_empty_value: true
+      override: true
   - remove:
       field:
         - workday.sign_on.Session_Start

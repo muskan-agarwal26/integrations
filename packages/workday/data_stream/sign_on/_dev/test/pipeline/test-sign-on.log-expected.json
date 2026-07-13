@@ -30,7 +30,7 @@
                         "managed": false
                     },
                     "lifecycle": {
-                        "last_activity": "2026-06-18T23:59:32.000Z"
+                        "last_activity": "2026-06-19T06:25:22.000Z"
                     }
                 },
                 "os": {
@@ -44,6 +44,7 @@
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
                     "Active_Session": false,
+                    "Authentication_Type": "SAML",
                     "Authentication_Type_for_Signon": "SAML",
                     "Browser_Type": "Chrome",
                     "Device_is_Trusted": false,
@@ -85,7 +86,7 @@
                         "managed": false
                     },
                     "lifecycle": {
-                        "last_activity": "2026-06-18T23:55:34.000Z"
+                        "last_activity": "2026-06-19T05:55:34.000Z"
                     }
                 }
             },
@@ -93,6 +94,7 @@
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
                     "Active_Session": false,
+                    "Authentication_Type": "OAuth 2.0",
                     "Authentication_Type_for_Signon": "OAuth 2.0",
                     "Device_is_Trusted": false,
                     "Failed_Signon": false,
@@ -148,6 +150,7 @@
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
                     "Active_Session": false,
+                    "Authentication_Type": "Biometric",
                     "Authentication_Type_for_Signon": "Biometric",
                     "Browser_Type": "Workday Phone App",
                     "Device_is_Trusted": false,
@@ -192,7 +195,7 @@
                         "managed": false
                     },
                     "lifecycle": {
-                        "last_activity": "2026-06-18T23:57:04.000Z"
+                        "last_activity": "2026-06-19T05:59:33.000Z"
                     }
                 },
                 "os": {
@@ -206,6 +209,7 @@
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
                     "Active_Session": false,
+                    "Authentication_Type": "SAML",
                     "Authentication_Type_for_Signon": "SAML",
                     "Browser_Type": "Workday Phone App",
                     "Device_is_Trusted": false,
@@ -253,6 +257,7 @@
                 "sign_on": {
                     "Account_Locked__Disabled_or_Expired": false,
                     "Active_Session": true,
+                    "Authentication_Type": "User Name Password",
                     "Authentication_Type_for_Signon": "User Name Password",
                     "Device_is_Trusted": false,
                     "Failed_Signon": false,
@@ -293,7 +298,7 @@
             "host": {
                 "entity": {
                     "lifecycle": {
-                        "last_activity": "2026-06-22T08:08:10.000Z"
+                        "last_activity": "2026-06-22T09:09:01.000Z"
                     }
                 },
                 "os": {
@@ -381,7 +386,7 @@
             "host": {
                 "entity": {
                     "lifecycle": {
-                        "last_activity": "2026-06-22T07:44:17.000Z"
+                        "last_activity": "2026-06-22T10:35:15.000Z"
                     }
                 },
                 "os": {
@@ -468,7 +473,7 @@
             "host": {
                 "entity": {
                     "lifecycle": {
-                        "last_activity": "2026-06-22T07:04:11.000Z"
+                        "last_activity": "2026-06-22T08:04:11.000Z"
                     }
                 }
             },
@@ -516,7 +521,7 @@
             "host": {
                 "entity": {
                     "lifecycle": {
-                        "last_activity": "2026-06-22T11:29:16.000Z"
+                        "last_activity": "2026-06-22T12:29:16.000Z"
                     }
                 }
             },
