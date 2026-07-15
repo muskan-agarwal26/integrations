@@ -1,0 +1,93 @@
+{
+    "expected": [
+        {
+            "@timestamp": "2026-07-09T20:33:11.112Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "link",
+                "category": [
+                    "configuration"
+                ],
+                "id": "7b3e4de1-2219-4d6c-9d6e-8f4d40c7c001",
+                "kind": "event",
+                "original": "{\"event_id\":\"7b3e4de1-2219-4d6c-9d6e-8f4d40c7c001\",\"type\":\"APP_AUTH_LOG\",\"timestamp\":\"2026-07-09T20:33:11.112450Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-AbCdEf1234567890\",\"user_email\":\"user@example.org\"},\"app_id\":\"conn-8f92d7c1\",\"link_id\":\"link-52c0e6b7\",\"action\":\"link\"}",
+                "type": [
+                    "change"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "app_id": "conn-8f92d7c1",
+                    "link_id": "link-52c0e6b7",
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "APP_AUTH_LOG"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-AbCdEf1234567890"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-AbCdEf1234567890"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T23:10:55.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "unlink",
+                "category": [
+                    "configuration"
+                ],
+                "id": "7b3e4de1-2219-4d6c-9d6e-8f4d40c7c002",
+                "kind": "event",
+                "original": "{\"event_id\":\"7b3e4de1-2219-4d6c-9d6e-8f4d40c7c002\",\"type\":\"APP_AUTH_LOG\",\"timestamp\":\"2026-07-09T23:10:55.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-AbCdEf1234567890\",\"user_email\":\"user@example.org\"},\"app_id\":null,\"link_id\":\"link-52c0e6b7\",\"action\":\"unlink\"}",
+                "type": [
+                    "change"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "link_id": "link-52c0e6b7",
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "APP_AUTH_LOG"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-AbCdEf1234567890"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-AbCdEf1234567890"
+            }
+        }
+    ]
+}

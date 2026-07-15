@@ -1,8 +1,8 @@
 # OpenAI
 
-The OpenAI integration allows you to monitor OpenAI API usage metrics and collect organization audit logs. OpenAI is an AI research and deployment company that offers [API platform](https://openai.com/api) for their industry-leading foundation models.
+The OpenAI integration allows you to monitor OpenAI API usage metrics, collect organization audit logs, and collect ChatGPT Enterprise compliance logs. OpenAI is an AI research and deployment company that offers [API platform](https://openai.com/api) for their industry-leading foundation models.
 
-With the OpenAI integration, you can track API usage metrics across their models, as well as for vector store and code interpreter. You can also collect audit logs from the OpenAI platform to monitor user actions, API key lifecycle events, and organization configuration changes. You will use Kibana to visualize your data, create alerts if usage limits are approaching, view metrics when you troubleshoot issues, and analyze audit events for security and compliance. For example, you can track token usage and API calls per model, as well as login attempts, API key creation/deletion, and role assignments.
+With the OpenAI integration, you can track API usage metrics across their models, as well as for vector store and code interpreter. You can also collect audit logs from the OpenAI platform to monitor user actions, API key lifecycle events, and organization configuration changes. Additionally, you can collect ChatGPT Enterprise compliance logs to monitor application activity, authentication events, and Codex usage across your workspace or organization. You will use Kibana to visualize your data, create alerts if usage limits are approaching, view metrics when you troubleshoot issues, and analyze audit and compliance events for security and compliance. For example, you can track token usage and API calls per model, as well as login attempts, API key creation/deletion, and role assignments.
 
 ## Data collection
 
@@ -11,6 +11,8 @@ The OpenAI integration leverages the following OpenAI APIs for data collection:
 - **Usage API**: The [OpenAI Usage API](https://platform.openai.com/docs/api-reference/usage) delivers comprehensive insights into your API activity, helping you understand and optimize your organization's OpenAI API usage.
 
 - **Audit Logs API**: The [OpenAI Audit Logs API](https://platform.openai.com/docs/api-reference/audit-logs) collects organization audit logs, providing visibility into user actions, API key lifecycle events, login attempts, role assignments, and other platform activity for security oversight and compliance.
+
+- **Compliance Logs Platform API**: The [OpenAI Compliance Logs Platform](https://help.openai.com/en/articles/9261474-compliance-api-for-enterprise-customers) collects ChatGPT Enterprise compliance logs including app_log, app_auth_log, auth_log, audit_log, codex_log, and codex_security_log at the workspace or organization level for security monitoring and regulatory compliance.
 
 - **Rate Limits API**: The [OpenAI Rate Limits API](https://platform.openai.com/docs/api-reference/project-rate-limits) collects the configured per-project, per-model rate limits (requests, tokens and images per minute, plus daily and batch limits). Combined with usage data, this lets you monitor how close each project is to being throttled.
 
@@ -23,6 +25,7 @@ The OpenAI integration collects the following data streams:
 - `audio_transcriptions`: Collects audio transcriptions usage metrics.
 - `code_interpreter_sessions`: Collects code interpreter sessions usage metrics.
 - `completions`: Collects completions usage metrics.
+- `compliance`: Collects ChatGPT Enterprise compliance logs.
 - `embeddings`: Collects embeddings usage metrics.
 - `images`: Collects images usage metrics.
 - `moderations`: Collects moderations usage metrics.
@@ -37,6 +40,8 @@ You need Elasticsearch for storing and searching your data and Kibana for visual
 
 You need an OpenAI account with a valid [Admin key](https://platform.openai.com/settings/organization/admin-keys) for programmatic access to the [OpenAI Usage API](https://platform.openai.com/docs/api-reference/usage) and [OpenAI Audit Logs API](https://platform.openai.com/docs/api-reference/audit-logs). To fetch audit logs, you must enable audit logging on the OpenAI platform in your organization settings under Data controls > Data retention. Audit logs also require Organization Owner permissions.
 
+To collect compliance logs, you additionally need a **Compliance API key** authorized for enterprise logs. The Compliance Logs Platform is available to ChatGPT Enterprise customers, and the key must be granted the `chatgpt.enterprise.compliance_export.read` scope by OpenAI support. You also need the target workspace ID or organization ID whose logs you want to collect. See [Compliance API for enterprise customers](https://help.openai.com/en/articles/9261474-compliance-api-for-enterprise-customers) for details.
+
 ## Setup
 
 For step-by-step instructions on how to set up an integration, see the [Getting started](https://www.elastic.co/guide/en/starting-with-the-elasticsearch-platform-and-its-solutions/current/getting-started-observability.html) guide.
@@ -45,9 +50,13 @@ For step-by-step instructions on how to set up an integration, see the [Getting 
 
 To generate an Admin key, please generate a key or use an existing one from the [Admin keys](https://platform.openai.com/settings/organization/admin-keys) page. Use the Admin key to configure the OpenAI integration.
 
+### Generate a Compliance API key
+
+The Compliance Logs Platform is available to ChatGPT Enterprise customers. Request a Compliance API key from OpenAI and ensure it is authorized for enterprise logs (contact OpenAI support to grant the key the `chatgpt.enterprise.compliance_export.read` scope). Use this key, together with the workspace or organization ID whose logs you want to collect, to configure the `compliance` data stream. See [Compliance API for enterprise customers](https://help.openai.com/en/articles/9261474-compliance-api-for-enterprise-customers) for details.
+
 ## Collection behavior
 
-Among the configuration options for the OpenAI integration, the following settings are particularly relevant: "Initial interval", "Bucket width" and "Finalization grace period" for usage metrics, and "Initial interval" and "Interval" for audit logs.
+Among the configuration options for the OpenAI integration, the following settings are particularly relevant: "Initial interval", "Bucket width" and "Finalization grace period" for usage metrics, and "Initial interval" and "Interval" for audit and compliance logs.
 
 ### Initial interval
 
@@ -634,6 +643,364 @@ An example event for `completions` looks as following:
 | openai.images.images | Number of images processed | long |  |
 | openai.images.size | Image size (dimension of the generated image) | keyword |  |
 | openai.moderations.input_tokens | Number of input tokens used. | long |  |
+
+
+### Compliance
+
+The `compliance` data stream captures ChatGPT Enterprise compliance logs collected from the OpenAI Compliance Logs Platform, covering application (`APP_LOG`, `APP_AUTH_LOG`), authentication (`AUTH_LOG`), audit (`AUDIT_LOG`), and Codex (`CODEX_LOG`, `CODEX_SECURITY_LOG`) activity.
+
+An example event for `compliance` looks as following:
+
+```json
+{
+    "@timestamp": "2026-07-09T08:55:12.762Z",
+    "agent": {
+        "ephemeral_id": "65c6a217-9727-4e28-9c9f-836d21553f2a",
+        "id": "73e82da3-7f18-4881-9282-2ba48f9c0ee2",
+        "name": "elastic-agent-71633",
+        "type": "filebeat",
+        "version": "8.18.0"
+    },
+    "data_stream": {
+        "dataset": "openai.compliance",
+        "namespace": "73387",
+        "type": "logs"
+    },
+    "ecs": {
+        "version": "9.3.0"
+    },
+    "elastic_agent": {
+        "id": "73e82da3-7f18-4881-9282-2ba48f9c0ee2",
+        "snapshot": false,
+        "version": "8.18.0"
+    },
+    "event": {
+        "action": "login_success",
+        "agent_id_status": "verified",
+        "category": [
+            "authentication"
+        ],
+        "dataset": "openai.compliance",
+        "id": "c97ee69d-41a6-4587-91ee-1ccb1afab002",
+        "ingested": "2026-07-15T06:20:16Z",
+        "kind": "event",
+        "original": "{\"action_data\":{\"action\":\"login_success\",\"auth_provider_name\":\"password\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_email\":\"user@example.org\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\"},\"event_id\":\"c97ee69d-41a6-4587-91ee-1ccb1afab002\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"request_metadata\":{\"client_ip\":\"10.12.43.122\",\"client_user_agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36\"},\"timestamp\":\"2026-07-09T08:55:12.762392Z\",\"type\":\"AUTH_LOG\"}",
+        "type": [
+            "info"
+        ]
+    },
+    "input": {
+        "type": "cel"
+    },
+    "openai": {
+        "compliance": {
+            "action_data": {
+                "auth_provider_name": "password"
+            },
+            "actor": {
+                "type": "ACCOUNT_USER"
+            },
+            "principal": {
+                "type": "CHATGPT_WORKSPACE"
+            },
+            "type": "AUTH_LOG"
+        }
+    },
+    "organization": {
+        "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+    },
+    "related": {
+        "ip": [
+            "10.12.43.122"
+        ],
+        "user": [
+            "user@example.org",
+            "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+        ]
+    },
+    "source": {
+        "ip": "10.12.43.122"
+    },
+    "tags": [
+        "preserve_original_event",
+        "forwarded",
+        "openai-compliance"
+    ],
+    "user": {
+        "domain": "example.org",
+        "email": "user@example.org",
+        "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+    },
+    "user_agent": {
+        "device": {
+            "name": "Mac"
+        },
+        "name": "Other",
+        "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "os": {
+            "full": "Mac OS X 10.15.7",
+            "name": "Mac OS X",
+            "version": "10.15.7"
+        }
+    }
+}
+```
+
+**Exported fields**
+
+| Field | Description | Type |
+|---|---|---|
+| @timestamp | Date/time when the event originated. This is the date/time extracted from the event, typically representing when the event was generated by the source. If the event source has no original timestamp, this value is typically populated by the first time the event was received by the pipeline. Required field for all events. | date |
+| data_stream.dataset | The field can contain anything that makes sense to signify the source of the data. Examples include `nginx.access`, `prometheus`, `endpoint` etc. For data streams that otherwise fit, but that do not have dataset set we use the value "generic" for the dataset value. `event.dataset` should have the same value as `data_stream.dataset`. Beyond the Elasticsearch data stream naming criteria noted above, the `dataset` value has additional restrictions:   \* Must not contain `-`   \* No longer than 100 characters | constant_keyword |
+| data_stream.namespace | A user defined namespace. Namespaces are useful to allow grouping of data. Many users already organize their indices this way, and the data stream naming scheme now provides this best practice as a default. Many users will populate this field with `default`. If no value is used, it falls back to `default`. Beyond the Elasticsearch index naming criteria noted above, `namespace` value has the additional restrictions:   \* Must not contain `-`   \* No longer than 100 characters | constant_keyword |
+| data_stream.type | An overarching type for the data stream. Currently allowed values are "logs" and "metrics". We expect to also add "traces" and "synthetics" in the near future. | constant_keyword |
+| event.dataset | Name of the dataset. If an event source publishes more than one type of log or events (e.g. access log, error log), the dataset is used to specify which one the event comes from. It's recommended but not required to start the dataset name with the module name, followed by a dot, then the dataset name. | constant_keyword |
+| event.module | Name of the module this data is coming from. If your monitoring agent supports the concept of modules or plugins to process events of a given source (e.g. Apache logs), `event.module` should contain the name of this module. | constant_keyword |
+| input.type | Type of filebeat input. | keyword |
+| observer.product | The product name of the observer. | constant_keyword |
+| observer.vendor | Vendor name of the observer. | constant_keyword |
+| openai.compliance.action | Sub-action name. AUDIT_LOG: the audit action (e.g. WORKSPACE_TOGGLE_FEATURE). APP_AUTH_LOG: link/unlink. Allowed values: APP_AUTH_LOG: link, unlink | AUDIT_LOG: 150 action names (see AUDIT_LOG sheet). | keyword |
+| openai.compliance.action_data.action | Auth sub-action (e.g. login_success, signup_success, password_reset_initiated). | keyword |
+| openai.compliance.action_data.added_user_id | Auth user ID added (GROUP_EDIT). | keyword |
+| openai.compliance.action_data.affected_connector_ids | Connector IDs whose workspace permissions were affected (APP_PUBLISH / WORKSPACE_TOGGLE_FEATURE). | keyword |
+| openai.compliance.action_data.after | Pagination cursor for list actions (RFC3339 timestamp). | date |
+| openai.compliance.action_data.after_string | Pagination cursor for list actions (Opaque token). | keyword |
+| openai.compliance.action_data.agent_id | Workspace agent identifier. | keyword |
+| openai.compliance.action_data.alert_recipients.email | Recipient email for usage alerts (SUBSCRIPTION_SET_USAGE_ALERTS). | keyword |
+| openai.compliance.action_data.alert_recipients.type | Recipient type; email. Allowed values: email. | keyword |
+| openai.compliance.action_data.alert_thresholds.credits | Credit threshold amount. | long |
+| openai.compliance.action_data.alert_thresholds.type | Threshold type; absolute. Allowed values: absolute. | keyword |
+| openai.compliance.action_data.allow_all_in_workspace | Whether the app is visible to the whole workspace (APP_UPDATE_ACCESS_POLICY). | boolean |
+| openai.compliance.action_data.allowed_ips | CIDR entries in the IP allowlist (WORKSPACE_SET_\*_IP_ALLOWLIST). | keyword |
+| openai.compliance.action_data.allowed_user_id | Auth user ID granted access (APP_ALLOW_USER). | keyword |
+| openai.compliance.action_data.already_exists | True if a shared conversation already existed (CONVERSATION_SHARE). | boolean |
+| openai.compliance.action_data.app_id | App / connector identifier. | keyword |
+| openai.compliance.action_data.app_name | App / connector friendly name. | keyword |
+| openai.compliance.action_data.auth_provider_name | Authentication provider used (e.g. password, google, saml). | keyword |
+| openai.compliance.action_data.auth_user_id | Auth user ID of a memory owner (DELETE_MEMORY). | keyword |
+| openai.compliance.action_data.automation_id | Automation identifier. | keyword |
+| openai.compliance.action_data.before | Pagination cursor upper bound for list actions (RFC3339 timestamp). | date |
+| openai.compliance.action_data.before_string | Pagination cursor upper bound for list actions (Opaque token). | keyword |
+| openai.compliance.action_data.changed_fields | List of fields changed by the request. | keyword |
+| openai.compliance.action_data.changed_fields_by_connector | Map of connector ID -\> changed fields (keys are connector IDs). | flattened |
+| openai.compliance.action_data.classification | FedRAMP banner classification string (WORKSPACE_SET_FEDRAMP_BANNER). | keyword |
+| openai.compliance.action_data.client_id | Codex remote-control client identifier. | keyword |
+| openai.compliance.action_data.codex_environment_id | Codex environment identifier (GET_CODE_ENVIRONMENT). | keyword |
+| openai.compliance.action_data.context_plugin_id | Plugin whose UI initiated the action. | keyword |
+| openai.compliance.action_data.conversation_id | Conversation identifier. | keyword |
+| openai.compliance.action_data.created_at | Creation time (epoch seconds). | date |
+| openai.compliance.action_data.created_by_user_id | Auth user ID that created the service account (nullable). | keyword |
+| openai.compliance.action_data.credential_id | Credential / personal access token identifier. | keyword |
+| openai.compliance.action_data.credential_name | User-provided credential name. | keyword |
+| openai.compliance.action_data.credential_type | Credential type; personal_access_token. Allowed values: personal_access_token. | keyword |
+| openai.compliance.action_data.cursor | Pagination cursor (list actions). | keyword |
+| openai.compliance.action_data.deactivated_at | Service account deletion time (epoch seconds) or null. | date |
+| openai.compliance.action_data.deleted_user_id | Auth user ID deleted (USER_DELETE). | keyword |
+| openai.compliance.action_data.disallowed_user_id | Auth user ID whose access was revoked (APP_DISALLOW_USER). | keyword |
+| openai.compliance.action_data.domain_id | Managed domain identifier. | keyword |
+| openai.compliance.action_data.domains | Allowed action domains for a GPT (may be null to clear). | keyword |
+| openai.compliance.action_data.email_address | Single email address (invite actions). | keyword |
+| openai.compliance.action_data.email_addresses | List of email addresses (invite / group actions). | keyword |
+| openai.compliance.action_data.enabled | Enabled / active state after the change. | boolean |
+| openai.compliance.action_data.environment_id | Environment identifier. | keyword |
+| openai.compliance.action_data.event_type | Compliance event category: filter list (array) or resolved category (download, string). Allowed values: Compliance event categories (APP_LOG, APP_AUTH_LOG, AUDIT_LOG, AUTH_LOG, CODEX_LOG, CODEX_SECURITY_LOG, ...). | keyword |
+| openai.compliance.action_data.expires_at | Credential expiration time (epoch seconds) or null. | date |
+| openai.compliance.action_data.feature | Feature / flag identifier toggled (WORKSPACE_TOGGLE_FEATURE / WORKSPACE_SET_SHARING_PERMISSION). | keyword |
+| openai.compliance.action_data.file_format | File output mode: url or id. Allowed values: url, id. | keyword |
+| openai.compliance.action_data.file_id | File identifier. | keyword |
+| openai.compliance.action_data.file_name | File name (FILE_DOWNLOAD). | keyword |
+| openai.compliance.action_data.gpt_id | GPT identifier. | keyword |
+| openai.compliance.action_data.group_id | Group identifier. | keyword |
+| openai.compliance.action_data.hostname | Domain hostname added (DOMAIN_CREATE). | keyword |
+| openai.compliance.action_data.id | Resource identifier (GPT / project) for the action. | keyword |
+| openai.compliance.action_data.include_summary | Whether recording summary sections are included (DOWNLOAD_RECORDING_TRANSCRIPT). | boolean |
+| openai.compliance.action_data.installation_policy | Plugin installation policy after the update. | keyword |
+| openai.compliance.action_data.installation_policy_before | Plugin installation policy before the update. | keyword |
+| openai.compliance.action_data.installed_by_default_role_ids | Role IDs the plugin is installed for by default (after). | keyword |
+| openai.compliance.action_data.installed_by_default_role_ids_before | Role IDs the plugin was installed for by default (before). | keyword |
+| openai.compliance.action_data.knowledge_app_type | App backend / type provisioned (APP_CREATE). | keyword |
+| openai.compliance.action_data.limit | Requested page size (list actions). | long |
+| openai.compliance.action_data.log_file_id | Compliance log file identifier (download actions). | keyword |
+| openai.compliance.action_data.logged_out_user_id | Auth user ID logged out by admin (USER_LOGGED_OUT_BY_ADMIN). | keyword |
+| openai.compliance.action_data.markdown | FedRAMP banner markdown body. | keyword |
+| openai.compliance.action_data.memory_context_id | Memory context identifier (DELETE_MEMORY). | keyword |
+| openai.compliance.action_data.memory_id | Memory identifier. | keyword |
+| openai.compliance.action_data.message_id | Message identifier (rating actions). | keyword |
+| openai.compliance.action_data.mime_type | MIME type of the file (FILE_DOWNLOAD). | keyword |
+| openai.compliance.action_data.name | Resource / service-account / credential name. | keyword |
+| openai.compliance.action_data.new_name | New / updated name. | keyword |
+| openai.compliance.action_data.new_owner_email | Email of the new GPT owner (CUSTOM_GPT_CHANGE_OWNER). | keyword |
+| openai.compliance.action_data.new_role | Role assigned to the user (USER_ROLE_UPDATED). | keyword |
+| openai.compliance.action_data.new_workspace_permissions_by_connector | Map of connector ID -\> permission snapshot after the change. | flattened |
+| openai.compliance.action_data.old_name | Previous name before the change. | keyword |
+| openai.compliance.action_data.order | Sort order (list directory actions). | keyword |
+| openai.compliance.action_data.overage_limit_credits | Credit overage limit: integer or the string "unlimited". Allowed values are integer, or "unlimited". | keyword |
+| openai.compliance.action_data.owner_id | Owner filter / owner user ID (list agents etc.). | keyword |
+| openai.compliance.action_data.owner_user_id | Auth user ID of the credential owner. | keyword |
+| openai.compliance.action_data.plugin_id | Plugin identifier. | keyword |
+| openai.compliance.action_data.previous_enabled | Service account active state before the update. | boolean |
+| openai.compliance.action_data.previous_name | Service account name before the update (nullable). | keyword |
+| openai.compliance.action_data.previous_role | Previous role for a share target (nullable) (SKILL_SHARE). | keyword |
+| openai.compliance.action_data.previous_workspace_permissions_by_connector | Map of connector ID -\> permission snapshot before the change. | flattened |
+| openai.compliance.action_data.principal_id | Principal (user or group) identifier for a share target. | keyword |
+| openai.compliance.action_data.principal_type | Principal type: user or group. Allowed values: user, group. | keyword |
+| openai.compliance.action_data.project_id | Project identifier. | keyword |
+| openai.compliance.action_data.public_display_name | External display name (WORKSPACE_SET_IS_DISCOVERABLE). | keyword |
+| openai.compliance.action_data.rating | Message rating: thumbs_up or thumbs_down. Allowed values: thumbs_up, thumbs_down. | keyword |
+| openai.compliance.action_data.recording_id | Recording identifier. | keyword |
+| openai.compliance.action_data.remote_thread_id | Codex remote-control thread identifier. | keyword |
+| openai.compliance.action_data.removed_user_id | Auth user ID removed (GROUP_REMOVE_USER). | keyword |
+| openai.compliance.action_data.requested_access_removals.recipient_type | Recipient type requested for removal (PROJECT_UPDATE_SHARING). Allowed values: private, email, user, group, workspace, workspace_link, link, marketplace. | keyword |
+| openai.compliance.action_data.requested_access_removals.user_id | User ID requested for removal. | keyword |
+| openai.compliance.action_data.requested_access_updates.capabilities | Capabilities requested for the recipient. | keyword |
+| openai.compliance.action_data.requested_access_updates.recipient_type | Recipient type requested to add/update. Allowed values: private, email, user, group, workspace, workspace_link, link, marketplace. | keyword |
+| openai.compliance.action_data.requested_access_updates.user_id | User ID requested to add/update. | keyword |
+| openai.compliance.action_data.revoked_at | Revocation time (epoch seconds) or null. | date |
+| openai.compliance.action_data.revoked_unified_sessions | Unified session IDs revoked (SESSION_REVOKE). | keyword |
+| openai.compliance.action_data.role | Role granted / removed (manager or user; or invite role). Allowed values: manager, user (service-account/skill share targets). | keyword |
+| openai.compliance.action_data.room_id | Project chat room identifier. | keyword |
+| openai.compliance.action_data.scope_id | Connector scope identifier (DELETE_PROJECT_CONNECTOR_SCOPE). | keyword |
+| openai.compliance.action_data.scopes | Product-access scopes on the credential (sorted, deduplicated). | keyword |
+| openai.compliance.action_data.service_account_id | Service account auth user ID. | keyword |
+| openai.compliance.action_data.session_id | Session identifier (SESSION_REVOKE). | keyword |
+| openai.compliance.action_data.shared_conversation_id | Shared conversation identifier (CONVERSATION_SHARE / view). | keyword |
+| openai.compliance.action_data.shared_to.capabilities | Capabilities granted to the recipient segment. | keyword |
+| openai.compliance.action_data.shared_to.group_id | Group ID recipient (sharing). | keyword |
+| openai.compliance.action_data.shared_to.recipient_type | Recipient type (UPDATE_SHARING): private/email/user/group/workspace/workspace_link/link/marketplace. Allowed values: private, email, user, group, workspace, workspace_link, link, marketplace. | keyword |
+| openai.compliance.action_data.shared_to.type | Recipient segment type (CHANGE_VISIBILITY): private/email/user/group/workspace/workspace_link/link/marketplace. Allowed values: private, email, user, group, workspace, workspace_link, link, marketplace. | keyword |
+| openai.compliance.action_data.shared_to.user_email | User email recipient when the segment type is user (sharing). | keyword |
+| openai.compliance.action_data.shared_to.user_id | User ID recipient when the segment type is user (sharing). | keyword |
+| openai.compliance.action_data.sign_in_endpoint | SAML sign-in endpoint URL / SCIM connection identifier. | keyword |
+| openai.compliance.action_data.since_timestamp | Lower-bound timestamp filter (list actions). | date |
+| openai.compliance.action_data.skill_id | Skill identifier. | keyword |
+| openai.compliance.action_data.skill_name | Skill name. | keyword |
+| openai.compliance.action_data.source_surface | Admin surface that initiated the action (admin_apps or admin_plugins). Allowed values: admin_apps, admin_plugins. | keyword |
+| openai.compliance.action_data.state_changed | Whether the successful request performed the initial revoke transition. | boolean |
+| openai.compliance.action_data.system_instruction | Workspace default system prompt (WORKSPACE_SET_SYSTEM_INSTRUCTION). | keyword |
+| openai.compliance.action_data.task_id | Codex task identifier. | keyword |
+| openai.compliance.action_data.textdoc_id | Canvas text document identifier. | keyword |
+| openai.compliance.action_data.third_party_gizmo_id | Third-party GPT identifier. | keyword |
+| openai.compliance.action_data.total_requested | Count of join requests approved (INVITE_ACCEPT_ALL). | long |
+| openai.compliance.action_data.use_workspace_name_for_discovery | Whether the workspace name is reused for discovery. | boolean |
+| openai.compliance.action_data.user_id | Auth user ID targeted by the action. | keyword |
+| openai.compliance.action_data.value | Generic value payload (boolean/string) for toggle/set actions. | keyword |
+| openai.compliance.action_data.value_bool | Boolean form of action_data.value (populated when the changed value is a boolean). | boolean |
+| openai.compliance.action_data.workspace_access_state | Skill workspace access state: restricted / discoverable / enabled. Allowed values: restricted, discoverable, enabled. | keyword |
+| openai.compliance.action_data.workspace_id | Workspace identifier. | keyword |
+| openai.compliance.action_data.workspace_policy | Workspace policy document or identifier (WORKSPACE_SET_POLICY). | keyword |
+| openai.compliance.action_privilege | Privilege level for the action: ADMIN or STANDARD_USER. Allowed values: ADMIN, STANDARD_USER. | keyword |
+| openai.compliance.action_result | Outcome of the action: SUCCESS, BLOCKED, or ERROR. Allowed values: SUCCESS, BLOCKED, ERROR. | keyword |
+| openai.compliance.actor.redacted_id | Redacted identifier of the API key (present when actor.type = API_KEY). | keyword |
+| openai.compliance.actor.type | Type of actor that performed the action (e.g. ACCOUNT_USER, API_KEY). Allowed values: ACCOUNT_USER, API_KEY. | keyword |
+| openai.compliance.actor.user_email | Email of the acting user (present when the actor is a user). | keyword |
+| openai.compliance.actor.user_id | Auth user ID of the acting user (present when the actor is a user). | keyword |
+| openai.compliance.app_id | Identifier of the connected app / connector. | keyword |
+| openai.compliance.app_name | Friendly name of the app / connector. | keyword |
+| openai.compliance.app_type | App backend type (e.g. SERVICE). Allowed values: SERVICE, OPEN_API, MCP, FIRST_PARTY_ECOSYSTEM, UNKNOWN. | keyword |
+| openai.compliance.client_id | Codex client identifier associated with the event. Allowed values: CODEX_CLI, CODEX_WEB, CODEX_IDE_VSCODE, CODEX_GITHUB_ACTION, CODEX_SDK_TS, CODEX_SERVICE_EXEC, CODEX_UNKNOWN_DEFAULT. | keyword |
+| openai.compliance.conversation_id | Conversation in which the app was invoked. | keyword |
+| openai.compliance.event_details.access_token_id | Codex access token identifier. | keyword |
+| openai.compliance.event_details.access_token_name | User-provided access token name. | keyword |
+| openai.compliance.event_details.arguments.jql | Arguments passed to an app/MCP call (shape varies; example is a Jira JQL query). | keyword |
+| openai.compliance.event_details.call_id | Identifier of the MCP/tool call. | keyword |
+| openai.compliance.event_details.created_by_user_id | Auth user ID that created the resource. | keyword |
+| openai.compliance.event_details.current_settings.default_model | Default model after the change. | keyword |
+| openai.compliance.event_details.current_settings.network_access | Network-access policy after the change. | keyword |
+| openai.compliance.event_details.decision | Approval decision for a suggested tool call (e.g. approved, denied). | keyword |
+| openai.compliance.event_details.detail_type | Discriminator identifying the specific Codex event-details schema. | keyword |
+| openai.compliance.event_details.elicitation_type | Type of MCP elicitation (e.g. oauth_consent). | keyword |
+| openai.compliance.event_details.environment_fields.agent_settings.model | Model configured for the environment's agent. | keyword |
+| openai.compliance.event_details.environment_fields.cache_settings.enabled | Whether environment caching is enabled. | boolean |
+| openai.compliance.event_details.environment_fields.description | Environment description. | keyword |
+| openai.compliance.event_details.environment_fields.env_var_keys | Names (keys only) of configured environment variables. | keyword |
+| openai.compliance.event_details.environment_fields.label | Environment label / name. | keyword |
+| openai.compliance.event_details.environment_fields.permissions.network_access | Environment network-access permission. | keyword |
+| openai.compliance.event_details.environment_fields.repos | Repositories attached to the environment. | keyword |
+| openai.compliance.event_details.environment_id | Codex environment identifier. | keyword |
+| openai.compliance.event_details.error_code | Error code when the action failed (null on success). | keyword |
+| openai.compliance.event_details.error_message | Error message when the action failed (null on success). | keyword |
+| openai.compliance.event_details.expires_at | Expiration time, e.g. for access tokens. Format assumed RFC3339 (verify). | date |
+| openai.compliance.event_details.finding_id | Security finding identifier. | keyword |
+| openai.compliance.event_details.marketplace_name | Marketplace source for a plugin. | keyword |
+| openai.compliance.event_details.model | Model used for the turn / prompt. | keyword |
+| openai.compliance.event_details.name | Tool / function name. | keyword |
+| openai.compliance.event_details.phase | Turn phase (e.g. prompt). | keyword |
+| openai.compliance.event_details.plugin_creator_account_user_id | Account user ID that created the plugin. | keyword |
+| openai.compliance.event_details.plugin_display_name | Plugin display name. | keyword |
+| openai.compliance.event_details.plugin_id | Plugin identifier. | keyword |
+| openai.compliance.event_details.plugin_name | Plugin (technical) name. | keyword |
+| openai.compliance.event_details.plugin_release_id | Plugin release identifier. | keyword |
+| openai.compliance.event_details.plugin_scope | Plugin scope (e.g. WORKSPACE). Allowed values: GLOBAL, WORKSPACE, USER. | keyword |
+| openai.compliance.event_details.plugin_version | Plugin version. | keyword |
+| openai.compliance.event_details.pr_url | Pull request URL associated with the finding / scan. | keyword |
+| openai.compliance.event_details.previous_settings.default_model | Default model before the change. | keyword |
+| openai.compliance.event_details.previous_settings.network_access | Network-access policy before the change. | keyword |
+| openai.compliance.event_details.prompt_text | Prompt text submitted by the user (sensitive content). | keyword |
+| openai.compliance.event_details.reasoning_effort | Reasoning effort setting (e.g. low/medium/high). | keyword |
+| openai.compliance.event_details.response_text | Model response text (sensitive content). | keyword |
+| openai.compliance.event_details.result_preview | Preview of a tool/call result. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.environment_id | Environment the scan configuration targets. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.lookback_days | Scan lookback window in days. | long |
+| openai.compliance.event_details.scan_configuration_fields.notification_rules_created_count | Count of notification rules created. | long |
+| openai.compliance.event_details.scan_configuration_fields.notification_rules_deleted_count | Count of notification rules deleted. | long |
+| openai.compliance.event_details.scan_configuration_fields.notification_rules_updated_count | Count of notification rules updated. | long |
+| openai.compliance.event_details.scan_configuration_fields.owner_id | Owner (auth user ID) of the scan configuration. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.repo_id | Repository identifier scanned. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.repo_url | Repository URL scanned. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.scan_type | Type of scan (e.g. secrets). Value set not fully specified. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.state | Scan configuration state (e.g. active). Value set not fully specified. | keyword |
+| openai.compliance.event_details.scan_configuration_fields.workspace_id | Workspace of the scan configuration. | keyword |
+| openai.compliance.event_details.scan_configuration_id | Scan configuration identifier. | keyword |
+| openai.compliance.event_details.service_tier | Service tier used for the request. | keyword |
+| openai.compliance.event_details.session_id | Codex session identifier. | keyword |
+| openai.compliance.event_details.status | Outcome status (e.g. success, error). | keyword |
+| openai.compliance.event_details.token_usage.cached_input_tokens | Cached input tokens used. | long |
+| openai.compliance.event_details.token_usage.input_tokens | Input tokens used. | long |
+| openai.compliance.event_details.token_usage.output_tokens | Output tokens generated. | long |
+| openai.compliance.event_details.token_usage.reasoning_output_tokens | Reasoning output tokens generated. | long |
+| openai.compliance.event_details.tool_call_id | Identifier of the tool call. | keyword |
+| openai.compliance.event_details.tool_input | Input passed to the tool (shape varies). | keyword |
+| openai.compliance.event_details.tool_meta.connector_id | Connector identifier associated with the tool. | keyword |
+| openai.compliance.event_details.tool_meta.resource_id | Resource identifier associated with the tool. | keyword |
+| openai.compliance.event_details.tool_name | Name of the tool invoked. | keyword |
+| openai.compliance.event_details.tool_type | Tool type (e.g. filesystem). | keyword |
+| openai.compliance.event_details.turn_id | Identifier of the conversation turn. | keyword |
+| openai.compliance.event_details.updated_fields.assignee_user_email | Email of the finding assignee after update. | keyword |
+| openai.compliance.event_details.updated_fields.criticality | Finding criticality after update (e.g. low/medium/high). Value set not fully specified. | keyword |
+| openai.compliance.event_details.updated_fields.criticality_reason | Reason for the criticality. | keyword |
+| openai.compliance.event_details.updated_fields.criticality_reason_updated | Whether criticality_reason changed in this update. | boolean |
+| openai.compliance.event_details.updated_fields.environment_id | Environment identifier (updated field). | keyword |
+| openai.compliance.event_details.updated_fields.lookback_days | Lookback days (updated field). | long |
+| openai.compliance.event_details.updated_fields.notification_rules_created_count | Notification rules created count (updated field). | long |
+| openai.compliance.event_details.updated_fields.notification_rules_deleted_count | Notification rules deleted count (updated field). | long |
+| openai.compliance.event_details.updated_fields.notification_rules_updated_count | Notification rules updated count (updated field). | long |
+| openai.compliance.event_details.updated_fields.owner_id | Owner id (updated field). | keyword |
+| openai.compliance.event_details.updated_fields.project_overview_length | Length of the project overview text (updated). | long |
+| openai.compliance.event_details.updated_fields.project_overview_updated | Whether the project overview changed. | boolean |
+| openai.compliance.event_details.updated_fields.resolution_reason | Reason recorded when resolving the finding. | keyword |
+| openai.compliance.event_details.updated_fields.resolution_reason_updated | Whether resolution_reason changed. | boolean |
+| openai.compliance.event_details.updated_fields.state | State (updated field). | keyword |
+| openai.compliance.event_details.updated_fields.status | Finding status after update (e.g. wontfix). Value set not fully specified. | keyword |
+| openai.compliance.event_details.url | URL associated with the event (e.g. OAuth consent URL). | keyword |
+| openai.compliance.event_id | Globally unique event identifier. Use for de-duplication (delivery is at-least-once). | keyword |
+| openai.compliance.event_type | Codex event type/category discriminator (top-level). | keyword |
+| openai.compliance.input.query | Query/input sent to the app (request log). Exact shape not fully specified. | keyword |
+| openai.compliance.link_id | Identifier of the app connection (link) that was linked/unlinked. | keyword |
+| openai.compliance.log_type | APP_LOG sub-type: request or response. Allowed values: request, response. | keyword |
+| openai.compliance.output.display_title | Title of a returned result item (response log). | keyword |
+| openai.compliance.output.display_url | URL of a returned result item (response log). | keyword |
+| openai.compliance.principal.id | Identifier of the ChatGPT workspace (or organization) the event belongs to. | keyword |
+| openai.compliance.principal.type | Principal that owns the event (e.g. CHATGPT_WORKSPACE). Allowed values: CHATGPT_WORKSPACE, API_PLATFORM_ORG. | keyword |
+| openai.compliance.request_metadata.client_ip | Client IP address captured at request time. | ip |
+| openai.compliance.request_metadata.client_ip_details.asn | Illustrative sub-field of client_ip_details (real shape unspecified). | keyword |
+| openai.compliance.request_metadata.client_ip_details.country | Illustrative sub-field of client_ip_details (real shape unspecified). | keyword |
+| openai.compliance.request_metadata.client_ja3 | JA3 TLS fingerprint of the client (may be empty). | keyword |
+| openai.compliance.request_metadata.client_ja4 | JA4 TLS fingerprint of the client (may be empty). | keyword |
+| openai.compliance.request_metadata.client_user_agent | Client User-Agent string captured at request time. | keyword |
+| openai.compliance.request_metadata.destination_hostname | Destination hostname for the request (nullable). | keyword |
+| openai.compliance.timestamp | Event time (RFC3339 / ISO-8601, UTC). | date |
+| openai.compliance.type | Top-level event category (APP_LOG, APP_AUTH_LOG, AUDIT_LOG, AUTH_LOG, CODEX_LOG, CODEX_SECURITY_LOG). Allowed values: APP_LOG, APP_AUTH_LOG, AUDIT_LOG, AUTH_LOG, CODEX_LOG, CODEX_SECURITY_LOG (full platform also emits other categories). | keyword |
+| openai.compliance.workspace_id | Workspace identifier associated with the event. | keyword |
 
 
 ### Embeddings

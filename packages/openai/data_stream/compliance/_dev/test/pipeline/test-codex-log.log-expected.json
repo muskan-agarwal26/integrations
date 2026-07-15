@@ -1,0 +1,1095 @@
+{
+    "expected": [
+        {
+            "@timestamp": "2026-07-09T10:10:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "access_token_created",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000010",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000010\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:10:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"ACCESS_TOKEN_CREATED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"ACCESS_TOKEN_CREATED\",\"access_token_id\":\"cat-1001\",\"access_token_name\":\"ci-runner-token\",\"created_by_user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"expires_at\":\"2026-10-09T10:10:00Z\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "access_token_id": "cat-1001",
+                        "access_token_name": "ci-runner-token",
+                        "created_by_user_id": "user-TUvqhBX7HbQPRgHyEBt5WRcI",
+                        "detail_type": "ACCESS_TOKEN_CREATED",
+                        "expires_at": "2026-10-09T10:10:00.000Z"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T12:00:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "access_token_revoked",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000011",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000011\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T12:00:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"ACCESS_TOKEN_REVOKED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"ACCESS_TOKEN_REVOKED\",\"access_token_id\":\"cat-1001\",\"access_token_name\":\"ci-runner-token\",\"created_by_user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"expires_at\":null}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "access_token_id": "cat-1001",
+                        "access_token_name": "ci-runner-token",
+                        "created_by_user_id": "user-TUvqhBX7HbQPRgHyEBt5WRcI",
+                        "detail_type": "ACCESS_TOKEN_REVOKED"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:11:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "app_mcp_call",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000012",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000012\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:11:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"APP_MCP_CALL\",\"client_id\":\"CODEX_CLI\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"APP_MCP_CALL\",\"call_id\":\"mcp-call-1\",\"name\":\"search_issues\",\"arguments\":{\"jql\":\"project=OPS AND status=Open\"},\"tool_meta\":{\"connector_id\":\"conn-jira01\",\"resource_id\":\"jira-cloud\"}}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "tool": {
+                    "call": {
+                        "id": "mcp-call-1"
+                    },
+                    "name": "search_issues"
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_CLI",
+                    "event_details": {
+                        "arguments": {
+                            "jql": "project=OPS AND status=Open"
+                        },
+                        "call_id": "mcp-call-1",
+                        "detail_type": "APP_MCP_CALL",
+                        "name": "search_issues",
+                        "tool_meta": {
+                            "connector_id": "conn-jira01",
+                            "resource_id": "jira-cloud"
+                        }
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:11:05.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "app_mcp_elicitation",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000014",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000014\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:11:05.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"APP_MCP_ELICITATION\",\"client_id\":\"CODEX_CLI\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"APP_MCP_ELICITATION\",\"call_id\":\"mcp-call-1\",\"name\":\"search_issues\",\"elicitation_type\":\"oauth_consent\",\"phase\":\"prompt\",\"decision\":\"approved\",\"url\":\"https://auth.example.org/oauth/consent?req=abc123\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "tool": {
+                    "call": {
+                        "id": "mcp-call-1"
+                    },
+                    "name": "search_issues"
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_CLI",
+                    "event_details": {
+                        "call_id": "mcp-call-1",
+                        "decision": "approved",
+                        "detail_type": "APP_MCP_ELICITATION",
+                        "elicitation_type": "oauth_consent",
+                        "name": "search_issues",
+                        "phase": "prompt"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "url": {
+                "full": "https://auth.example.org/oauth/consent?req=abc123"
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:11:02.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "app_mcp_result",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000013",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000013\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:11:02.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"APP_MCP_RESULT\",\"client_id\":\"CODEX_CLI\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"APP_MCP_RESULT\",\"call_id\":\"mcp-call-1\",\"name\":\"search_issues\",\"status\":\"success\",\"error_code\":null,\"error_message\":null,\"result_preview\":\"OPS-4412 ingest lag; OPS-4415 dashboard 500s\"}}",
+                "outcome": "success",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "tool": {
+                    "call": {
+                        "id": "mcp-call-1"
+                    },
+                    "name": "search_issues"
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_CLI",
+                    "event_details": {
+                        "call_id": "mcp-call-1",
+                        "detail_type": "APP_MCP_RESULT",
+                        "name": "search_issues",
+                        "result_preview": "OPS-4412 ingest lag; OPS-4415 dashboard 500s",
+                        "status": "success"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:00:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "environment_created",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000001",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000001\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:00:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"ENVIRONMENT_CREATED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"ENVIRONMENT_CREATED\",\"environment_id\":\"env-123\",\"environment_fields\":{\"label\":\"alert-monitor\",\"description\":\"CI environment for the alert-monitor service\",\"repos\":[\"git@github.com:openai/example.git\"],\"env_var_keys\":[\"API_KEY\",\"DATADOG_KEY\"],\"cache_settings\":{\"enabled\":true},\"agent_settings\":{\"model\":\"gpt-5.1-codex-max\"},\"permissions\":{\"network_access\":\"restricted\"}}}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "ENVIRONMENT_CREATED",
+                        "environment_fields": {
+                            "agent_settings": {
+                                "model": "gpt-5.1-codex-max"
+                            },
+                            "cache_settings": {
+                                "enabled": true
+                            },
+                            "description": "CI environment for the alert-monitor service",
+                            "env_var_keys": [
+                                "API_KEY",
+                                "DATADOG_KEY"
+                            ],
+                            "label": "alert-monitor",
+                            "permissions": {
+                                "network_access": "restricted"
+                            },
+                            "repos": [
+                                "git@github.com:openai/example.git"
+                            ]
+                        },
+                        "environment_id": "env-123"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:04:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "environment_deleted",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000003",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000003\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:04:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"ENVIRONMENT_DELETED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"ENVIRONMENT_DELETED\",\"environment_id\":\"env-123\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "ENVIRONMENT_DELETED",
+                        "environment_id": "env-123"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:02:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "environment_updated",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000002",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000002\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:02:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"ENVIRONMENT_UPDATED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"ENVIRONMENT_UPDATED\",\"environment_id\":\"env-123\",\"environment_fields\":{\"label\":\"My Env\",\"repos\":[\"git@github.com:openai/example.git\"],\"env_var_keys\":[\"API_KEY\"],\"cache_settings\":{\"enabled\":true}}}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "ENVIRONMENT_UPDATED",
+                        "environment_fields": {
+                            "cache_settings": {
+                                "enabled": true
+                            },
+                            "env_var_keys": [
+                                "API_KEY"
+                            ],
+                            "label": "My Env",
+                            "repos": [
+                                "git@github.com:openai/example.git"
+                            ]
+                        },
+                        "environment_id": "env-123"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:12:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "plugin_created",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000015",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000015\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:12:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"PLUGIN_CREATED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"PLUGIN_CREATED\",\"plugin_id\":\"plugin_123\",\"plugin_release_id\":\"release_456\",\"plugin_version\":\"1.2.0\",\"plugin_name\":\"company-search\",\"plugin_display_name\":\"Company Search\",\"marketplace_name\":\"openai-curated\",\"plugin_scope\":\"WORKSPACE\",\"plugin_creator_account_user_id\":\"user_abc__workspace_uuid\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "PLUGIN_CREATED",
+                        "marketplace_name": "openai-curated",
+                        "plugin_creator_account_user_id": "user_abc__workspace_uuid",
+                        "plugin_display_name": "Company Search",
+                        "plugin_id": "plugin_123",
+                        "plugin_name": "company-search",
+                        "plugin_release_id": "release_456",
+                        "plugin_scope": "WORKSPACE",
+                        "plugin_version": "1.2.0"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:13:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "plugin_deleted",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000016",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000016\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:13:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"PLUGIN_DELETED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"PLUGIN_DELETED\",\"plugin_id\":\"plugin_123\",\"plugin_release_id\":\"release_456\",\"plugin_version\":\"1.2.0\",\"plugin_name\":\"company-search\",\"plugin_display_name\":\"Company Search\",\"marketplace_name\":\"openai-curated\",\"plugin_scope\":\"WORKSPACE\",\"plugin_creator_account_user_id\":\"user_abc__workspace_uuid\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "PLUGIN_DELETED",
+                        "marketplace_name": "openai-curated",
+                        "plugin_creator_account_user_id": "user_abc__workspace_uuid",
+                        "plugin_display_name": "Company Search",
+                        "plugin_id": "plugin_123",
+                        "plugin_name": "company-search",
+                        "plugin_release_id": "release_456",
+                        "plugin_scope": "WORKSPACE",
+                        "plugin_version": "1.2.0"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:14:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "plugin_installed",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000017",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000017\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:14:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"PLUGIN_INSTALLED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"PLUGIN_INSTALLED\",\"plugin_id\":\"plugin_123\",\"plugin_release_id\":\"release_456\",\"plugin_version\":\"1.2.0\",\"plugin_name\":\"company-search\",\"plugin_display_name\":\"Company Search\",\"marketplace_name\":\"openai-curated\",\"plugin_scope\":\"WORKSPACE\",\"plugin_creator_account_user_id\":\"user_abc__workspace_uuid\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "PLUGIN_INSTALLED",
+                        "marketplace_name": "openai-curated",
+                        "plugin_creator_account_user_id": "user_abc__workspace_uuid",
+                        "plugin_display_name": "Company Search",
+                        "plugin_id": "plugin_123",
+                        "plugin_name": "company-search",
+                        "plugin_release_id": "release_456",
+                        "plugin_scope": "WORKSPACE",
+                        "plugin_version": "1.2.0"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:15:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "plugin_uninstalled",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000018",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000018\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:15:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"PLUGIN_UNINSTALLED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"PLUGIN_UNINSTALLED\",\"plugin_id\":\"plugin_123\",\"plugin_release_id\":\"release_456\",\"plugin_version\":\"1.2.0\",\"plugin_name\":\"company-search\",\"plugin_display_name\":\"Company Search\",\"marketplace_name\":\"openai-curated\",\"plugin_scope\":\"WORKSPACE\",\"plugin_creator_account_user_id\":\"user_abc__workspace_uuid\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "detail_type": "PLUGIN_UNINSTALLED",
+                        "marketplace_name": "openai-curated",
+                        "plugin_creator_account_user_id": "user_abc__workspace_uuid",
+                        "plugin_display_name": "Company Search",
+                        "plugin_id": "plugin_123",
+                        "plugin_name": "company-search",
+                        "plugin_release_id": "release_456",
+                        "plugin_scope": "WORKSPACE",
+                        "plugin_version": "1.2.0"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:08:44.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "prompt_response_received",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000006",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000006\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:08:44.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"PROMPT_RESPONSE_RECEIVED\",\"client_id\":\"CODEX_CLI\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"PROMPT_RESPONSE_RECEIVED\",\"session_id\":\"session-123\",\"response_text\":\"Refactored timeline.tsx and split the remediation view.\",\"status\":\"completed\",\"turn_id\":\"turn-1\",\"call_id\":\"call-1\",\"model\":\"gpt-5.1-codex-max\",\"service_tier\":\"default\",\"reasoning_effort\":\"medium\",\"token_usage\":{\"input_tokens\":4200,\"output_tokens\":1800,\"cached_input_tokens\":900,\"reasoning_output_tokens\":600},\"environment_id\":\"env-123\"}}",
+                "outcome": "unknown",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "gpt-5.1-codex-max"
+                },
+                "tool": {
+                    "call": {
+                        "id": "call-1"
+                    }
+                },
+                "usage": {
+                    "input_tokens": 4200,
+                    "output_tokens": 1800
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_CLI",
+                    "event_details": {
+                        "call_id": "call-1",
+                        "detail_type": "PROMPT_RESPONSE_RECEIVED",
+                        "environment_id": "env-123",
+                        "reasoning_effort": "medium",
+                        "response_text": "Refactored timeline.tsx and split the remediation view.",
+                        "service_tier": "default",
+                        "session_id": "session-123",
+                        "status": "completed",
+                        "token_usage": {
+                            "cached_input_tokens": 900,
+                            "reasoning_output_tokens": 600
+                        },
+                        "turn_id": "turn-1"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:08:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "prompt_sent",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000005",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000005\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:08:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"PROMPT_SENT\",\"client_id\":\"CODEX_CLI\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"PROMPT_SENT\",\"session_id\":\"session-123\",\"prompt_text\":\"Summarize the latest changes in the repo.\",\"turn_id\":\"turn-1\",\"call_id\":\"call-1\",\"model\":\"gpt-5.1-codex-max\",\"environment_id\":\"env-123\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "gpt-5.1-codex-max"
+                },
+                "tool": {
+                    "call": {
+                        "id": "call-1"
+                    }
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_CLI",
+                    "event_details": {
+                        "call_id": "call-1",
+                        "detail_type": "PROMPT_SENT",
+                        "environment_id": "env-123",
+                        "prompt_text": "Summarize the latest changes in the repo.",
+                        "session_id": "session-123",
+                        "turn_id": "turn-1"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:09:10.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "tool_call_completed",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000008",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000008\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:09:10.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"TOOL_CALL_COMPLETED\",\"client_id\":\"CODEX_IDE_VSCODE\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"TOOL_CALL_COMPLETED\",\"session_id\":\"session-123\",\"tool_name\":\"apply_patch\",\"tool_type\":\"filesystem\",\"tool_input\":\"src/rca/timeline.tsx\",\"turn_id\":\"turn-1\",\"call_id\":\"call-1\",\"tool_call_id\":\"tc-991\",\"status\":\"success\",\"model\":\"gpt-5.1-codex-max\",\"environment_id\":\"env-123\"}}",
+                "outcome": "success",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "gpt-5.1-codex-max"
+                },
+                "tool": {
+                    "call": {
+                        "id": "tc-991"
+                    },
+                    "name": "apply_patch",
+                    "type": "filesystem"
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_IDE_VSCODE",
+                    "event_details": {
+                        "call_id": "call-1",
+                        "detail_type": "TOOL_CALL_COMPLETED",
+                        "environment_id": "env-123",
+                        "session_id": "session-123",
+                        "status": "success",
+                        "tool_input": "src/rca/timeline.tsx",
+                        "turn_id": "turn-1"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:09:20.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "tool_call_failed",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000009",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000009\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:09:20.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"TOOL_CALL_FAILED\",\"client_id\":\"CODEX_IDE_VSCODE\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"TOOL_CALL_FAILED\",\"session_id\":\"session-123\",\"tool_name\":\"run_tests\",\"tool_type\":\"shell\",\"tool_input\":\"npm test\",\"turn_id\":\"turn-1\",\"call_id\":\"call-2\",\"tool_call_id\":\"tc-992\",\"status\":\"error\",\"model\":\"gpt-5.1-codex-max\",\"environment_id\":\"env-123\"}}",
+                "outcome": "failure",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "gpt-5.1-codex-max"
+                },
+                "tool": {
+                    "call": {
+                        "id": "tc-992"
+                    },
+                    "name": "run_tests",
+                    "type": "shell"
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_IDE_VSCODE",
+                    "event_details": {
+                        "call_id": "call-2",
+                        "detail_type": "TOOL_CALL_FAILED",
+                        "environment_id": "env-123",
+                        "session_id": "session-123",
+                        "status": "error",
+                        "tool_input": "npm test",
+                        "turn_id": "turn-1"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:09:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "tool_call_suggested",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000007",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000007\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:09:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"TOOL_CALL_SUGGESTED\",\"client_id\":\"CODEX_IDE_VSCODE\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"TOOL_CALL_SUGGESTED\",\"session_id\":\"session-123\",\"tool_name\":\"apply_patch\",\"tool_type\":\"filesystem\",\"tool_input\":\"src/rca/timeline.tsx\",\"turn_id\":\"turn-1\",\"call_id\":\"call-1\",\"tool_call_id\":\"tc-991\",\"status\":\"suggested\",\"model\":\"gpt-5.1-codex-max\",\"environment_id\":\"env-123\"}}",
+                "outcome": "unknown",
+                "type": [
+                    "info"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "gpt-5.1-codex-max"
+                },
+                "tool": {
+                    "call": {
+                        "id": "tc-991"
+                    },
+                    "name": "apply_patch",
+                    "type": "filesystem"
+                }
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_IDE_VSCODE",
+                    "event_details": {
+                        "call_id": "call-1",
+                        "detail_type": "TOOL_CALL_SUGGESTED",
+                        "environment_id": "env-123",
+                        "session_id": "session-123",
+                        "status": "suggested",
+                        "tool_input": "src/rca/timeline.tsx",
+                        "turn_id": "turn-1"
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T10:06:00.000Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "action": "workspace_updated",
+                "category": [
+                    "api"
+                ],
+                "id": "cd000000-0000-0000-0000-000000000004",
+                "kind": "event",
+                "original": "{\"event_id\":\"cd000000-0000-0000-0000-000000000004\",\"type\":\"CODEX_LOG\",\"timestamp\":\"2026-07-09T10:06:00.000000Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-TUvqhBX7HbQPRgHyEBt5WRcI\",\"user_email\":\"user@example.org\"},\"event_type\":\"WORKSPACE_UPDATED\",\"client_id\":\"CODEX_WEB\",\"workspace_id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"event_details\":{\"detail_type\":\"WORKSPACE_UPDATED\",\"previous_settings\":{\"default_model\":\"gpt-5.1-codex\",\"network_access\":\"restricted\"},\"current_settings\":{\"default_model\":\"gpt-5.1-codex-max\",\"network_access\":\"restricted\"}}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "client_id": "CODEX_WEB",
+                    "event_details": {
+                        "current_settings": {
+                            "default_model": "gpt-5.1-codex-max",
+                            "network_access": "restricted"
+                        },
+                        "detail_type": "WORKSPACE_UPDATED",
+                        "previous_settings": {
+                            "default_model": "gpt-5.1-codex",
+                            "network_access": "restricted"
+                        }
+                    },
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "CODEX_LOG",
+                    "workspace_id": "be545252-ad04-4cfa-9ca5-deca58416151"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-TUvqhBX7HbQPRgHyEBt5WRcI"
+            }
+        }
+    ]
+}

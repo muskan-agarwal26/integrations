@@ -1,0 +1,213 @@
+---
+description: Handle OpenAI Compliance CODEX_SECURITY_LOG events (Codex security scans and findings).
+processors:
+  - append:
+      field: event.category
+      tag: append_event_category_codex_security_log
+      value: vulnerability
+  - append:
+      field: event.type
+      tag: append_event_type_codex_security_log
+      value: info
+  - set:
+      field: vulnerability.id
+      tag: set_vulnerability_id_from_finding_id
+      copy_from: openai.compliance.event_details.finding_id
+      ignore_empty_value: true
+  - set:
+      field: vulnerability.severity
+      tag: set_vulnerability_severity_from_criticality
+      copy_from: openai.compliance.event_details.updated_fields.criticality
+      ignore_empty_value: true
+  - set:
+      field: url.full
+      tag: set_url_full_from_pr_url
+      copy_from: openai.compliance.event_details.pr_url
+      ignore_empty_value: true
+  - convert:
+      field: openai.compliance.event_details.scan_configuration_fields.lookback_days
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_scan_configuration_fields_lookback_days
+      if: ctx.openai?.compliance?.event_details?.scan_configuration_fields?.lookback_days != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.scan_configuration_fields.lookback_days
+            ignore_missing: true
+            tag: remove_event_details_scan_configuration_fields_lookback_days_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.scan_configuration_fields.notification_rules_created_count
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_scan_configuration_fields_notification_rules_created_count
+      if: ctx.openai?.compliance?.event_details?.scan_configuration_fields?.notification_rules_created_count != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.scan_configuration_fields.notification_rules_created_count
+            ignore_missing: true
+            tag: remove_event_details_scan_configuration_fields_notification_rules_created_count_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.scan_configuration_fields.notification_rules_deleted_count
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_scan_configuration_fields_notification_rules_deleted_count
+      if: ctx.openai?.compliance?.event_details?.scan_configuration_fields?.notification_rules_deleted_count != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.scan_configuration_fields.notification_rules_deleted_count
+            ignore_missing: true
+            tag: remove_event_details_scan_configuration_fields_notification_rules_deleted_count_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.scan_configuration_fields.notification_rules_updated_count
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_scan_configuration_fields_notification_rules_updated_count
+      if: ctx.openai?.compliance?.event_details?.scan_configuration_fields?.notification_rules_updated_count != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.scan_configuration_fields.notification_rules_updated_count
+            ignore_missing: true
+            tag: remove_event_details_scan_configuration_fields_notification_rules_updated_count_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.lookback_days
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_lookback_days
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.lookback_days != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.lookback_days
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_lookback_days_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.notification_rules_created_count
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_notification_rules_created_count
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.notification_rules_created_count != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.notification_rules_created_count
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_notification_rules_created_count_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.notification_rules_deleted_count
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_notification_rules_deleted_count
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.notification_rules_deleted_count != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.notification_rules_deleted_count
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_notification_rules_deleted_count_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.notification_rules_updated_count
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_notification_rules_updated_count
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.notification_rules_updated_count != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.notification_rules_updated_count
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_notification_rules_updated_count_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.project_overview_length
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_project_overview_length
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.project_overview_length != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.project_overview_length
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_project_overview_length_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.criticality_reason_updated
+      type: boolean
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_criticality_reason_updated
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.criticality_reason_updated != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.criticality_reason_updated
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_criticality_reason_updated_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.project_overview_updated
+      type: boolean
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_project_overview_updated
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.project_overview_updated != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.project_overview_updated
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_project_overview_updated_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.updated_fields.resolution_reason_updated
+      type: boolean
+      ignore_missing: true
+      tag: convert_event_details_updated_fields_resolution_reason_updated
+      if: ctx.openai?.compliance?.event_details?.updated_fields?.resolution_reason_updated != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.updated_fields.resolution_reason_updated
+            ignore_missing: true
+            tag: remove_event_details_updated_fields_resolution_reason_updated_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - remove:
+      field:
+        - openai.compliance.event_details.finding_id
+        - openai.compliance.event_details.updated_fields.criticality
+        - openai.compliance.event_details.pr_url
+      tag: remove_codex_security_custom_fields_mapped_to_ecs
+      ignore_missing: true
+      description: Remove CODEX_SECURITY_LOG custom fields copied to ECS fields.
+on_failure:
+  - append:
+      field: error.message
+      value: >-
+        Processor '{{{ _ingest.on_failure_processor_type }}}'
+        {{{#_ingest.on_failure_processor_tag}}}with tag '{{{ _ingest.on_failure_processor_tag }}}'
+        {{{/_ingest.on_failure_processor_tag}}}failed with message '{{{ _ingest.on_failure_message }}}'
+  - set:
+      field: event.kind
+      tag: set_pipeline_error_to_event_kind
+      value: pipeline_error

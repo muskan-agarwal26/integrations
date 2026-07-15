@@ -1,0 +1,111 @@
+{
+    "expected": [
+        {
+            "@timestamp": "2026-07-09T20:12:24.551Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "id": "31c1b9b0-5b2d-4c2a-9e11-32d7b0c3e9aa",
+                "kind": "event",
+                "original": "{\"event_id\":\"31c1b9b0-5b2d-4c2a-9e11-32d7b0c3e9aa\",\"type\":\"APP_LOG\",\"timestamp\":\"2026-07-09T20:12:24.551203Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-AbCdEf1234567890\",\"user_email\":\"user@example.org\"},\"app_id\":\"conn-8f92d7c1\",\"app_name\":\"gdrive\",\"app_type\":\"SERVICE\",\"conversation_id\":\"c-7cda9b2e\",\"log_type\":\"request\",\"input\":{\"query\":\"List recent architecture decisions\"}}",
+                "type": [
+                    "access"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "app_id": "conn-8f92d7c1",
+                    "app_name": "gdrive",
+                    "app_type": "SERVICE",
+                    "conversation_id": "c-7cda9b2e",
+                    "input": {
+                        "query": "List recent architecture decisions"
+                    },
+                    "log_type": "request",
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "APP_LOG"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-AbCdEf1234567890"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-AbCdEf1234567890"
+            }
+        },
+        {
+            "@timestamp": "2026-07-09T20:12:25.012Z",
+            "ecs": {
+                "version": "9.3.0"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "id": "31c1b9b0-5b2d-4c2a-9e11-32d7b0c3e9ab",
+                "kind": "event",
+                "original": "{\"event_id\":\"31c1b9b0-5b2d-4c2a-9e11-32d7b0c3e9ab\",\"type\":\"APP_LOG\",\"timestamp\":\"2026-07-09T20:12:25.012944Z\",\"principal\":{\"id\":\"be545252-ad04-4cfa-9ca5-deca58416151\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-AbCdEf1234567890\",\"user_email\":\"user@example.org\"},\"app_id\":\"conn-8f92d7c1\",\"app_name\":\"gdrive\",\"app_type\":\"SERVICE\",\"conversation_id\":\"c-7cda9b2e\",\"log_type\":\"response\",\"output\":[{\"display_title\":\"ADR-017 Caching Strategy\",\"display_url\":\"https://confluence.example.org/adr17\"},{\"display_title\":\"ADR-016 Messaging Bus\",\"display_url\":\"https://confluence.example.org/adr16\"}]}",
+                "type": [
+                    "access"
+                ]
+            },
+            "openai": {
+                "compliance": {
+                    "actor": {
+                        "type": "ACCOUNT_USER"
+                    },
+                    "app_id": "conn-8f92d7c1",
+                    "app_name": "gdrive",
+                    "app_type": "SERVICE",
+                    "conversation_id": "c-7cda9b2e",
+                    "log_type": "response",
+                    "output": [
+                        {
+                            "display_title": "ADR-017 Caching Strategy",
+                            "display_url": "https://confluence.example.org/adr17"
+                        },
+                        {
+                            "display_title": "ADR-016 Messaging Bus",
+                            "display_url": "https://confluence.example.org/adr16"
+                        }
+                    ],
+                    "principal": {
+                        "type": "CHATGPT_WORKSPACE"
+                    },
+                    "type": "APP_LOG"
+                }
+            },
+            "organization": {
+                "id": "be545252-ad04-4cfa-9ca5-deca58416151"
+            },
+            "related": {
+                "user": [
+                    "user@example.org",
+                    "user-AbCdEf1234567890"
+                ]
+            },
+            "user": {
+                "domain": "example.org",
+                "email": "user@example.org",
+                "id": "user-AbCdEf1234567890"
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+---
+description: Handle OpenAI Compliance APP_LOG events (in-app connector requests and responses).
+processors:
+  - append:
+      field: event.category
+      tag: append_event_category_app_log
+      value: api
+  - append:
+      field: event.type
+      tag: append_event_type_app_log
+      value: access
+on_failure:
+  - append:
+      field: error.message
+      value: >-
+        Processor '{{{ _ingest.on_failure_processor_type }}}'
+        {{{#_ingest.on_failure_processor_tag}}}with tag '{{{ _ingest.on_failure_processor_tag }}}'
+        {{{/_ingest.on_failure_processor_tag}}}failed with message '{{{ _ingest.on_failure_message }}}'
+  - set:
+      field: event.kind
+      tag: set_pipeline_error_to_event_kind
+      value: pipeline_error

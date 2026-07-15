@@ -1,0 +1,106 @@
+config_version: 2
+interval: {{interval}}
+resource.tracer:
+  enabled: {{enable_request_tracer}}
+  filename: "../../logs/cel/http-request-trace-*.ndjson"
+  maxbackups: 5
+{{#if proxy_url}}
+resource.proxy_url: {{proxy_url}}
+{{/if}}
+{{#if ssl}}
+resource.ssl: {{ssl}}
+{{/if}}
+{{#if http_client_timeout}}
+resource.timeout: {{http_client_timeout}}
+{{/if}}
+resource.url: {{url}}
+state:
+  admin_token: {{admin_token}}
+  scope: {{scope}}
+  resource_id: {{resource_id}}
+  initial_interval: {{initial_interval}}
+  batch_size: {{batch_size}}
+  event_types:
+{{#each event_types as |event_type|}}
+    - {{event_type}}
+{{/each}}
+redact:
+  fields:
+    - admin_token
+program: |-
+  (
+    state.?want_more.orValue(false) ?
+      state
+    :
+      state.with({
+        "after": state.?cursor.last_end_time.orValue(string(now - duration(state.initial_interval))),
+      })
+  ).as(state, state.with(
+    request(
+      "GET",
+      state.url.trim_right("/") + "/v1/compliance/" +
+        ((state.scope == "organization") ? "organizations" : "workspaces") + "/" +
+        string(state.resource_id) + "/logs?" + {
+          "event_type": [state.event_types.join(",")],
+          "after": [string(state.after)],
+          "limit": [string(int(state.batch_size))],
+        }.format_query()
+    ).with({
+      "Header": {
+        "Authorization": ["Bearer " + string(state.admin_token)]
+      }
+    }).do_request().as(resp, resp.StatusCode == 200 ?
+      bytes(resp.Body).decode_json().as(body, {
+        "events": (
+            has(body.data)
+          ?
+            body.data.map(e, {
+              "message": e.encode_json(),
+            })
+          :
+            []
+        ),
+        "after": has(body.last_end_time) ?
+          string(body.last_end_time)
+        :
+          state.after,
+        "cursor": {
+          ?"last_end_time": has(body.last_end_time) ?
+            optional.of(string(body.last_end_time))
+          :
+            state.?cursor.last_end_time,
+        },
+        "want_more": body.?has_more.orValue(false),
+      })
+    :
+      {
+        "events": {
+          "error": {
+            "code": string(resp.StatusCode),
+            "id": string(resp.Status),
+            "message": "GET " + state.url.trim_right("/") + "/v1/compliance/logs: " + (
+              size(resp.Body) != 0 ?
+                string(resp.Body)
+              :
+                string(resp.Status) + ' (' + string(resp.StatusCode) + ')'
+            ),
+          },
+        },
+        "want_more": false,
+      }
+    )
+  ))
+tags:
+{{#if preserve_original_event}}
+  - preserve_original_event
+{{/if}}
+{{#each tags as |tag|}}
+  - {{tag}}
+{{/each}}
+{{#contains "forwarded" tags}}
+publisher_pipeline.disable_host: true
+{{/contains}}
+{{#if processors}}
+processors:
+{{processors}}
+{{/if}}

@@ -1,0 +1,182 @@
+---
+description: Handle OpenAI Compliance CODEX_LOG events (Codex activity).
+processors:
+  - append:
+      field: event.category
+      tag: append_event_category_codex_log
+      value: api
+  - append:
+      field: event.type
+      tag: append_event_type_codex_log
+      value: info
+  - set:
+      field: gen_ai.request.model
+      tag: set_gen_ai_request_model
+      copy_from: openai.compliance.event_details.model
+      ignore_empty_value: true
+  - set:
+      field: gen_ai.tool.name
+      tag: set_gen_ai_tool_name_from_tool_name
+      copy_from: openai.compliance.event_details.tool_name
+      ignore_empty_value: true
+  - set:
+      field: gen_ai.tool.name
+      tag: set_gen_ai_tool_name_from_name
+      copy_from: openai.compliance.event_details.name
+      ignore_empty_value: true
+      if: ctx.gen_ai?.tool?.name == null
+  - set:
+      field: gen_ai.tool.call.id
+      tag: set_gen_ai_tool_call_id_from_tool_call_id
+      copy_from: openai.compliance.event_details.tool_call_id
+      ignore_empty_value: true
+  - set:
+      field: gen_ai.tool.call.id
+      tag: set_gen_ai_tool_call_id_from_call_id
+      copy_from: openai.compliance.event_details.call_id
+      ignore_empty_value: true
+      if: ctx.gen_ai?.tool?.call?.id == null
+  - set:
+      field: gen_ai.tool.type
+      tag: set_gen_ai_tool_type
+      copy_from: openai.compliance.event_details.tool_type
+      ignore_empty_value: true
+  - set:
+      field: url.full
+      tag: set_url_full_from_event_details
+      copy_from: openai.compliance.event_details.url
+      ignore_empty_value: true
+  - script:
+      lang: painless
+      tag: set_event_outcome_from_status
+      description: Normalize CODEX_LOG status into event.outcome.
+      if: ctx.openai?.compliance?.event_details?.status != null && ctx.openai.compliance.event_details.status != ''
+      source: |-
+        def s = ctx.openai.compliance.event_details.status;
+        if (s == 'success') {
+          ctx.event.outcome = 'success';
+        } else if (s == 'error') {
+          ctx.event.outcome = 'failure';
+        } else {
+          ctx.event.outcome = 'unknown';
+        }
+  - date:
+      field: openai.compliance.event_details.expires_at
+      target_field: openai.compliance.event_details.expires_at
+      formats:
+        - ISO8601
+      tag: date_event_details_expires_at
+      if: ctx.openai?.compliance?.event_details?.expires_at != null && ctx.openai.compliance.event_details.expires_at != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.expires_at
+            ignore_missing: true
+            tag: remove_event_details_expires_at_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.token_usage.cached_input_tokens
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_token_usage_cached_input_tokens
+      if: ctx.openai?.compliance?.event_details?.token_usage?.cached_input_tokens != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.token_usage.cached_input_tokens
+            ignore_missing: true
+            tag: remove_event_details_token_usage_cached_input_tokens_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.token_usage.input_tokens
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_token_usage_input_tokens
+      if: ctx.openai?.compliance?.event_details?.token_usage?.input_tokens != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.token_usage.input_tokens
+            ignore_missing: true
+            tag: remove_event_details_token_usage_input_tokens_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - set:
+      field: gen_ai.usage.input_tokens
+      tag: set_gen_ai_usage_input_tokens
+      copy_from: openai.compliance.event_details.token_usage.input_tokens
+      ignore_empty_value: true
+  - convert:
+      field: openai.compliance.event_details.token_usage.output_tokens
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_token_usage_output_tokens
+      if: ctx.openai?.compliance?.event_details?.token_usage?.output_tokens != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.token_usage.output_tokens
+            ignore_missing: true
+            tag: remove_event_details_token_usage_output_tokens_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - set:
+      field: gen_ai.usage.output_tokens
+      tag: set_gen_ai_usage_output_tokens
+      copy_from: openai.compliance.event_details.token_usage.output_tokens
+      ignore_empty_value: true
+  - convert:
+      field: openai.compliance.event_details.token_usage.reasoning_output_tokens
+      type: long
+      ignore_missing: true
+      tag: convert_event_details_token_usage_reasoning_output_tokens
+      if: ctx.openai?.compliance?.event_details?.token_usage?.reasoning_output_tokens != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.token_usage.reasoning_output_tokens
+            ignore_missing: true
+            tag: remove_event_details_token_usage_reasoning_output_tokens_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.event_details.environment_fields.cache_settings.enabled
+      type: boolean
+      ignore_missing: true
+      tag: convert_event_details_environment_fields_cache_settings_enabled
+      if: ctx.openai?.compliance?.event_details?.environment_fields?.cache_settings?.enabled != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.event_details.environment_fields.cache_settings.enabled
+            ignore_missing: true
+            tag: remove_event_details_environment_fields_cache_settings_enabled_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - remove:
+      field:
+        - openai.compliance.event_details.model
+        - openai.compliance.event_details.tool_name
+        - openai.compliance.event_details.tool_call_id
+        - openai.compliance.event_details.tool_type
+        - openai.compliance.event_details.token_usage.input_tokens
+        - openai.compliance.event_details.token_usage.output_tokens
+        - openai.compliance.event_details.error_code
+        - openai.compliance.event_details.error_message
+        - openai.compliance.event_details.url
+      tag: remove_codex_custom_fields_mapped_to_ecs
+      ignore_missing: true
+      description: Remove CODEX_LOG custom fields copied to ECS fields.
+on_failure:
+  - append:
+      field: error.message
+      value: >-
+        Processor '{{{ _ingest.on_failure_processor_type }}}'
+        {{{#_ingest.on_failure_processor_tag}}}with tag '{{{ _ingest.on_failure_processor_tag }}}'
+        {{{/_ingest.on_failure_processor_tag}}}failed with message '{{{ _ingest.on_failure_message }}}'
+  - set:
+      field: event.kind
+      tag: set_pipeline_error_to_event_kind
+      value: pipeline_error

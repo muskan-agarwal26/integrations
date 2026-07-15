@@ -1,8 +1,8 @@
 # OpenAI
 
-The OpenAI integration allows you to monitor OpenAI API usage metrics and collect organization audit logs. OpenAI is an AI research and deployment company that offers [API platform](https://openai.com/api) for their industry-leading foundation models.
+The OpenAI integration allows you to monitor OpenAI API usage metrics, collect organization audit logs, and collect ChatGPT Enterprise compliance logs. OpenAI is an AI research and deployment company that offers [API platform](https://openai.com/api) for their industry-leading foundation models.
 
-With the OpenAI integration, you can track API usage metrics across their models, as well as for vector store and code interpreter. You can also collect audit logs from the OpenAI platform to monitor user actions, API key lifecycle events, and organization configuration changes. You will use Kibana to visualize your data, create alerts if usage limits are approaching, view metrics when you troubleshoot issues, and analyze audit events for security and compliance. For example, you can track token usage and API calls per model, as well as login attempts, API key creation/deletion, and role assignments.
+With the OpenAI integration, you can track API usage metrics across their models, as well as for vector store and code interpreter. You can also collect audit logs from the OpenAI platform to monitor user actions, API key lifecycle events, and organization configuration changes. Additionally, you can collect ChatGPT Enterprise compliance logs to monitor application activity, authentication events, and Codex usage across your workspace or organization. You will use Kibana to visualize your data, create alerts if usage limits are approaching, view metrics when you troubleshoot issues, and analyze audit and compliance events for security and compliance. For example, you can track token usage and API calls per model, as well as login attempts, API key creation/deletion, and role assignments.
 
 ## Data collection
 
@@ -11,6 +11,8 @@ The OpenAI integration leverages the following OpenAI APIs for data collection:
 - **Usage API**: The [OpenAI Usage API](https://platform.openai.com/docs/api-reference/usage) delivers comprehensive insights into your API activity, helping you understand and optimize your organization's OpenAI API usage.
 
 - **Audit Logs API**: The [OpenAI Audit Logs API](https://platform.openai.com/docs/api-reference/audit-logs) collects organization audit logs, providing visibility into user actions, API key lifecycle events, login attempts, role assignments, and other platform activity for security oversight and compliance.
+
+- **Compliance Logs Platform API**: The [OpenAI Compliance Logs Platform](https://help.openai.com/en/articles/9261474-compliance-api-for-enterprise-customers) collects ChatGPT Enterprise compliance logs including app_log, app_auth_log, auth_log, audit_log, codex_log, and codex_security_log at the workspace or organization level for security monitoring and regulatory compliance.
 
 - **Rate Limits API**: The [OpenAI Rate Limits API](https://platform.openai.com/docs/api-reference/project-rate-limits) collects the configured per-project, per-model rate limits (requests, tokens and images per minute, plus daily and batch limits). Combined with usage data, this lets you monitor how close each project is to being throttled.
 
@@ -23,6 +25,7 @@ The OpenAI integration collects the following data streams:
 - `audio_transcriptions`: Collects audio transcriptions usage metrics.
 - `code_interpreter_sessions`: Collects code interpreter sessions usage metrics.
 - `completions`: Collects completions usage metrics.
+- `compliance`: Collects ChatGPT Enterprise compliance logs.
 - `embeddings`: Collects embeddings usage metrics.
 - `images`: Collects images usage metrics.
 - `moderations`: Collects moderations usage metrics.
@@ -37,6 +40,8 @@ You need Elasticsearch for storing and searching your data and Kibana for visual
 
 You need an OpenAI account with a valid [Admin key](https://platform.openai.com/settings/organization/admin-keys) for programmatic access to the [OpenAI Usage API](https://platform.openai.com/docs/api-reference/usage) and [OpenAI Audit Logs API](https://platform.openai.com/docs/api-reference/audit-logs). To fetch audit logs, you must enable audit logging on the OpenAI platform in your organization settings under Data controls > Data retention. Audit logs also require Organization Owner permissions.
 
+To collect compliance logs, you additionally need a **Compliance API key** authorized for enterprise logs. The Compliance Logs Platform is available to ChatGPT Enterprise customers, and the key must be granted the `chatgpt.enterprise.compliance_export.read` scope by OpenAI support. You also need the target workspace ID or organization ID whose logs you want to collect. See [Compliance API for enterprise customers](https://help.openai.com/en/articles/9261474-compliance-api-for-enterprise-customers) for details.
+
 ## Setup
 
 For step-by-step instructions on how to set up an integration, see the [Getting started](https://www.elastic.co/guide/en/starting-with-the-elasticsearch-platform-and-its-solutions/current/getting-started-observability.html) guide.
@@ -45,9 +50,13 @@ For step-by-step instructions on how to set up an integration, see the [Getting 
 
 To generate an Admin key, please generate a key or use an existing one from the [Admin keys](https://platform.openai.com/settings/organization/admin-keys) page. Use the Admin key to configure the OpenAI integration.
 
+### Generate a Compliance API key
+
+The Compliance Logs Platform is available to ChatGPT Enterprise customers. Request a Compliance API key from OpenAI and ensure it is authorized for enterprise logs (contact OpenAI support to grant the key the `chatgpt.enterprise.compliance_export.read` scope). Use this key, together with the workspace or organization ID whose logs you want to collect, to configure the `compliance` data stream. See [Compliance API for enterprise customers](https://help.openai.com/en/articles/9261474-compliance-api-for-enterprise-customers) for details.
+
 ## Collection behavior
 
-Among the configuration options for the OpenAI integration, the following settings are particularly relevant: "Initial interval", "Bucket width" and "Finalization grace period" for usage metrics, and "Initial interval" and "Interval" for audit logs.
+Among the configuration options for the OpenAI integration, the following settings are particularly relevant: "Initial interval", "Bucket width" and "Finalization grace period" for usage metrics, and "Initial interval" and "Interval" for audit and compliance logs.
 
 ### Initial interval
 
@@ -219,6 +228,14 @@ The `completions` data stream captures completions usage metrics.
 {{event "completions"}}
 
 {{fields "completions"}}
+
+### Compliance
+
+The `compliance` data stream captures ChatGPT Enterprise compliance logs collected from the OpenAI Compliance Logs Platform, covering application (`APP_LOG`, `APP_AUTH_LOG`), authentication (`AUTH_LOG`), audit (`AUDIT_LOG`), and Codex (`CODEX_LOG`, `CODEX_SECURITY_LOG`) activity.
+
+{{event "compliance"}}
+
+{{fields "compliance"}}
 
 ### Embeddings
 

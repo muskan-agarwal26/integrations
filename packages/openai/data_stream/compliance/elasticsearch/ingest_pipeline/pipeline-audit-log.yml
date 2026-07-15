@@ -1,0 +1,395 @@
+---
+description: Handle OpenAI Compliance AUDIT_LOG events (workspace administration actions).
+processors:
+  - append:
+      field: event.category
+      tag: append_event_category_audit_log
+      value: iam
+  - append:
+      field: event.type
+      tag: append_event_type_audit_log
+      value: info
+  - script:
+      lang: painless
+      tag: set_event_outcome_from_action_result
+      description: Normalize AUDIT_LOG action_result into event.outcome.
+      if: ctx.openai?.compliance?.action_result != null && ctx.openai.compliance.action_result != ''
+      source: |-
+        def r = ctx.openai.compliance.action_result;
+        if (r == 'SUCCESS') {
+          ctx.event.outcome = 'success';
+        } else if (r == 'ERROR' || r == 'BLOCKED') {
+          ctx.event.outcome = 'failure';
+        } else {
+          ctx.event.outcome = 'unknown';
+        }
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_user_id
+      copy_from: openai.compliance.action_data.user_id
+      ignore_empty_value: true
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_added_user_id
+      copy_from: openai.compliance.action_data.added_user_id
+      ignore_empty_value: true
+      if: ctx.user?.target?.id == null
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_allowed_user_id
+      copy_from: openai.compliance.action_data.allowed_user_id
+      ignore_empty_value: true
+      if: ctx.user?.target?.id == null
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_deleted_user_id
+      copy_from: openai.compliance.action_data.deleted_user_id
+      ignore_empty_value: true
+      if: ctx.user?.target?.id == null
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_disallowed_user_id
+      copy_from: openai.compliance.action_data.disallowed_user_id
+      ignore_empty_value: true
+      if: ctx.user?.target?.id == null
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_removed_user_id
+      copy_from: openai.compliance.action_data.removed_user_id
+      ignore_empty_value: true
+      if: ctx.user?.target?.id == null
+  - set:
+      field: user.target.id
+      tag: set_user_target_id_from_logged_out_user_id
+      copy_from: openai.compliance.action_data.logged_out_user_id
+      ignore_empty_value: true
+      if: ctx.user?.target?.id == null
+  - set:
+      field: user.target.email
+      tag: set_user_target_email_from_new_owner_email
+      copy_from: openai.compliance.action_data.new_owner_email
+      ignore_empty_value: true
+  - set:
+      field: file.name
+      tag: set_file_name_from_action_data
+      copy_from: openai.compliance.action_data.file_name
+      ignore_empty_value: true
+  - set:
+      field: file.mime_type
+      tag: set_file_mime_type_from_action_data
+      copy_from: openai.compliance.action_data.mime_type
+      ignore_empty_value: true
+  - append:
+      field: related.user
+      tag: append_user_target_id_to_related
+      value: '{{{user.target.id}}}'
+      allow_duplicates: false
+      if: ctx.user?.target?.id != null
+  - append:
+      field: related.user
+      tag: append_user_target_email_to_related
+      value: '{{{user.target.email}}}'
+      allow_duplicates: false
+      if: ctx.user?.target?.email != null
+  - append:
+      field: related.user
+      tag: append_action_data_email_address_to_related
+      value: '{{{openai.compliance.action_data.email_address}}}'
+      allow_duplicates: false
+      if: ctx.openai?.compliance?.action_data?.email_address != null && ctx.openai.compliance.action_data.email_address != ''
+  - foreach:
+      field: openai.compliance.action_data.email_addresses
+      ignore_missing: true
+      tag: foreach_append_email_addresses_to_related
+      if: ctx.openai?.compliance?.action_data?.email_addresses instanceof List
+      processor:
+        append:
+          field: related.user
+          value: '{{{_ingest._value}}}'
+          allow_duplicates: false
+  - rename:
+      field: openai.compliance.action_data.value
+      target_field: openai.compliance.action_data.value_bool
+      ignore_missing: true
+      tag: rename_action_data_value_to_value_bool
+  - convert:
+      field: openai.compliance.action_data.value_bool
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_value_bool
+      on_failure:
+        - rename:
+            field: openai.compliance.action_data.value_bool
+            target_field: openai.compliance.action_data.value
+            ignore_missing: true
+            tag: rename_action_data_value_bool_to_value
+  - date:
+      field: openai.compliance.action_data.after
+      target_field: openai.compliance.action_data.after
+      formats:
+        - ISO8601
+      tag: date_action_data_after
+      if: ctx.openai?.compliance?.action_data?.after != null && ctx.openai.compliance.action_data.after != ''
+      on_failure:
+        - rename:
+            field: openai.compliance.action_data.after
+            target_field: openai.compliance.action_data.after_string
+            ignore_missing: true
+            tag: rename_action_data_after_on_failure
+  - date:
+      field: openai.compliance.action_data.before
+      target_field: openai.compliance.action_data.before
+      formats:
+        - ISO8601
+      tag: date_action_data_before
+      if: ctx.openai?.compliance?.action_data?.before != null && ctx.openai.compliance.action_data.before != ''
+      on_failure:
+        - rename:
+            field: openai.compliance.action_data.before
+            target_field: openai.compliance.action_data.before_string
+            ignore_missing: true
+            tag: rename_action_data_before_on_failure
+  - date:
+      field: openai.compliance.action_data.since_timestamp
+      target_field: openai.compliance.action_data.since_timestamp
+      formats:
+        - ISO8601
+      tag: date_action_data_since_timestamp
+      if: ctx.openai?.compliance?.action_data?.since_timestamp != null && ctx.openai.compliance.action_data.since_timestamp != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.since_timestamp
+            ignore_missing: true
+            tag: remove_action_data_since_timestamp_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - date:
+      field: openai.compliance.action_data.created_at
+      target_field: openai.compliance.action_data.created_at
+      formats:
+        - UNIX
+      tag: date_action_data_created_at
+      if: ctx.openai?.compliance?.action_data?.created_at != null && ctx.openai.compliance.action_data.created_at != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.created_at
+            ignore_missing: true
+            tag: remove_action_data_created_at_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - date:
+      field: openai.compliance.action_data.deactivated_at
+      target_field: openai.compliance.action_data.deactivated_at
+      formats:
+        - UNIX
+      tag: date_action_data_deactivated_at
+      if: ctx.openai?.compliance?.action_data?.deactivated_at != null && ctx.openai.compliance.action_data.deactivated_at != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.deactivated_at
+            ignore_missing: true
+            tag: remove_action_data_deactivated_at_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - date:
+      field: openai.compliance.action_data.expires_at
+      target_field: openai.compliance.action_data.expires_at
+      formats:
+        - UNIX
+      tag: date_action_data_expires_at
+      if: ctx.openai?.compliance?.action_data?.expires_at != null && ctx.openai.compliance.action_data.expires_at != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.expires_at
+            ignore_missing: true
+            tag: remove_action_data_expires_at_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - date:
+      field: openai.compliance.action_data.revoked_at
+      target_field: openai.compliance.action_data.revoked_at
+      formats:
+        - UNIX
+      tag: date_action_data_revoked_at
+      if: ctx.openai?.compliance?.action_data?.revoked_at != null && ctx.openai.compliance.action_data.revoked_at != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.revoked_at
+            ignore_missing: true
+            tag: remove_action_data_revoked_at_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - foreach:
+      field: openai.compliance.action_data.alert_thresholds
+      ignore_missing: true
+      tag: foreach_convert_action_data_alert_thresholds_credits
+      if: ctx.openai?.compliance?.action_data?.alert_thresholds instanceof List
+      processor:
+        convert:
+          field: _ingest._value.credits
+          type: long
+          ignore_missing: true
+          tag: convert_action_data_alert_thresholds_credits
+          on_failure:
+            - remove:
+                field: _ingest._value.credits
+                ignore_missing: true
+                tag: remove_action_data_alert_thresholds_credits_on_failure
+            - append:
+                field: error.message
+                value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.limit
+      type: long
+      ignore_missing: true
+      tag: convert_action_data_limit
+      if: ctx.openai?.compliance?.action_data?.limit != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.limit
+            ignore_missing: true
+            tag: remove_action_data_limit_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.total_requested
+      type: long
+      ignore_missing: true
+      tag: convert_action_data_total_requested
+      if: ctx.openai?.compliance?.action_data?.total_requested != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.total_requested
+            ignore_missing: true
+            tag: remove_action_data_total_requested_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.allow_all_in_workspace
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_allow_all_in_workspace
+      if: ctx.openai?.compliance?.action_data?.allow_all_in_workspace != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.allow_all_in_workspace
+            ignore_missing: true
+            tag: remove_action_data_allow_all_in_workspace_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.already_exists
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_already_exists
+      if: ctx.openai?.compliance?.action_data?.already_exists != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.already_exists
+            ignore_missing: true
+            tag: remove_action_data_already_exists_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.enabled
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_enabled
+      if: ctx.openai?.compliance?.action_data?.enabled != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.enabled
+            ignore_missing: true
+            tag: remove_action_data_enabled_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.include_summary
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_include_summary
+      if: ctx.openai?.compliance?.action_data?.include_summary != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.include_summary
+            ignore_missing: true
+            tag: remove_action_data_include_summary_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.previous_enabled
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_previous_enabled
+      if: ctx.openai?.compliance?.action_data?.previous_enabled != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.previous_enabled
+            ignore_missing: true
+            tag: remove_action_data_previous_enabled_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.state_changed
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_state_changed
+      if: ctx.openai?.compliance?.action_data?.state_changed != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.state_changed
+            ignore_missing: true
+            tag: remove_action_data_state_changed_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - convert:
+      field: openai.compliance.action_data.use_workspace_name_for_discovery
+      type: boolean
+      ignore_missing: true
+      tag: convert_action_data_use_workspace_name_for_discovery
+      if: ctx.openai?.compliance?.action_data?.use_workspace_name_for_discovery != ''
+      on_failure:
+        - remove:
+            field: openai.compliance.action_data.use_workspace_name_for_discovery
+            ignore_missing: true
+            tag: remove_action_data_use_workspace_name_for_discovery_on_failure
+        - append:
+            field: error.message
+            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+  - remove:
+      field:
+        - openai.compliance.action_data.added_user_id
+        - openai.compliance.action_data.allowed_user_id
+        - openai.compliance.action_data.deleted_user_id
+        - openai.compliance.action_data.disallowed_user_id
+        - openai.compliance.action_data.removed_user_id
+        - openai.compliance.action_data.logged_out_user_id
+        - openai.compliance.action_data.new_owner_email
+        - openai.compliance.action_data.file_name
+        - openai.compliance.action_data.mime_type
+      tag: remove_audit_custom_fields_mapped_to_ecs
+      ignore_missing: true
+on_failure:
+  - append:
+      field: error.message
+      value: >-
+        Processor '{{{ _ingest.on_failure_processor_type }}}'
+        {{{#_ingest.on_failure_processor_tag}}}with tag '{{{ _ingest.on_failure_processor_tag }}}'
+        {{{/_ingest.on_failure_processor_tag}}}failed with message '{{{ _ingest.on_failure_message }}}'
+  - set:
+      field: event.kind
+      tag: set_pipeline_error_to_event_kind
+      value: pipeline_error

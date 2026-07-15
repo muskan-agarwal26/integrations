@@ -321,3 +321,88 @@ rules:
             "has_more": false
           }
           `}}
+
+  # --- Compliance logs (workspace scope): page 2 (requested with ?after=2026-07-09T09:00:00Z) ---
+  - path: /v1/compliance/workspaces/ws-example-001/logs
+    methods: ['GET']
+    query_params:
+      event_type: AUTH_LOG
+      limit: 2
+      after: "2026-07-09T09:00:00Z"
+    request_headers:
+      Authorization:
+        - "Bearer xxxx"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - 'application/json'
+        body: |-
+          {{ minify_json `
+          {
+            "data": [
+              {
+                "event_id": "c97ee69d-41a6-4587-91ee-1ccb1afab004",
+                "type": "AUTH_LOG",
+                "timestamp": "2026-07-09T18:10:00.000000Z",
+                "principal": { "id": "be545252-ad04-4cfa-9ca5-deca58416151", "type": "CHATGPT_WORKSPACE" },
+                "actor": { "type": "ACCOUNT_USER", "user_id": "user-TUvqhBX7HbQPRgHyEBt5WRcI", "user_email": "user@example.org" },
+                "request_metadata": { "client_ip": "10.12.43.122", "client_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" },
+                "action_data": { "action": "logout_success", "auth_provider_name": "password" }
+              },
+              {
+                "event_id": "c97ee69d-41a6-4587-91ee-1ccb1afab006",
+                "type": "AUTH_LOG",
+                "timestamp": "2026-07-09T19:20:00.000000Z",
+                "principal": { "id": "be545252-ad04-4cfa-9ca5-deca58416151", "type": "CHATGPT_WORKSPACE" },
+                "actor": { "type": "ACCOUNT_USER", "user_id": "user-TUvqhBX7HbQPRgHyEBt5WRcI", "user_email": "user@example.org" },
+                "request_metadata": { "client_ip": "10.12.43.122", "client_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" },
+                "action_data": { "action": "token_revoked", "auth_provider_name": "password" }
+              }
+            ],
+            "last_end_time": "2026-07-09T19:20:00Z",
+            "has_more": false
+          }
+          `}}
+
+  # --- Compliance logs (workspace scope): page 1 (initial request, dynamic ?after=now-initial_interval) ---
+  - path: /v1/compliance/workspaces/ws-example-001/logs
+    methods: ['GET']
+    query_params:
+      event_type: AUTH_LOG
+      limit: 2
+    request_headers:
+      Authorization:
+        - "Bearer xxxx"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - 'application/json'
+        body: |-
+          {{ minify_json `
+          {
+            "data": [
+              {
+                "event_id": "c97ee69d-41a6-4587-91ee-1ccb1afab002",
+                "type": "AUTH_LOG",
+                "timestamp": "2026-07-09T08:55:12.762392Z",
+                "principal": { "id": "be545252-ad04-4cfa-9ca5-deca58416151", "type": "CHATGPT_WORKSPACE" },
+                "actor": { "type": "ACCOUNT_USER", "user_id": "user-TUvqhBX7HbQPRgHyEBt5WRcI", "user_email": "user@example.org" },
+                "request_metadata": { "client_ip": "10.12.43.122", "client_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" },
+                "action_data": { "action": "login_success", "auth_provider_name": "password" }
+              },
+              {
+                "event_id": "c97ee69d-41a6-4587-91ee-1ccb1afab011",
+                "type": "AUTH_LOG",
+                "timestamp": "2026-07-09T08:56:03.100000Z",
+                "principal": { "id": "be545252-ad04-4cfa-9ca5-deca58416151", "type": "CHATGPT_WORKSPACE" },
+                "actor": { "type": "ACCOUNT_USER", "user_id": "user-TUvqhBX7HbQPRgHyEBt5WRcI", "user_email": "user@example.org" },
+                "request_metadata": { "client_ip": "198.51.100.90", "client_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/127.0" },
+                "action_data": { "action": "password_login_invalid_password", "auth_provider_name": "password" }
+              }
+            ],
+            "last_end_time": "2026-07-09T09:00:00Z",
+            "has_more": true
+          }
+          `}}

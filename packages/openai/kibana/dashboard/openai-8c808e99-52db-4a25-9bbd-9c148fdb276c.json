@@ -1,0 +1,2494 @@
+{
+    "attributes": {
+        "controlGroupInput": {
+            "chainingSystem": "HIERARCHICAL",
+            "controlStyle": "oneLine",
+            "ignoreParentSettingsJSON": {
+                "ignoreFilters": false,
+                "ignoreQuery": false,
+                "ignoreTimerange": false,
+                "ignoreValidations": false
+            },
+            "panelsJSON": {
+                "0540a5bb-0d78-4cf3-913d-4a30b13de624": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "exclude": false,
+                        "existsSelected": false,
+                        "fieldName": "openai.compliance.type",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "Event Type"
+                    },
+                    "grow": false,
+                    "order": 0,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                },
+                "3d9c9880-df4e-4301-8352-3caa11fab567": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "exclude": false,
+                        "existsSelected": false,
+                        "fieldName": "user.email",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "User Email"
+                    },
+                    "grow": false,
+                    "order": 3,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                },
+                "ea8c8e80-3cc5-4495-908f-b90ce5ad6447": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "exclude": false,
+                        "existsSelected": false,
+                        "fieldName": "event.outcome",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "Outcome"
+                    },
+                    "grow": false,
+                    "order": 2,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                },
+                "f5540685-94af-4f80-bbc3-c9af4a0614fb": {
+                    "explicitInput": {
+                        "dataViewId": "logs-*",
+                        "exclude": false,
+                        "existsSelected": false,
+                        "fieldName": "event.action",
+                        "searchTechnique": "prefix",
+                        "selectedOptions": [],
+                        "sort": {
+                            "by": "_count",
+                            "direction": "desc"
+                        },
+                        "title": "Action"
+                    },
+                    "grow": false,
+                    "order": 1,
+                    "type": "optionsListControl",
+                    "width": "medium"
+                }
+            },
+            "showApplySelections": false
+        },
+        "description": "Overview of OpenAI Compliance Logs Platform activity across app, auth, audit, and Codex event types.",
+        "kibanaSavedObjectMeta": {
+            "searchSourceJSON": {
+                "filter": [
+                    {
+                        "$state": {
+                            "store": "appState"
+                        },
+                        "meta": {
+                            "alias": null,
+                            "disabled": false,
+                            "field": "data_stream.dataset",
+                            "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+                            "key": "data_stream.dataset",
+                            "negate": false,
+                            "params": {
+                                "query": "openai.compliance"
+                            },
+                            "type": "phrase"
+                        },
+                        "query": {
+                            "match_phrase": {
+                                "data_stream.dataset": "openai.compliance"
+                            }
+                        }
+                    }
+                ],
+                "query": {
+                    "language": "kuery",
+                    "query": ""
+                }
+            }
+        },
+        "optionsJSON": {
+            "hidePanelTitles": false,
+            "syncColors": false,
+            "syncCursor": true,
+            "syncTooltips": false,
+            "useMargins": true
+        },
+        "panelsJSON": [
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-1b18a8bf-b2b3-4499-9e40-e88e42ce8a45",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "15940603-3239-47c2-a02d-40c99d52cf67",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "1b18a8bf-b2b3-4499-9e40-e88e42ce8a45": {
+                                            "columnOrder": [
+                                                "239824a3-4e28-45fb-bcf9-35478fc0d5e1",
+                                                "3f39619d-c77d-48b7-bc61-e20328e1e689",
+                                                "389c812d-6a1b-48fe-a3d2-9af6c364e31f"
+                                            ],
+                                            "columns": {
+                                                "239824a3-4e28-45fb-bcf9-35478fc0d5e1": {
+                                                    "dataType": "date",
+                                                    "isBucketed": true,
+                                                    "label": "@timestamp",
+                                                    "operationType": "date_histogram",
+                                                    "params": {
+                                                        "dropPartials": false,
+                                                        "includeEmptyRows": true,
+                                                        "interval": "auto"
+                                                    },
+                                                    "sourceField": "@timestamp"
+                                                },
+                                                "389c812d-6a1b-48fe-a3d2-9af6c364e31f": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "3f39619d-c77d-48b7-bc61-e20328e1e689": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Event Type",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "389c812d-6a1b-48fe-a3d2-9af6c364e31f",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "openai.compliance.type"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "15940603-3239-47c2-a02d-40c99d52cf67",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "accessors": [
+                                            "389c812d-6a1b-48fe-a3d2-9af6c364e31f"
+                                        ],
+                                        "layerId": "1b18a8bf-b2b3-4499-9e40-e88e42ce8a45",
+                                        "layerType": "data",
+                                        "seriesType": "line",
+                                        "splitAccessor": "3f39619d-c77d-48b7-bc61-e20328e1e689",
+                                        "xAccessor": "239824a3-4e28-45fb-bcf9-35478fc0d5e1"
+                                    }
+                                ],
+                                "legend": {
+                                    "isVisible": true,
+                                    "position": "right",
+                                    "shouldTruncate": false
+                                },
+                                "preferredSeriesType": "line",
+                                "valueLabels": "hide"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsXY"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 11,
+                    "i": "18f7818a-bf55-4a96-b701-4174f7346227",
+                    "w": 18,
+                    "x": 30,
+                    "y": 0
+                },
+                "panelIndex": "18f7818a-bf55-4a96-b701-4174f7346227",
+                "title": "Events over Time by Type",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-f9532c00-2d44-4be7-9254-5258e0cc72d0",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "f9532c00-2d44-4be7-9254-5258e0cc72d0": {
+                                            "columnOrder": [
+                                                "390e0b17-875d-4ce4-80a9-b12032eff09f"
+                                            ],
+                                            "columns": {
+                                                "390e0b17-875d-4ce4-80a9-b12032eff09f": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Event Types Collected",
+                                                    "operationType": "unique_count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "openai.compliance.type"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "logs-*",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "f9532c00-2d44-4be7-9254-5258e0cc72d0",
+                                "layerType": "data",
+                                "metricAccessor": "390e0b17-875d-4ce4-80a9-b12032eff09f",
+                                "showBar": false
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 11,
+                    "i": "48a58a55-77d9-43db-9620-6dd772139978",
+                    "w": 7,
+                    "x": 16,
+                    "y": 0
+                },
+                "panelIndex": "48a58a55-77d9-43db-9620-6dd772139978",
+                "title": "Event Types Collected",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-ac7d0243-8fde-4fc2-ae63-9cd6b1268814",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "ac7d0243-8fde-4fc2-ae63-9cd6b1268814": {
+                                            "columnOrder": [
+                                                "7aae1bda-4b3d-4cd6-8414-1cac81a937fb"
+                                            ],
+                                            "columns": {
+                                                "7aae1bda-4b3d-4cd6-8414-1cac81a937fb": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Total Events",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "logs-*",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "ac7d0243-8fde-4fc2-ae63-9cd6b1268814",
+                                "layerType": "data",
+                                "metricAccessor": "7aae1bda-4b3d-4cd6-8414-1cac81a937fb",
+                                "showBar": false
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 11,
+                    "i": "a27f2123-661e-4e84-9152-c911b7b882fe",
+                    "w": 7,
+                    "x": 9,
+                    "y": 0
+                },
+                "panelIndex": "a27f2123-661e-4e84-9152-c911b7b882fe",
+                "title": "Total Events",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-735bda3e-ef27-424d-8355-dd1c75ccd443",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "735bda3e-ef27-424d-8355-dd1c75ccd443": {
+                                            "columnOrder": [
+                                                "3bbf8882-aff8-447f-be3b-352b4c0bad1b"
+                                            ],
+                                            "columns": {
+                                                "3bbf8882-aff8-447f-be3b-352b4c0bad1b": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Unique Users",
+                                                    "operationType": "unique_count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "user.id"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "logs-*",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "735bda3e-ef27-424d-8355-dd1c75ccd443",
+                                "layerType": "data",
+                                "metricAccessor": "3bbf8882-aff8-447f-be3b-352b4c0bad1b",
+                                "showBar": false
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 11,
+                    "i": "0a0ff960-1830-45c9-aeab-ce9300b4643f",
+                    "w": 7,
+                    "x": 23,
+                    "y": 0
+                },
+                "panelIndex": "0a0ff960-1830-45c9-aeab-ce9300b4643f",
+                "title": "Unique Users",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-76efdc8a-c83f-4736-99b8-a6eddf86966c",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "2256f1de-89b7-4c78-b9dd-2f5289d8a9ef",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "76efdc8a-c83f-4736-99b8-a6eddf86966c": {
+                                            "columnOrder": [
+                                                "b28951c7-e997-4610-9683-1cbff5af64bd",
+                                                "e271ef04-c523-4c3c-b7ec-bb6d1ee5c0de"
+                                            ],
+                                            "columns": {
+                                                "b28951c7-e997-4610-9683-1cbff5af64bd": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Outcome",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "e271ef04-c523-4c3c-b7ec-bb6d1ee5c0de",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": false,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 5
+                                                    },
+                                                    "sourceField": "event.outcome"
+                                                },
+                                                "e271ef04-c523-4c3c-b7ec-bb6d1ee5c0de": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "2256f1de-89b7-4c78-b9dd-2f5289d8a9ef",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "categoryDisplay": "default",
+                                        "layerId": "76efdc8a-c83f-4736-99b8-a6eddf86966c",
+                                        "layerType": "data",
+                                        "legendDisplay": "show",
+                                        "metrics": [
+                                            "e271ef04-c523-4c3c-b7ec-bb6d1ee5c0de"
+                                        ],
+                                        "nestedLegend": false,
+                                        "numberDisplay": "percent",
+                                        "primaryGroups": [
+                                            "b28951c7-e997-4610-9683-1cbff5af64bd"
+                                        ],
+                                        "truncateLegend": false
+                                    }
+                                ],
+                                "shape": "pie"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsPie"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 15,
+                    "i": "7a934318-1480-416d-86cb-b9dc408f86a1",
+                    "w": 20,
+                    "x": 9,
+                    "y": 11
+                },
+                "panelIndex": "7a934318-1480-416d-86cb-b9dc408f86a1",
+                "title": "Event Outcome",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-7d71253c-34bc-43d3-866e-b2b6add8579d",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "94f36987-fc30-4908-8743-d6e4adc3ba3b",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "7d71253c-34bc-43d3-866e-b2b6add8579d": {
+                                            "columnOrder": [
+                                                "a0a6bd33-5763-4d9d-9647-2aeb0768e315",
+                                                "3a76c190-da5e-4ead-9d87-501efe744c17"
+                                            ],
+                                            "columns": {
+                                                "3a76c190-da5e-4ead-9d87-501efe744c17": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "a0a6bd33-5763-4d9d-9647-2aeb0768e315": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Event Type",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "3a76c190-da5e-4ead-9d87-501efe744c17",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": false,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 5
+                                                    },
+                                                    "sourceField": "openai.compliance.type"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "94f36987-fc30-4908-8743-d6e4adc3ba3b",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "categoryDisplay": "default",
+                                        "layerId": "7d71253c-34bc-43d3-866e-b2b6add8579d",
+                                        "layerType": "data",
+                                        "legendDisplay": "show",
+                                        "metrics": [
+                                            "3a76c190-da5e-4ead-9d87-501efe744c17"
+                                        ],
+                                        "nestedLegend": false,
+                                        "numberDisplay": "percent",
+                                        "primaryGroups": [
+                                            "a0a6bd33-5763-4d9d-9647-2aeb0768e315"
+                                        ],
+                                        "truncateLegend": false
+                                    }
+                                ],
+                                "shape": "pie"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsPie"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 15,
+                    "i": "e2fa0ddf-beeb-453c-9986-4d8db5a42c8f",
+                    "w": 19,
+                    "x": 29,
+                    "y": 11
+                },
+                "panelIndex": "e2fa0ddf-beeb-453c-9986-4d8db5a42c8f",
+                "title": "Events by Type",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "savedVis": {
+                        "data": {
+                            "aggs": [],
+                            "searchSource": {
+                                "filter": [],
+                                "query": {
+                                    "language": "kuery",
+                                    "query": ""
+                                }
+                            }
+                        },
+                        "description": "",
+                        "params": {
+                            "fontSize": 12,
+                            "markdown": "#### OpenAI\n\n**Compliance**\n\nThis dashboard gives visibility into the compliance data stream of OpenAI, showing activity collected from the ChatGPT Enterprise Compliance Logs Platform. It highlights total events and unique actors, trends of compliance events by type over time, and event category breakdowns. It surfaces top actions, top users by activity, and top source IPs, along with Codex model usage and security findings. Use the controls above to filter by event type, action, outcome, and user. Together, these panels offer a compliance-level view to support security oversight, auditing, and usage analysis.\n\n**[Integration Page](/app/integrations/detail/openai/overview)**",
+                            "openLinksInNewTab": false
+                        },
+                        "title": "",
+                        "type": "markdown",
+                        "uiState": {}
+                    }
+                },
+                "gridData": {
+                    "h": 26,
+                    "i": "2c1c0670-3149-4174-9c9a-748eca94493e",
+                    "w": 9,
+                    "x": 0,
+                    "y": 0
+                },
+                "panelIndex": "2c1c0670-3149-4174-9c9a-748eca94493e",
+                "title": "",
+                "type": "visualization"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-507f8bd4-a838-4851-8a31-d64f8451969c",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "currentIndexPatternId": "logs-*",
+                                    "layers": {
+                                        "507f8bd4-a838-4851-8a31-d64f8451969c": {
+                                            "columnOrder": [
+                                                "ac771d78-551e-4401-8d3e-7d21dc544a83",
+                                                "9ab6defd-4576-49af-8fe5-0fbeabc27474"
+                                            ],
+                                            "columns": {
+                                                "9ab6defd-4576-49af-8fe5-0fbeabc27474": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "ac771d78-551e-4401-8d3e-7d21dc544a83": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Action",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "9ab6defd-4576-49af-8fe5-0fbeabc27474",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "event.action"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "indexPatternId": "logs-*",
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "currentIndexPatternId": "logs-*",
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "indexPatternRefs": [
+                                        {
+                                            "id": "logs-*",
+                                            "timeField": "@timestamp",
+                                            "title": "logs-*"
+                                        }
+                                    ],
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "logs-*",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "accessors": [
+                                            "9ab6defd-4576-49af-8fe5-0fbeabc27474"
+                                        ],
+                                        "layerId": "507f8bd4-a838-4851-8a31-d64f8451969c",
+                                        "layerType": "data",
+                                        "seriesType": "bar_horizontal",
+                                        "xAccessor": "ac771d78-551e-4401-8d3e-7d21dc544a83"
+                                    }
+                                ],
+                                "legend": {
+                                    "isVisible": true,
+                                    "position": "right",
+                                    "shouldTruncate": false,
+                                    "showSingleSeries": false
+                                },
+                                "preferredSeriesType": "bar_horizontal",
+                                "valueLabels": "hide"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsXY"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 15,
+                    "i": "e3f3a159-568e-45ac-8287-86430162615a",
+                    "w": 16,
+                    "x": 0,
+                    "y": 26
+                },
+                "panelIndex": "e3f3a159-568e-45ac-8287-86430162615a",
+                "title": "Top Actions",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-a61db44c-a8bf-4c09-a0e3-bb29a894b815",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "bf735b61-8cf4-48e8-b485-405618d98b2e",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "a61db44c-a8bf-4c09-a0e3-bb29a894b815": {
+                                            "columnOrder": [
+                                                "d352b7b1-b3d8-401f-b166-aacef84a7d52",
+                                                "96325a89-4c37-4107-bebf-9a589c35b788"
+                                            ],
+                                            "columns": {
+                                                "96325a89-4c37-4107-bebf-9a589c35b788": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "d352b7b1-b3d8-401f-b166-aacef84a7d52": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Event Category",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "96325a89-4c37-4107-bebf-9a589c35b788",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "event.category"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "bf735b61-8cf4-48e8-b485-405618d98b2e",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "accessors": [
+                                            "96325a89-4c37-4107-bebf-9a589c35b788"
+                                        ],
+                                        "layerId": "a61db44c-a8bf-4c09-a0e3-bb29a894b815",
+                                        "layerType": "data",
+                                        "seriesType": "bar",
+                                        "xAccessor": "d352b7b1-b3d8-401f-b166-aacef84a7d52"
+                                    }
+                                ],
+                                "legend": {
+                                    "isVisible": true,
+                                    "position": "right",
+                                    "shouldTruncate": false,
+                                    "showSingleSeries": false
+                                },
+                                "preferredSeriesType": "bar",
+                                "valueLabels": "hide"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsXY"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 15,
+                    "i": "86c2e5f7-de8e-40b6-ae02-e7008705a214",
+                    "w": 16,
+                    "x": 16,
+                    "y": 26
+                },
+                "panelIndex": "86c2e5f7-de8e-40b6-ae02-e7008705a214",
+                "title": "Events by Category",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-9825d5a0-0ea3-4078-970b-b03c6b4061cc",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "b170c724-39ff-4476-8cc0-ce0381c80ec1",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "9825d5a0-0ea3-4078-970b-b03c6b4061cc": {
+                                            "columnOrder": [
+                                                "c8d12314-546b-496f-8437-0ae08575d38d",
+                                                "4152fe17-561d-44b1-9333-a9ceec90ed91"
+                                            ],
+                                            "columns": {
+                                                "4152fe17-561d-44b1-9333-a9ceec90ed91": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "c8d12314-546b-496f-8437-0ae08575d38d": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Severity",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "4152fe17-561d-44b1-9333-a9ceec90ed91",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "vulnerability.severity"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "b170c724-39ff-4476-8cc0-ce0381c80ec1",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layers": [
+                                    {
+                                        "accessors": [
+                                            "4152fe17-561d-44b1-9333-a9ceec90ed91"
+                                        ],
+                                        "layerId": "9825d5a0-0ea3-4078-970b-b03c6b4061cc",
+                                        "layerType": "data",
+                                        "seriesType": "bar",
+                                        "xAccessor": "c8d12314-546b-496f-8437-0ae08575d38d"
+                                    }
+                                ],
+                                "legend": {
+                                    "isVisible": true,
+                                    "position": "right",
+                                    "shouldTruncate": false,
+                                    "showSingleSeries": false
+                                },
+                                "preferredSeriesType": "bar",
+                                "valueLabels": "hide"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsXY"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 15,
+                    "i": "445904e3-b868-4d8a-b171-fb56ba2fb4f4",
+                    "w": 16,
+                    "x": 32,
+                    "y": 26
+                },
+                "panelIndex": "445904e3-b868-4d8a-b171-fb56ba2fb4f4",
+                "title": "Security Findings by Severity",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-24e984ee-23fc-49d2-b4d7-7ca2e63b6cce",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "currentIndexPatternId": "logs-*",
+                                    "layers": {
+                                        "24e984ee-23fc-49d2-b4d7-7ca2e63b6cce": {
+                                            "columnOrder": [
+                                                "de62f47a-823a-4c36-bc14-be3bbfee822f",
+                                                "cdd38512-44dc-4ce6-b86a-e9faaaaa348d"
+                                            ],
+                                            "columns": {
+                                                "cdd38512-44dc-4ce6-b86a-e9faaaaa348d": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "de62f47a-823a-4c36-bc14-be3bbfee822f": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Codex Model",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "cdd38512-44dc-4ce6-b86a-e9faaaaa348d",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "gen_ai.request.model"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "indexPatternId": "logs-*",
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "currentIndexPatternId": "logs-*",
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "indexPatternRefs": [
+                                        {
+                                            "id": "logs-*",
+                                            "timeField": "@timestamp",
+                                            "title": "logs-*"
+                                        }
+                                    ],
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "logs-*",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "columns": [
+                                    {
+                                        "columnId": "de62f47a-823a-4c36-bc14-be3bbfee822f",
+                                        "isMetric": false,
+                                        "isTransposed": false
+                                    },
+                                    {
+                                        "columnId": "cdd38512-44dc-4ce6-b86a-e9faaaaa348d",
+                                        "isMetric": true,
+                                        "isTransposed": false
+                                    }
+                                ],
+                                "layerId": "24e984ee-23fc-49d2-b4d7-7ca2e63b6cce",
+                                "layerType": "data"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsDatatable"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 14,
+                    "i": "93be3d7f-582a-4c3b-9235-9723e2e54015",
+                    "w": 16,
+                    "x": 32,
+                    "y": 41
+                },
+                "panelIndex": "93be3d7f-582a-4c3b-9235-9723e2e54015",
+                "title": "Top Codex Models",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "description": "",
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "sort": []
+                },
+                "gridData": {
+                    "h": 15,
+                    "i": "e777661f-7800-4e43-8c6d-3896199208ec",
+                    "w": 48,
+                    "x": 0,
+                    "y": 55
+                },
+                "panelIndex": "e777661f-7800-4e43-8c6d-3896199208ec",
+                "panelRefName": "panel_e777661f-7800-4e43-8c6d-3896199208ec",
+                "title": "[Logs OpenAI] Essential Details",
+                "type": "search"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-513b7e2f-491c-468b-b679-fe4455ec50c0",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "5bf4fed7-743d-4a42-a655-2f2cc33c658a",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "513b7e2f-491c-468b-b679-fe4455ec50c0": {
+                                            "columnOrder": [
+                                                "b9e92fa2-1833-40b5-a44d-8b13106d2c6d",
+                                                "8f7d01c2-47d3-4e49-98bd-8fef1b262828"
+                                            ],
+                                            "columns": {
+                                                "8f7d01c2-47d3-4e49-98bd-8fef1b262828": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "b9e92fa2-1833-40b5-a44d-8b13106d2c6d": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "Country ISO Code",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "8f7d01c2-47d3-4e49-98bd-8fef1b262828",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "source.geo.country_iso_code"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "5bf4fed7-743d-4a42-a655-2f2cc33c658a",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "layerId": "513b7e2f-491c-468b-b679-fe4455ec50c0",
+                                "layerType": "data",
+                                "regionAccessor": "b9e92fa2-1833-40b5-a44d-8b13106d2c6d",
+                                "valueAccessor": "8f7d01c2-47d3-4e49-98bd-8fef1b262828"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsChoropleth"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 24,
+                    "i": "7e1d64cb-cf89-4525-b0c6-11ff8ee3ad7c",
+                    "w": 48,
+                    "x": 0,
+                    "y": 70
+                },
+                "panelIndex": "7e1d64cb-cf89-4525-b0c6-11ff8ee3ad7c",
+                "title": "Events by Country",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-cc0934c8-61a0-4487-b787-041fd527de48",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "e4128c06-dda7-4e37-ba67-e7d26b1e7fe0",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "cc0934c8-61a0-4487-b787-041fd527de48": {
+                                            "columnOrder": [
+                                                "de435e10-ecd8-4ab1-8574-193a80e93d7d",
+                                                "afa16c13-f460-4b9a-ab8c-e30733707932"
+                                            ],
+                                            "columns": {
+                                                "afa16c13-f460-4b9a-ab8c-e30733707932": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                },
+                                                "de435e10-ecd8-4ab1-8574-193a80e93d7d": {
+                                                    "customLabel": true,
+                                                    "dataType": "ip",
+                                                    "isBucketed": true,
+                                                    "label": "Source IP",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "afa16c13-f460-4b9a-ab8c-e30733707932",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "source.ip"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "e4128c06-dda7-4e37-ba67-e7d26b1e7fe0",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "columns": [
+                                    {
+                                        "columnId": "de435e10-ecd8-4ab1-8574-193a80e93d7d",
+                                        "isMetric": false,
+                                        "isTransposed": false
+                                    },
+                                    {
+                                        "columnId": "afa16c13-f460-4b9a-ab8c-e30733707932",
+                                        "isMetric": true,
+                                        "isTransposed": false
+                                    }
+                                ],
+                                "layerId": "cc0934c8-61a0-4487-b787-041fd527de48",
+                                "layerType": "data"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsDatatable"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 14,
+                    "i": "1006eab4-3c46-489e-883c-1151958bb63a",
+                    "w": 16,
+                    "x": 0,
+                    "y": 41
+                },
+                "panelIndex": "1006eab4-3c46-489e-883c-1151958bb63a",
+                "title": "Top Source IPs",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-5c013032-b52e-4bee-af52-9f9fb95a713f",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "currentIndexPatternId": "logs-*",
+                                    "layers": {
+                                        "5c013032-b52e-4bee-af52-9f9fb95a713f": {
+                                            "columnOrder": [
+                                                "5c9bf5c5-bad8-49d3-81c1-b10881035859",
+                                                "bce659ab-8a0c-4e84-afc7-5d842da047bf"
+                                            ],
+                                            "columns": {
+                                                "5c9bf5c5-bad8-49d3-81c1-b10881035859": {
+                                                    "customLabel": true,
+                                                    "dataType": "string",
+                                                    "isBucketed": true,
+                                                    "label": "User",
+                                                    "operationType": "terms",
+                                                    "params": {
+                                                        "missingBucket": false,
+                                                        "orderBy": {
+                                                            "columnId": "bce659ab-8a0c-4e84-afc7-5d842da047bf",
+                                                            "type": "column"
+                                                        },
+                                                        "orderDirection": "desc",
+                                                        "otherBucket": true,
+                                                        "parentFormat": {
+                                                            "id": "terms"
+                                                        },
+                                                        "size": 10
+                                                    },
+                                                    "sourceField": "user.email"
+                                                },
+                                                "bce659ab-8a0c-4e84-afc7-5d842da047bf": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "isBucketed": false,
+                                                    "label": "Count",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false
+                                                    },
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "ignoreGlobalFilters": false,
+                                            "incompleteColumns": {},
+                                            "indexPatternId": "logs-*",
+                                            "sampling": 1
+                                        }
+                                    }
+                                },
+                                "indexpattern": {
+                                    "currentIndexPatternId": "logs-*",
+                                    "layers": {}
+                                },
+                                "textBased": {
+                                    "indexPatternRefs": [
+                                        {
+                                            "id": "logs-*",
+                                            "timeField": "@timestamp",
+                                            "title": "logs-*"
+                                        }
+                                    ],
+                                    "layers": {}
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "logs-*",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "openai.compliance"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "openai.compliance"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "columns": [
+                                    {
+                                        "columnId": "5c9bf5c5-bad8-49d3-81c1-b10881035859",
+                                        "isMetric": false,
+                                        "isTransposed": false
+                                    },
+                                    {
+                                        "columnId": "bce659ab-8a0c-4e84-afc7-5d842da047bf",
+                                        "isMetric": true,
+                                        "isTransposed": false
+                                    }
+                                ],
+                                "layerId": "5c013032-b52e-4bee-af52-9f9fb95a713f",
+                                "layerType": "data"
+                            }
+                        },
+                        "title": "",
+                        "type": "lens",
+                        "visualizationType": "lnsDatatable"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "logs-*",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "openai.compliance"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "openai.compliance"
+                                }
+                            }
+                        }
+                    ],
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 14,
+                    "i": "081db51e-d47b-40ae-926f-63a9b4b1fa82",
+                    "w": 16,
+                    "x": 16,
+                    "y": 41
+                },
+                "panelIndex": "081db51e-d47b-40ae-926f-63a9b4b1fa82",
+                "title": "Top Users",
+                "type": "lens"
+            }
+        ],
+        "timeRestore": false,
+        "title": "[Logs OpenAI] Compliance Overview",
+        "version": 3
+    },
+    "coreMigrationVersion": "8.8.0",
+    "created_at": "2026-07-14T10:44:12.932Z",
+    "id": "openai-8c808e99-52db-4a25-9bbd-9c148fdb276c",
+    "references": [
+        {
+            "id": "logs-*",
+            "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+            "type": "index-pattern"
+        },
+        {
+            "id": "openai-343e1382-5694-4443-ad87-32b5272627a2",
+            "name": "e777661f-7800-4e43-8c6d-3896199208ec:panel_e777661f-7800-4e43-8c6d-3896199208ec",
+            "type": "search"
+        },
+        {
+            "id": "logs-*",
+            "name": "18f7818a-bf55-4a96-b701-4174f7346227:indexpattern-datasource-layer-1b18a8bf-b2b3-4499-9e40-e88e42ce8a45",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "18f7818a-bf55-4a96-b701-4174f7346227:15940603-3239-47c2-a02d-40c99d52cf67",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "48a58a55-77d9-43db-9620-6dd772139978:indexpattern-datasource-layer-f9532c00-2d44-4be7-9254-5258e0cc72d0",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "a27f2123-661e-4e84-9152-c911b7b882fe:indexpattern-datasource-layer-ac7d0243-8fde-4fc2-ae63-9cd6b1268814",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "0a0ff960-1830-45c9-aeab-ce9300b4643f:indexpattern-datasource-layer-735bda3e-ef27-424d-8355-dd1c75ccd443",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "7a934318-1480-416d-86cb-b9dc408f86a1:indexpattern-datasource-layer-76efdc8a-c83f-4736-99b8-a6eddf86966c",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "7a934318-1480-416d-86cb-b9dc408f86a1:2256f1de-89b7-4c78-b9dd-2f5289d8a9ef",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "e2fa0ddf-beeb-453c-9986-4d8db5a42c8f:indexpattern-datasource-layer-7d71253c-34bc-43d3-866e-b2b6add8579d",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "e2fa0ddf-beeb-453c-9986-4d8db5a42c8f:94f36987-fc30-4908-8743-d6e4adc3ba3b",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "e3f3a159-568e-45ac-8287-86430162615a:indexpattern-datasource-layer-507f8bd4-a838-4851-8a31-d64f8451969c",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "86c2e5f7-de8e-40b6-ae02-e7008705a214:indexpattern-datasource-layer-a61db44c-a8bf-4c09-a0e3-bb29a894b815",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "86c2e5f7-de8e-40b6-ae02-e7008705a214:bf735b61-8cf4-48e8-b485-405618d98b2e",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "445904e3-b868-4d8a-b171-fb56ba2fb4f4:indexpattern-datasource-layer-9825d5a0-0ea3-4078-970b-b03c6b4061cc",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "445904e3-b868-4d8a-b171-fb56ba2fb4f4:b170c724-39ff-4476-8cc0-ce0381c80ec1",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "93be3d7f-582a-4c3b-9235-9723e2e54015:indexpattern-datasource-layer-24e984ee-23fc-49d2-b4d7-7ca2e63b6cce",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "7e1d64cb-cf89-4525-b0c6-11ff8ee3ad7c:indexpattern-datasource-layer-513b7e2f-491c-468b-b679-fe4455ec50c0",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "7e1d64cb-cf89-4525-b0c6-11ff8ee3ad7c:5bf4fed7-743d-4a42-a655-2f2cc33c658a",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "1006eab4-3c46-489e-883c-1151958bb63a:indexpattern-datasource-layer-cc0934c8-61a0-4487-b787-041fd527de48",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "1006eab4-3c46-489e-883c-1151958bb63a:e4128c06-dda7-4e37-ba67-e7d26b1e7fe0",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "081db51e-d47b-40ae-926f-63a9b4b1fa82:indexpattern-datasource-layer-5c013032-b52e-4bee-af52-9f9fb95a713f",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_0540a5bb-0d78-4cf3-913d-4a30b13de624:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_f5540685-94af-4f80-bbc3-c9af4a0614fb:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_ea8c8e80-3cc5-4495-908f-b90ce5ad6447:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "controlGroup_3d9c9880-df4e-4301-8352-3caa11fab567:optionsListDataView",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+            "type": "index-pattern"
+        }
+    ],
+    "type": "dashboard",
+    "typeMigrationVersion": "10.2.0",
+    "updated_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0"
+}
