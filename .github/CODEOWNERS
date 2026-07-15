@@ -429,6 +429,7 @@
 /packages/openai/data_stream/audit @elastic/security-service-integrations
 /packages/openai/data_stream/code_interpreter_sessions @elastic/obs-infraobs-integrations
 /packages/openai/data_stream/completions @elastic/obs-infraobs-integrations
+/packages/openai/data_stream/compliance @elastic/security-service-integrations
 /packages/openai/data_stream/embeddings @elastic/obs-infraobs-integrations
 /packages/openai/data_stream/images @elastic/obs-infraobs-integrations
 /packages/openai/data_stream/moderations @elastic/obs-infraobs-integrations
