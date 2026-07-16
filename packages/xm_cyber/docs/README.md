@@ -158,22 +158,22 @@ An example event for `audit_trail` looks as following:
 {
     "@timestamp": "2023-01-03T19:13:54.358Z",
     "agent": {
-        "ephemeral_id": "82c58df4-60d3-4f5e-acfc-8487938b89be",
-        "id": "60d4174b-a8ab-4553-87d1-babcd72f3d97",
-        "name": "elastic-agent-45805",
+        "ephemeral_id": "5c78c857-7c05-4ad1-b59d-dfe002b69f86",
+        "id": "8e7a72ce-e668-41b7-a4e5-89abecc24932",
+        "name": "elastic-agent-25860",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.audit_trail",
-        "namespace": "38562",
+        "namespace": "82890",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "60d4174b-a8ab-4553-87d1-babcd72f3d97",
+        "id": "8e7a72ce-e668-41b7-a4e5-89abecc24932",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -181,10 +181,10 @@ An example event for `audit_trail` looks as following:
         "action": "xm-login",
         "agent_id_status": "verified",
         "dataset": "xm_cyber.audit_trail",
-        "id": "63b47e72ee320700106d4381",
-        "ingested": "2026-06-02T07:28:02Z",
+        "id": "64b2c3d4e5f60718293a4b5c",
+        "ingested": "2026-07-16T03:32:18Z",
         "kind": "event",
-        "original": "{\"_id\":\"63b47e72ee320700106d4381\",\"details\":\"john.doe@example.com Logged in via user\",\"eventSubType\":\"XM_LOGIN\",\"eventType\":\"ACCESS\",\"objectName\":\"User\",\"objectType\":\"USER\",\"tenant\":\"acme\",\"terminalId\":{\"hostname\":\"acme.clients.xmcyber.com\",\"ip\":\"192.0.2.0\"},\"timestamp\":\"2023-01-03T19:13:54.358Z\",\"userId\":{\"email\":\"john.doe@example.com\",\"name\":\"John Doe\"}}",
+        "original": "{\"_id\":\"64b2c3d4e5f60718293a4b5c\",\"details\":\"alice.johnson@example.org Logged in via user\",\"eventSubType\":\"XM_LOGIN\",\"eventType\":\"ACCESS\",\"objectName\":\"User\",\"objectType\":\"USER\",\"tenant\":\"demo\",\"terminalId\":{\"hostname\":\"demo.clients.example.com\",\"ip\":\"198.51.100.10\"},\"timestamp\":\"2023-01-03T19:13:54.358Z\",\"userId\":{\"email\":\"alice.johnson@example.org\",\"name\":\"Alice Johnson\"}}",
         "type": [
             "access"
         ]
@@ -192,40 +192,40 @@ An example event for `audit_trail` looks as following:
     "input": {
         "type": "cel"
     },
-    "message": "john.doe@example.com Logged in via user",
+    "message": "alice.johnson@example.org Logged in via user",
     "related": {
         "hosts": [
-            "acme.clients.xmcyber.com"
+            "demo.clients.example.com"
         ],
         "ip": [
-            "192.0.2.0"
+            "198.51.100.10"
         ],
         "user": [
-            "John Doe",
-            "john.doe@example.com"
+            "Alice Johnson",
+            "alice.johnson@example.org"
         ]
     },
     "source": {
         "as": {
-            "number": 64500,
+            "number": 64501,
             "organization": {
                 "name": "Documentation ASN"
             }
         },
-        "domain": "acme.clients.xmcyber.com",
+        "domain": "demo.clients.example.com",
         "geo": {
-            "city_name": "Las Vegas",
-            "continent_name": "North America",
-            "country_iso_code": "US",
-            "country_name": "United States",
+            "city_name": "Amsterdam",
+            "continent_name": "Europe",
+            "country_iso_code": "NL",
+            "country_name": "Netherlands",
             "location": {
-                "lat": 36.17497,
-                "lon": -115.13722
+                "lat": 52.37404,
+                "lon": 4.88969
             },
-            "region_iso_code": "US-NV",
-            "region_name": "Nevada"
+            "region_iso_code": "NL-NH",
+            "region_name": "North Holland"
         },
-        "ip": "192.0.2.0"
+        "ip": "198.51.100.10"
     },
     "tags": [
         "preserve_original_event",
@@ -233,17 +233,17 @@ An example event for `audit_trail` looks as following:
         "xm_cyber-audit_trail"
     ],
     "user": {
-        "domain": "example.com",
-        "email": "john.doe@example.com",
-        "name": "John Doe"
+        "domain": "example.org",
+        "email": "alice.johnson@example.org",
+        "name": "Alice Johnson"
     },
     "xm_cyber": {
         "audit_trail": {
-            "details": "john.doe@example.com Logged in via user",
+            "details": "alice.johnson@example.org Logged in via user",
             "event_type": "access",
             "object_name": "User",
             "object_type": "USER",
-            "tenant": "acme"
+            "tenant": "demo"
         }
     }
 }
@@ -305,22 +305,22 @@ An example event for `vulnerability` looks as following:
 {
     "@timestamp": "2025-04-03T00:00:00.000Z",
     "agent": {
-        "ephemeral_id": "7c001110-ee01-434f-8abf-9dc62adb91e4",
-        "id": "51e7c693-87cb-4910-b6d3-23201c6c96c9",
-        "name": "elastic-agent-15139",
+        "ephemeral_id": "8c904b7d-9389-4f26-8846-ce989291f316",
+        "id": "066264b2-6fce-4707-9b57-51a9510384cf",
+        "name": "elastic-agent-93043",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.vulnerability",
-        "namespace": "40523",
+        "namespace": "50901",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "51e7c693-87cb-4910-b6d3-23201c6c96c9",
+        "id": "066264b2-6fce-4707-9b57-51a9510384cf",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -330,7 +330,7 @@ An example event for `vulnerability` looks as following:
             "vulnerability"
         ],
         "dataset": "xm_cyber.vulnerability",
-        "ingested": "2026-06-08T08:55:00Z",
+        "ingested": "2026-07-16T03:38:10Z",
         "kind": "event",
         "original": "{\"chokePointFoundOn\":4,\"criticalAssetsAtRisk\":33,\"criticalAssetsFoundOn\":17,\"cve\":\"CVE-2016-0185\",\"cvss2\":9.3,\"cvss2Vector\":\"AV:N/AC:M/Au:N/C:C/I:C/A:C\",\"cvss30\":null,\"cvss31\":7.8,\"cvss31Vector\":\"CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\"cvss3Vector\":null,\"cvss4\":null,\"cvss4Vector\":null,\"description\":\"Media Center in Microsoft Windows Vista SP2, Windows 7 SP1, and Windows 8.1 allows remote attackers to execute arbitrary code via a crafted Media Center link (aka .mcl) file, aka 'Windows Media Center Remote Code Execution Vulnerability.'\",\"deviceFoundOn\":17,\"epssPercentile\":0.99132,\"epssProbability\":0.80235,\"epssScore\":0.80235,\"exploitKitExist\":true,\"firstDetected\":\"2025-04-03T00:00:00.000Z\",\"hasAttackTechnique\":false,\"inCisaKev\":true,\"inExploitDb\":true,\"isExploitedInTheWild\":true,\"products\":1,\"publishedDate\":\"2016-05-11T00:00:00.000Z\",\"severity\":30,\"severityLevel\":\"High\",\"status\":\"Active\",\"techniqueId\":null}",
         "type": [
@@ -767,53 +767,53 @@ An example event for `entity_inventory` looks as following:
 {
     "@timestamp": "2026-05-05T21:05:15.079Z",
     "agent": {
-        "ephemeral_id": "c3c0a0af-c50d-4900-b4cb-67a31d202b12",
-        "id": "07193dcb-00a4-4495-986d-13148e6cf661",
-        "name": "elastic-agent-53244",
+        "ephemeral_id": "b4977117-3967-4809-bbcb-e298690cc65d",
+        "id": "3700578a-2aa5-4af7-8743-db1b3ef31513",
+        "name": "elastic-agent-10070",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "cloud": {
         "account": {
-            "id": "702947630755",
-            "name": "xm-test3"
+            "id": "000000000001",
+            "name": "example-account"
         },
         "instance": {
-            "name": "/CodeBuild/accessKeys"
+            "name": "/ExampleBuild/testKeys"
         },
         "region": "us-east-1"
     },
     "data_stream": {
         "dataset": "xm_cyber.entity_inventory",
-        "namespace": "45716",
+        "namespace": "51995",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "07193dcb-00a4-4495-986d-13148e6cf661",
+        "id": "3700578a-2aa5-4af7-8743-db1b3ef31513",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.entity_inventory",
-        "id": "awsSsmParameter-arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys",
-        "ingested": "2026-06-19T11:02:05Z",
+        "id": "awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys",
+        "ingested": "2026-07-16T03:34:25Z",
         "kind": "asset",
-        "original": "{\"accountId\":\"702947630755\",\"accountName\":\"xm-test3\",\"arn\":\"arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys\",\"category\":\"Cloud\",\"customProperties\":{\"domainWorkgroup\":{\"data\":\"AWS/702947630755\",\"type\":\"domain\"},\"ouComputer\":\"AWS/702947630755/us-east-1/SSM/ParameterMetadata\",\"ouUser\":\"AWS/702947630755/SSM/ParameterMetadata\",\"subnetInfo\":\"AWS_702947630755_us-east-1\"},\"disabled\":false,\"displayName\":\"/CodeBuild/accessKeys\",\"entityDetails\":{\"id\":\"awsSsmParameter-arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys\",\"isAsset\":null,\"name\":\"/CodeBuild/accessKeys\",\"subType\":\"awsSsmParameter\",\"subTypeDisplayName\":\"AWS SSM Parameter\"},\"entityType\":\"AwsSsmParameterEntity\",\"id\":\"awsSsmParameter-arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys\",\"name\":\"/CodeBuild/accessKeys\",\"notIncludedInAttacks\":false,\"organizationId\":\"o-wvjziar78j\",\"region\":\"us-east-1\",\"ruleDisplayName\":\"702947630755 / /CodeBuild/accessKeys\",\"ssmParameterDataType\":\"text\",\"ssmParameterKeyId\":\"alias/aws/ssm\",\"ssmParameterLastModifiedDate\":\"2020-07-19T09:53:58.629Z\",\"ssmParameterLastModifiedUser\":\"arn:aws:sts::702947630755:assumed-role/AWSReservedSSO_AdministratorAccess_4b70f7a69b186776/zur@xmcyber.com\",\"ssmParameterName\":\"/CodeBuild/accessKeys\",\"ssmParameterTier\":\"Standard\",\"ssmParameterType\":\"SecureString\",\"ssmParameterVersion\":1,\"status\":\"active\",\"type\":\"awsSsmParameter\",\"typeDisplayName\":\"AWS SSM Parameter\",\"useType\":\"Storage\",\"xmProviderAccount\":\"xm-test3\",\"xmUpdateTime\":\"2026-05-05T21:05:15.079Z\"}"
+        "original": "{\"accountId\":\"000000000001\",\"accountName\":\"example-account\",\"arn\":\"arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys\",\"category\":\"Cloud\",\"customProperties\":{\"domainWorkgroup\":{\"data\":\"AWS/000000000001\",\"type\":\"domain\"},\"ouComputer\":\"AWS/000000000001/us-east-1/SSM/ParameterMetadata\",\"ouUser\":\"AWS/000000000001/SSM/ParameterMetadata\",\"subnetInfo\":\"AWS_000000000001_us-east-1\"},\"disabled\":false,\"displayName\":\"/ExampleBuild/testKeys\",\"entityDetails\":{\"id\":\"awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys\",\"isAsset\":null,\"name\":\"/ExampleBuild/testKeys\",\"subType\":\"awsSsmParameter\",\"subTypeDisplayName\":\"AWS SSM Parameter\"},\"entityType\":\"AwsSsmParameterEntity\",\"id\":\"awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys\",\"name\":\"/ExampleBuild/testKeys\",\"notIncludedInAttacks\":false,\"organizationId\":\"o-abc123def4\",\"region\":\"us-east-1\",\"ruleDisplayName\":\"000000000001 / /ExampleBuild/testKeys\",\"ssmParameterDataType\":\"text\",\"ssmParameterKeyId\":\"alias/aws/ssm\",\"ssmParameterLastModifiedDate\":\"2020-07-19T09:53:58.629Z\",\"ssmParameterLastModifiedUser\":\"arn:aws:sts::000000000001:assumed-role/AWSReservedSSO_ExampleAccess_0123456789abcdef/alice.johnson@example.org\",\"ssmParameterName\":\"/ExampleBuild/testKeys\",\"ssmParameterTier\":\"Standard\",\"ssmParameterType\":\"SecureString\",\"ssmParameterVersion\":1,\"status\":\"active\",\"type\":\"awsSsmParameter\",\"typeDisplayName\":\"AWS SSM Parameter\",\"useType\":\"Storage\",\"xmProviderAccount\":\"example-account\",\"xmUpdateTime\":\"2026-05-05T21:05:15.079Z\"}"
     },
     "input": {
         "type": "cel"
     },
     "organization": {
-        "id": "o-wvjziar78j"
+        "id": "o-abc123def4"
     },
     "related": {
         "hosts": [
-            "arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys",
-            "/CodeBuild/accessKeys"
+            "arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys",
+            "/ExampleBuild/testKeys"
         ]
     },
     "tags": [
@@ -823,34 +823,34 @@ An example event for `entity_inventory` looks as following:
     ],
     "xm_cyber": {
         "entity_inventory": {
-            "arn": "arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys",
+            "arn": "arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys",
             "category": "Cloud",
             "custom_properties": {
                 "domain_workgroup": {
-                    "data": "AWS/702947630755",
+                    "data": "AWS/000000000001",
                     "type": "domain"
                 },
-                "ou_computer": "AWS/702947630755/us-east-1/SSM/ParameterMetadata",
-                "ou_user": "AWS/702947630755/SSM/ParameterMetadata",
-                "subnet_info": "AWS_702947630755_us-east-1"
+                "ou_computer": "AWS/000000000001/us-east-1/SSM/ParameterMetadata",
+                "ou_user": "AWS/000000000001/SSM/ParameterMetadata",
+                "subnet_info": "AWS_000000000001_us-east-1"
             },
             "disabled": false,
-            "display_name": "/CodeBuild/accessKeys",
+            "display_name": "/ExampleBuild/testKeys",
             "entity_details": {
-                "id": "awsSsmParameter-arn:aws:ssm:us-east-1:702947630755:parameter/CodeBuild/accessKeys",
-                "name": "/CodeBuild/accessKeys",
+                "id": "awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys",
+                "name": "/ExampleBuild/testKeys",
                 "sub_type": "awsSsmParameter",
                 "sub_type_display_name": "AWS SSM Parameter"
             },
             "entity_type": "AwsSsmParameterEntity",
-            "name": "/CodeBuild/accessKeys",
+            "name": "/ExampleBuild/testKeys",
             "not_included_in_attacks": false,
-            "rule_display_name": "702947630755 / /CodeBuild/accessKeys",
+            "rule_display_name": "000000000001 / /ExampleBuild/testKeys",
             "ssm_parameter_data_type": "text",
             "ssm_parameter_key_id": "alias/aws/ssm",
             "ssm_parameter_last_modified_date": "2020-07-19T09:53:58.629Z",
-            "ssm_parameter_last_modified_user": "arn:aws:sts::702947630755:assumed-role/AWSReservedSSO_AdministratorAccess_4b70f7a69b186776/zur@xmcyber.com",
-            "ssm_parameter_name": "/CodeBuild/accessKeys",
+            "ssm_parameter_last_modified_user": "arn:aws:sts::000000000001:assumed-role/AWSReservedSSO_ExampleAccess_0123456789abcdef/alice.johnson@example.org",
+            "ssm_parameter_name": "/ExampleBuild/testKeys",
             "ssm_parameter_tier": "Standard",
             "ssm_parameter_type": "SecureString",
             "ssm_parameter_version": 1,
@@ -858,7 +858,7 @@ An example event for `entity_inventory` looks as following:
             "type": "awsSsmParameter",
             "type_display_name": "AWS SSM Parameter",
             "use_type": "Storage",
-            "xm_provider_account": "xm-test3"
+            "xm_provider_account": "example-account"
         }
     }
 }
@@ -912,33 +912,33 @@ An example event for `risk_score` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-07-01T06:36:35.341Z",
+    "@timestamp": "2026-07-16T03:36:50.372Z",
     "agent": {
-        "ephemeral_id": "3611556a-015f-4824-bcd3-d952390f2aa5",
-        "id": "26f65bf6-8eda-4621-b409-d49e6ad56049",
-        "name": "elastic-agent-44928",
+        "ephemeral_id": "7e5e0337-223d-4f96-8f54-424ffc18dc61",
+        "id": "6515826d-f225-4488-afec-a77fbd9fb044",
+        "name": "elastic-agent-49813",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.risk_score",
-        "namespace": "51482",
+        "namespace": "53401",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "26f65bf6-8eda-4621-b409-d49e6ad56049",
+        "id": "6515826d-f225-4488-afec-a77fbd9fb044",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.risk_score",
-        "ingested": "2026-07-01T06:36:38Z",
+        "ingested": "2026-07-16T03:36:53Z",
         "kind": "event",
-        "original": "{\"avgGraphData\":[{\"date\":\"2025-12-03T00:00:00.000Z\",\"grade\":\"A\",\"score\":95}],\"graphData\":{\"campaigns\":null,\"fromDate\":\"2025-12-02T00:00:00.000Z\",\"grade\":\"A\",\"score\":95,\"toDate\":\"2025-12-03T00:00:00.000Z\"},\"scenario\":{\"grade\":\"B\",\"id\":\"02D8\",\"name\":\"(LG) Workstation to Servers\",\"score\":82},\"stats\":{\"grade\":\"A\",\"score\":90,\"trend\":1}}"
+        "original": "{\"avgGraphData\":[{\"date\":\"2025-12-03T00:00:00.000Z\",\"grade\":\"A\",\"score\":95}],\"graphData\":{\"campaigns\":null,\"fromDate\":\"2025-12-02T00:00:00.000Z\",\"grade\":\"A\",\"score\":95,\"toDate\":\"2025-12-03T00:00:00.000Z\"},\"scenario\":{\"grade\":\"B\",\"id\":\"A101\",\"name\":\"(EX) Endpoint to Servers\",\"score\":82},\"stats\":{\"grade\":\"A\",\"score\":90,\"trend\":1}}"
     },
     "input": {
         "type": "cel"
@@ -946,7 +946,7 @@ An example event for `risk_score` looks as following:
     "labels": {
         "risk_grade": "B",
         "risk_score": "82",
-        "scenario_name": "(LG) Workstation to Servers"
+        "scenario_name": "(EX) Endpoint to Servers"
     },
     "tags": [
         "preserve_original_event",
@@ -969,7 +969,7 @@ An example event for `risk_score` looks as following:
                 "to_date": "2025-12-03T00:00:00.000Z"
             },
             "scenario": {
-                "id": "02D8",
+                "id": "A101",
                 "score_float": 82
             },
             "stats": {
@@ -1056,28 +1056,28 @@ An example event for `device` looks as following:
 {
     "@timestamp": "2026-05-12T21:54:01.641Z",
     "agent": {
-        "ephemeral_id": "c892c59b-e06e-4192-942b-0c0ffb531573",
-        "id": "13c97267-e431-40c3-860f-88297376f007",
-        "name": "elastic-agent-32973",
+        "ephemeral_id": "a0276a47-db24-4b3a-a8e5-08914dada121",
+        "id": "f4a1e445-b252-4f40-9a39-394c5dad5577",
+        "name": "elastic-agent-10582",
         "type": "filebeat",
-        "version": "8.19.0"
+        "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.device",
-        "namespace": "24819",
+        "namespace": "56834",
         "type": "logs"
     },
     "device": {
-        "id": "1017176037145946592",
+        "id": "9000000000000000001",
         "type": "Workstation"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "13c97267-e431-40c3-860f-88297376f007",
+        "id": "f4a1e445-b252-4f40-9a39-394c5dad5577",
         "snapshot": false,
-        "version": "8.19.0"
+        "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
@@ -1085,23 +1085,23 @@ An example event for `device` looks as following:
             "host"
         ],
         "dataset": "xm_cyber.device",
-        "ingested": "2026-07-06T11:28:47Z",
+        "ingested": "2026-07-16T03:33:21Z",
         "kind": "event",
-        "original": "{\"affectedEntities\":4,\"apps\":[{\"activeCves\":[\"CVE-2023-0001\"],\"activeCvesSafeVersion\":[{\"cve\":\"CVE-2023-0001\",\"safeVersion\":\"2.0.0\"}],\"affectedCriticalAssets\":0,\"chokePointFoundOn\":\"1\",\"closedCves\":[],\"deviceFoundOn\":2,\"name\":\"Example Product\",\"productOperatingSystems\":[\"Windows\"],\"productVulnerabilities\":3,\"productsCriticalAssetsAtRisk\":1,\"vendor\":\"VendorCo\",\"version\":\"1.2.3\"}],\"chokePointLevel\":\"Critical\",\"chokePointScore\":100,\"criticalAssetsAtRisk\":2,\"criticalVulnerabilities\":2,\"deviceId\":\"1017176037145946592\",\"deviceName\":\"Hugh\",\"deviceType\":\"Workstation\",\"domain\":\"corp.example.com\",\"enitityVulnerabilities\":1,\"enrichmentLabels\":[\"enriched\"],\"fqdn\":\"hugh.corp.example.com\",\"highVulnerabilities\":5,\"ipAddress\":\"192.168.1.10\",\"isChokePoint\":true,\"isCriticalAsset\":true,\"labels\":[\"lab\",\"xm-cyber-test\"],\"lastCompromised\":null,\"lastScan\":\"2026-05-12T21:54:01.641Z\",\"lowVulnerabilities\":3,\"maxCvssV2\":8,\"maxCvssV3\":9.1,\"maxCvssV31\":8.8,\"maxCvssV4\":7.2,\"mediumVulnerabilities\":10,\"os\":\"Windows 11\",\"ou\":\"OU=Workstations,DC=corp,DC=example,DC=com\",\"products\":5,\"riskScore\":75,\"subnet\":\"192.168.1.0/24\",\"type\":\"Endpoint\",\"unknownVulnerabilities\":0}",
+        "original": "{\"affectedEntities\":4,\"apps\":[{\"activeCves\":[\"CVE-2023-0001\"],\"activeCvesSafeVersion\":[{\"cve\":\"CVE-2023-0001\",\"safeVersion\":\"2.0.0\"}],\"affectedCriticalAssets\":0,\"chokePointFoundOn\":\"1\",\"closedCves\":[],\"deviceFoundOn\":2,\"name\":\"Example Product\",\"productOperatingSystems\":[\"Orion OS\"],\"productVulnerabilities\":3,\"productsCriticalAssetsAtRisk\":1,\"vendor\":\"VendorCo\",\"version\":\"1.2.3\"}],\"chokePointLevel\":\"Critical\",\"chokePointScore\":100,\"criticalAssetsAtRisk\":2,\"criticalVulnerabilities\":2,\"deviceId\":\"9000000000000000001\",\"deviceName\":\"host-01\",\"deviceType\":\"Workstation\",\"domain\":\"corp.example.com\",\"enitityVulnerabilities\":1,\"enrichmentLabels\":[\"enriched\"],\"fqdn\":\"host-01.corp.example.com\",\"highVulnerabilities\":5,\"ipAddress\":\"192.0.2.10\",\"isChokePoint\":true,\"isCriticalAsset\":true,\"labels\":[\"lab\",\"example-security-test\"],\"lastCompromised\":null,\"lastScan\":\"2026-05-12T21:54:01.641Z\",\"lowVulnerabilities\":3,\"maxCvssV2\":8,\"maxCvssV3\":9.1,\"maxCvssV31\":8.8,\"maxCvssV4\":7.2,\"mediumVulnerabilities\":10,\"os\":\"Orion Desktop 11\",\"ou\":\"OU=Workstations,DC=corp,DC=example,DC=com\",\"products\":5,\"riskScore\":75,\"subnet\":\"192.0.2.0/24\",\"type\":\"Endpoint\",\"unknownVulnerabilities\":0}",
         "type": [
             "info"
         ]
     },
     "host": {
         "domain": "corp.example.com",
-        "hostname": "Hugh",
-        "id": "1017176037145946592",
+        "hostname": "host-01",
+        "id": "9000000000000000001",
         "ip": [
-            "192.168.1.10"
+            "192.0.2.10"
         ],
-        "name": "hugh.corp.example.com",
+        "name": "host-01.corp.example.com",
         "os": {
-            "full": "Windows 11"
+            "full": "Orion Desktop 11"
         },
         "type": "Workstation"
     },
@@ -1110,7 +1110,7 @@ An example event for `device` looks as following:
     },
     "related": {
         "ip": [
-            "192.168.1.10"
+            "192.0.2.10"
         ]
     },
     "tags": [
@@ -1148,7 +1148,7 @@ An example event for `device` looks as following:
                     "device_found_on": 2,
                     "name": "Example Product",
                     "product_operating_systems": [
-                        "Windows"
+                        "Orion OS"
                     ],
                     "product_vulnerabilities": 3,
                     "products_critical_assets_at_risk": 1,
@@ -1169,7 +1169,7 @@ An example event for `device` looks as following:
             "is_critical_asset": true,
             "labels": [
                 "lab",
-                "xm-cyber-test"
+                "example-security-test"
             ],
             "low_vulnerabilities": 3,
             "max_cvss_v2": 8,
@@ -1180,7 +1180,7 @@ An example event for `device` looks as following:
             "ou": "OU=Workstations,DC=corp,DC=example,DC=com",
             "products": 5,
             "risk_score": 75,
-            "subnet": "192.168.1.0/24",
+            "subnet": "192.0.2.0/24",
             "type": "Endpoint",
             "unknown_vulnerabilities": 0
         }
@@ -1223,33 +1223,33 @@ An example event for `product` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-07-01T15:33:52.609Z",
+    "@timestamp": "2026-07-16T03:35:34.205Z",
     "agent": {
-        "ephemeral_id": "a3795845-fbb9-4b88-aaed-2a8e09ad0848",
-        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
-        "name": "elastic-agent-41139",
+        "ephemeral_id": "7e74eaae-affa-41f6-9bd8-870e20a7fc42",
+        "id": "051bc826-b48d-4953-b68e-54431811f68d",
+        "name": "elastic-agent-91937",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.product",
-        "namespace": "21831",
+        "namespace": "13577",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
+        "id": "051bc826-b48d-4953-b68e-54431811f68d",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.product",
-        "ingested": "2026-07-01T15:33:55Z",
+        "ingested": "2026-07-16T03:35:37Z",
         "kind": "event",
-        "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"wget\",\"productOperatingSystems\":[\"Linux sles 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
+        "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"Atlas Transfer Tool\",\"productOperatingSystems\":[\"Helios OS 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },
     "input": {
         "type": "cel"
@@ -1264,9 +1264,9 @@ An example event for `product` looks as following:
             "affected_critical_assets": 2,
             "choke_points_found_on": 0,
             "devices_found_on": 2,
-            "product_name": "wget",
+            "product_name": "Atlas Transfer Tool",
             "product_operating_systems": [
-                "Linux sles 12.5 Server"
+                "Helios OS 12.5 Server"
             ],
             "product_vulnerabilities": 1,
             "products_critical_assets_at_risk": 0

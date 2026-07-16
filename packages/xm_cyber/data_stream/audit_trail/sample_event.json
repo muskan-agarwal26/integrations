@@ -1,22 +1,22 @@
 {
     "@timestamp": "2023-01-03T19:13:54.358Z",
     "agent": {
-        "ephemeral_id": "82c58df4-60d3-4f5e-acfc-8487938b89be",
-        "id": "60d4174b-a8ab-4553-87d1-babcd72f3d97",
-        "name": "elastic-agent-45805",
+        "ephemeral_id": "5c78c857-7c05-4ad1-b59d-dfe002b69f86",
+        "id": "8e7a72ce-e668-41b7-a4e5-89abecc24932",
+        "name": "elastic-agent-25860",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.audit_trail",
-        "namespace": "38562",
+        "namespace": "82890",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "60d4174b-a8ab-4553-87d1-babcd72f3d97",
+        "id": "8e7a72ce-e668-41b7-a4e5-89abecc24932",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -24,10 +24,10 @@
         "action": "xm-login",
         "agent_id_status": "verified",
         "dataset": "xm_cyber.audit_trail",
-        "id": "63b47e72ee320700106d4381",
-        "ingested": "2026-06-02T07:28:02Z",
+        "id": "64b2c3d4e5f60718293a4b5c",
+        "ingested": "2026-07-16T03:32:18Z",
         "kind": "event",
-        "original": "{\"_id\":\"63b47e72ee320700106d4381\",\"details\":\"john.doe@example.com Logged in via user\",\"eventSubType\":\"XM_LOGIN\",\"eventType\":\"ACCESS\",\"objectName\":\"User\",\"objectType\":\"USER\",\"tenant\":\"acme\",\"terminalId\":{\"hostname\":\"acme.clients.xmcyber.com\",\"ip\":\"192.0.2.0\"},\"timestamp\":\"2023-01-03T19:13:54.358Z\",\"userId\":{\"email\":\"john.doe@example.com\",\"name\":\"John Doe\"}}",
+        "original": "{\"_id\":\"64b2c3d4e5f60718293a4b5c\",\"details\":\"alice.johnson@example.org Logged in via user\",\"eventSubType\":\"XM_LOGIN\",\"eventType\":\"ACCESS\",\"objectName\":\"User\",\"objectType\":\"USER\",\"tenant\":\"demo\",\"terminalId\":{\"hostname\":\"demo.clients.example.com\",\"ip\":\"198.51.100.10\"},\"timestamp\":\"2023-01-03T19:13:54.358Z\",\"userId\":{\"email\":\"alice.johnson@example.org\",\"name\":\"Alice Johnson\"}}",
         "type": [
             "access"
         ]
@@ -35,40 +35,40 @@
     "input": {
         "type": "cel"
     },
-    "message": "john.doe@example.com Logged in via user",
+    "message": "alice.johnson@example.org Logged in via user",
     "related": {
         "hosts": [
-            "acme.clients.xmcyber.com"
+            "demo.clients.example.com"
         ],
         "ip": [
-            "192.0.2.0"
+            "198.51.100.10"
         ],
         "user": [
-            "John Doe",
-            "john.doe@example.com"
+            "Alice Johnson",
+            "alice.johnson@example.org"
         ]
     },
     "source": {
         "as": {
-            "number": 64500,
+            "number": 64501,
             "organization": {
                 "name": "Documentation ASN"
             }
         },
-        "domain": "acme.clients.xmcyber.com",
+        "domain": "demo.clients.example.com",
         "geo": {
-            "city_name": "Las Vegas",
-            "continent_name": "North America",
-            "country_iso_code": "US",
-            "country_name": "United States",
+            "city_name": "Amsterdam",
+            "continent_name": "Europe",
+            "country_iso_code": "NL",
+            "country_name": "Netherlands",
             "location": {
-                "lat": 36.17497,
-                "lon": -115.13722
+                "lat": 52.37404,
+                "lon": 4.88969
             },
-            "region_iso_code": "US-NV",
-            "region_name": "Nevada"
+            "region_iso_code": "NL-NH",
+            "region_name": "North Holland"
         },
-        "ip": "192.0.2.0"
+        "ip": "198.51.100.10"
     },
     "tags": [
         "preserve_original_event",
@@ -76,17 +76,17 @@
         "xm_cyber-audit_trail"
     ],
     "user": {
-        "domain": "example.com",
-        "email": "john.doe@example.com",
-        "name": "John Doe"
+        "domain": "example.org",
+        "email": "alice.johnson@example.org",
+        "name": "Alice Johnson"
     },
     "xm_cyber": {
         "audit_trail": {
-            "details": "john.doe@example.com Logged in via user",
+            "details": "alice.johnson@example.org Logged in via user",
             "event_type": "access",
             "object_name": "User",
             "object_type": "USER",
-            "tenant": "acme"
+            "tenant": "demo"
         }
     }
 }

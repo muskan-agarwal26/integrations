@@ -1,31 +1,31 @@
 {
-    "@timestamp": "2026-07-01T15:33:52.609Z",
+    "@timestamp": "2026-07-16T03:35:34.205Z",
     "agent": {
-        "ephemeral_id": "a3795845-fbb9-4b88-aaed-2a8e09ad0848",
-        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
-        "name": "elastic-agent-41139",
+        "ephemeral_id": "7e74eaae-affa-41f6-9bd8-870e20a7fc42",
+        "id": "051bc826-b48d-4953-b68e-54431811f68d",
+        "name": "elastic-agent-91937",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.product",
-        "namespace": "21831",
+        "namespace": "13577",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "18ef6aa4-8616-4cd9-b863-9b4c16279260",
+        "id": "051bc826-b48d-4953-b68e-54431811f68d",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.product",
-        "ingested": "2026-07-01T15:33:55Z",
+        "ingested": "2026-07-16T03:35:37Z",
         "kind": "event",
-        "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"wget\",\"productOperatingSystems\":[\"Linux sles 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
+        "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"Atlas Transfer Tool\",\"productOperatingSystems\":[\"Helios OS 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },
     "input": {
         "type": "cel"
@@ -40,9 +40,9 @@
             "affected_critical_assets": 2,
             "choke_points_found_on": 0,
             "devices_found_on": 2,
-            "product_name": "wget",
+            "product_name": "Atlas Transfer Tool",
             "product_operating_systems": [
-                "Linux sles 12.5 Server"
+                "Helios OS 12.5 Server"
             ],
             "product_vulnerabilities": 1,
             "products_critical_assets_at_risk": 0
