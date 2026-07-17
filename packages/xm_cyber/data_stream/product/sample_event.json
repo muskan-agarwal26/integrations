@@ -1,29 +1,29 @@
 {
-    "@timestamp": "2026-07-16T03:35:34.205Z",
+    "@timestamp": "2026-07-17T09:34:07.437Z",
     "agent": {
-        "ephemeral_id": "7e74eaae-affa-41f6-9bd8-870e20a7fc42",
-        "id": "051bc826-b48d-4953-b68e-54431811f68d",
-        "name": "elastic-agent-91937",
+        "ephemeral_id": "ba92df7d-15fc-4978-b553-8d96400a02b1",
+        "id": "a7c561c8-1ad6-4955-aa5f-2969f60ec135",
+        "name": "elastic-agent-56475",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.product",
-        "namespace": "13577",
+        "namespace": "16298",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "051bc826-b48d-4953-b68e-54431811f68d",
+        "id": "a7c561c8-1ad6-4955-aa5f-2969f60ec135",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.product",
-        "ingested": "2026-07-16T03:35:37Z",
+        "ingested": "2026-07-17T09:34:10Z",
         "kind": "event",
         "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"Atlas Transfer Tool\",\"productOperatingSystems\":[\"Helios OS 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },

@@ -1,15 +1,15 @@
 {
     "@timestamp": "2026-05-12T21:54:01.641Z",
     "agent": {
-        "ephemeral_id": "a0276a47-db24-4b3a-a8e5-08914dada121",
-        "id": "f4a1e445-b252-4f40-9a39-394c5dad5577",
-        "name": "elastic-agent-10582",
+        "ephemeral_id": "3656849f-6c16-4078-9952-015995548e2d",
+        "id": "a9d23aad-91bc-4a14-9f62-f29ebf1c8ab1",
+        "name": "elastic-agent-40605",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.device",
-        "namespace": "56834",
+        "namespace": "59928",
         "type": "logs"
     },
     "device": {
@@ -20,7 +20,7 @@
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "f4a1e445-b252-4f40-9a39-394c5dad5577",
+        "id": "a9d23aad-91bc-4a14-9f62-f29ebf1c8ab1",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -30,9 +30,9 @@
             "host"
         ],
         "dataset": "xm_cyber.device",
-        "ingested": "2026-07-16T03:33:21Z",
+        "ingested": "2026-07-17T09:31:25Z",
         "kind": "event",
-        "original": "{\"affectedEntities\":4,\"apps\":[{\"activeCves\":[\"CVE-2023-0001\"],\"activeCvesSafeVersion\":[{\"cve\":\"CVE-2023-0001\",\"safeVersion\":\"2.0.0\"}],\"affectedCriticalAssets\":0,\"chokePointFoundOn\":\"1\",\"closedCves\":[],\"deviceFoundOn\":2,\"name\":\"Example Product\",\"productOperatingSystems\":[\"Orion OS\"],\"productVulnerabilities\":3,\"productsCriticalAssetsAtRisk\":1,\"vendor\":\"VendorCo\",\"version\":\"1.2.3\"}],\"chokePointLevel\":\"Critical\",\"chokePointScore\":100,\"criticalAssetsAtRisk\":2,\"criticalVulnerabilities\":2,\"deviceId\":\"9000000000000000001\",\"deviceName\":\"host-01\",\"deviceType\":\"Workstation\",\"domain\":\"corp.example.com\",\"enitityVulnerabilities\":1,\"enrichmentLabels\":[\"enriched\"],\"fqdn\":\"host-01.corp.example.com\",\"highVulnerabilities\":5,\"ipAddress\":\"192.0.2.10\",\"isChokePoint\":true,\"isCriticalAsset\":true,\"labels\":[\"lab\",\"example-security-test\"],\"lastCompromised\":null,\"lastScan\":\"2026-05-12T21:54:01.641Z\",\"lowVulnerabilities\":3,\"maxCvssV2\":8,\"maxCvssV3\":9.1,\"maxCvssV31\":8.8,\"maxCvssV4\":7.2,\"mediumVulnerabilities\":10,\"os\":\"Orion Desktop 11\",\"ou\":\"OU=Workstations,DC=corp,DC=example,DC=com\",\"products\":5,\"riskScore\":75,\"subnet\":\"192.0.2.0/24\",\"type\":\"Endpoint\",\"unknownVulnerabilities\":0}",
+        "original": "{\"affectedEntities\":4,\"apps\":[{\"activeCves\":[\"CVE-2023-0001\"],\"activeCvesSafeVersion\":[{\"cve\":\"CVE-2023-0001\",\"safeVersion\":\"2.0.0\"}],\"affectedCriticalAssets\":0,\"chokePointFoundOn\":\"1\",\"closedCves\":[],\"deviceFoundOn\":2,\"name\":\"Example Product\",\"productOperatingSystems\":[\"Orion OS\"],\"productVulnerabilities\":3,\"productsCriticalAssetsAtRisk\":1,\"vendor\":\"VendorCo\",\"version\":\"1.2.3\"}],\"chokePointLevel\":\"Critical\",\"chokePointScore\":100,\"criticalAssetsAtRisk\":2,\"criticalVulnerabilities\":2,\"deviceId\":\"9000000000000000001\",\"deviceName\":\"host-01\",\"deviceType\":\"Workstation\",\"domain\":\"corp.example.com\",\"enitityVulnerabilities\":1,\"enrichmentLabels\":[\"enriched\"],\"fqdn\":\"hugh.corp.example.com\",\"highVulnerabilities\":5,\"ipAddress\":\"192.168.1.10\",\"isChokePoint\":true,\"isCriticalAsset\":true,\"labels\":[\"lab\",\"example-security-test\"],\"lastCompromised\":null,\"lastScan\":\"2026-05-12T21:54:01.641Z\",\"lowVulnerabilities\":3,\"maxCvssV2\":8,\"maxCvssV3\":9.1,\"maxCvssV31\":8.8,\"maxCvssV4\":7.2,\"mediumVulnerabilities\":10,\"os\":\"Orion Desktop 11\",\"ou\":\"OU=Workstations,DC=corp,DC=example,DC=com\",\"products\":5,\"riskScore\":75,\"subnet\":\"192.168.1.0/24\",\"type\":\"Endpoint\",\"unknownVulnerabilities\":0}",
         "type": [
             "info"
         ]
@@ -42,9 +42,9 @@
         "hostname": "host-01",
         "id": "9000000000000000001",
         "ip": [
-            "192.0.2.10"
+            "192.168.1.10"
         ],
-        "name": "host-01.corp.example.com",
+        "name": "hugh.corp.example.com",
         "os": {
             "full": "Orion Desktop 11"
         },
@@ -55,7 +55,7 @@
     },
     "related": {
         "ip": [
-            "192.0.2.10"
+            "192.168.1.10"
         ]
     },
     "tags": [
@@ -125,7 +125,7 @@
             "ou": "OU=Workstations,DC=corp,DC=example,DC=com",
             "products": 5,
             "risk_score": 75,
-            "subnet": "192.0.2.0/24",
+            "subnet": "192.168.1.0/24",
             "type": "Endpoint",
             "unknown_vulnerabilities": 0
         }

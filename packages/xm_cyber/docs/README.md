@@ -158,33 +158,33 @@ An example event for `audit_trail` looks as following:
 {
     "@timestamp": "2023-01-03T19:13:54.358Z",
     "agent": {
-        "ephemeral_id": "5c78c857-7c05-4ad1-b59d-dfe002b69f86",
-        "id": "8e7a72ce-e668-41b7-a4e5-89abecc24932",
-        "name": "elastic-agent-25860",
+        "ephemeral_id": "55b27668-d54c-4a65-ade5-c33577da3ef7",
+        "id": "1799662a-7b8f-4bf6-8c4e-6ff0ac45f498",
+        "name": "elastic-agent-39650",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.audit_trail",
-        "namespace": "82890",
+        "namespace": "21331",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "8e7a72ce-e668-41b7-a4e5-89abecc24932",
+        "id": "1799662a-7b8f-4bf6-8c4e-6ff0ac45f498",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
-        "action": "xm-login",
+        "action": "console-login",
         "agent_id_status": "verified",
         "dataset": "xm_cyber.audit_trail",
         "id": "64b2c3d4e5f60718293a4b5c",
-        "ingested": "2026-07-16T03:32:18Z",
+        "ingested": "2026-07-17T09:30:14Z",
         "kind": "event",
-        "original": "{\"_id\":\"64b2c3d4e5f60718293a4b5c\",\"details\":\"alice.johnson@example.org Logged in via user\",\"eventSubType\":\"XM_LOGIN\",\"eventType\":\"ACCESS\",\"objectName\":\"User\",\"objectType\":\"USER\",\"tenant\":\"demo\",\"terminalId\":{\"hostname\":\"demo.clients.example.com\",\"ip\":\"198.51.100.10\"},\"timestamp\":\"2023-01-03T19:13:54.358Z\",\"userId\":{\"email\":\"alice.johnson@example.org\",\"name\":\"Alice Johnson\"}}",
+        "original": "{\"_id\":\"64b2c3d4e5f60718293a4b5c\",\"details\":\"john.doe@example.com Logged in via user\",\"eventSubType\":\"CONSOLE_LOGIN\",\"eventType\":\"ACCESS\",\"objectName\":\"User\",\"objectType\":\"USER\",\"tenant\":\"demo\",\"terminalId\":{\"hostname\":\"demo.clients.example.com\",\"ip\":\"192.0.2.0\"},\"timestamp\":\"2023-01-03T19:13:54.358Z\",\"userId\":{\"email\":\"john.doe@example.com\",\"name\":\"John Doe\"}}",
         "type": [
             "access"
         ]
@@ -192,40 +192,40 @@ An example event for `audit_trail` looks as following:
     "input": {
         "type": "cel"
     },
-    "message": "alice.johnson@example.org Logged in via user",
+    "message": "john.doe@example.com Logged in via user",
     "related": {
         "hosts": [
             "demo.clients.example.com"
         ],
         "ip": [
-            "198.51.100.10"
+            "192.0.2.0"
         ],
         "user": [
-            "Alice Johnson",
-            "alice.johnson@example.org"
+            "John Doe",
+            "john.doe@example.com"
         ]
     },
     "source": {
         "as": {
-            "number": 64501,
+            "number": 64500,
             "organization": {
                 "name": "Documentation ASN"
             }
         },
         "domain": "demo.clients.example.com",
         "geo": {
-            "city_name": "Amsterdam",
-            "continent_name": "Europe",
-            "country_iso_code": "NL",
-            "country_name": "Netherlands",
+            "city_name": "Las Vegas",
+            "continent_name": "North America",
+            "country_iso_code": "US",
+            "country_name": "United States",
             "location": {
-                "lat": 52.37404,
-                "lon": 4.88969
+                "lat": 36.17497,
+                "lon": -115.13722
             },
-            "region_iso_code": "NL-NH",
-            "region_name": "North Holland"
+            "region_iso_code": "US-NV",
+            "region_name": "Nevada"
         },
-        "ip": "198.51.100.10"
+        "ip": "192.0.2.0"
     },
     "tags": [
         "preserve_original_event",
@@ -233,13 +233,13 @@ An example event for `audit_trail` looks as following:
         "xm_cyber-audit_trail"
     ],
     "user": {
-        "domain": "example.org",
-        "email": "alice.johnson@example.org",
-        "name": "Alice Johnson"
+        "domain": "example.com",
+        "email": "john.doe@example.com",
+        "name": "John Doe"
     },
     "xm_cyber": {
         "audit_trail": {
-            "details": "alice.johnson@example.org Logged in via user",
+            "details": "john.doe@example.com Logged in via user",
             "event_type": "access",
             "object_name": "User",
             "object_type": "USER",
@@ -305,22 +305,22 @@ An example event for `vulnerability` looks as following:
 {
     "@timestamp": "2025-04-03T00:00:00.000Z",
     "agent": {
-        "ephemeral_id": "8c904b7d-9389-4f26-8846-ce989291f316",
-        "id": "066264b2-6fce-4707-9b57-51a9510384cf",
-        "name": "elastic-agent-93043",
+        "ephemeral_id": "58f10044-9f61-445b-8531-faec6c08e68f",
+        "id": "f9a231ba-8bb8-419a-ac92-2725c170fb1b",
+        "name": "elastic-agent-17232",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.vulnerability",
-        "namespace": "50901",
+        "namespace": "73891",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "066264b2-6fce-4707-9b57-51a9510384cf",
+        "id": "f9a231ba-8bb8-419a-ac92-2725c170fb1b",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -330,7 +330,7 @@ An example event for `vulnerability` looks as following:
             "vulnerability"
         ],
         "dataset": "xm_cyber.vulnerability",
-        "ingested": "2026-07-16T03:38:10Z",
+        "ingested": "2026-07-17T09:36:38Z",
         "kind": "event",
         "original": "{\"chokePointFoundOn\":4,\"criticalAssetsAtRisk\":33,\"criticalAssetsFoundOn\":17,\"cve\":\"CVE-2016-0185\",\"cvss2\":9.3,\"cvss2Vector\":\"AV:N/AC:M/Au:N/C:C/I:C/A:C\",\"cvss30\":null,\"cvss31\":7.8,\"cvss31Vector\":\"CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\"cvss3Vector\":null,\"cvss4\":null,\"cvss4Vector\":null,\"description\":\"Media Center in Microsoft Windows Vista SP2, Windows 7 SP1, and Windows 8.1 allows remote attackers to execute arbitrary code via a crafted Media Center link (aka .mcl) file, aka 'Windows Media Center Remote Code Execution Vulnerability.'\",\"deviceFoundOn\":17,\"epssPercentile\":0.99132,\"epssProbability\":0.80235,\"epssScore\":0.80235,\"exploitKitExist\":true,\"firstDetected\":\"2025-04-03T00:00:00.000Z\",\"hasAttackTechnique\":false,\"inCisaKev\":true,\"inExploitDb\":true,\"isExploitedInTheWild\":true,\"products\":1,\"publishedDate\":\"2016-05-11T00:00:00.000Z\",\"severity\":30,\"severityLevel\":\"High\",\"status\":\"Active\",\"techniqueId\":null}",
         "type": [
@@ -414,10 +414,10 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.arn | AWS resource ARN associated with the entity. | keyword |
 | xm_cyber.entity_inventory.availability_zone | Availability zone (e.g. us-east-1b). | keyword |
 | xm_cyber.entity_inventory.aws_tags | AWS tags attached to the entity (array of key/value pairs). | flattened |
-| xm_cyber.entity_inventory.aws_user_name | Aws user name (e.g. xmcyber-eldar-arn-iam-user-sts-QRc9n12OTGiq). | keyword |
+| xm_cyber.entity_inventory.aws_user_name | Aws user name (e.g. example-user). | keyword |
 | xm_cyber.entity_inventory.behavior_version | Behavior version (e.g. 7). | keyword |
 | xm_cyber.entity_inventory.boot_id | Boot id (e.g. 004c6ece-9317-40e7-9a15-d24df7709df0). | keyword |
-| xm_cyber.entity_inventory.canonical_name | Canonical name (e.g. vpn.Corporate.xm/). | keyword |
+| xm_cyber.entity_inventory.canonical_name | Canonical name (e.g. vpn.example.com/). | keyword |
 | xm_cyber.entity_inventory.category | Vendor category classification for the entity. | keyword |
 | xm_cyber.entity_inventory.cloud_provider | Cloud provider (e.g. UNSUPPORTED_CLOUD_PROVIDER). | keyword |
 | xm_cyber.entity_inventory.cluster_name | Cluster name (e.g. udoawsk8s). | keyword |
@@ -434,7 +434,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.container_runtime_version | Container runtime version (e.g. containerd://2.1.5-k3s1.33). | keyword |
 | xm_cyber.entity_inventory.create_time | Create time (e.g. 2026-03-02T18:36:07.000Z). | date |
 | xm_cyber.entity_inventory.created | Created (e.g. 2025-09-24T10:10:32.413Z). | date |
-| xm_cyber.entity_inventory.created_by | Created by (e.g. arn:aws:sts::908522078858:assumed-role/AWSReservedSSO_AdministratorAccess_a84c80). | keyword |
+| xm_cyber.entity_inventory.created_by | Created by (e.g. arn:aws:sts::000000000002:assumed-role/AWSReservedSSO_ExampleAccess_0123456789abcdef). | keyword |
 | xm_cyber.entity_inventory.created_date | Created date (e.g. 2022-08-03T07:44:06.000Z). | date |
 | xm_cyber.entity_inventory.creation_timestamp | Creation timestamp (e.g. 2025-12-04T14:10:01.000Z). | date |
 | xm_cyber.entity_inventory.cred_type | Cred type (e.g. NTLM_HASH). | keyword |
@@ -464,11 +464,11 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.disabled_changed_at | Time at which the disabled state last changed. | date |
 | xm_cyber.entity_inventory.disabled_reason | Reason the entity was disabled. | keyword |
 | xm_cyber.entity_inventory.display_name | Human-readable display name for the entity. | keyword |
-| xm_cyber.entity_inventory.distinguished_name | Distinguished name (e.g. DC=vpn,DC=Corporate,DC=xm). | keyword |
-| xm_cyber.entity_inventory.dns_host_name | Dns host name (e.g. vpndc.vpn.Corporate.xm). | keyword |
+| xm_cyber.entity_inventory.distinguished_name | Distinguished name (e.g. DC=vpn,DC=example,DC=com). | keyword |
+| xm_cyber.entity_inventory.dns_host_name | Dns host name (e.g. vpndc.vpn.example.com). | keyword |
 | xm_cyber.entity_inventory.dns_policy | Dns policy (e.g. ClusterFirst). | keyword |
 | xm_cyber.entity_inventory.domain_name | Domain name associated with the entity when reported. | keyword |
-| xm_cyber.entity_inventory.domain_owner | Domain owner (e.g. 908522078858). | keyword |
+| xm_cyber.entity_inventory.domain_owner | Domain owner (e.g. 000000000002). | keyword |
 | xm_cyber.entity_inventory.domain_sid | Domain sid (e.g. S-1-5-21-3955220616-103436932-1560667138). | keyword |
 | xm_cyber.entity_inventory.dynamo_db_table_creation_date_time | Dynamo db table creation date time (e.g. 2021-10-26T07:59:54.362Z). | date |
 | xm_cyber.entity_inventory.dynamo_db_table_item_count | Dynamo db table item count (e.g. 0). | long |
@@ -483,7 +483,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.ebs_volume_create_time | Ebs volume create time (e.g. 2026-03-18T14:45:23.445Z). | date |
 | xm_cyber.entity_inventory.ebs_volume_id | Ebs volume id (e.g. vol-00073da63bfe48dad). | keyword |
 | xm_cyber.entity_inventory.ebs_volume_iops | Ebs volume iops (e.g. 100). | long |
-| xm_cyber.entity_inventory.ebs_volume_kms_key_id | Ebs volume kms key id (e.g. arn:aws:kms:us-east-1:908522078858:key/7a079e1f-3b2b-427c-9a03-a6471d754d36). | keyword |
+| xm_cyber.entity_inventory.ebs_volume_kms_key_id | Ebs volume kms key id (e.g. arn:aws:kms:us-east-1:000000000002:key/00000000-0000-0000-0000-000000000003). | keyword |
 | xm_cyber.entity_inventory.ebs_volume_multi_attach_enabled | Ebs volume multi attach enabled (e.g. False). | boolean |
 | xm_cyber.entity_inventory.ebs_volume_size | Ebs volume size (e.g. 32). | long |
 | xm_cyber.entity_inventory.ebs_volume_snapshot_id | Ebs volume snapshot id (e.g. snap-02b09548e23285e0b). | keyword |
@@ -501,7 +501,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.ec2tags.key | Key (e.g. Name). | keyword |
 | xm_cyber.entity_inventory.ec2tags.value | Value (e.g. win11). | keyword |
 | xm_cyber.entity_inventory.ec2vpc_id | Ec2vpc id (e.g. vpc-0e9f502a4d1b70878). | keyword |
-| xm_cyber.entity_inventory.ecr_repository_arn | Ecr repository arn (e.g. arn:aws:ecr:ca-central-1:302823744532:repository/xm-cyber). | keyword |
+| xm_cyber.entity_inventory.ecr_repository_arn | Ecr repository arn (e.g. arn:aws:ecr:ca-central-1:000000000003:repository/example-security). | keyword |
 | xm_cyber.entity_inventory.ecr_repository_creation_date | Ecr repository creation date (e.g. 2024-05-16T14:21:23.373Z). | date |
 | xm_cyber.entity_inventory.ecr_repository_image_scanning_on_push | Ecr repository image scanning on push (e.g. False). | boolean |
 | xm_cyber.entity_inventory.ecr_repository_image_tag_mutability | Ecr repository image tag mutability (e.g. IMMUTABLE). | keyword |
@@ -513,11 +513,11 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.ecr_repository_images.image_status | Image status (e.g. ACTIVE). | keyword |
 | xm_cyber.entity_inventory.ecr_repository_images.image_tags | Image tags (e.g. ["pr-148"]). | keyword |
 | xm_cyber.entity_inventory.ecr_repository_images.last_recorded_pull_time | Last recorded pull time (e.g. 2026-05-06T23:37:16.835Z). | date |
-| xm_cyber.entity_inventory.ecr_repository_images.registry_id | Registry id (e.g. 908522078858). | keyword |
-| xm_cyber.entity_inventory.ecr_repository_images.repository_name | Repository name (e.g. xm-mgmt-pr-api-keys-manager). | keyword |
-| xm_cyber.entity_inventory.ecr_repository_name | Ecr repository name (e.g. xm-cyber). | keyword |
-| xm_cyber.entity_inventory.ecr_repository_registry_id | Ecr repository registry id (e.g. 302823744532). | keyword |
-| xm_cyber.entity_inventory.ecr_repository_uri | Ecr repository uri (e.g. 302823744532.dkr.ecr.ca-central-1.amazonaws.com/xm-cyber). | keyword |
+| xm_cyber.entity_inventory.ecr_repository_images.registry_id | Registry id (e.g. 000000000002). | keyword |
+| xm_cyber.entity_inventory.ecr_repository_images.repository_name | Repository name (e.g. example-api-keys-manager). | keyword |
+| xm_cyber.entity_inventory.ecr_repository_name | Ecr repository name (e.g. example-security). | keyword |
+| xm_cyber.entity_inventory.ecr_repository_registry_id | Ecr repository registry id (e.g. 000000000003). | keyword |
+| xm_cyber.entity_inventory.ecr_repository_uri | Ecr repository uri (e.g. 000000000003.dkr.ecr.ca-central-1.amazonaws.com/example-security). | keyword |
 | xm_cyber.entity_inventory.elasticache_cache_cache_security_groups | Elasticache cache cache security groups (e.g. 0). | long |
 | xm_cyber.entity_inventory.elasticache_cache_cluster_auth_token | Elasticache cache cluster auth token (e.g. False). | boolean |
 | xm_cyber.entity_inventory.elasticache_cache_cluster_create_time | Elasticache cache cluster create time (e.g. 2026-02-18T08:35:45.012Z). | date |
@@ -530,10 +530,10 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.elasticache_cache_parameter_group_name | Elasticache cache parameter group name (e.g. default.redis7.cluster.on). | keyword |
 | xm_cyber.entity_inventory.elasticache_cache_security_groups | Elasticache cache security groups (e.g. 1). | long |
 | xm_cyber.entity_inventory.elasticache_cache_subnet_group_name | Elasticache cache subnet group name (e.g. maor). | keyword |
-| xm_cyber.entity_inventory.elb_v2load_balancer_name | Elb v2load balancer name (e.g. xmcyber-97kjg-ext). | keyword |
-| xm_cyber.entity_inventory.elb_v2target_group_name | Elb v2target group name (e.g. xmcyber-97kjg-aext). | keyword |
+| xm_cyber.entity_inventory.elb_v2load_balancer_name | Elb v2load balancer name (e.g. example-97kjg-ext). | keyword |
+| xm_cyber.entity_inventory.elb_v2target_group_name | Elb v2target group name (e.g. example-97kjg-aext). | keyword |
 | xm_cyber.entity_inventory.encryption | Encryption (e.g. True). | boolean |
-| xm_cyber.entity_inventory.encryption_key | Encryption key (e.g. arn:aws:kms:us-east-1:908522078858:alias/aws/s3). | keyword |
+| xm_cyber.entity_inventory.encryption_key | Encryption key (e.g. arn:aws:kms:us-east-1:000000000002:alias/aws/s3). | keyword |
 | xm_cyber.entity_inventory.encryption_type | Encryption type (e.g. AES256). | keyword |
 | xm_cyber.entity_inventory.endpoint_address | Endpoint address (e.g. redshift-cluster.c8ri4vjslsze.us-west-1.redshift.amazonaws.com). | keyword |
 | xm_cyber.entity_inventory.endpoint_port | Endpoint port (e.g. 5439). | long |
@@ -549,7 +549,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.environment_type | Environment type (e.g. LINUX_CONTAINER). | keyword |
 | xm_cyber.entity_inventory.expire_at | Expire at (e.g. 2026-07-05T10:41:14.000Z). | date |
 | xm_cyber.entity_inventory.first_seen | First observation time reported for the entity. | date |
-| xm_cyber.entity_inventory.fqdn | Fqdn (e.g. vpndc.vpn.Corporate.xm). | keyword |
+| xm_cyber.entity_inventory.fqdn | Fqdn (e.g. vpndc.vpn.example.com). | keyword |
 | xm_cyber.entity_inventory.gp_link | Gp link (e.g. [LDAP://CN=\{31B2F340-016D-11D2-945F-00C04FB984F9\},CN=Policies,CN=System,DC=vpn,D). | keyword |
 | xm_cyber.entity_inventory.guid | Guid (e.g. \{C624BD51-11AA-4646-BD13-C752853BD2DA\}). | keyword |
 | xm_cyber.entity_inventory.has_matching_sid | Whether the entity has a matching SID in another directory source. | boolean |
@@ -557,9 +557,9 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.host_ip | Host ip (e.g. 192.168.5.97). | ip |
 | xm_cyber.entity_inventory.iam_unique_id | Iam unique id (e.g. AROA5HCBCYKFFYRQOIDLG). | keyword |
 | xm_cyber.entity_inventory.id | Vendor-provided unique identifier for the entity record. | keyword |
-| xm_cyber.entity_inventory.image_pull_secrets_name | Image pull secrets name (e.g. ["xm-dockerhub-secret"]). | keyword |
+| xm_cyber.entity_inventory.image_pull_secrets_name | Image pull secrets name (e.g. ["registry-secret"]). | keyword |
 | xm_cyber.entity_inventory.image_pull_secrets_name_to_display | Image pull secrets name to display (e.g. [   null ]). | keyword |
-| xm_cyber.entity_inventory.images | Images (e.g. [   "xmcyber/sensor:1.50.1" ]). | keyword |
+| xm_cyber.entity_inventory.images | Images (e.g. [   "example/security-agent:1.50.1" ]). | keyword |
 | xm_cyber.entity_inventory.images_to_display | Images to display (e.g. [   "docker.io/rancher/mirrored-metrics-server@sha256:89258156d0e9af60403eafd44d). | keyword |
 | xm_cyber.entity_inventory.imported_labels | Imported labels associated with the entity. | keyword |
 | xm_cyber.entity_inventory.installation_id | Installation identifier reported for the entity. | keyword |
@@ -591,7 +591,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.kube_proxy_version | Kube proxy version (e.g. ). | keyword |
 | xm_cyber.entity_inventory.kubelet_version | Kubelet version (e.g. v1.33.6+k3s1). | keyword |
 | xm_cyber.entity_inventory.kubernetes_annotations | Kubernetes annotations (e.g. \{\}). | keyword |
-| xm_cyber.entity_inventory.kubernetes_labels | Kubernetes labels (e.g. ["name: xm-sensor", "app.kubernetes.io/instance: xmcyber-sensor", "pod-template-). | keyword |
+| xm_cyber.entity_inventory.kubernetes_labels | Kubernetes labels (e.g. ["name: security-agent", "app.kubernetes.io/instance: example-security-agent", "pod-template-). | keyword |
 | xm_cyber.entity_inventory.labels | Vendor labels attached to the entity (array of id/type pairs). | flattened |
 | xm_cyber.entity_inventory.lambda_description | Lambda description (e.g. dddd). | keyword |
 | xm_cyber.entity_inventory.lambda_runtime | Lambda runtime (e.g. nodejs20.x). | keyword |
@@ -642,7 +642,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.owner_references.block_owner_deletion | Block owner deletion (e.g. True). | boolean |
 | xm_cyber.entity_inventory.owner_references.controller | Controller (e.g. True). | boolean |
 | xm_cyber.entity_inventory.owner_references.kind | Kind (e.g. ReplicaSet). | keyword |
-| xm_cyber.entity_inventory.owner_references.name | Name (e.g. xmcyber-sensor-85f5586455). | keyword |
+| xm_cyber.entity_inventory.owner_references.name | Name (e.g. example-security-agent-85f5586455). | keyword |
 | xm_cyber.entity_inventory.owner_references.uid | Uid (e.g. 8c5aa788-5284-4807-a918-f1d3d9445c7f). | keyword |
 | xm_cyber.entity_inventory.owner_references_to_display | Owner references to display (e.g. [   \{     "blockOwnerDeletion": true,     "controller": true,     "kind": "Repli). | keyword |
 | xm_cyber.entity_inventory.password_hash | Password hash (e.g. 147317149651d67246e5e5f0de7f72b6c26ee1855f5eb10d33ace6df8adb6ed39742f1523b7e9613). | keyword |
@@ -675,7 +675,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.secret_description | Description of the AWS Secrets Manager secret. | keyword |
 | xm_cyber.entity_inventory.secret_kms_key_id | KMS key identifier protecting the secret. | keyword |
 | xm_cyber.entity_inventory.secret_names | Secret names (e.g. []). | keyword |
-| xm_cyber.entity_inventory.secret_rotation_lambda_arn | Secret rotation lambda arn (e.g. arn:aws:lambda:eu-west-1:908522078858:function:orisRotation). | keyword |
+| xm_cyber.entity_inventory.secret_rotation_lambda_arn | Secret rotation lambda arn (e.g. arn:aws:lambda:eu-west-1:000000000002:function:exampleRotation). | keyword |
 | xm_cyber.entity_inventory.secret_type | Secret type (e.g. helm.sh/release.v1). | keyword |
 | xm_cyber.entity_inventory.security_context | Security context (e.g. \{   "fsGroup": 1031,   "runAsNonRoot": true,   "runAsUser": 1031,   "seccompProf). | keyword |
 | xm_cyber.entity_inventory.security_flags | Security flags reported for the entity. | flattened |
@@ -683,9 +683,9 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.security_flags_for_display.key | Security flag key. | keyword |
 | xm_cyber.entity_inventory.security_flags_for_display.reason | Security flag reason. | keyword |
 | xm_cyber.entity_inventory.security_group_name | Security group name (e.g. vulnerable-sg-0cb516b). | keyword |
-| xm_cyber.entity_inventory.service_account | Service account (e.g. xm-service-account). | keyword |
-| xm_cyber.entity_inventory.service_account_name | Service account name (e.g. xm-service-account). | keyword |
-| xm_cyber.entity_inventory.service_role | Service role (e.g. arn:aws:iam::908522078858:role/service-role/codebuild-yadgartest-service-role). | keyword |
+| xm_cyber.entity_inventory.service_account | Service account (e.g. security-service-account). | keyword |
+| xm_cyber.entity_inventory.service_account_name | Service account name (e.g. security-service-account). | keyword |
+| xm_cyber.entity_inventory.service_role | Service role (e.g. arn:aws:iam::000000000002:role/service-role/codebuild-example-service-role). | keyword |
 | xm_cyber.entity_inventory.service_spec.allocate_load_balancer_node_ports | Allocate load balancer node ports (e.g. True). | boolean |
 | xm_cyber.entity_inventory.service_spec.cluster_ip | Cluster ip (e.g. 10.43.227.17). | ip |
 | xm_cyber.entity_inventory.service_spec.cluster_ips | Cluster ips (e.g. ["10.43.227.17"]). | ip |
@@ -717,12 +717,12 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.spec.parameters.kind | Kind (e.g. ). | keyword |
 | xm_cyber.entity_inventory.spec.parameters.name | Name (e.g. ). | keyword |
 | xm_cyber.entity_inventory.spec.parameters.namespace | Namespace (e.g. ). | keyword |
-| xm_cyber.entity_inventory.sqs_queue_arn | Sqs queue arn (e.g. arn:aws:sqs:us-east-1:908522078858:roi-yadgar-queue). | keyword |
+| xm_cyber.entity_inventory.sqs_queue_arn | Sqs queue arn (e.g. arn:aws:sqs:us-east-1:000000000002:example-queue). | keyword |
 | xm_cyber.entity_inventory.sqs_queue_created_timestamp | Sqs queue created timestamp (e.g. 1735769555). | keyword |
 | xm_cyber.entity_inventory.sqs_queue_last_modified_date | Sqs queue last modified date (e.g. 1970-01-21T02:09:29.642Z). | date |
 | xm_cyber.entity_inventory.sqs_queue_last_modified_timestamp | Sqs queue last modified timestamp (e.g. 1735769642). | keyword |
 | xm_cyber.entity_inventory.sqs_queue_name | Sqs queue name (e.g. roi-yadgar-queue). | keyword |
-| xm_cyber.entity_inventory.sqs_queue_url | Sqs queue url (e.g. https://sqs.us-east-1.amazonaws.com/908522078858/roi-yadgar-queue). | keyword |
+| xm_cyber.entity_inventory.sqs_queue_url | Sqs queue url (e.g. https://sqs.us-east-1.amazonaws.com/000000000002/example-queue). | keyword |
 | xm_cyber.entity_inventory.ssm_parameter_data_type | SSM parameter data type. | keyword |
 | xm_cyber.entity_inventory.ssm_parameter_description | SSM parameter description. | keyword |
 | xm_cyber.entity_inventory.ssm_parameter_key_id | KMS key id used to encrypt the SSM parameter. | keyword |
@@ -737,7 +737,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.system_uuid | System uuid (e.g. a3a7d001-bc73-48bd-0609-c63b9d59ff7d). | keyword |
 | xm_cyber.entity_inventory.tags_str | Vendor-provided tags reported as plain strings. | keyword |
 | xm_cyber.entity_inventory.time_to_revive_at | Time at which the entity is scheduled to be revived. | date |
-| xm_cyber.entity_inventory.top_owner_name | Top owner name (e.g. xmcyber-sensor). | keyword |
+| xm_cyber.entity_inventory.top_owner_name | Top owner name (e.g. example-security-agent). | keyword |
 | xm_cyber.entity_inventory.type | Vendor type discriminator returned alongside `entity_type`. | keyword |
 | xm_cyber.entity_inventory.type_display_name | Human-readable label for `type`. | keyword |
 | xm_cyber.entity_inventory.uid | Uid (e.g. 27c684bf-90ea-40c2-8e61-65e5f4156b2b). | keyword |
@@ -751,7 +751,7 @@ An example event for `vulnerability` looks as following:
 | xm_cyber.entity_inventory.vpc_config.vpc_id | Vpc id (e.g. ). | keyword |
 | xm_cyber.entity_inventory.when_created | When created (e.g. 2020-03-27T20:42:23.000Z). | date |
 | xm_cyber.entity_inventory.xm_labels | XM Cyber managed labels attached to the entity. | flattened |
-| xm_cyber.entity_inventory.xm_mongo_update_time | Xm mongo update time (e.g. 2026-05-06T10:43:14.469Z). | date |
+| xm_cyber.entity_inventory.xm_mongo_update_time | Source Mongo update time (e.g. 2026-05-06T10:43:14.469Z). | date |
 | xm_cyber.entity_inventory.xm_provider_account | XM Cyber provider account identifier. | keyword |
 | xm_cyber.entity_inventory.xm_update_time | Time at which XM Cyber last updated the entity record. | date |
 | xm_cyber.entity_inventory.yaml_representation | Yaml representation (e.g. metadata:   annotations:     meta.helm.sh/release-name: "traefik"     meta.helm.). | keyword |
@@ -767,9 +767,9 @@ An example event for `entity_inventory` looks as following:
 {
     "@timestamp": "2026-05-05T21:05:15.079Z",
     "agent": {
-        "ephemeral_id": "b4977117-3967-4809-bbcb-e298690cc65d",
-        "id": "3700578a-2aa5-4af7-8743-db1b3ef31513",
-        "name": "elastic-agent-10070",
+        "ephemeral_id": "6db08d4c-f6f9-4c4d-addb-5d7b13059786",
+        "id": "a63b7488-f0c6-47bb-b9fa-723c4b23a358",
+        "name": "elastic-agent-97309",
         "type": "filebeat",
         "version": "8.18.0"
     },
@@ -785,14 +785,14 @@ An example event for `entity_inventory` looks as following:
     },
     "data_stream": {
         "dataset": "xm_cyber.entity_inventory",
-        "namespace": "51995",
+        "namespace": "49491",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "3700578a-2aa5-4af7-8743-db1b3ef31513",
+        "id": "a63b7488-f0c6-47bb-b9fa-723c4b23a358",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -800,7 +800,7 @@ An example event for `entity_inventory` looks as following:
         "agent_id_status": "verified",
         "dataset": "xm_cyber.entity_inventory",
         "id": "awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys",
-        "ingested": "2026-07-16T03:34:25Z",
+        "ingested": "2026-07-17T09:32:46Z",
         "kind": "asset",
         "original": "{\"accountId\":\"000000000001\",\"accountName\":\"example-account\",\"arn\":\"arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys\",\"category\":\"Cloud\",\"customProperties\":{\"domainWorkgroup\":{\"data\":\"AWS/000000000001\",\"type\":\"domain\"},\"ouComputer\":\"AWS/000000000001/us-east-1/SSM/ParameterMetadata\",\"ouUser\":\"AWS/000000000001/SSM/ParameterMetadata\",\"subnetInfo\":\"AWS_000000000001_us-east-1\"},\"disabled\":false,\"displayName\":\"/ExampleBuild/testKeys\",\"entityDetails\":{\"id\":\"awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys\",\"isAsset\":null,\"name\":\"/ExampleBuild/testKeys\",\"subType\":\"awsSsmParameter\",\"subTypeDisplayName\":\"AWS SSM Parameter\"},\"entityType\":\"AwsSsmParameterEntity\",\"id\":\"awsSsmParameter-arn:aws:ssm:us-east-1:000000000001:parameter/ExampleBuild/testKeys\",\"name\":\"/ExampleBuild/testKeys\",\"notIncludedInAttacks\":false,\"organizationId\":\"o-abc123def4\",\"region\":\"us-east-1\",\"ruleDisplayName\":\"000000000001 / /ExampleBuild/testKeys\",\"ssmParameterDataType\":\"text\",\"ssmParameterKeyId\":\"alias/aws/ssm\",\"ssmParameterLastModifiedDate\":\"2020-07-19T09:53:58.629Z\",\"ssmParameterLastModifiedUser\":\"arn:aws:sts::000000000001:assumed-role/AWSReservedSSO_ExampleAccess_0123456789abcdef/alice.johnson@example.org\",\"ssmParameterName\":\"/ExampleBuild/testKeys\",\"ssmParameterTier\":\"Standard\",\"ssmParameterType\":\"SecureString\",\"ssmParameterVersion\":1,\"status\":\"active\",\"type\":\"awsSsmParameter\",\"typeDisplayName\":\"AWS SSM Parameter\",\"useType\":\"Storage\",\"xmProviderAccount\":\"example-account\",\"xmUpdateTime\":\"2026-05-05T21:05:15.079Z\"}"
     },
@@ -912,31 +912,31 @@ An example event for `risk_score` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-07-16T03:36:50.372Z",
+    "@timestamp": "2026-07-17T09:35:28.559Z",
     "agent": {
-        "ephemeral_id": "7e5e0337-223d-4f96-8f54-424ffc18dc61",
-        "id": "6515826d-f225-4488-afec-a77fbd9fb044",
-        "name": "elastic-agent-49813",
+        "ephemeral_id": "3ab54312-695e-407e-a8a1-23a2d3825292",
+        "id": "488043c1-24f5-4a6c-b760-51eb4f84c770",
+        "name": "elastic-agent-33912",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.risk_score",
-        "namespace": "53401",
+        "namespace": "52557",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "6515826d-f225-4488-afec-a77fbd9fb044",
+        "id": "488043c1-24f5-4a6c-b760-51eb4f84c770",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.risk_score",
-        "ingested": "2026-07-16T03:36:53Z",
+        "ingested": "2026-07-17T09:35:31Z",
         "kind": "event",
         "original": "{\"avgGraphData\":[{\"date\":\"2025-12-03T00:00:00.000Z\",\"grade\":\"A\",\"score\":95}],\"graphData\":{\"campaigns\":null,\"fromDate\":\"2025-12-02T00:00:00.000Z\",\"grade\":\"A\",\"score\":95,\"toDate\":\"2025-12-03T00:00:00.000Z\"},\"scenario\":{\"grade\":\"B\",\"id\":\"A101\",\"name\":\"(EX) Endpoint to Servers\",\"score\":82},\"stats\":{\"grade\":\"A\",\"score\":90,\"trend\":1}}"
     },
@@ -1056,15 +1056,15 @@ An example event for `device` looks as following:
 {
     "@timestamp": "2026-05-12T21:54:01.641Z",
     "agent": {
-        "ephemeral_id": "a0276a47-db24-4b3a-a8e5-08914dada121",
-        "id": "f4a1e445-b252-4f40-9a39-394c5dad5577",
-        "name": "elastic-agent-10582",
+        "ephemeral_id": "3656849f-6c16-4078-9952-015995548e2d",
+        "id": "a9d23aad-91bc-4a14-9f62-f29ebf1c8ab1",
+        "name": "elastic-agent-40605",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.device",
-        "namespace": "56834",
+        "namespace": "59928",
         "type": "logs"
     },
     "device": {
@@ -1075,7 +1075,7 @@ An example event for `device` looks as following:
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "f4a1e445-b252-4f40-9a39-394c5dad5577",
+        "id": "a9d23aad-91bc-4a14-9f62-f29ebf1c8ab1",
         "snapshot": false,
         "version": "8.18.0"
     },
@@ -1085,9 +1085,9 @@ An example event for `device` looks as following:
             "host"
         ],
         "dataset": "xm_cyber.device",
-        "ingested": "2026-07-16T03:33:21Z",
+        "ingested": "2026-07-17T09:31:25Z",
         "kind": "event",
-        "original": "{\"affectedEntities\":4,\"apps\":[{\"activeCves\":[\"CVE-2023-0001\"],\"activeCvesSafeVersion\":[{\"cve\":\"CVE-2023-0001\",\"safeVersion\":\"2.0.0\"}],\"affectedCriticalAssets\":0,\"chokePointFoundOn\":\"1\",\"closedCves\":[],\"deviceFoundOn\":2,\"name\":\"Example Product\",\"productOperatingSystems\":[\"Orion OS\"],\"productVulnerabilities\":3,\"productsCriticalAssetsAtRisk\":1,\"vendor\":\"VendorCo\",\"version\":\"1.2.3\"}],\"chokePointLevel\":\"Critical\",\"chokePointScore\":100,\"criticalAssetsAtRisk\":2,\"criticalVulnerabilities\":2,\"deviceId\":\"9000000000000000001\",\"deviceName\":\"host-01\",\"deviceType\":\"Workstation\",\"domain\":\"corp.example.com\",\"enitityVulnerabilities\":1,\"enrichmentLabels\":[\"enriched\"],\"fqdn\":\"host-01.corp.example.com\",\"highVulnerabilities\":5,\"ipAddress\":\"192.0.2.10\",\"isChokePoint\":true,\"isCriticalAsset\":true,\"labels\":[\"lab\",\"example-security-test\"],\"lastCompromised\":null,\"lastScan\":\"2026-05-12T21:54:01.641Z\",\"lowVulnerabilities\":3,\"maxCvssV2\":8,\"maxCvssV3\":9.1,\"maxCvssV31\":8.8,\"maxCvssV4\":7.2,\"mediumVulnerabilities\":10,\"os\":\"Orion Desktop 11\",\"ou\":\"OU=Workstations,DC=corp,DC=example,DC=com\",\"products\":5,\"riskScore\":75,\"subnet\":\"192.0.2.0/24\",\"type\":\"Endpoint\",\"unknownVulnerabilities\":0}",
+        "original": "{\"affectedEntities\":4,\"apps\":[{\"activeCves\":[\"CVE-2023-0001\"],\"activeCvesSafeVersion\":[{\"cve\":\"CVE-2023-0001\",\"safeVersion\":\"2.0.0\"}],\"affectedCriticalAssets\":0,\"chokePointFoundOn\":\"1\",\"closedCves\":[],\"deviceFoundOn\":2,\"name\":\"Example Product\",\"productOperatingSystems\":[\"Orion OS\"],\"productVulnerabilities\":3,\"productsCriticalAssetsAtRisk\":1,\"vendor\":\"VendorCo\",\"version\":\"1.2.3\"}],\"chokePointLevel\":\"Critical\",\"chokePointScore\":100,\"criticalAssetsAtRisk\":2,\"criticalVulnerabilities\":2,\"deviceId\":\"9000000000000000001\",\"deviceName\":\"host-01\",\"deviceType\":\"Workstation\",\"domain\":\"corp.example.com\",\"enitityVulnerabilities\":1,\"enrichmentLabels\":[\"enriched\"],\"fqdn\":\"hugh.corp.example.com\",\"highVulnerabilities\":5,\"ipAddress\":\"192.168.1.10\",\"isChokePoint\":true,\"isCriticalAsset\":true,\"labels\":[\"lab\",\"example-security-test\"],\"lastCompromised\":null,\"lastScan\":\"2026-05-12T21:54:01.641Z\",\"lowVulnerabilities\":3,\"maxCvssV2\":8,\"maxCvssV3\":9.1,\"maxCvssV31\":8.8,\"maxCvssV4\":7.2,\"mediumVulnerabilities\":10,\"os\":\"Orion Desktop 11\",\"ou\":\"OU=Workstations,DC=corp,DC=example,DC=com\",\"products\":5,\"riskScore\":75,\"subnet\":\"192.168.1.0/24\",\"type\":\"Endpoint\",\"unknownVulnerabilities\":0}",
         "type": [
             "info"
         ]
@@ -1097,9 +1097,9 @@ An example event for `device` looks as following:
         "hostname": "host-01",
         "id": "9000000000000000001",
         "ip": [
-            "192.0.2.10"
+            "192.168.1.10"
         ],
-        "name": "host-01.corp.example.com",
+        "name": "hugh.corp.example.com",
         "os": {
             "full": "Orion Desktop 11"
         },
@@ -1110,7 +1110,7 @@ An example event for `device` looks as following:
     },
     "related": {
         "ip": [
-            "192.0.2.10"
+            "192.168.1.10"
         ]
     },
     "tags": [
@@ -1180,7 +1180,7 @@ An example event for `device` looks as following:
             "ou": "OU=Workstations,DC=corp,DC=example,DC=com",
             "products": 5,
             "risk_score": 75,
-            "subnet": "192.0.2.0/24",
+            "subnet": "192.168.1.0/24",
             "type": "Endpoint",
             "unknown_vulnerabilities": 0
         }
@@ -1223,31 +1223,31 @@ An example event for `product` looks as following:
 
 ```json
 {
-    "@timestamp": "2026-07-16T03:35:34.205Z",
+    "@timestamp": "2026-07-17T09:34:07.437Z",
     "agent": {
-        "ephemeral_id": "7e74eaae-affa-41f6-9bd8-870e20a7fc42",
-        "id": "051bc826-b48d-4953-b68e-54431811f68d",
-        "name": "elastic-agent-91937",
+        "ephemeral_id": "ba92df7d-15fc-4978-b553-8d96400a02b1",
+        "id": "a7c561c8-1ad6-4955-aa5f-2969f60ec135",
+        "name": "elastic-agent-56475",
         "type": "filebeat",
         "version": "8.18.0"
     },
     "data_stream": {
         "dataset": "xm_cyber.product",
-        "namespace": "13577",
+        "namespace": "16298",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "051bc826-b48d-4953-b68e-54431811f68d",
+        "id": "a7c561c8-1ad6-4955-aa5f-2969f60ec135",
         "snapshot": false,
         "version": "8.18.0"
     },
     "event": {
         "agent_id_status": "verified",
         "dataset": "xm_cyber.product",
-        "ingested": "2026-07-16T03:35:37Z",
+        "ingested": "2026-07-17T09:34:10Z",
         "kind": "event",
         "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"Atlas Transfer Tool\",\"productOperatingSystems\":[\"Helios OS 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },

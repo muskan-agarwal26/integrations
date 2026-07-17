@@ -55,21 +55,21 @@
             },
             "event": {
                 "kind": "event",
-                "original": "{\"affectedCriticalAssets\":1,\"chokePointsFoundOn\":1,\"devicesFoundOn\":1,\"productName\":\"Sentinel Agent\",\"productOperatingSystems\":[\"Orion Server 2019 (DC)\",\"Helios OS 22.04\"],\"productVulnerabilities\":4243,\"productsCriticalAssetsAtRisk\":12,\"vendor\":\"Sentinel\"}"
+                "original": "{\"affectedCriticalAssets\":1,\"chokePointsFoundOn\":1,\"devicesFoundOn\":1,\"productName\":\"ACME Secure Agent\",\"productOperatingSystems\":[\"Orion Server 2019 (DC)\",\"Helios OS 22.04\"],\"productVulnerabilities\":4243,\"productsCriticalAssetsAtRisk\":12,\"vendor\":\"ACME\"}"
             },
             "xm_cyber": {
                 "product": {
                     "affected_critical_assets": 1,
                     "choke_points_found_on": 1,
                     "devices_found_on": 1,
-                    "product_name": "Sentinel Agent",
+                    "product_name": "ACME Secure Agent",
                     "product_operating_systems": [
                         "Orion Server 2019 (DC)",
                         "Helios OS 22.04"
                     ],
                     "product_vulnerabilities": 4243,
                     "products_critical_assets_at_risk": 12,
-                    "vendor": "Sentinel"
+                    "vendor": "ACME"
                 }
             }
         }
