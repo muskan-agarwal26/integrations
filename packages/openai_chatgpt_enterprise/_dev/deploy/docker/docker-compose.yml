@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   openai_chatgpt_enterprise:
-    image: docker.elastic.co/observability/stream:v0.20.0
+    image: docker.elastic.co/observability/stream:v0.22.0
     hostname: openai_chatgpt_enterprise
     ports:
       - 8090
