@@ -3,4 +3,4 @@
   changes:
     - description: Initial release of the OpenAI ChatGPT Enterprise integration, collecting compliance logs from the OpenAI Compliance Logs Platform with the codex_log data stream.
       type: enhancement
-      link: https://github.com/elastic/integrations/pull/20200
+      link: https://github.com/elastic/integrations/pull/20201
