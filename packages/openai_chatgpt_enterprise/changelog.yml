@@ -3,4 +3,4 @@
   changes:
     - description: Initial release of the OpenAI ChatGPT Enterprise Conversation Messages (conversation_message) data stream.
       type: enhancement
-      link: https://github.com/elastic/integrations/pull/20200
+      link: https://github.com/elastic/integrations/pull/20208
