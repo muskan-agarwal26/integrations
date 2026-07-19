@@ -135,14 +135,34 @@ An example event for `app_log` looks as following:
 ```json
 {
     "@timestamp": "2026-07-15T15:39:18.154Z",
+    "agent": {
+        "ephemeral_id": "87be6f7f-80bc-49d8-ad30-f68b72b3f36d",
+        "id": "254ac796-0d7c-4238-815c-490e9920f496",
+        "name": "elastic-agent-86157",
+        "type": "filebeat",
+        "version": "8.19.0"
+    },
+    "data_stream": {
+        "dataset": "openai_chatgpt_enterprise.app_log",
+        "namespace": "95204",
+        "type": "logs"
+    },
     "ecs": {
         "version": "9.3.0"
     },
+    "elastic_agent": {
+        "id": "254ac796-0d7c-4238-815c-490e9920f496",
+        "snapshot": false,
+        "version": "8.19.0"
+    },
     "event": {
+        "agent_id_status": "verified",
         "category": [
             "api"
         ],
+        "dataset": "openai_chatgpt_enterprise.app_log",
         "id": "3f1a9c02-1111-4a11-8b11-000000000001",
+        "ingested": "2026-07-19T14:31:18Z",
         "kind": "event",
         "original": "{\"event_id\":\"3f1a9c02-1111-4a11-8b11-000000000001\",\"type\":\"APP_LOG\",\"principal\":{\"id\":\"11111111-2222-3333-4444-555555555555\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-Aaaaaaaaaaaaaaaaaaaaaaa1\",\"user_email\":\"alice.martin@example.org\"},\"timestamp\":\"2026-07-15T15:39:18.154524Z\",\"app_id\":\"asdk_app_1111111111111111aaaa\",\"app_name\":\"Slack\",\"app_type\":\"MCP\",\"conversation_id\":\"c-1111-aaaa-2222-bbbb\",\"log_type\":\"request\",\"input\":{\"query\":\"in:general after:2026-07-14\",\"limit\":20,\"include_bots\":true,\"sort\":\"timestamp\",\"sort_dir\":\"desc\",\"response_format\":\"concise\",\"_meta\":{\"openai/userAgent\":\"ChatGPT/1.2026.183 (Mac OS X 26.5.2; arm64; build 1783607847)\",\"openai/locale\":\"en-GB\",\"openai/userLocation\":{\"city\":\"London\",\"region\":\"England\",\"country\":\"GB\",\"timezone\":\"Europe/London\",\"latitude\":\"51.50853\",\"longitude\":\"-0.12574\"},\"timezone\":\"Europe/London\",\"openai/subject\":\"v1/mock-subject-aaaaaaaaaaaaaaaa\",\"openai/session\":\"v1/mock-session-aaaaaaaaaaaaaaaa\",\"openai/organization\":\"v1/mock-org-aaaaaaaaaaaaaaaa\"}}}",
         "type": [
@@ -151,6 +171,9 @@ An example event for `app_log` looks as following:
     },
     "gen_ai": {
         "system": "openai"
+    },
+    "input": {
+        "type": "cel"
     },
     "openai_chatgpt_enterprise": {
         "app_log": {
@@ -201,6 +224,11 @@ An example event for `app_log` looks as following:
             "region_name": "England"
         }
     },
+    "tags": [
+        "preserve_original_event",
+        "forwarded",
+        "openai_chatgpt_enterprise-app_log"
+    ],
     "user": {
         "domain": "example.org",
         "email": "alice.martin@example.org",
