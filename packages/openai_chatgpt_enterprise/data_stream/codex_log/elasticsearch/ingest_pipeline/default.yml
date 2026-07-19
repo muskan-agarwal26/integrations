@@ -92,7 +92,6 @@ processors:
       field: user.email
       pattern: '%{}@%{user.domain}'
       tag: dissect_user_domain_from_email
-      ignore_missing: true
       if: ctx.user?.email != null && ctx.user.email.contains('@')
   - set:
       field: organization.id
@@ -305,13 +304,11 @@ processors:
   - user_agent:
       field: user_agent.original
       ignore_missing: true
-      if: ctx.user_agent?.original != null
       tag: enrich_user_agent
   - geoip:
       field: source.ip
       target_field: source.geo
       ignore_missing: true
-      if: ctx.source?.ip != null
       tag: enrich_source_geo
   - geoip:
       database_file: GeoLite2-ASN.mmdb
@@ -321,7 +318,6 @@ processors:
         - asn
         - organization_name
       ignore_missing: true
-      if: ctx.source?.ip != null
       tag: enrich_source_asn
   - rename:
       field: source.as.asn
@@ -397,16 +393,16 @@ processors:
       allow_duplicates: false
       if: ctx.error?.message != null
 on_failure:
+  - set:
+      field: event.kind
+      tag: set_pipeline_error_to_event_kind
+      value: pipeline_error
   - append:
       field: error.message
       value: >-
         Processor '{{{ _ingest.on_failure_processor_type }}}'
         {{{#_ingest.on_failure_processor_tag}}}with tag '{{{ _ingest.on_failure_processor_tag }}}'
         {{{/_ingest.on_failure_processor_tag}}}failed with message '{{{ _ingest.on_failure_message }}}'
-  - set:
-      field: event.kind
-      tag: set_pipeline_error_to_event_kind
-      value: pipeline_error
   - append:
       field: tags
       value: preserve_original_event

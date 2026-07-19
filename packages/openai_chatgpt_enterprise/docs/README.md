@@ -100,7 +100,7 @@ For more information on architectures that can be used for scaling this integrat
 
 The `codex_log` data stream captures ChatGPT Enterprise `CODEX_LOG` events.
 
-#### codex_log fields
+#### Codex Log fields
 
 **Exported fields**
 
@@ -133,7 +133,7 @@ The `codex_log` data stream captures ChatGPT Enterprise `CODEX_LOG` events.
 | openai_chatgpt_enterprise.codex_log.event_details.elicitation_type | Type of MCP elicitation (e.g. oauth_consent). | keyword |
 | openai_chatgpt_enterprise.codex_log.event_details.environment_fields.agent_settings.model | Model configured for the environment's agent. | keyword |
 | openai_chatgpt_enterprise.codex_log.event_details.environment_fields.cache_settings.enabled | Whether environment caching is enabled. | boolean |
-| openai_chatgpt_enterprise.codex_log.event_details.environment_fields.description | Environment description. | keyword |
+| openai_chatgpt_enterprise.codex_log.event_details.environment_fields.description | Environment description. | text |
 | openai_chatgpt_enterprise.codex_log.event_details.environment_fields.env_var_keys | Names (keys only) of configured environment variables. | keyword |
 | openai_chatgpt_enterprise.codex_log.event_details.environment_fields.label | Environment label / name. | keyword |
 | openai_chatgpt_enterprise.codex_log.event_details.environment_fields.permissions.network_access | Environment network-access permission. | keyword |
@@ -168,6 +168,10 @@ The `codex_log` data stream captures ChatGPT Enterprise `CODEX_LOG` events.
 | openai_chatgpt_enterprise.codex_log.type | Top-level event category (e.g. CODEX_LOG). | keyword |
 | openai_chatgpt_enterprise.codex_log.workspace_id | Workspace identifier associated with the event. | keyword |
 
+
+### Example event
+
+#### Codex Log
 
 An example event for `codex_log` looks as following:
 

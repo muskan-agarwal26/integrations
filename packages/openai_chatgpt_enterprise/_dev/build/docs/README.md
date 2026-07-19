@@ -100,9 +100,13 @@ For more information on architectures that can be used for scaling this integrat
 
 The `codex_log` data stream captures ChatGPT Enterprise `CODEX_LOG` events.
 
-#### codex_log fields
+#### Codex Log fields
 
 {{ fields "codex_log" }}
+
+### Example event
+
+#### Codex Log
 
 {{ event "codex_log" }}
 

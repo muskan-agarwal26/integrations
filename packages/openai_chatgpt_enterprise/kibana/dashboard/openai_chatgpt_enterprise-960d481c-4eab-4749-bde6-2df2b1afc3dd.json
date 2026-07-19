@@ -239,7 +239,7 @@
                                     }
                                 ],
                                 "legend": {
-                                    "isVisible": true,
+                                    "isVisible": false,
                                     "position": "right",
                                     "shouldTruncate": false
                                 },
@@ -1267,7 +1267,7 @@
                                     }
                                 ],
                                 "legend": {
-                                    "isVisible": true,
+                                    "isVisible": false,
                                     "position": "right",
                                     "shouldTruncate": false
                                 },
@@ -1863,6 +1863,5 @@
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.3.0",
-    "updated_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0"
+    "typeMigrationVersion": "10.3.0"
 }

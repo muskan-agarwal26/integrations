@@ -72,7 +72,7 @@
                   type: boolean
                   description: Whether environment caching is enabled.
             - name: description
-              type: keyword
+              type: text
               description: Environment description.
             - name: env_var_keys
               type: keyword
