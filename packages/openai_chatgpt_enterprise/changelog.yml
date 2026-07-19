@@ -3,4 +3,4 @@
   changes:
     - description: Initial release of the OpenAI ChatGPT Enterprise Application Logs (app_log) data stream.
       type: enhancement
-      link: https://github.com/elastic/integrations/pull/1
+      link: https://github.com/elastic/integrations/pull/20205
