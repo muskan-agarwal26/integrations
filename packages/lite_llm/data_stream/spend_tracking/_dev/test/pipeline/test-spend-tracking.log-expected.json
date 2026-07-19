@@ -1,0 +1,294 @@
+{
+    "expected": [
+        {
+            "@timestamp": "2026-07-18T10:12:56.825Z",
+            "client": {
+                "ip": "10.212.128.28"
+            },
+            "ecs": {
+                "version": "9.4.0"
+            },
+            "error": {
+                "type": "AuthenticationError"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "duration": 0,
+                "end": "2026-07-18T10:12:56.825Z",
+                "id": "b36677ed-2f11-400b-a0d0-56c6bdba294d",
+                "kind": "event",
+                "original": "{\"request_id\":\"b36677ed-2f11-400b-a0d0-56c6bdba294d\",\"call_type\":\"\",\"api_key\":\"f0c41b248c7396133777f28fddfc2ae0fe0789e0dcdc17cda1ede29adc522dbf\",\"spend\":0,\"total_tokens\":0,\"prompt_tokens\":0,\"completion_tokens\":0,\"start_time\":\"2026-07-18T10:12:56.825+00:00\",\"end_time\":\"2026-07-18T10:12:56.825+00:00\",\"completion_start_time\":\"2026-07-18T10:12:56.824+00:00\",\"model\":\"openai/gpt-4o\",\"model_group\":\"gpt-4o\",\"user\":\"default_user_id\",\"team_id\":\"litellm-dashboard\",\"requester_ip_address\":\"10.212.128.28\",\"status\":\"failure\",\"metadata\":{\"status\":\"failure\",\"error_information\":{\"error_code\":\"401\",\"error_class\":\"AuthenticationError\",\"error_message\":\"Incorrect API key provided: sk-REPLA*E_ME\"}}}",
+                "outcome": "failure",
+                "start": "2026-07-18T10:12:56.825Z",
+                "type": [
+                    "access"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "openai/gpt-4o"
+                }
+            },
+            "group": {
+                "id": "litellm-dashboard"
+            },
+            "lite_llm": {
+                "spend_tracking": {
+                    "api_key": "f0c41b248c7396133777f28fddfc2ae0fe0789e0dcdc17cda1ede29adc522dbf",
+                    "completion_start_time": "2026-07-18T10:12:56.824Z",
+                    "completion_tokens": 0,
+                    "metadata": {
+                        "error_information": {
+                            "error_code": "401",
+                            "error_message": "Incorrect API key provided: sk-REPLA*E_ME"
+                        },
+                        "status": "failure"
+                    },
+                    "model_group": "gpt-4o",
+                    "prompt_tokens": 0,
+                    "spend": 0.0,
+                    "total_tokens": 0
+                }
+            },
+            "related": {
+                "ip": [
+                    "10.212.128.28"
+                ],
+                "user": [
+                    "default_user_id"
+                ]
+            },
+            "user": {
+                "id": "default_user_id"
+            }
+        },
+        {
+            "@timestamp": "2026-07-18T10:12:47.898Z",
+            "client": {
+                "ip": "10.212.128.28"
+            },
+            "ecs": {
+                "version": "9.4.0"
+            },
+            "error": {
+                "type": "AuthenticationError"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "duration": 0,
+                "end": "2026-07-18T10:12:47.898Z",
+                "id": "0d291c4a-d71e-43f2-a602-8b77d08ef4b3",
+                "kind": "event",
+                "original": "{\"request_id\":\"0d291c4a-d71e-43f2-a602-8b77d08ef4b3\",\"call_type\":\"\",\"api_key\":\"f0c41b248c7396133777f28fddfc2ae0fe0789e0dcdc17cda1ede29adc522dbf\",\"spend\":0,\"total_tokens\":0,\"prompt_tokens\":0,\"completion_tokens\":0,\"start_time\":\"2026-07-18T10:12:47.898+00:00\",\"end_time\":\"2026-07-18T10:12:47.898+00:00\",\"model\":\"anthropic/claude-sonnet-4-6\",\"model_group\":\"claude-sonnet\",\"user\":\"default_user_id\",\"team_id\":\"litellm-dashboard\",\"requester_ip_address\":\"10.212.128.28\",\"status\":\"failure\",\"metadata\":{\"error_information\":{\"error_code\":\"401\",\"error_class\":\"AuthenticationError\",\"error_message\":\"invalid x-api-key\"}}}",
+                "outcome": "failure",
+                "start": "2026-07-18T10:12:47.898Z",
+                "type": [
+                    "access"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "anthropic/claude-sonnet-4-6"
+                }
+            },
+            "group": {
+                "id": "litellm-dashboard"
+            },
+            "lite_llm": {
+                "spend_tracking": {
+                    "api_key": "f0c41b248c7396133777f28fddfc2ae0fe0789e0dcdc17cda1ede29adc522dbf",
+                    "completion_tokens": 0,
+                    "metadata": {
+                        "error_information": {
+                            "error_code": "401",
+                            "error_message": "invalid x-api-key"
+                        }
+                    },
+                    "model_group": "claude-sonnet",
+                    "prompt_tokens": 0,
+                    "spend": 0.0,
+                    "total_tokens": 0
+                }
+            },
+            "related": {
+                "ip": [
+                    "10.212.128.28"
+                ],
+                "user": [
+                    "default_user_id"
+                ]
+            },
+            "user": {
+                "id": "default_user_id"
+            }
+        },
+        {
+            "@timestamp": "2026-07-18T10:12:39.353Z",
+            "client": {
+                "ip": "10.212.128.28"
+            },
+            "ecs": {
+                "version": "9.4.0"
+            },
+            "error": {
+                "type": "AuthenticationError"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "duration": 0,
+                "end": "2026-07-18T10:12:39.353Z",
+                "id": "bcfdde71-ec6c-469c-ba5e-bba248d12b23",
+                "kind": "event",
+                "original": "{\"request_id\":\"bcfdde71-ec6c-469c-ba5e-bba248d12b23\",\"call_type\":\"\",\"api_key\":\"f0c41b248c7396133777f28fddfc2ae0fe0789e0dcdc17cda1ede29adc522dbf\",\"spend\":0,\"total_tokens\":0,\"prompt_tokens\":0,\"completion_tokens\":0,\"start_time\":\"2026-07-18T10:12:39.353+00:00\",\"end_time\":\"2026-07-18T10:12:39.353+00:00\",\"model\":\"openai/gpt-4o-mini\",\"model_group\":\"gpt-4o-mini\",\"user\":\"default_user_id\",\"team_id\":\"litellm-dashboard\",\"requester_ip_address\":\"10.212.128.28\",\"status\":\"failure\",\"metadata\":{\"error_information\":{\"error_code\":\"401\",\"error_class\":\"AuthenticationError\",\"error_message\":\"Incorrect API key provided\"}}}",
+                "outcome": "failure",
+                "start": "2026-07-18T10:12:39.353Z",
+                "type": [
+                    "access"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "openai/gpt-4o-mini"
+                }
+            },
+            "group": {
+                "id": "litellm-dashboard"
+            },
+            "lite_llm": {
+                "spend_tracking": {
+                    "api_key": "f0c41b248c7396133777f28fddfc2ae0fe0789e0dcdc17cda1ede29adc522dbf",
+                    "completion_tokens": 0,
+                    "metadata": {
+                        "error_information": {
+                            "error_code": "401",
+                            "error_message": "Incorrect API key provided"
+                        }
+                    },
+                    "model_group": "gpt-4o-mini",
+                    "prompt_tokens": 0,
+                    "spend": 0.0,
+                    "total_tokens": 0
+                }
+            },
+            "related": {
+                "ip": [
+                    "10.212.128.28"
+                ],
+                "user": [
+                    "default_user_id"
+                ]
+            },
+            "user": {
+                "id": "default_user_id"
+            }
+        },
+        {
+            "@timestamp": "2026-07-18T10:11:19.909Z",
+            "ecs": {
+                "version": "9.4.0"
+            },
+            "error": {
+                "type": "ProxyModelNotFoundError"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "duration": 0,
+                "end": "2026-07-18T10:11:19.909Z",
+                "id": "7d8f7a77-9f46-47b2-997e-0a0892fe2c7a",
+                "kind": "event",
+                "original": "{\"request_id\":\"7d8f7a77-9f46-47b2-997e-0a0892fe2c7a\",\"call_type\":\"\",\"api_key\":\"8de15ff28eedf53bd4cf2e65b8e980b9231acc3f894648a9fa3c2dbf0ab1a6d9\",\"spend\":0,\"total_tokens\":0,\"prompt_tokens\":0,\"completion_tokens\":0,\"start_time\":\"2026-07-18T10:11:19.909+00:00\",\"end_time\":\"2026-07-18T10:11:19.909+00:00\",\"model\":\"gemma-4-31b-it\",\"user\":\"default_user_id\",\"status\":\"failure\",\"metadata\":{\"error_information\":{\"error_code\":\"400\",\"error_class\":\"ProxyModelNotFoundError\",\"error_message\":\"Invalid model name passed in model=gemma-4-31b-it\"}}}",
+                "outcome": "failure",
+                "start": "2026-07-18T10:11:19.909Z",
+                "type": [
+                    "access"
+                ]
+            },
+            "gen_ai": {
+                "request": {
+                    "model": "gemma-4-31b-it"
+                }
+            },
+            "lite_llm": {
+                "spend_tracking": {
+                    "api_key": "8de15ff28eedf53bd4cf2e65b8e980b9231acc3f894648a9fa3c2dbf0ab1a6d9",
+                    "completion_tokens": 0,
+                    "metadata": {
+                        "error_information": {
+                            "error_code": "400",
+                            "error_message": "Invalid model name passed in model=gemma-4-31b-it"
+                        }
+                    },
+                    "prompt_tokens": 0,
+                    "spend": 0.0,
+                    "total_tokens": 0
+                }
+            },
+            "related": {
+                "user": [
+                    "default_user_id"
+                ]
+            },
+            "user": {
+                "id": "default_user_id"
+            }
+        },
+        {
+            "@timestamp": "2026-07-18T10:06:43.423Z",
+            "ecs": {
+                "version": "9.4.0"
+            },
+            "error": {
+                "type": "ProxyException"
+            },
+            "event": {
+                "category": [
+                    "api"
+                ],
+                "duration": 0,
+                "end": "2026-07-18T10:06:43.423Z",
+                "id": "3d7cafce-9d87-4d6d-b055-45f697447c4b",
+                "kind": "event",
+                "original": "{\"request_id\":\"3d7cafce-9d87-4d6d-b055-45f697447c4b\",\"call_type\":\"\",\"api_key\":\"cd8ee59ff419ca78a92994c1cd4241d818539cf879a66f29ea97dc2442b35f67\",\"spend\":0,\"total_tokens\":0,\"prompt_tokens\":0,\"completion_tokens\":0,\"start_time\":\"2026-07-18T10:06:43.423+00:00\",\"end_time\":\"2026-07-18T10:06:43.423+00:00\",\"user\":\"default_user_id\",\"team_id\":\"litellm-dashboard\",\"status\":\"failure\",\"metadata\":{\"error_information\":{\"error_code\":\"401\",\"error_class\":\"ProxyException\",\"error_message\":\"Authentication Error - Expired Key. Key Expiry time 2026-07-18 07:38:38\"}}}",
+                "outcome": "failure",
+                "start": "2026-07-18T10:06:43.423Z",
+                "type": [
+                    "access"
+                ]
+            },
+            "group": {
+                "id": "litellm-dashboard"
+            },
+            "lite_llm": {
+                "spend_tracking": {
+                    "api_key": "cd8ee59ff419ca78a92994c1cd4241d818539cf879a66f29ea97dc2442b35f67",
+                    "completion_tokens": 0,
+                    "metadata": {
+                        "error_information": {
+                            "error_code": "401",
+                            "error_message": "Authentication Error - Expired Key. Key Expiry time 2026-07-18 07:38:38"
+                        }
+                    },
+                    "prompt_tokens": 0,
+                    "spend": 0.0,
+                    "total_tokens": 0
+                }
+            },
+            "related": {
+                "user": [
+                    "default_user_id"
+                ]
+            },
+            "user": {
+                "id": "default_user_id"
+            }
+        }
+    ]
+}
