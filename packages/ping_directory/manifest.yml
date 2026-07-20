@@ -16,6 +16,10 @@ conditions:
   elastic:
     subscription: 'basic'
 screenshots:
+  - src: /img/ping_directory-http-access-dashboard.png
+    title: HTTP Access Dashboard
+    size: 600x600
+    type: image/png
   - src: /img/ping_directory-audit-dashboard.png
     title: Audit Dashboard
     size: 600x600
