@@ -119,11 +119,11 @@ The `auth_log` data stream captures ChatGPT Enterprise `AUTH_LOG` events (user a
 | input.type | Type of filebeat input. | keyword |
 | observer.product | The product name of the observer. | constant_keyword |
 | observer.vendor | Vendor name of the observer. | constant_keyword |
-| openai_chatgpt_enterprise.auth_log.action_data.role | Role of the acting user at the time of the authentication event (e.g. standard-user). | keyword |
-| openai_chatgpt_enterprise.auth_log.actor.type | Type of actor that performed the action (e.g. ACCOUNT_USER, API_KEY). | keyword |
-| openai_chatgpt_enterprise.auth_log.principal.type | Principal that owns the event (e.g. CHATGPT_WORKSPACE). | keyword |
+| openai_chatgpt_enterprise.auth_log.action_data.role | Role of the acting user at the time of the authentication event (for example, standard-user). | keyword |
+| openai_chatgpt_enterprise.auth_log.actor.type | Type of actor that performed the action (for example, ACCOUNT_USER, API_KEY). | keyword |
+| openai_chatgpt_enterprise.auth_log.principal.type | Principal that owns the event (for example, CHATGPT_WORKSPACE). | keyword |
 | openai_chatgpt_enterprise.auth_log.request_metadata.client_ja4 | JA4 TLS client fingerprint captured at request time. | keyword |
-| openai_chatgpt_enterprise.auth_log.type | Top-level event category (e.g. AUTH_LOG). | keyword |
+| openai_chatgpt_enterprise.auth_log.type | Top-level event category (for example, AUTH_LOG). | keyword |
 
 
 ### Example event
@@ -136,24 +136,24 @@ An example event for `auth_log` looks as following:
 {
     "@timestamp": "2026-07-15T10:53:18.000Z",
     "agent": {
-        "ephemeral_id": "85e07fce-1191-406f-81b3-97f84089e51c",
-        "id": "0c22f2af-5c59-4681-9ca5-1977f4992cbc",
-        "name": "elastic-agent-96825",
+        "ephemeral_id": "8a2f01cf-4c4c-4c03-bdc3-3c3e9c9f9a52",
+        "id": "c1a502c2-de54-4082-88b0-f1b5039168b8",
+        "name": "elastic-agent-11733",
         "type": "filebeat",
-        "version": "8.19.0"
+        "version": "9.4.3"
     },
     "data_stream": {
         "dataset": "openai_chatgpt_enterprise.auth_log",
-        "namespace": "69621",
+        "namespace": "42795",
         "type": "logs"
     },
     "ecs": {
-        "version": "9.3.0"
+        "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "0c22f2af-5c59-4681-9ca5-1977f4992cbc",
+        "id": "c1a502c2-de54-4082-88b0-f1b5039168b8",
         "snapshot": false,
-        "version": "8.19.0"
+        "version": "9.4.3"
     },
     "event": {
         "action": "login_success",
@@ -163,8 +163,9 @@ An example event for `auth_log` looks as following:
         ],
         "dataset": "openai_chatgpt_enterprise.auth_log",
         "id": "9532e1b4-e44a-42c7-a52a-083c345e0001",
-        "ingested": "2026-07-19T11:56:30Z",
+        "ingested": "2026-07-21T09:53:44Z",
         "kind": "event",
+        "module": "openai_chatgpt_enterprise",
         "original": "{\"event_id\":\"9532e1b4-e44a-42c7-a52a-083c345e0001\",\"type\":\"AUTH_LOG\",\"principal\":{\"id\":\"11111111-2222-3333-4444-555555555555\",\"type\":\"CHATGPT_WORKSPACE\"},\"actor\":{\"type\":\"ACCOUNT_USER\",\"user_id\":\"user-Aaaaaaaaaaaaaaaaaaaaaaa1\",\"user_email\":\"alice.martin@example.org\"},\"timestamp\":\"2026-07-15T10:53:18Z\",\"request_metadata\":{\"client_ip\":\"81.2.69.142\",\"client_ip_details\":{\"country\":\"GB\",\"city\":\"London\",\"region\":\"England\",\"region_code\":\"ENG\",\"latitude\":\"51.50853\",\"longitude\":\"-0.12574\"},\"client_ja3\":\"f90ffded875933863a95a1a84285c922\",\"client_ja4\":\"q13d0311h3_55b375c5d22e_653d80c3fe9d\"},\"action_data\":{\"action\":\"login_success\",\"role\":\"standard-user\"}}",
         "outcome": "success",
         "type": [
@@ -176,6 +177,10 @@ An example event for `auth_log` looks as following:
     },
     "input": {
         "type": "cel"
+    },
+    "observer": {
+        "product": "ChatGPT Enterprise Compliance",
+        "vendor": "OpenAI"
     },
     "openai_chatgpt_enterprise": {
         "auth_log": {
@@ -210,7 +215,13 @@ An example event for `auth_log` looks as following:
         "geo": {
             "city_name": "London",
             "country_iso_code": "GB",
-            "location": "51.50853,-0.12574",
+            "location": {
+                "coordinates": [
+                    -0.1257400307804346,
+                    51.508529959246516
+                ],
+                "type": "Point"
+            },
             "region_iso_code": "ENG",
             "region_name": "England"
         },

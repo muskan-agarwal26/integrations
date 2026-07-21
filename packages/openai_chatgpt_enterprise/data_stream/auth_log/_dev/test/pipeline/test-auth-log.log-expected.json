@@ -3,7 +3,7 @@
         {
             "@timestamp": "2026-07-15T10:53:18.000Z",
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "action": "login_success",
@@ -74,7 +74,7 @@
         {
             "@timestamp": "2026-07-15T10:53:24.000Z",
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "action": "token_issued",
@@ -155,7 +155,7 @@
         {
             "@timestamp": "2026-07-15T12:12:23.000Z",
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "action": "logout_success",
@@ -219,7 +219,7 @@
         {
             "@timestamp": "2026-07-15T13:49:25.000Z",
             "ecs": {
-                "version": "9.3.0"
+                "version": "9.4.0"
             },
             "event": {
                 "action": "login_success",

@@ -7,19 +7,19 @@
       fields:
         - name: role
           type: keyword
-          description: Role of the acting user at the time of the authentication event (e.g. standard-user).
+          description: Role of the acting user at the time of the authentication event (for example, standard-user).
     - name: actor
       type: group
       fields:
         - name: type
           type: keyword
-          description: Type of actor that performed the action (e.g. ACCOUNT_USER, API_KEY).
+          description: Type of actor that performed the action (for example, ACCOUNT_USER, API_KEY).
     - name: principal
       type: group
       fields:
         - name: type
           type: keyword
-          description: Principal that owns the event (e.g. CHATGPT_WORKSPACE).
+          description: Principal that owns the event (for example, CHATGPT_WORKSPACE).
     - name: request_metadata
       type: group
       fields:
@@ -28,4 +28,4 @@
           description: JA4 TLS client fingerprint captured at request time.
     - name: type
       type: keyword
-      description: Top-level event category (e.g. AUTH_LOG).
+      description: Top-level event category (for example, AUTH_LOG).
