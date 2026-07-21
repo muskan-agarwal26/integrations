@@ -13,7 +13,7 @@ conditions:
   elastic:
     subscription: 'basic'
 screenshots:
-  - src: img/lite_llm-audit-dashboard.png
+  - src: /img/lite_llm-audit-dashboard.png
     title: Audit Dashboard
     size: 600x600
     type: image/png

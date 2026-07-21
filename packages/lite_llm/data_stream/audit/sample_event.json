@@ -1,17 +1,17 @@
 {
     "@timestamp": "2026-07-03T11:30:59.385Z",
     "agent": {
-        "ephemeral_id": "b7a16d12-e599-4d3c-be00-1f3e4915426a",
-        "id": "2cf37096-07d9-4398-802e-62d4968b52cc",
-        "name": "elastic-agent-76806",
+        "ephemeral_id": "7612fa48-f470-4bbf-adea-9feab1f81f4e",
+        "id": "074b7c4a-cea2-4f37-92a0-aeb9e49a99d7",
+        "name": "elastic-agent-67631",
         "type": "filebeat",
-        "version": "8.18.0"
+        "version": "8.19.0"
     },
     "aws": {
         "s3": {
             "bucket": {
-                "arn": "arn:aws:s3:::elastic-package-lite-llm-audit-bucket-49613",
-                "name": "elastic-package-lite-llm-audit-bucket-49613"
+                "arn": "arn:aws:s3:::elastic-package-lite-llm-audit-bucket-44222",
+                "name": "elastic-package-lite-llm-audit-bucket-44222"
             },
             "object": {
                 "key": "audit.log"
@@ -23,16 +23,16 @@
     },
     "data_stream": {
         "dataset": "lite_llm.audit",
-        "namespace": "21645",
+        "namespace": "15741",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "2cf37096-07d9-4398-802e-62d4968b52cc",
+        "id": "074b7c4a-cea2-4f37-92a0-aeb9e49a99d7",
         "snapshot": false,
-        "version": "8.18.0"
+        "version": "8.19.0"
     },
     "event": {
         "action": "updated",
@@ -43,9 +43,9 @@
         "created": "2026-06-26T11:03:33.193Z",
         "dataset": "lite_llm.audit",
         "id": "f6bbb635-8079-46bc-a7c7-49b38bfceb7a",
-        "ingested": "2026-07-18T04:51:24Z",
+        "ingested": "2026-07-21T06:27:41Z",
         "kind": "event",
-        "original": "{\"id\": \"f6bbb635-8079-46bc-a7c7-49b38bfceb7a\", \"updated_at\": \"2026-07-03T11:30:59.385000Z\", \"changed_by\": \"ops@berri.ai\", \"changed_by_api_key\": \"\", \"action\": \"updated\", \"table_name\": \"LiteLLM_UserTable\", \"object_id\": \"default_user_id\", \"before_value\": {\"spend\": 0.01098520000000001, \"teams\": [\"45d1cbaf-cf75-4052-9f51-a241d2518873\"], \"models\": [], \"user_id\": \"default_user_id\", \"metadata\": {}, \"policies\": [], \"user_role\": \"proxy_admin\", \"created_at\": \"2026-06-26T11:03:33.193000Z\", \"updated_at\": \"2026-07-03T11:12:06.577000Z\", \"model_spend\": {}, \"model_max_budget\": {}, \"allowed_cache_controls\": []}, \"updated_values\": {\"spend\": 0.01098520000000001, \"teams\": [\"45d1cbaf-cf75-4052-9f51-a241d2518873\"], \"models\": [], \"user_id\": \"default_user_id\", \"metadata\": {}, \"policies\": [], \"user_role\": \"proxy_admin\", \"created_at\": \"2026-06-26T11:03:33.193000Z\", \"updated_at\": \"2026-07-03T11:30:59.375000Z\", \"model_spend\": {}, \"model_max_budget\": {}, \"allowed_cache_controls\": []}}",
+        "original": "{\"id\": \"f6bbb635-8079-46bc-a7c7-49b38bfceb7a\", \"updated_at\": \"2026-07-03T11:30:59.385000Z\", \"changed_by\": \"ops@example.com\", \"changed_by_api_key\": \"\", \"action\": \"updated\", \"table_name\": \"LiteLLM_UserTable\", \"object_id\": \"default_user_id\", \"before_value\": {\"spend\": 0.01098520000000001, \"teams\": [\"45d1cbaf-cf75-4052-9f51-a241d2518873\"], \"models\": [], \"user_id\": \"default_user_id\", \"metadata\": {}, \"policies\": [], \"user_role\": \"proxy_admin\", \"created_at\": \"2026-06-26T11:03:33.193000Z\", \"updated_at\": \"2026-07-03T11:12:06.577000Z\", \"model_spend\": {}, \"model_max_budget\": {}, \"allowed_cache_controls\": []}, \"updated_values\": {\"spend\": 0.01098520000000001, \"teams\": [\"45d1cbaf-cf75-4052-9f51-a241d2518873\"], \"models\": [], \"user_id\": \"default_user_id\", \"metadata\": {}, \"policies\": [], \"user_role\": \"proxy_admin\", \"created_at\": \"2026-06-26T11:03:33.193000Z\", \"updated_at\": \"2026-07-03T11:30:59.375000Z\", \"model_spend\": {}, \"model_max_budget\": {}, \"allowed_cache_controls\": []}}",
         "type": [
             "change"
         ]
@@ -81,14 +81,13 @@
     },
     "log": {
         "file": {
-            "path": "https://elastic-package-lite-llm-audit-bucket-49613.s3.us-east-2.amazonaws.com/audit.log"
+            "path": "https://elastic-package-lite-llm-audit-bucket-44222.s3.us-east-2.amazonaws.com/audit.log"
         },
-        "offset": 1474
+        "offset": 1478
     },
     "related": {
         "user": [
-            "ops@berri.ai",
-            "berri.ai",
+            "ops@example.com",
             "default_user_id"
         ]
     },
@@ -99,8 +98,8 @@
         "litellm-audit"
     ],
     "user": {
-        "domain": "berri.ai",
-        "email": "ops@berri.ai",
+        "domain": "example.com",
+        "email": "ops@example.com",
         "id": "default_user_id"
     }
 }

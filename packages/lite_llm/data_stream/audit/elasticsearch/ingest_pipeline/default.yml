@@ -111,6 +111,18 @@ processors:
       tag: set_event_action_from_audit_action
       copy_from: lite_llm.audit.action
       ignore_empty_value: true
+  - append:
+      field: event.type
+      tag: append_creation_event_type
+      value: creation
+      if: ctx.event?.action != null && ctx.event.action.contains('created')
+      allow_duplicates: false
+  - append:
+      field: event.type
+      tag: append_deletion_event_type
+      value: deletion
+      if: ctx.event?.action != null && ctx.event.action.contains('deleted')
+      allow_duplicates: false
   - date:
       field: lite_llm.audit.updated_at
       tag: date_root_updated_at
@@ -351,27 +363,8 @@ processors:
       tag: dissect_extract_domain_from_email
       description: Extract domain from user email address.
       field: user.email
-      pattern: '%{user_part}@%{domain}'
-      ignore_missing: true
-      on_failure:
-        - remove:
-            field: user_part
-            ignore_missing: true
-  - rename:
-      tag: rename_domain_to_user_domain
-      field: domain
-      target_field: user.domain
-      ignore_missing: true
-  - append:
-      tag: append_domain_to_related_user
-      field: related.user
-      value: '{{{user.domain}}}'
-      if: ctx.user?.domain != null
-      allow_duplicates: false
-  - remove:
-      tag: remove_user_part_field
-      field: user_part
-      ignore_missing: true
+      pattern: '%{}@%{user.domain}'
+      if: ctx.user?.email != null && ctx.user.email.contains('@')
   - set:
       field: event.created
       tag: set_event_created_from_updated_values

@@ -132,8 +132,8 @@ For more information on architectures that can be used for scaling this integrat
 
 - [LiteLLM Proxy Server Documentation](https://docs.litellm.ai/docs/proxy/quick_start)
 - [LiteLLM API Authentication](https://docs.litellm.ai/docs/proxy/virtual_keys)
-- [LiteLLM Audit Logs API](https://docs.litellm.ai/docs/proxy/audit_logs)
-- [LiteLLM Rate Limiting and Budgets](https://docs.litellm.ai/docs/proxy/user_management)
+- [LiteLLM API Reference (OpenAPI)](https://litellm-api.up.railway.app)
+- [LiteLLM Model Hub](https://docs.litellm.ai/docs/proxy/model_management)
 
 ### Audit
 

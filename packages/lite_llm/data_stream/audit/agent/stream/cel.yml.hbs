@@ -43,10 +43,9 @@ program: |-
         "Authorization": ["Bearer " + string(state.api_key)]
       }
     }).do_request().as(resp, resp.StatusCode == 200 ?
-      bytes(resp.Body).decode_json().as(body, {
+      resp.Body.decode_json().as(body, {
         "events": (
-            has(body.audit_logs)
-          ?
+            has(body.audit_logs) ?
             body.audit_logs.map(e, {
               "message": e.encode_json()
             })
@@ -79,12 +78,12 @@ program: |-
           "events":{
             "error": {
               "code": string(resp.StatusCode),
-              "id": string(resp.Status),
+              "id": resp.Status,
               "message": "GET:" + state.url.trim_right("/") + "/audit: " + (
                 size(resp.Body) != 0 ?
                   string(resp.Body)
                 :
-                  string(resp.Status) + ' (' + string(resp.StatusCode) + ')'
+                  resp.Status + ' (' + string(resp.StatusCode) + ')'
               ),
             },
           },
