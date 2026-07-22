@@ -45,7 +45,7 @@ program: |-
     }).do_request().as(resp, resp.StatusCode == 200 ?
       resp.Body.decode_json().as(body, {
         "events": (
-            has(body.audit_logs) ?
+          has(body.audit_logs) ?
             body.audit_logs.map(e, {
               "message": e.encode_json()
             })
@@ -56,10 +56,10 @@ program: |-
           ?"last_timestamp": (has(body.audit_logs) && size(body.audit_logs) > 0) ?
             (has(state.?cursor.last_timestamp) ?
               optional.of(
-                max([
+                max(
                   state.cursor.last_timestamp,
                   body.audit_logs[0].updated_at
-                ])
+                )
               )
             :
               optional.of(body.audit_logs[0].updated_at)

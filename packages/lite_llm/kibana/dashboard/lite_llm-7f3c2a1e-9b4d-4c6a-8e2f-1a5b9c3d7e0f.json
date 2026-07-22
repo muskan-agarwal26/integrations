@@ -13,6 +13,8 @@
                 "ctrl-event-action": {
                     "explicitInput": {
                         "dataViewId": "logs-*",
+                        "exclude": false,
+                        "existsSelected": false,
                         "fieldName": "event.action",
                         "searchTechnique": "prefix",
                         "selectedOptions": [],
@@ -31,6 +33,8 @@
                 "ctrl-table-name": {
                     "explicitInput": {
                         "dataViewId": "logs-*",
+                        "exclude": false,
+                        "existsSelected": false,
                         "fieldName": "lite_llm.audit.table_name",
                         "searchTechnique": "prefix",
                         "selectedOptions": [],
@@ -90,149 +94,6 @@
             "useMargins": true
         },
         "panelsJSON": [
-            {
-                "embeddableConfig": {
-                    "attributes": {
-                        "references": [
-                            {
-                                "id": "logs-*",
-                                "name": "indexpattern-datasource-layer-layer-total-events",
-                                "type": "index-pattern"
-                            },
-                            {
-                                "id": "logs-*",
-                                "name": "07c99113-fb93-4dca-b6db-d0da7e80ee3f",
-                                "type": "index-pattern"
-                            }
-                        ],
-                        "state": {
-                            "adHocDataViews": {},
-                            "datasourceStates": {
-                                "formBased": {
-                                    "layers": {
-                                        "layer-total-events": {
-                                            "columnOrder": [
-                                                "col-total-events-count"
-                                            ],
-                                            "columns": {
-                                                "col-total-events-count": {
-                                                    "customLabel": true,
-                                                    "dataType": "number",
-                                                    "filter": {
-                                                        "language": "kuery",
-                                                        "query": "event.id: * "
-                                                    },
-                                                    "isBucketed": false,
-                                                    "label": "Total Events",
-                                                    "operationType": "count",
-                                                    "params": {
-                                                        "emptyAsNull": false,
-                                                        "format": {
-                                                            "id": "number",
-                                                            "params": {
-                                                                "decimals": 0
-                                                            }
-                                                        }
-                                                    },
-                                                    "scale": "ratio",
-                                                    "sourceField": "___records___"
-                                                }
-                                            },
-                                            "incompleteColumns": {},
-                                            "sampling": 1
-                                        }
-                                    }
-                                }
-                            },
-                            "filters": [
-                                {
-                                    "$state": {
-                                        "store": "appState"
-                                    },
-                                    "meta": {
-                                        "alias": null,
-                                        "disabled": false,
-                                        "field": "data_stream.dataset",
-                                        "index": "07c99113-fb93-4dca-b6db-d0da7e80ee3f",
-                                        "key": "data_stream.dataset",
-                                        "negate": false,
-                                        "params": {
-                                            "query": "lite_llm.audit"
-                                        },
-                                        "type": "phrase"
-                                    },
-                                    "query": {
-                                        "match_phrase": {
-                                            "data_stream.dataset": "lite_llm.audit"
-                                        }
-                                    }
-                                }
-                            ],
-                            "internalReferences": [],
-                            "query": {
-                                "language": "kuery",
-                                "query": ""
-                            },
-                            "visualization": {
-                                "color": "#6092C0",
-                                "layerId": "layer-total-events",
-                                "layerType": "data",
-                                "metricAccessor": "col-total-events-count",
-                                "showBar": false
-                            }
-                        },
-                        "title": "",
-                        "type": "lens",
-                        "visualizationType": "lnsMetric"
-                    },
-                    "enhancements": {
-                        "dynamicActions": {
-                            "events": []
-                        }
-                    },
-                    "filters": [
-                        {
-                            "$state": {
-                                "store": "appState"
-                            },
-                            "meta": {
-                                "alias": null,
-                                "disabled": false,
-                                "field": "data_stream.dataset",
-                                "index": "logs-*",
-                                "key": "data_stream.dataset",
-                                "negate": false,
-                                "params": {
-                                    "query": "lite_llm.audit"
-                                },
-                                "type": "phrase"
-                            },
-                            "query": {
-                                "match_phrase": {
-                                    "data_stream.dataset": "lite_llm.audit"
-                                }
-                            }
-                        }
-                    ],
-                    "query": {
-                        "language": "kuery",
-                        "query": ""
-                    },
-                    "syncColors": false,
-                    "syncCursor": true,
-                    "syncTooltips": false
-                },
-                "gridData": {
-                    "h": 8,
-                    "i": "panel-total-events",
-                    "w": 6,
-                    "x": 9,
-                    "y": 0
-                },
-                "panelIndex": "panel-total-events",
-                "title": "",
-                "type": "lens"
-            },
             {
                 "embeddableConfig": {
                     "attributes": {
@@ -348,7 +209,7 @@
                                 "alias": null,
                                 "disabled": false,
                                 "field": "data_stream.dataset",
-                                "index": "logs-*",
+                                "index": "36737f1b-ffb1-4bcd-bd39-fd64ff928695",
                                 "key": "data_stream.dataset",
                                 "negate": false,
                                 "params": {
@@ -363,13 +224,15 @@
                             }
                         }
                     ],
+                    "hidePanelTitles": true,
                     "query": {
                         "language": "kuery",
                         "query": ""
                     },
                     "syncColors": false,
                     "syncCursor": true,
-                    "syncTooltips": false
+                    "syncTooltips": false,
+                    "title": "Total Users"
                 },
                 "gridData": {
                     "h": 8,
@@ -379,7 +242,6 @@
                     "y": 0
                 },
                 "panelIndex": "panel-unique-users",
-                "title": "",
                 "type": "lens"
             },
             {
@@ -536,7 +398,8 @@
                     },
                     "syncColors": false,
                     "syncCursor": true,
-                    "syncTooltips": false
+                    "syncTooltips": false,
+                    "title": "Audit Events over Time"
                 },
                 "gridData": {
                     "h": 8,
@@ -546,7 +409,6 @@
                     "y": 0
                 },
                 "panelIndex": "panel-audit-over-time",
-                "title": "Audit Events over Time",
                 "type": "lens"
             },
             {
@@ -753,7 +615,8 @@
                     },
                     "syncColors": false,
                     "syncCursor": true,
-                    "syncTooltips": false
+                    "syncTooltips": false,
+                    "title": "Most Modified Objects"
                 },
                 "gridData": {
                     "h": 16,
@@ -763,7 +626,6 @@
                     "y": 24
                 },
                 "panelIndex": "ea818816-8fbb-4a72-bf07-3be31c42a3a7",
-                "title": "Most Modified Objects",
                 "type": "lens"
             },
             {
@@ -928,7 +790,8 @@
                     },
                     "syncColors": false,
                     "syncCursor": true,
-                    "syncTooltips": false
+                    "syncTooltips": false,
+                    "title": "Events by Action Type"
                 },
                 "gridData": {
                     "h": 16,
@@ -938,7 +801,6 @@
                     "y": 8
                 },
                 "panelIndex": "panel-events-by-action",
-                "title": "Events by Action Type",
                 "type": "lens"
             },
             {
@@ -1104,7 +966,8 @@
                     },
                     "syncColors": false,
                     "syncCursor": true,
-                    "syncTooltips": false
+                    "syncTooltips": false,
+                    "title": "Events by Table"
                 },
                 "gridData": {
                     "h": 16,
@@ -1114,7 +977,6 @@
                     "y": 8
                 },
                 "panelIndex": "panel-events-by-table",
-                "title": "Events by Table",
                 "type": "lens"
             },
             {
@@ -1269,7 +1131,8 @@
                     },
                     "syncColors": false,
                     "syncCursor": true,
-                    "syncTooltips": false
+                    "syncTooltips": false,
+                    "title": "Top Users by Audit Activity"
                 },
                 "gridData": {
                     "h": 16,
@@ -1279,7 +1142,152 @@
                     "y": 24
                 },
                 "panelIndex": "panel-top-users",
-                "title": "Top Users by Audit Activity",
+                "type": "lens"
+            },
+            {
+                "embeddableConfig": {
+                    "attributes": {
+                        "description": "",
+                        "references": [
+                            {
+                                "id": "logs-*",
+                                "name": "indexpattern-datasource-layer-layer-total-events",
+                                "type": "index-pattern"
+                            },
+                            {
+                                "id": "logs-*",
+                                "name": "60a9fd82-45a1-4b9f-a675-d8ab39582e92",
+                                "type": "index-pattern"
+                            }
+                        ],
+                        "state": {
+                            "adHocDataViews": {},
+                            "datasourceStates": {
+                                "formBased": {
+                                    "layers": {
+                                        "layer-total-events": {
+                                            "columnOrder": [
+                                                "col-total-events-count"
+                                            ],
+                                            "columns": {
+                                                "col-total-events-count": {
+                                                    "customLabel": true,
+                                                    "dataType": "number",
+                                                    "filter": {
+                                                        "language": "kuery",
+                                                        "query": "event.id: * "
+                                                    },
+                                                    "isBucketed": false,
+                                                    "label": "Total Events",
+                                                    "operationType": "count",
+                                                    "params": {
+                                                        "emptyAsNull": false,
+                                                        "format": {
+                                                            "id": "number",
+                                                            "params": {
+                                                                "decimals": 0
+                                                            }
+                                                        }
+                                                    },
+                                                    "scale": "ratio",
+                                                    "sourceField": "___records___"
+                                                }
+                                            },
+                                            "incompleteColumns": {},
+                                            "sampling": 1
+                                        }
+                                    }
+                                }
+                            },
+                            "filters": [
+                                {
+                                    "$state": {
+                                        "store": "appState"
+                                    },
+                                    "meta": {
+                                        "alias": null,
+                                        "disabled": false,
+                                        "field": "data_stream.dataset",
+                                        "index": "60a9fd82-45a1-4b9f-a675-d8ab39582e92",
+                                        "key": "data_stream.dataset",
+                                        "negate": false,
+                                        "params": {
+                                            "query": "lite_llm.audit"
+                                        },
+                                        "type": "phrase"
+                                    },
+                                    "query": {
+                                        "match_phrase": {
+                                            "data_stream.dataset": "lite_llm.audit"
+                                        }
+                                    }
+                                }
+                            ],
+                            "internalReferences": [],
+                            "query": {
+                                "language": "kuery",
+                                "query": ""
+                            },
+                            "visualization": {
+                                "color": "#6092C0",
+                                "layerId": "layer-total-events",
+                                "layerType": "data",
+                                "metricAccessor": "col-total-events-count",
+                                "secondaryTrend": {
+                                    "type": "none"
+                                },
+                                "showBar": false
+                            }
+                        },
+                        "title": "Total Events",
+                        "visualizationType": "lnsMetric"
+                    },
+                    "enhancements": {
+                        "dynamicActions": {
+                            "events": []
+                        }
+                    },
+                    "filters": [
+                        {
+                            "$state": {
+                                "store": "appState"
+                            },
+                            "meta": {
+                                "alias": null,
+                                "disabled": false,
+                                "field": "data_stream.dataset",
+                                "index": "60a9fd82-45a1-4b9f-a675-d8ab39582e92",
+                                "key": "data_stream.dataset",
+                                "negate": false,
+                                "params": {
+                                    "query": "lite_llm.audit"
+                                },
+                                "type": "phrase"
+                            },
+                            "query": {
+                                "match_phrase": {
+                                    "data_stream.dataset": "lite_llm.audit"
+                                }
+                            }
+                        }
+                    ],
+                    "hidePanelTitles": true,
+                    "query": {
+                        "language": "kuery",
+                        "query": ""
+                    },
+                    "syncColors": false,
+                    "syncCursor": true,
+                    "syncTooltips": false
+                },
+                "gridData": {
+                    "h": 8,
+                    "i": "b00292e2-6907-43fa-b722-ebd2e65c6be6",
+                    "w": 6,
+                    "x": 9,
+                    "y": 0
+                },
+                "panelIndex": "b00292e2-6907-43fa-b722-ebd2e65c6be6",
                 "type": "lens"
             }
         ],
@@ -1288,22 +1296,12 @@
         "version": 3
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2026-07-14T08:25:20.963Z",
+    "created_at": "2026-07-22T06:10:34.854Z",
     "id": "lite_llm-7f3c2a1e-9b4d-4c6a-8e2f-1a5b9c3d7e0f",
     "references": [
         {
             "id": "logs-*",
             "name": "kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "panel-total-events:indexpattern-datasource-layer-layer-total-events",
-            "type": "index-pattern"
-        },
-        {
-            "id": "logs-*",
-            "name": "panel-total-events:07c99113-fb93-4dca-b6db-d0da7e80ee3f",
             "type": "index-pattern"
         },
         {
@@ -1368,6 +1366,16 @@
         },
         {
             "id": "logs-*",
+            "name": "b00292e2-6907-43fa-b722-ebd2e65c6be6:indexpattern-datasource-layer-layer-total-events",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
+            "name": "b00292e2-6907-43fa-b722-ebd2e65c6be6:60a9fd82-45a1-4b9f-a675-d8ab39582e92",
+            "type": "index-pattern"
+        },
+        {
+            "id": "logs-*",
             "name": "controlGroup_ctrl-event-action:optionsListDataView",
             "type": "index-pattern"
         },
@@ -1383,5 +1391,5 @@
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0"
+    "typeMigrationVersion": "10.3.0"
 }
