@@ -13,6 +13,8 @@ streams:
         multi: true
         required: true
         show_user: true
+        default:
+          - /opt/pingdirectory/logs/audit*
         description: A list of glob-based paths that will be crawled and fetched.
       - name: tz_offset
         type: text

@@ -23,12 +23,9 @@ processors:
       tag: drop_non_audit_header_lines
       if: >-
         ctx.event?.original == null ||
-        !(ctx.event.original =~ /^# \d{2}\/[A-Za-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{4};(?: conn=-?\d+;)?(?: op=\d+;)?(?: triggeredByConn=\d+;)?(?: triggeredByOp=\d+;)?(?: origin="[^"]*";)?(?: instanceName="[^"]*";)?(?: threadID=\d+;)?(?: clientIP=[^;]+;)?(?: requesterDN="[^"]*";)?(?: usingAdminSessionWorkerThread=\w+;)?/)
+        !(ctx.event.original =~ /^# \d{2}\/[A-Za-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{4};(?: conn=-?\d+;)?(?: op=\d+;)?(?: triggeredByConn=\d+;)?(?: triggeredByOp=\d+;)?(?: origin='[^']*";)?(?: instanceName="[^"]*";)?(?: threadID=\d+;)?(?: clientIP=[^;]+;)?(?: requesterDN="[^"]*";)?(?: usingAdminSessionWorkerThread=\w+;)?/)
       description: >-
-        Drops any event where event.original does not match the PingDirectory
-        audit header pattern. This covers logger initialization lines, log
-        rotation markers, log file creation markers, and any other non-audit
-        content before the grok processor runs.
+        Drops any event where event.original does not match the PingDirectory audit header pattern. This covers logger initialization lines, log rotation markers, log file creation markers, and any other non-audit content before the grok processor runs.
   - grok:
       field: event.original
       tag: parse_audit_header
@@ -36,19 +33,15 @@ processors:
         - '# (?<ping_directory.audit.timestamp>\d{2}\/[A-Za-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}\.\d{3}) (?<ping_directory.audit.timezone>[+-]\d{4});(?: conn=%{INT:ping_directory.audit.conn:long};)?(?: op=%{NUMBER:ping_directory.audit.op:long};)?(?: triggeredByConn=%{NUMBER:ping_directory.audit.triggered_by_conn:long};)?(?: triggeredByOp=%{NUMBER:ping_directory.audit.triggered_by_op:long};)?(?: origin="%{DATA:ping_directory.audit.origin}";)?(?: instanceName="%{DATA:ping_directory.audit.instance_name}";)?(?: threadID=%{NUMBER:ping_directory.audit.thread_id};)?(?: clientIP=%{IP:ping_directory.audit.client_ip};)?(?: requesterDN="%{DATA:ping_directory.audit.requester_dn_raw}";)?(?: usingAdminSessionWorkerThread=%{WORD:ping_directory.audit.using_admin_session_worker_thread};)?'
       if: ctx.event?.original != null
       on_failure:
-        - append:
-            field: error.message
-            tag: append_error_message_for_parse_audit_header
-            value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
+        - drop:
+            tag: drop_event_on_grok_failure
+            description: Drop event if audit header grok fails; unable to extract core fields (timestamp, clientIP, etc.).
   - script:
       tag: parse_audit_ldif_fields
       lang: painless
       if: ctx.event?.original != null
       description: >-
-        Extracts LDIF body fields (dn, changetype, modifiersName, modifyTimestamp,
-        creatorsName, createTimestamp, entryUUID) from the multiline audit record
-        in event.original using regex matching, storing raw values under
-        ping_directory.audit for further processing.
+        Extracts LDIF body fields (dn, changetype, modifiersName, modifyTimestamp, creatorsName, createTimestamp, entryUUID) from the multiline audit record in event.original using regex matching, storing raw values under ping_directory.audit for further processing.
       source: |-
         def raw = ctx.event.original;
 
@@ -68,7 +61,11 @@ processors:
         // dn: (DN value, ends before next attribute)
         def dnMatch = /dn:\s*(.*?)(?=\s+[A-Za-z][A-Za-z0-9-]*:\s|$)/.matcher(body);
         if (dnMatch.find()) {
-          ctx.ping_directory.audit.dn_raw = dnMatch.group(1).trim();
+          String value = dnMatch.group(1).trim();
+          if (value.endsWith(' -')) {
+            value = value.substring(0, value.length() - 2).trim();
+          }
+          ctx.ping_directory.audit.dn_raw = value;
         }
 
         // changetype: single token
@@ -80,7 +77,11 @@ processors:
         // modifiersName: DN value
         def mnMatch = /modifiersName:\s*(.*?)(?=\s+[A-Za-z][A-Za-z0-9-]*:\s|$)/.matcher(body);
         if (mnMatch.find()) {
-          ctx.ping_directory.audit.modifiers_name_raw = mnMatch.group(1).trim();
+          String value = mnMatch.group(1).trim();
+          if (value.endsWith(' -')) {
+            value = value.substring(0, value.length() - 2).trim();
+          }
+          ctx.ping_directory.audit.modifiers_name_raw = value;
         }
 
         // modifyTimestamp: single token (timestamp, no spaces)
@@ -92,7 +93,11 @@ processors:
         // creatorsName: DN value
         def cnMatch = /creatorsName:\s*(.*?)(?=\s+[A-Za-z][A-Za-z0-9-]*:\s|$)/.matcher(body);
         if (cnMatch.find()) {
-          ctx.ping_directory.audit.creators_name_raw = cnMatch.group(1).trim();
+          String value = cnMatch.group(1).trim();
+          if (value.endsWith(' -')) {
+            value = value.substring(0, value.length() - 2).trim();
+          }
+          ctx.ping_directory.audit.creators_name_raw = value;
         }
 
         // createTimestamp: single token
@@ -111,9 +116,7 @@ processors:
       lang: painless
       if: ctx.ping_directory?.audit != null
       description: >-
-        Converts raw Distinguished Name strings (dn_raw, modifiers_name_raw,
-        requester_dn_raw, creators_name_raw) into structured objects with
-        cn and meta sub-fields, then removes the original raw fields.
+        Converts raw Distinguished Name strings (dn_raw, modifiers_name_raw, requester_dn_raw, creators_name_raw) into structured objects with cn and meta sub-fields, then removes the original raw fields.
       source: |-
         def parseDN(String raw) {
           Map result = new HashMap();
@@ -158,9 +161,7 @@ processors:
       lang: painless
       if: ctx.event?.original != null && ctx.event.original.contains('operationPurpose')
       description: >-
-        Extracts the operationPurpose JSON block from event.original and parses
-        out applicationName, applicationVersion, and codeLocation into
-        ping_directory.audit.operation_purpose.
+        Extracts the operationPurpose JSON block from event.original and parses out applicationName, applicationVersion, and codeLocation into ping_directory.audit.operation_purpose.
       source: |-
         def raw = ctx.event.original;
         int start = raw.indexOf('operationPurpose={ ');
@@ -194,9 +195,7 @@ processors:
       lang: painless
       if: ctx.event?.original != null
       description: >-
-        Extracts ds-cfg-* attribute fields into ping_directory.audit.ds_cfg
-        and objectClass values into ping_directory.audit.object_classes from
-        the LDIF body of the audit record.
+        Extracts ds-cfg-* attribute fields into ping_directory.audit.ds_cfg and objectClass values into ping_directory.audit.object_classes from the LDIF body of the audit record.
       source: |-
         String raw = ctx.event.original;
 
@@ -222,7 +221,12 @@ processors:
         while (dsMatcher.find()) {
           String key = dsMatcher.group(1).replace('-', '_');
           String value = dsMatcher.group(2).trim();
-
+          // Drop trailing LDIF modify change separator
+          if (value.endsWith(' -')) {
+            value = value.substring(0, value.length() - 2).trim();
+          } else if (value == '-') {
+            continue;
+          }
           def coerced;
           if (value == 'true' || value == 'True' || value == 'TRUE') {
             coerced = true;
@@ -302,10 +306,28 @@ processors:
       field: client.ip
       tag: geoip_client_ip
       target_field: client.geo
-      ignore_missing: true
+      if: ctx.client?.ip != null
       description: >-
-        Enriches client.ip with geographic location data, populating
-        client.geo fields such as country, city, and coordinates.
+        Enriches client.ip with geographic location data, populating client.geo fields such as country, city, and coordinates.
+  - geoip:
+      database_file: GeoLite2-ASN.mmdb
+      field: client.ip
+      tag: enrich_client_asn
+      target_field: client.as
+      properties:
+        - asn
+        - organization_name
+      if: ctx.client?.ip != null
+  - rename:
+      field: client.as.asn
+      tag: rename_client_as_asn
+      target_field: client.as.number
+      if: ctx.client?.as?.asn != null
+  - rename:
+      field: client.as.organization_name
+      tag: rename_client_as_organization_name
+      target_field: client.as.organization.name
+      if: ctx.client?.as?.organization_name != null
   - append:
       field: related.ip
       tag: append_audit_client_ip_into_related_ip
@@ -329,11 +351,6 @@ processors:
             tag: append_error_message_for_date_createTimestamp
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.on_failure_pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - set:
-      field: event.created
-      tag: set_event_created_from_audit_create_timestamp
-      copy_from: ping_directory.audit.create_timestamp
-      ignore_empty_value: true
   - set:
       field: observer.name
       tag: set_observer_name_from_audit_instance_name
@@ -386,8 +403,7 @@ processors:
       value: '{{{ping_directory.audit.dn.cn}}}'
       allow_duplicates: false
       description: >-
-        Appends the target entry DN common name to related.user.
-        Particularly important for delete operations where the dn is the only identity field.
+        Appends the target entry DN common name to related.user. Particularly important for delete operations where the dn is the only identity field.
   - set:
       field: event.reason
       tag: set_event_reason_from_audit_operation_purpose_code_location
@@ -460,8 +476,7 @@ processors:
       tag: lowercase_event_action
       ignore_missing: true
       description: >-
-        Converts event.action to lowercase to normalize changetype values
-        such as ADD, MODIFY, DELETE regardless of case in the source log.
+        Converts event.action to lowercase to normalize changetype values such as ADD, MODIFY, DELETE regardless of case in the source log.
   - set:
       field: observer.version
       tag: set_observer_version_from_audit_operation_purpose_application_version
@@ -470,7 +485,6 @@ processors:
   - remove:
       field:
         - ping_directory.audit.client_ip
-        - ping_directory.audit.create_timestamp
         - ping_directory.audit.instance_name
         - ping_directory.audit.operation_purpose.application_version
         - ping_directory.audit.operation_purpose.code_location

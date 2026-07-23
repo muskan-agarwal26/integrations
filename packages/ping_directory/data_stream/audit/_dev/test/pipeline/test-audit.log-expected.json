@@ -25,7 +25,6 @@
                 "category": [
                     "iam"
                 ],
-                "created": "2026-05-26T09:13:48.537Z",
                 "kind": "event",
                 "original": "# 01/May/2026:14:43:48.623 +0530; conn=112; op=17; instanceName=\"pingdirectory-elastic-test\"; threadID=28; clientIP=175.16.199.0; requesterDN=\"cn=Directory Manager,cn=Root DNs,cn=config\"; usingAdminSessionWorkerThread=true; operationPurpose={ \"applicationName\":\"PingDirectory\", \"applicationVersion\":\"11.0.0.2\", \"codeLocation\":\"DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698\" } dn: cn=Attribute Mappings,cn=Group,cn=SCIMResourceTypes,cn=Cluster,cn=config changetype: add objectClass: ds-cfg-branch objectClass: top objectClass: ds-mirrored-object cn: Attribute Mappings createTimestamp: 20260526091348.537Z creatorsName: cn=Directory Manager,cn=Root DNs,cn=config modifyTimestamp: 20260526091348.537Z modifiersName: cn=Directory Manager,cn=Root DNs,cn=config entryUUID: f53f3545-2e44-4912-bde9-25c68fe27b2d",
                 "reason": "DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698",
@@ -41,6 +40,7 @@
             "ping_directory": {
                 "audit": {
                     "conn": 112,
+                    "create_timestamp": "2026-05-26T09:13:48.537Z",
                     "creators_name": {
                         "cn": "Directory Manager",
                         "meta": "cn=Root DNs,cn=config"
@@ -85,6 +85,12 @@
         {
             "@timestamp": "2026-05-26T14:43:34.342+05:30",
             "client": {
+                "as": {
+                    "number": 1221,
+                    "organization": {
+                        "name": "Telstra Pty Ltd"
+                    }
+                },
                 "ip": "1.128.0.0"
             },
             "ecs": {
@@ -95,7 +101,6 @@
                 "category": [
                     "iam"
                 ],
-                "created": "2026-05-26T09:13:34.254Z",
                 "kind": "event",
                 "original": "# 26/May/2026:14:43:34.342 +0530; conn=110; op=17; instanceName=\"pingdirectory-elastic-test\"; threadID=30; clientIP=1.128.0.0; requesterDN=\"cn=Directory Manager,cn=Root DNs,cn=config\"; usingAdminSessionWorkerThread=true; operationPurpose={ \"applicationName\":\"PingDirectory\", \"applicationVersion\":\"11.0.0.2\", \"codeLocation\":\"DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698\" } dn: cn=name.givenName,cn=Attribute Mappings,cn=User,cn=SCIMResourceTypes,cn=Cluster,cn=config changetype: add objectClass: top objectClass: ds-mirrored-object objectClass: ds-cfg-scim-attribute-mapping ds-cfg-ldap-attribute: givenName cn: name.givenName ds-cfg-scim-resource-type-attribute: name.givenName createTimestamp: 20260526091334.254Z creatorsName: cn=Directory Manager,cn=Root DNs,cn=config modifyTimestamp: 20260526091334.254Z modifiersName: cn=Directory Manager,cn=Root DNs,cn=config entryUUID: 9686780a-4d5a-4b6e-b489-2c9ab19b1d0d",
                 "reason": "DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698",
@@ -111,6 +116,7 @@
             "ping_directory": {
                 "audit": {
                     "conn": 110,
+                    "create_timestamp": "2026-05-26T09:13:34.254Z",
                     "creators_name": {
                         "cn": "Directory Manager",
                         "meta": "cn=Root DNs,cn=config"
@@ -181,7 +187,6 @@
                 "category": [
                     "iam"
                 ],
-                "created": "2026-05-26T09:12:42.633Z",
                 "kind": "event",
                 "original": "# 26/May/2026:14:42:42.706 +0530; conn=98; op=17; instanceName=\"pingdirectory-elastic-test\"; threadID=25; clientIP=81.2.69.142; requesterDN=\"cn=Directory Manager,cn=Root DNs,cn=config\"; usingAdminSessionWorkerThread=true; operationPurpose={ \"applicationName\":\"PingDirectory\", \"applicationVersion\":\"11.0.0.2\", \"codeLocation\":\"DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698\" } dn: cn=Attributes,ds-cfg-schema-urn=urn:ietf:params:scim:schemas:extension:enterprise:2.0:User,cn=SCIM Schemas,cn=Cluster,cn=config changetype: add objectClass: ds-cfg-branch objectClass: top objectClass: ds-mirrored-object cn: Attributes createTimestamp: 20260526091242.633Z creatorsName: cn=Directory Manager,cn=Root DNs,cn=config modifyTimestamp: 20260526091242.633Z modifiersName: cn=Directory Manager,cn=Root DNs,cn=config entryUUID: c272b03c-d102-45d1-ac1f-1d914770455e",
                 "reason": "DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698",
@@ -197,6 +202,7 @@
             "ping_directory": {
                 "audit": {
                     "conn": 98,
+                    "create_timestamp": "2026-05-26T09:12:42.633Z",
                     "creators_name": {
                         "cn": "Directory Manager",
                         "meta": "cn=Root DNs,cn=config"
@@ -241,6 +247,9 @@
         {
             "@timestamp": "2026-05-25T18:48:06.786+05:30",
             "client": {
+                "as": {
+                    "number": 35908
+                },
                 "geo": {
                     "continent_name": "Asia",
                     "country_iso_code": "BT",
@@ -280,11 +289,11 @@
                         "meta": "cn=Loggers,cn=config"
                     },
                     "ds_cfg": {
-                        "enabled": "true -"
+                        "enabled": true
                     },
                     "modifiers_name": {
                         "cn": "Directory Manager",
-                        "meta": "cn=Root DNs,cn=config -"
+                        "meta": "cn=Root DNs,cn=config"
                     },
                     "modify_timestamp": "2026-05-25T13:18:06.681Z",
                     "op": 28,
@@ -312,6 +321,12 @@
         {
             "@timestamp": "2026-06-17T11:32:51.072+05:30",
             "client": {
+                "as": {
+                    "number": 1221,
+                    "organization": {
+                        "name": "Telstra Pty Ltd"
+                    }
+                },
                 "ip": "1.128.0.0"
             },
             "ecs": {
@@ -420,7 +435,6 @@
                 "category": [
                     "iam"
                 ],
-                "created": "2026-05-26T09:09:33.636Z",
                 "kind": "event",
                 "original": "# 26/May/2026:14:39:33.749 +0530; conn=80; op=23; instanceName=\"pingdirectory-elastic-test\"; threadID=32; clientIP=10.50.15.29; requesterDN=\"cn=Directory Manager,cn=Root DNs,cn=config\"; usingAdminSessionWorkerThread=true; operationPurpose={ \"applicationName\":\"PingDirectory\", \"applicationVersion\":\"11.0.0.2\", \"codeLocation\":\"DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698\" } dn: cn=User,cn=SCIMResourceTypes,cn=Cluster,cn=config changetype: add objectClass: ds-cfg-mapping-scim-resource-type objectClass: ds-cfg-ldap-mapping-scim-resource-type objectClass: top objectClass: ds-mirrored-object objectClass: ds-cfg-scim-resource-type ds-cfg-core-schema: ds-cfg-schema-urn=urn:ietf:params:scim:schemas:core:2.0:User,cn=SCIM Schemas,cn=Cluster,cn=config ds-cfg-optional-schema-extension: ds-cfg-schema-urn=urn:ietf:params:scim:schemas:extension:enterprise:2.0:User,cn=SCIM Schemas,cn=Cluster,cn=config ds-cfg-optional-schema-extension: ds-cfg-schema-urn=urn:pingidentity:schemas:extension:2.0:PingDirectory,cn=SCIM Schemas,cn=Cluster,cn=config cn: User ds-cfg-id-attribute: entryUUID ds-cfg-endpoint: Users ds-cfg-lookthrough-limit: 500 ds-cfg-java-class: com.unboundid.directory.server.extensions.scim2.LDAPMappingSCIMResourceType ds-cfg-include-base-dn: dc=example,dc=com ds-cfg-enabled: true ds-cfg-structural-ldap-objectclass: inetOrgPerson createTimestamp: 20260526090933.636Z creatorsName: cn=Directory Manager,cn=Root DNs,cn=config modifyTimestamp: 20260526090933.636Z modifiersName: cn=Directory Manager,cn=Root DNs,cn=config entryUUID: 79f4a8f0-3eb1-4e20-92a7-b6d8d76081b3",
                 "reason": "DSConfig.getReason:2978 CreateSubCommandHandler.commitManagedObject:892 CreateSubCommandHandler.run:1643 DSConfig.runSubCommand:2574 DSConfig.execute:1698",
@@ -436,6 +450,7 @@
             "ping_directory": {
                 "audit": {
                     "conn": 80,
+                    "create_timestamp": "2026-05-26T09:09:33.636Z",
                     "creators_name": {
                         "cn": "Directory Manager",
                         "meta": "cn=Root DNs,cn=config"

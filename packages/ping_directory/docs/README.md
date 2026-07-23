@@ -98,6 +98,8 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 
 ### HTTP Access
 
+The `http_access` data stream provides HTTP access logs from PingDirectory.
+
 #### HTTP Access fields
 
 **Exported fields**
@@ -312,8 +314,6 @@ The `audit` data stream provides audit logs from ping_directory.
 | log.offset | Log offset. | long |
 | observer.product | The product name of the observer that generated the event. | constant_keyword |
 | observer.vendor | The vendor name of the observer that generated the event. | constant_keyword |
-| ping_directory.audit.changetype | LDAP change type such as add, modify, or delete. | keyword |
-| ping_directory.audit.client_ip | Client IP address associated with the operation. | ip |
 | ping_directory.audit.conn | Connection identifier associated with the operation. | long |
 | ping_directory.audit.create_timestamp | Timestamp when the entry was created. | date |
 | ping_directory.audit.creators_name.cn | Common name component of the creator Distinguished Name. | keyword |
@@ -322,21 +322,16 @@ The `audit` data stream provides audit logs from ping_directory.
 | ping_directory.audit.dn.meta | Remaining path components of the target entry Distinguished Name. | keyword |
 | ping_directory.audit.ds_cfg | Dynamic ds-cfg attributes extracted from PingDirectory audit records. | flattened |
 | ping_directory.audit.entry_uuid | Unique identifier assigned to the LDAP entry. | keyword |
-| ping_directory.audit.instance_name | PingDirectory instance that generated the event. | keyword |
 | ping_directory.audit.modifiers_name.cn | Common name component of the modifier Distinguished Name. | keyword |
 | ping_directory.audit.modifiers_name.meta | Remaining path components of the modifier Distinguished Name. | keyword |
 | ping_directory.audit.modify_timestamp | Timestamp when the entry was last modified. | date |
 | ping_directory.audit.object_classes | List of LDAP objectClass values associated with the entry. | keyword |
 | ping_directory.audit.op | Operation identifier within the connection. | long |
 | ping_directory.audit.operation_purpose.application_name | Name of the application initiating the operation. | keyword |
-| ping_directory.audit.operation_purpose.application_version | Version of the application initiating the operation. | keyword |
-| ping_directory.audit.operation_purpose.code_location | Code path that initiated the operation. | keyword |
 | ping_directory.audit.origin | Origin of the operation. | keyword |
 | ping_directory.audit.requester_dn.cn | Common name component of the requester Distinguished Name. | keyword |
 | ping_directory.audit.requester_dn.meta | Remaining path components of the requester Distinguished Name. | keyword |
 | ping_directory.audit.thread_id | Thread ID processing the operation. | keyword |
-| ping_directory.audit.timestamp | Timestamp of the audit log entry. | date |
-| ping_directory.audit.timezone | Timezone offset associated with the audit event. | keyword |
 | ping_directory.audit.triggered_by_conn | Connection ID that triggered the operation. | long |
 | ping_directory.audit.triggered_by_op | Operation ID that triggered the operation. | long |
 | ping_directory.audit.using_admin_session_worker_thread | Indicates whether an admin session worker thread processed the operation. | boolean |
@@ -352,27 +347,27 @@ An example event for `audit` looks as following:
 {
     "@timestamp": "2026-05-25T18:48:06.786+05:30",
     "agent": {
-        "ephemeral_id": "6c348d95-d9b8-487d-8156-f6f51ddfb3a4",
-        "id": "2d44efe9-365f-4169-bb43-e1831f44004d",
-        "name": "elastic-agent-35776",
+        "ephemeral_id": "9d9fa5b8-1cc4-4e51-b53b-7c5342e396a5",
+        "id": "7ebf0f90-b6ef-4f4d-a9cf-998138324151",
+        "name": "elastic-agent-26003",
         "type": "filebeat",
-        "version": "8.18.0"
+        "version": "8.19.0"
     },
     "client": {
         "ip": "10.50.15.29"
     },
     "data_stream": {
         "dataset": "ping_directory.audit",
-        "namespace": "14751",
+        "namespace": "36409",
         "type": "logs"
     },
     "ecs": {
         "version": "9.3.0"
     },
     "elastic_agent": {
-        "id": "2d44efe9-365f-4169-bb43-e1831f44004d",
+        "id": "7ebf0f90-b6ef-4f4d-a9cf-998138324151",
         "snapshot": false,
-        "version": "8.18.0"
+        "version": "8.19.0"
     },
     "event": {
         "action": "modify",
@@ -381,9 +376,9 @@ An example event for `audit` looks as following:
             "iam"
         ],
         "dataset": "ping_directory.audit",
-        "ingested": "2026-06-16T13:04:20Z",
+        "ingested": "2026-07-21T12:19:05Z",
         "kind": "event",
-        "original": "# 25/May/2026:18:48:06.786 +0530; conn=13; op=28; instanceName=\"pingdirectory-elastic-test\"; threadID=29; clientIP=10.50.15.29; requesterDN=\"cn=Directory Manager,cn=Root DNs,cn=config\"; usingAdminSessionWorkerThread=true; operationPurpose={ \"applicationName\":\"PingDirectory\", \"applicationVersion\":\"11.0.0.2\", \"codeLocation\":\"DSConfig.getReason:2978 SetPropSubCommandHandler.modifyManagedObject:541 SetPropSubCommandHandler.run:1246 DSConfig.runSubCommand:2574 DSConfig.execute:1698\" }\ndn: cn=File-Based Audit Logger,cn=Loggers,cn=config\nchangetype: modify\nreplace: ds-cfg-enabled\nds-cfg-enabled: true\n-\nreplace: modifiersName\nmodifiersName: cn=Directory Manager,cn=Root DNs,cn=config\n-\nreplace: modifyTimestamp\nmodifyTimestamp: 20260525131806.681Z\n",
+        "original": "# 25/May/2026:18:48:06.786 +0530; conn=13; op=28; instanceName=\"pingdirectory-elastic-test\"; threadID=29; clientIP=10.50.15.29; requesterDN=\"cn=Directory Manager,cn=Root DNs,cn=config\"; usingAdminSessionWorkerThread=true; operationPurpose={ \"applicationName\":\"PingDirectory\", \"applicationVersion\":\"11.0.0.2\", \"codeLocation\":\"DSConfig.getReason:2978 SetPropSubCommandHandler.modifyManagedObject:541 SetPropSubCommandHandler.run:1246 DSConfig.runSubCommand:2574 DSConfig.execute:1698\" }\ndn: cn=File-Based Audit Logger,cn=Loggers,cn=config\nchangetype: modify\nreplace: ds-cfg-enabled\nds-cfg-enabled: true\n-\nreplace: modifiersName\nmodifiersName: cn=Directory Manager,cn=Root DNs,cn=config\n-\nreplace: modifyTimestamp\nmodifyTimestamp: 20260525131806.681Z",
         "reason": "DSConfig.getReason:2978 SetPropSubCommandHandler.modifyManagedObject:541 SetPropSubCommandHandler.run:1246 DSConfig.runSubCommand:2574 DSConfig.execute:1698",
         "timezone": "+0530",
         "type": [
@@ -396,7 +391,7 @@ An example event for `audit` looks as following:
     "log": {
         "file": {
             "device_id": "64768",
-            "inode": "1373194",
+            "inode": "1444588",
             "path": "/tmp/service_logs/test-audit.log"
         },
         "flags": [
@@ -433,7 +428,8 @@ An example event for `audit` looks as following:
             "10.50.15.29"
         ],
         "user": [
-            "Directory Manager"
+            "Directory Manager",
+            "File-Based Audit Logger"
         ]
     },
     "tags": [

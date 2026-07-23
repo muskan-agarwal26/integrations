@@ -98,6 +98,8 @@ For help with Elastic ingest tools, check [Common problems](https://www.elastic.
 
 ### HTTP Access
 
+The `http_access` data stream provides HTTP access logs from PingDirectory.
+
 #### HTTP Access fields
 
 {{fields "http_access"}}
