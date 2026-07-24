@@ -25,7 +25,7 @@
         "dataset": "xm_cyber.product",
         "ingested": "2026-07-17T09:34:10Z",
         "kind": "event",
-        "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"Atlas Transfer Tool\",\"productOperatingSystems\":[\"Helios OS 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
+        "original": "{\"affectedCriticalAssets\":2,\"chokePointsFoundOn\":0,\"devicesFoundOn\":2,\"productName\":\"wget\",\"productOperatingSystems\":[\"Linux sles 12.5 Server\"],\"productVulnerabilities\":1,\"productsCriticalAssetsAtRisk\":0,\"vendor\":null}"
     },
     "input": {
         "type": "cel"
@@ -40,9 +40,9 @@
             "affected_critical_assets": 2,
             "choke_points_found_on": 0,
             "devices_found_on": 2,
-            "product_name": "Atlas Transfer Tool",
+            "product_name": "wget",
             "product_operating_systems": [
-                "Helios OS 12.5 Server"
+                "Linux sles 12.5 Server"
             ],
             "product_vulnerabilities": 1,
             "products_critical_assets_at_risk": 0
