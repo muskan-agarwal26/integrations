@@ -33,11 +33,10 @@ program: |-
   ).as(state, state.with(
     request(
       "GET",
-      state.url.trim_right("/") + "/spend/logs/v2?" +
+      state.url.trim_right("/") + "/audit?" +
         "page=" + string(state.?page.orValue(1)) +
         "&page_size=" + string(state.batch_size) +
-        "&start_date=" + string(state.start_time).substring(0, 10) + "%20" + string(state.start_time).substring(11, 19) + 
-        "&end_date=" + string(state.end_time).substring(0, 10) + "%20" + string(state.end_time).substring(11, 19) +
+        "&start_date=" + string(state.start_time) + "&end_date=" + string(state.end_time) +
         "&sort_order=desc"
     ).with({
       "Header": {
@@ -46,24 +45,24 @@ program: |-
     }).do_request().as(resp, resp.StatusCode == 200 ?
       resp.Body.decode_json().as(body, {
         "events": (
-            has(body.data) ?
-            body.data.map(e, {
+          has(body.audit_logs) ?
+            body.audit_logs.map(e, {
               "message": e.encode_json()
             })
           :
             []
         ),
         "cursor": {
-          ?"last_timestamp": (has(body.data) && size(body.data) > 0) ?
+          ?"last_timestamp": (has(body.audit_logs) && size(body.audit_logs) > 0) ?
             (has(state.?cursor.last_timestamp) ?
               optional.of(
-                max([
+                max(
                   state.cursor.last_timestamp,
-                  body.data[0].startTime
-                ])
+                  body.audit_logs[0].updated_at
+                )
               )
             :
-              optional.of(body.data[0].startTime)
+              optional.of(body.audit_logs[0].updated_at)
             )
           :
             state.?cursor.last_timestamp
@@ -80,7 +79,7 @@ program: |-
             "error": {
               "code": string(resp.StatusCode),
               "id": resp.Status,
-              "message": "GET:" + state.url.trim_right("/") + "/spend/logs/v2: " + (
+              "message": "GET:" + state.url.trim_right("/") + "/audit: " + (
                 size(resp.Body) != 0 ?
                   string(resp.Body)
                 :

@@ -1,17 +1,17 @@
 {
     "@timestamp": "2026-07-18T10:11:19.909Z",
     "agent": {
-        "ephemeral_id": "bae89555-6f44-4e24-899b-1fb48a4e5105",
-        "id": "faabe81e-f245-4791-a743-b178774b4139",
-        "name": "elastic-agent-56227",
+        "ephemeral_id": "a108215c-e0ce-4331-a831-a06048f41e75",
+        "id": "efc806b4-f432-4ae4-91aa-34fa0b98fb2a",
+        "name": "elastic-agent-45254",
         "type": "filebeat",
-        "version": "8.18.0"
+        "version": "8.19.0"
     },
     "aws": {
         "s3": {
             "bucket": {
-                "arn": "arn:aws:s3:::elastic-package-lite-llm-spend-tracking-bucket-72730",
-                "name": "elastic-package-lite-llm-spend-tracking-bucket-72730"
+                "arn": "arn:aws:s3:::elastic-package-lite-llm-spend-tracking-bucket-92434",
+                "name": "elastic-package-lite-llm-spend-tracking-bucket-92434"
             },
             "object": {
                 "key": "spend-tracking.log"
@@ -23,16 +23,16 @@
     },
     "data_stream": {
         "dataset": "lite_llm.spend_tracking",
-        "namespace": "46564",
+        "namespace": "42414",
         "type": "logs"
     },
     "ecs": {
         "version": "9.4.0"
     },
     "elastic_agent": {
-        "id": "faabe81e-f245-4791-a743-b178774b4139",
+        "id": "efc806b4-f432-4ae4-91aa-34fa0b98fb2a",
         "snapshot": false,
-        "version": "8.18.0"
+        "version": "8.19.0"
     },
     "error": {
         "type": "ProxyModelNotFoundError"
@@ -46,7 +46,7 @@
         "duration": 0,
         "end": "2026-07-18T10:11:19.909Z",
         "id": "7d8f7a77-9f46-47b2-997e-0a0892fe2c7a",
-        "ingested": "2026-07-19T02:54:36Z",
+        "ingested": "2026-07-21T07:01:38Z",
         "kind": "event",
         "original": "{\"request_id\":\"7d8f7a77-9f46-47b2-997e-0a0892fe2c7a\",\"call_type\":\"\",\"api_key\":\"8de15ff28eedf53bd4cf2e65b8e980b9231acc3f894648a9fa3c2dbf0ab1a6d9\",\"spend\":0,\"total_tokens\":0,\"prompt_tokens\":0,\"completion_tokens\":0,\"start_time\":\"2026-07-18T10:11:19.909+00:00\",\"end_time\":\"2026-07-18T10:11:19.909+00:00\",\"model\":\"gemma-4-31b-it\",\"user\":\"default_user_id\",\"status\":\"failure\",\"metadata\":{\"error_information\":{\"error_code\":\"400\",\"error_class\":\"ProxyModelNotFoundError\",\"error_message\":\"Invalid model name passed in model=gemma-4-31b-it\"}}}",
         "outcome": "failure",
@@ -80,7 +80,7 @@
     },
     "log": {
         "file": {
-            "path": "https://elastic-package-lite-llm-spend-tracking-bucket-72730.s3.us-east-2.amazonaws.com/spend-tracking.log"
+            "path": "https://elastic-package-lite-llm-spend-tracking-bucket-92434.s3.us-east-2.amazonaws.com/spend-tracking.log"
         },
         "offset": 1900
     },

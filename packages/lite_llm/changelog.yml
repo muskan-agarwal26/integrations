@@ -4,3 +4,6 @@
     - description: Add support of spend_tracking datastream.
       type: enhancement
       link: https://github.com/elastic/integrations/pull/20206
+    - description: Add support of audit datastream.
+      type: enhancement
+      link: https://github.com/elastic/integrations/pull/20202

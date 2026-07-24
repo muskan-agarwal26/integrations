@@ -334,13 +334,7 @@ processors:
       description: Extract domain from user email address.
       field: user.email
       pattern: '%{}@%{user.domain}'
-      ignore_missing: true
-  - append:
-      tag: append_domain_to_related_user
-      field: related.user
-      value: '{{{user.domain}}}'
-      if: ctx.user?.domain != null
-      allow_duplicates: false
+      if: ctx.user?.email != null && ctx.user.email.contains('@')
   - set:
       field: gen_ai.request.model
       tag: set_gen_ai_request_model_from_spend_tracking_model
